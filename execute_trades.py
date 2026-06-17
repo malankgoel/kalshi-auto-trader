@@ -3,8 +3,9 @@
 When run, it: picks the next upcoming fixture (from the bundled schedule +
 pre-tournament model), pulls that game's CURRENT Kalshi odds, de-vigs them,
 flags every >=10% mispricing exactly as the backtest does, sizes each with
-half-Kelly, and places the orders. No tally files, no saved state -- it
-recomputes from live odds every run.
+half-Kelly, and places the orders. A CSV ledger records submitted orders and is
+settled from Kalshi market results before each run so the next game sizes from
+the updated bankroll.
 
 Order type is one switch: --order-type market|limit (or KALSHI_ORDER_TYPE).
 
@@ -32,6 +33,7 @@ import uuid
 import config
 import market_match as mm
 import model
+import trade_log
 from kalshi_client import KalshiClient
 
 _CLIENT_ID_NS = uuid.uuid5(uuid.NAMESPACE_URL, "kalshi-auto-trader")
@@ -80,14 +82,18 @@ def client_order_id(game: dict, selection: str) -> str:
 # --------------------------------------------------------------------------- #
 # planning                                                                    #
 # --------------------------------------------------------------------------- #
-def plan_bets(bets: list, idx: dict, bankroll: float, order_type: str) -> list[dict]:
+def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
+              order_type: str) -> list[dict]:
     plans: list[dict] = []
     running = 0.0
     for b in sorted(bets, key=lambda x: x.line):
         plan = {"selection": b.selection, "side": b.side, "line": b.line,
+                "selection_team": b.selection_team,
                 "model_prob": b.model_prob, "fair_prob": b.fair_prob,
-                "edge": b.edge, "skip": None}
-        frac = model.staked_fraction(b.kelly_full)
+                "edge": b.edge, "market_price_cents": b.market_price * 100.0,
+                "kelly_fraction": model.staked_fraction(b.kelly_full),
+                "skip": None}
+        frac = plan["kelly_fraction"]
         stake = round(bankroll * frac, 2)
         plan["stake"] = stake
         if stake <= 0:
@@ -111,7 +117,8 @@ def plan_bets(bets: list, idx: dict, bankroll: float, order_type: str) -> list[d
             continue
         running += params["est_cost"]
         plan.update(ticker=market.get("ticker", ""), buy_side=buy_side,
-                    ask=round(ask, 1), count=count, **params)
+                    ask=round(ask, 1), count=count,
+                    client_order_id=client_order_id(game, b.selection), **params)
         plans.append(plan)
     return plans
 
@@ -155,15 +162,18 @@ def print_plan(plans: list[dict], live: bool) -> float:
     return total
 
 
-def place_orders(client, game: dict, plans: list[dict], order_type: str) -> None:
+def place_orders(client, game: dict, plans: list[dict], order_type: str,
+                 bankroll: float, environment: str) -> None:
     for p in [p for p in plans if not p.get("skip")]:
-        coid = client_order_id(game, p["selection"])
         try:
             order = client.create_order(
                 ticker=p["ticker"], action="buy", side=p["buy_side"],
-                count=p["count"], order_type=order_type, client_order_id=coid,
+                count=p["count"], order_type=order_type,
+                client_order_id=p["client_order_id"],
                 yes_price=p.get("yes_price"), no_price=p.get("no_price"),
                 buy_max_cost=p.get("buy_max_cost"))
+            trade_log.append_order(game, p, order, bankroll=bankroll,
+                                   environment=environment)
             print(f"  placed {p['selection']:16} {p['count']:>4} @ {p['ticker']} "
                   f"-> {order.get('status', 'submitted')} ({order.get('order_id','')})")
         except Exception as exc:  # noqa: BLE001
@@ -177,17 +187,10 @@ def place_orders(client, game: dict, plans: list[dict], order_type: str) -> None
 # --------------------------------------------------------------------------- #
 # main                                                                        #
 # --------------------------------------------------------------------------- #
-def resolve_bankroll(client, args) -> float:
+def resolve_bankroll(args, ledger_bankroll: float) -> float:
     if args.bankroll is not None:
         return args.bankroll
-    if args.live and client.authenticated:
-        try:
-            cents = client.get_balance().get("balance", 0)
-            if cents:
-                return cents / 100.0
-        except Exception as exc:  # noqa: BLE001
-            print(f"(could not read balance: {exc}; using ${config.BANKROLL:.2f})")
-    return config.BANKROLL
+    return ledger_bankroll
 
 
 def main() -> None:
@@ -203,7 +206,7 @@ def main() -> None:
     ap.add_argument("--home", help="home team (with --away) to trade a specific game")
     ap.add_argument("--away", help="away team")
     ap.add_argument("--bankroll", type=float, default=None,
-                    help="override Kelly bankroll (default: live balance, else config)")
+                    help="override Kelly bankroll (default: logged bankroll)")
     ap.add_argument("--max-total", type=float, default=None,
                     help="override per-run total spend cap (dollars)")
     args = ap.parse_args()
@@ -211,7 +214,13 @@ def main() -> None:
     if args.max_total is not None:
         config.MAX_TOTAL_COST = args.max_total
 
+    environment = "demo" if args.demo else "prod"
     client = KalshiClient(base_url=config.DEMO_BASE_URL if args.demo else None)
+    settled = trade_log.settle_pending(client)
+    ledger_bankroll = trade_log.current_bankroll()
+    if settled:
+        print(f"Settled {settled} logged order(s). Ledger bankroll: "
+              f"${ledger_bankroll:.2f}")
     if args.live and not client.authenticated:
         sys.exit("Live trading needs an API key. Set KALSHI_API_KEY_ID and "
                  "KALSHI_PRIVATE_KEY_PATH (see README).")
@@ -228,13 +237,13 @@ def main() -> None:
     odds = mm.build_odds_row(idx, game["home_team"], game["away_team"])
     bets = model.flag_bets(game, odds)
 
-    bankroll = resolve_bankroll(client, args)
+    bankroll = resolve_bankroll(args, ledger_bankroll)
     print_header(game, odds, bankroll, args.order_type, args.live)
     if not bets:
         print("\nNo line clears the threshold; nothing to bet.")
         return
 
-    plans = plan_bets(bets, idx, bankroll, args.order_type)
+    plans = plan_bets(game, bets, idx, bankroll, args.order_type)
     total = print_plan(plans, args.live)
 
     if not args.live:
@@ -253,7 +262,7 @@ def main() -> None:
     except Exception as exc:  # noqa: BLE001
         sys.exit(f"Could not read balance ({exc}). Aborting before placing.")
 
-    place_orders(client, game, plans, args.order_type)
+    place_orders(client, game, plans, args.order_type, bankroll, environment)
     print("\nDone.")
 
 

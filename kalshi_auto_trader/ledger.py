@@ -12,7 +12,7 @@ import datetime as dt
 import os
 from typing import Optional
 
-import config
+from kalshi_auto_trader import settings
 
 
 COLUMNS = [
@@ -60,7 +60,15 @@ def _now() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def ensure_log(path: str = config.TRADE_LOG_FILE) -> None:
+def _resolve_path(path: str | os.PathLike | None = None) -> str:
+    resolved = os.fspath(path) if path else settings.TRADE_LOG_FILE
+    if not resolved:
+        raise ValueError("A trade log path is required.")
+    return resolved
+
+
+def ensure_log(path: str | os.PathLike | None = None) -> None:
+    path = _resolve_path(path)
     if os.path.exists(path):
         return
     directory = os.path.dirname(path)
@@ -70,13 +78,15 @@ def ensure_log(path: str = config.TRADE_LOG_FILE) -> None:
         csv.DictWriter(fh, fieldnames=COLUMNS).writeheader()
 
 
-def read_rows(path: str = config.TRADE_LOG_FILE) -> list[dict]:
+def read_rows(path: str | os.PathLike | None = None) -> list[dict]:
+    path = _resolve_path(path)
     ensure_log(path)
     with open(path, newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
 
 
-def write_rows(rows: list[dict], path: str = config.TRADE_LOG_FILE) -> None:
+def write_rows(rows: list[dict], path: str | os.PathLike | None = None) -> None:
+    path = _resolve_path(path)
     ensure_log(path)
     with open(path, "w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=COLUMNS)
@@ -85,10 +95,10 @@ def write_rows(rows: list[dict], path: str = config.TRADE_LOG_FILE) -> None:
             writer.writerow({k: row.get(k, "") for k in COLUMNS})
 
 
-def current_bankroll(path: str = config.TRADE_LOG_FILE) -> float:
-    """Latest settled bankroll, or config.BANKROLL for a fresh ledger."""
+def current_bankroll(path: str | os.PathLike | None = None) -> float:
+    """Latest settled bankroll, or the configured fallback for a fresh ledger."""
     rows = read_rows(path)
-    bankroll = config.BANKROLL
+    bankroll = settings.BANKROLL
     found_settled = False
     for row in sorted(rows, key=lambda r: (r.get("settled_at", ""),
                                            r.get("created_at", ""))):
@@ -147,7 +157,8 @@ def placed_price(plan: dict, order: dict) -> tuple[float, str]:
 
 
 def append_order(game: dict, plan: dict, order: dict, *, bankroll: float,
-                 environment: str, path: str = config.TRADE_LOG_FILE) -> None:
+                 environment: str,
+                 path: str | os.PathLike | None = None) -> None:
     rows = read_rows(path)
     coid = plan["client_order_id"]
     if any(r.get("client_order_id") == coid for r in rows):
@@ -193,7 +204,7 @@ def append_order(game: dict, plan: dict, order: dict, *, bankroll: float,
     write_rows(rows, path)
 
 
-def settle_pending(client, path: str = config.TRADE_LOG_FILE) -> int:
+def settle_pending(client, path: str | os.PathLike | None = None) -> int:
     """Update pending rows from Kalshi market settlement data.
 
     Returns the number of rows newly settled. Rows remain pending when Kalshi
@@ -227,7 +238,7 @@ def _recompute_bankrolls(rows: list[dict]) -> None:
     bankroll: Optional[float] = None
     for row in rows:
         if bankroll is None:
-            bankroll = _float(row.get("bankroll_before")) or config.BANKROLL
+            bankroll = _float(row.get("bankroll_before")) or settings.BANKROLL
         if row.get("status") not in ("won", "lost"):
             row["bankroll_after"] = ""
             continue

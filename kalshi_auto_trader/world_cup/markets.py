@@ -17,7 +17,7 @@ import re
 import unicodedata
 from typing import Optional
 
-import config
+from kalshi_auto_trader.world_cup import config
 
 
 # --------------------------------------------------------------------------- #

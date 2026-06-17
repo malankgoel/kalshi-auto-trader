@@ -13,7 +13,8 @@ import datetime as dt
 from dataclasses import dataclass
 from typing import Optional
 
-import config
+from kalshi_auto_trader import settings
+from kalshi_auto_trader.world_cup import config
 
 
 # --------------------------------------------------------------------------- #
@@ -145,7 +146,7 @@ def kelly_fraction(model_prob: float, entry_price: float) -> float:
 
 def staked_fraction(kelly_full: float) -> float:
     """Half-Kelly, capped -- the share of bankroll actually risked."""
-    return min(config.KELLY_FRACTION * kelly_full, config.MAX_STAKE_FRACTION)
+    return min(settings.KELLY_FRACTION * kelly_full, settings.MAX_STAKE_FRACTION)
 
 
 # --------------------------------------------------------------------------- #
@@ -169,10 +170,10 @@ def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
               no_price: Optional[float]) -> Optional[Bet]:
     eps = 1e-9
     diff = model_yes - fair_yes
-    if diff >= config.EDGE_THRESHOLD - eps:
+    if diff >= settings.EDGE_THRESHOLD - eps:
         side, label = "YES", yes_label
         model_win, fair_win, price = model_yes, fair_yes, yes_price
-    elif -diff >= config.EDGE_THRESHOLD - eps:
+    elif -diff >= settings.EDGE_THRESHOLD - eps:
         side, label = "NO", no_label
         model_win, fair_win = 1.0 - model_yes, 1.0 - fair_yes
         price = no_price if no_price is not None else (1.0 - yes_price)

@@ -1,0 +1,52 @@
+"""Reusable order sizing and parameter helpers."""
+
+from __future__ import annotations
+
+import math
+import uuid
+
+from kalshi_auto_trader import settings
+
+
+def size_order(stake_dollars: float, price_cents: float) -> int:
+    """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
+    if stake_dollars <= 0 or not price_cents or price_cents <= 0:
+        return 0
+    count = int((stake_dollars * 100.0) // price_cents)
+    count = min(count, settings.MAX_CONTRACTS_PER_ORDER)
+    count = min(count, int((settings.MAX_ORDER_COST * 100.0) // price_cents))
+    return max(count, 0)
+
+
+def build_order_params(side: str, count: int, price_cents: float,
+                       order_type: str) -> dict:
+    """Convert a side/count/ask into Kalshi order fields."""
+    params = {
+        "order_type": order_type,
+        "yes_price": None,
+        "no_price": None,
+        "buy_max_cost": None,
+    }
+    if order_type == "limit":
+        limit_price = int(round(price_cents + settings.LIMIT_BUFFER_CENTS))
+        limit_price = max(
+            settings.MIN_PRICE_CENTS,
+            min(settings.MAX_PRICE_CENTS, limit_price),
+        )
+        params["yes_price" if side == "yes" else "no_price"] = limit_price
+        params["limit_price"] = limit_price
+        params["est_cost"] = round(count * limit_price / 100.0, 2)
+    else:
+        params["buy_max_cost"] = int(math.ceil(
+            count * (price_cents + settings.MARKET_SLIPPAGE_CENTS)
+        ))
+        params["limit_price"] = None
+        params["est_cost"] = round(count * price_cents / 100.0, 2)
+    return params
+
+
+def stable_client_order_id(namespace: str, key: str) -> str:
+    """Deterministic UUID for idempotent Kalshi order submission."""
+    ns = uuid.uuid5(uuid.NAMESPACE_URL, namespace)
+    return str(uuid.uuid5(ns, key))
+

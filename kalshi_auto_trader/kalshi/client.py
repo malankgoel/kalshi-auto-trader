@@ -18,7 +18,7 @@ from urllib.parse import urlparse
 
 import requests
 
-import config
+from kalshi_auto_trader import settings
 
 try:  # signing only needed when an API key is configured
     from cryptography.hazmat.primitives import hashes, serialization
@@ -32,11 +32,11 @@ class KalshiClient:
     def __init__(
         self,
         base_url: Optional[str] = None,
-        key_id: Optional[str] = config.KALSHI_API_KEY_ID,
-        private_key_path: Optional[str] = config.KALSHI_PRIVATE_KEY_PATH,
+        key_id: Optional[str] = settings.KALSHI_API_KEY_ID,
+        private_key_path: Optional[str] = settings.KALSHI_PRIVATE_KEY_PATH,
         timeout: int = 20,
     ) -> None:
-        base_url = base_url or config.KALSHI_BASE_URL or config.PROD_BASE_URL
+        base_url = base_url or settings.KALSHI_BASE_URL or settings.PROD_BASE_URL
         self.base_url = base_url.rstrip("/")
         self.key_id = key_id
         self.timeout = timeout

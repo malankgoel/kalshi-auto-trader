@@ -1,20 +1,15 @@
-"""Configuration for the self-contained Kalshi auto-trader.
+"""Shared runtime settings for Kalshi-backed trading apps.
 
-This repo carries everything it needs: the pre-tournament model snapshot and the
-schedule live in ``data/``. At run time it picks the next game, pulls that game's
-current Kalshi odds, flags >=10% mispricings exactly as the backtest does, sizes
-them with half-Kelly, and places the orders. No external files; the only local
-state is the trade log used for settlement and bankroll tracking.
-
-Every knob has an environment-variable override so you don't edit code to go
-live, switch order type, or change risk caps.
+Keep use-case specifics, such as model data paths and market series tickers, in
+the app package. This module should stay reusable for future strategies.
 """
 
 from __future__ import annotations
 
 import os
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.dirname(PACKAGE_DIR)
 
 
 def _env_float(name: str, default: float) -> float:
@@ -32,17 +27,7 @@ def _env_int(name: str, default: int) -> int:
 
 
 # --------------------------------------------------------------------------- #
-# Bundled model data (this repo is self-contained)                            #
-# --------------------------------------------------------------------------- #
-DATA_DIR = os.path.join(HERE, "data")
-# The pre-tournament forecast: trained on data through 2026-06-10, before any
-# 2026 World Cup match was played. This is the model the edges are measured
-# against -- a later, hindsight-refit snapshot would inflate the "edge".
-PREDICTIONS_FILE = os.path.join(DATA_DIR, "match_predictions.csv")
-SCHEDULE_FILE = os.path.join(DATA_DIR, "schedule_2026.csv")
-
-# --------------------------------------------------------------------------- #
-# Betting rules (must mirror the model's backtest)                            #
+# Generic betting rules                                                        #
 # --------------------------------------------------------------------------- #
 EDGE_THRESHOLD = _env_float("EDGE_THRESHOLD", 0.10)   # flag a line at >=10% edge
 OVER_UNDER_LINE = 2.5
@@ -54,9 +39,7 @@ MAX_STAKE_FRACTION = _env_float("MAX_STAKE_FRACTION", 0.25)  # cap per bet
 # bankroll for dry-runs and a new empty ledger. Override with --bankroll or
 # BANKROLL.
 BANKROLL = _env_float("BANKROLL", 50.0)
-TRADE_LOG_FILE = os.environ.get(
-    "KALSHI_TRADE_LOG_FILE", os.path.join(DATA_DIR, "trade_log.csv")
-)
+TRADE_LOG_FILE = os.environ.get("KALSHI_TRADE_LOG_FILE", "")
 
 # --------------------------------------------------------------------------- #
 # Kalshi API                                                                  #
@@ -67,13 +50,6 @@ KALSHI_BASE_URL = os.environ.get("KALSHI_BASE_URL")  # full override if set
 
 KALSHI_API_KEY_ID = os.environ.get("KALSHI_API_KEY_ID")
 KALSHI_PRIVATE_KEY_PATH = os.environ.get("KALSHI_PRIVATE_KEY_PATH")
-
-# 2026 World Cup per-match series. MUST match the wording the markets use.
-KALSHI_SERIES = {
-    "winner": ["KXWCGAME"],
-    "over_under": ["KXWCTOTAL"],
-    "btts": ["KXWCBTTS"],
-}
 
 # --------------------------------------------------------------------------- #
 # Order behaviour  (market <-> limit is one switch)                           #

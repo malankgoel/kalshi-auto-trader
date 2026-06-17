@@ -1,0 +1,2 @@
+"""World Cup strategy app."""
+

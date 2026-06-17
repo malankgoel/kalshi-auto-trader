@@ -10,11 +10,11 @@ from pytest import approx
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import config
-import execute_trades as ex
-import market_match as mm
-import model
-import trade_log
+from kalshi_auto_trader import ledger as trade_log
+from kalshi_auto_trader import settings
+from kalshi_auto_trader.world_cup import markets as mm
+from kalshi_auto_trader.world_cup import model
+from kalshi_auto_trader.world_cup import trader as ex
 
 
 # ----------------------------- model: de-vig ------------------------------ #
@@ -47,7 +47,7 @@ def test_flag_fades_overpriced_favourite():
     odds = {"winner_home_price": 60, "winner_draw_price": 25, "winner_away_price": 20}
     bets = model.flag_bets(_game(), odds)
     arg = [b for b in bets if "Argentina" in b.selection]
-    assert arg and arg[0].side == "YES" and arg[0].edge >= config.EDGE_THRESHOLD
+    assert arg and arg[0].side == "YES" and arg[0].edge >= settings.EDGE_THRESHOLD
 
 
 def test_no_flag_when_market_agrees():
@@ -69,22 +69,22 @@ def test_under_is_no_side_on_over_market():
 def test_size_floor_and_caps(monkeypatch):
     assert ex.size_order(4.33, 45.0) == 9
     assert ex.size_order(0.30, 45.0) == 0
-    monkeypatch.setattr(config, "MAX_ORDER_COST", 2.0)
+    monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.0)
     assert ex.size_order(100.0, 50.0) == 4
 
 
 def test_market_params_buy_max_cost(monkeypatch):
-    monkeypatch.setattr(config, "MARKET_SLIPPAGE_CENTS", 3)
+    monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 3)
     p = ex.build_order_params("yes", 10, 44.0, "market")
     assert p["yes_price"] is None and p["buy_max_cost"] == 10 * 47
     assert p["est_cost"] == approx(4.40)
 
 
 def test_limit_params_side_and_clamp(monkeypatch):
-    monkeypatch.setattr(config, "LIMIT_BUFFER_CENTS", 2)
+    monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 2)
     p = ex.build_order_params("no", 8, 20.0, "limit")
     assert p["no_price"] == 22 and p["yes_price"] is None and p["buy_max_cost"] is None
-    monkeypatch.setattr(config, "LIMIT_BUFFER_CENTS", 10)
+    monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 10)
     assert ex.build_order_params("yes", 1, 95.0, "limit")["yes_price"] == 99
 
 

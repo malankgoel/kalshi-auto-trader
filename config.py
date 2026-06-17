@@ -3,7 +3,8 @@
 This repo carries everything it needs: the pre-tournament model snapshot and the
 schedule live in ``data/``. At run time it picks the next game, pulls that game's
 current Kalshi odds, flags >=10% mispricings exactly as the backtest does, sizes
-them with half-Kelly, and places the orders. No external files, no tally CSVs.
+them with half-Kelly, and places the orders. No external files; the only local
+state is the trade log used for settlement and bankroll tracking.
 
 Every knob has an environment-variable override so you don't edit code to go
 live, switch order type, or change risk caps.
@@ -49,9 +50,13 @@ KELLY_FRACTION = _env_float("KELLY_FRACTION", 0.50)   # half-Kelly
 MAX_STAKE_FRACTION = _env_float("MAX_STAKE_FRACTION", 0.25)  # cap per bet
 
 # Bankroll for Kelly sizing. When trading live with a key, the trader uses your
-# real Kalshi cash balance instead; this is the fallback for dry-runs (and if
-# the balance can't be read). Override with --bankroll or BANKROLL.
+# logged bankroll after settled trades instead; this is the starting/fallback
+# bankroll for dry-runs and a new empty ledger. Override with --bankroll or
+# BANKROLL.
 BANKROLL = _env_float("BANKROLL", 50.0)
+TRADE_LOG_FILE = os.environ.get(
+    "KALSHI_TRADE_LOG_FILE", os.path.join(DATA_DIR, "trade_log.csv")
+)
 
 # --------------------------------------------------------------------------- #
 # Kalshi API                                                                  #

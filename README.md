@@ -10,10 +10,11 @@ run it recomputes from scratch:
 
 ```
 next game (bundled schedule + forecast)
-      └─► pull that game's CURRENT Kalshi odds
-            └─► de-vig, flag every ≥10% mispricing  (same rule as the backtest)
-                  └─► size with half-Kelly
-                        └─► place the orders
+      └─► settle any logged prior bets from Kalshi results
+            └─► pull that game's CURRENT Kalshi odds
+                  └─► de-vig, flag every ≥10% mispricing  (same rule as the backtest)
+                        └─► size with half-Kelly from the updated ledger bankroll
+                              └─► place the orders and append the CSV log
 ```
 
 So you run it before a game, and it does live what the tally used to do offline —
@@ -28,10 +29,14 @@ then places the trades.
 - **Hard caps** on every live run regardless of model stake: max contracts/order,
   max $/order, max $/run, plus a balance check that aborts before placing if the
   plan exceeds your cash.
-- **Idempotent with no state files.** Each order uses a deterministic
+- **Idempotent order IDs.** Each order uses a deterministic
   `client_order_id` derived from the game + selection, so re-running before
   kickoff can't double-place — Kalshi rejects the duplicate. (Caveat: if the odds
   move between runs the bet is still placed only once, at the first run's size.)
+- **Persistent trade log.** Successful live/demo submissions are appended to
+  `data/trade_log.csv`. On the next run the bot checks pending logged tickers for
+  settlement, writes win/loss/profit, and sizes the next game from the updated
+  logged bankroll.
 - **Practice with `--demo`** on Kalshi's demo exchange before going live.
 - Trading risks real money. With this few bets the results are mostly noise.
   You own every order this places. Start tiny.
@@ -102,8 +107,25 @@ The model flags mispricings on three lines and the trader maps each to a contrac
 | **Both teams to score** | model BTTS% vs market BTTS% | BTTS-Yes market: `YES` = both score, `NO` = not both. |
 
 Stake = `bankroll × min(½ × fullKelly, 25%)`; contracts = ⌊ stake ÷ side-ask ⌋,
-clamped to the caps. **Bankroll** is your live Kalshi cash balance when trading
-live, otherwise the `BANKROLL` config default (handy for dry-runs).
+clamped to the caps. **Bankroll** comes from the CSV ledger after settled prior
+trades, starting at the `BANKROLL` config default. `--bankroll` overrides sizing
+for that run. Live mode still checks your actual Kalshi cash balance before
+placing.
+
+---
+
+## Trade log and bankroll
+
+`data/trade_log.csv` is one row per successfully submitted live/demo order. It
+records the model probability, de-vigged market fair probability, raw market
+price, quoted ask, recommended stake, starting bankroll for the run, submitted
+order price, order id, and settlement fields.
+
+Before every run, the bot reads pending rows and calls Kalshi for the logged
+market tickers. If Kalshi reports a YES/NO result, the row is marked won/lost,
+profit is calculated from the logged placed price and contract count, and
+`bankroll_after` becomes the sizing bankroll for later games. Rows stay pending
+until Kalshi exposes a settled result.
 
 ---
 
@@ -115,7 +137,8 @@ live, otherwise the `BANKROLL` config default (handy for dry-runs).
 | `EDGE_THRESHOLD` | `0.10` | min model-vs-market edge to bet |
 | `KELLY_FRACTION` | `0.50` | fraction of full Kelly (half-Kelly) |
 | `MAX_STAKE_FRACTION` | `0.25` | cap per bet, share of bankroll |
-| `BANKROLL` | `50` | dry-run bankroll (live uses real balance) |
+| `BANKROLL` | `50` | starting/fallback ledger bankroll |
+| `KALSHI_TRADE_LOG_FILE` | `data/trade_log.csv` | CSV ledger used for logging, settlement, and bankroll tracking |
 | `MAX_ORDER_COST` | `25` | max $ on a single order |
 | `MAX_TOTAL_COST` | `100` | max $ across one run |
 | `MAX_CONTRACTS_PER_ORDER` | `500` | hard contract cap per order |

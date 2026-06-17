@@ -14,6 +14,7 @@ import config
 import execute_trades as ex
 import market_match as mm
 import model
+import trade_log
 
 
 # ----------------------------- model: de-vig ------------------------------ #
@@ -149,8 +150,42 @@ def test_plan_bets_end_to_end():
     idx = mm.build_market_index(_FakeClient(), "Argentina", "Algeria", "2026-06-16")
     odds = mm.build_odds_row(idx, "Argentina", "Algeria")
     bets = model.flag_bets(_game(), odds)               # model home 70% >> market 60%
-    plans = ex.plan_bets(bets, idx, bankroll=50.0, order_type="market")
+    plans = ex.plan_bets(_game(), bets, idx, bankroll=50.0, order_type="market")
     placed = [p for p in plans if not p.get("skip")]
     assert placed, "expected at least one actionable order"
     arg = [p for p in placed if "Argentina" in p["selection"]][0]
     assert arg["buy_side"] == "yes" and arg["count"] >= 1 and arg["buy_max_cost"]
+
+
+# ----------------------------- trade log ---------------------------------- #
+def test_trade_log_appends_and_settles(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    game = _game()
+    plan = {
+        "client_order_id": ex.client_order_id(game, "YES Argentina"),
+        "line": "winner", "selection": "YES Argentina",
+        "selection_team": "Argentina", "side": "YES", "buy_side": "yes",
+        "ticker": "KXWCGAME-26JUN16ARGALG-ARG",
+        "model_prob": 0.70, "fair_prob": 0.60, "edge": 0.10,
+        "market_price_cents": 60, "ask": 40, "stake": 10.0,
+        "kelly_fraction": 0.20, "count": 10, "order_type": "limit",
+        "limit_price": 40, "buy_max_cost": None, "est_cost": 4.0,
+    }
+    trade_log.append_order(game, plan, {"order_id": "abc", "status": "open"},
+                           bankroll=50.0, environment="demo", path=str(path))
+    rows = trade_log.read_rows(str(path))
+    assert rows[0]["status"] == "pending"
+    assert rows[0]["placed_price_cents"] == "40.0000"
+    assert trade_log.current_bankroll(str(path)) == 50.0
+
+    class _MarketClient:
+        def get_market(self, ticker):
+            assert ticker == plan["ticker"]
+            return {"status": "settled", "result": "yes"}
+
+    assert trade_log.settle_pending(_MarketClient(), str(path)) == 1
+    settled = trade_log.read_rows(str(path))[0]
+    assert settled["status"] == "won"
+    assert settled["profit"] == "6.00"
+    assert settled["bankroll_after"] == "56.00"
+    assert trade_log.current_bankroll(str(path)) == 56.0

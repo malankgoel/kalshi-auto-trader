@@ -1,0 +1,19 @@
+[project]
+name = "kalshi-auto-trader"
+version = "0.1.0"
+description = "Reusable Kalshi trading utilities plus app-specific prediction strategies."
+requires-python = ">=3.10"
+dependencies = [
+    "requests>=2.31",
+    "cryptography>=42.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+

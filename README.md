@@ -4,8 +4,9 @@ Self-contained bot that bets the next World Cup game on Kalshi using the
 pre-tournament model's edges.
 
 It carries its own copy of the model: the pre-tournament forecast
-(`data/match_predictions.csv`) and the schedule (`data/schedule_2026.csv`). It
-does **not** read the model repo's `tally.csv` or any other external file — every
+(`data/world_cup/match_predictions.csv`) and the schedule
+(`data/world_cup/schedule_2026.csv`). It does **not** read the model repo's
+`tally.csv` or any other external file — every
 run it recomputes from scratch:
 
 ```
@@ -34,9 +35,9 @@ then places the trades.
   kickoff can't double-place — Kalshi rejects the duplicate. (Caveat: if the odds
   move between runs the bet is still placed only once, at the first run's size.)
 - **Persistent trade log.** Successful live/demo submissions are appended to
-  `data/trade_log.csv`. On the next run the bot checks pending logged tickers for
-  settlement, writes win/loss/profit, and sizes the next game from the updated
-  logged bankroll.
+  `data/world_cup/trade_log.csv`. On the next run the bot checks pending logged
+  tickers for settlement, writes win/loss/profit, and sizes the next game from
+  the updated logged bankroll.
 - **Practice with `--demo`** on Kalshi's demo exchange before going live.
 - Trading risks real money. With this few bets the results are mostly noise.
   You own every order this places. Start tiny.
@@ -47,7 +48,7 @@ then places the trades.
 
 ```bash
 cd kalshi-auto-trader
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -64,15 +65,15 @@ export KALSHI_PRIVATE_KEY_PATH="/path/to/kalshi_private_key.pem"
 ## Usage
 
 ```bash
-python execute_trades.py                      # dry-run, next game, market orders
-python execute_trades.py --order-type limit   # dry-run, limit pricing
-python execute_trades.py --demo --live        # place on the demo exchange
-python execute_trades.py --live               # place for real
+python3 execute_trades.py                      # dry-run, next game, market orders
+python3 execute_trades.py --order-type limit   # dry-run, limit pricing
+python3 execute_trades.py --demo --live        # place on the demo exchange
+python3 execute_trades.py --live               # place for real
 
-python execute_trades.py --home France --away Senegal   # a specific fixture
-python execute_trades.py --match-id 21                  # by schedule id
-python execute_trades.py --bankroll 200                 # override Kelly bankroll
-python execute_trades.py --max-total 20                 # tighter run cap
+python3 execute_trades.py --home France --away Senegal   # a specific fixture
+python3 execute_trades.py --match-id 21                  # by schedule id
+python3 execute_trades.py --bankroll 200                 # override Kelly bankroll
+python3 execute_trades.py --max-total 20                 # tighter run cap
 ```
 
 The next game is the earliest scheduled fixture that hasn't kicked off and has a
@@ -116,10 +117,10 @@ placing.
 
 ## Trade log and bankroll
 
-`data/trade_log.csv` is one row per successfully submitted live/demo order. It
-records the model probability, de-vigged market fair probability, raw market
-price, quoted ask, recommended stake, starting bankroll for the run, submitted
-order price, order id, and settlement fields.
+`data/world_cup/trade_log.csv` is one row per successfully submitted live/demo
+order. It records the model probability, de-vigged market fair probability, raw
+market price, quoted ask, recommended stake, starting bankroll for the run,
+submitted order price, order id, and settlement fields.
 
 Before every run, the bot reads pending rows and calls Kalshi for the logged
 market tickers. If Kalshi reports a YES/NO result, the row is marked won/lost,
@@ -129,7 +130,11 @@ until Kalshi exposes a settled result.
 
 ---
 
-## Configuration (`config.py`, all env-overridable)
+## Configuration
+
+Reusable Kalshi/runtime settings live in `kalshi_auto_trader/settings.py`.
+World Cup-specific data paths and market series live in
+`kalshi_auto_trader/world_cup/config.py`.
 
 | Env var | Default | Meaning |
 |---|---|---|
@@ -138,7 +143,7 @@ until Kalshi exposes a settled result.
 | `KELLY_FRACTION` | `0.50` | fraction of full Kelly (half-Kelly) |
 | `MAX_STAKE_FRACTION` | `0.25` | cap per bet, share of bankroll |
 | `BANKROLL` | `50` | starting/fallback ledger bankroll |
-| `KALSHI_TRADE_LOG_FILE` | `data/trade_log.csv` | CSV ledger used for logging, settlement, and bankroll tracking |
+| `KALSHI_TRADE_LOG_FILE` | `data/world_cup/trade_log.csv` | CSV ledger used for logging, settlement, and bankroll tracking |
 | `MAX_ORDER_COST` | `25` | max $ on a single order |
 | `MAX_TOTAL_COST` | `100` | max $ across one run |
 | `MAX_CONTRACTS_PER_ORDER` | `500` | hard contract cap per order |
@@ -150,7 +155,8 @@ until Kalshi exposes a settled result.
 ## Tests
 
 ```bash
-python -m pytest tests/ -q
+python3 -m pip install -r requirements-dev.txt
+python3 -m pytest tests/ -q
 ```
 
 Fully offline (no network, no keys): de-vig, edge flagging, Kelly, sizing/caps,
@@ -159,23 +165,28 @@ market+limit params, price extraction, bet→market mapping, and an end-to-end
 
 ---
 
-## Files
+## Repository layout
 
-| File | Role |
+| Path | Role |
 |---|---|
-| `execute_trades.py` | CLI: next game → live odds → flag → size → (dry-run/place). |
-| `model.py` | Bundled forecast + schedule, de-vig, ≥10% flagging, Kelly. |
-| `market_match.py` | Find the live market per outcome; map a bet to ticker + side; read prices. |
-| `kalshi_client.py` | Kalshi REST: signed reads + `create_order`, `get_balance`. |
-| `config.py` | Paths, betting rules, caps, order settings (env-overridable). |
-| `data/` | The bundled model snapshot + schedule (committed; this is what makes it self-contained). |
+| `execute_trades.py` | Backward-compatible CLI wrapper for the World Cup app. |
+| `kalshi_auto_trader/kalshi/client.py` | Reusable Kalshi REST client: signed reads/writes, orders, balance. |
+| `kalshi_auto_trader/orders.py` | Reusable order sizing, price fields, and idempotent client order IDs. |
+| `kalshi_auto_trader/ledger.py` | Reusable CSV order ledger and settlement/bankroll logic. |
+| `kalshi_auto_trader/settings.py` | Shared env-overridable runtime, risk, auth, and order settings. |
+| `kalshi_auto_trader/world_cup/` | World Cup-specific model, market matching, config, and CLI planning. |
+| `data/world_cup/` | Bundled World Cup model snapshot, schedule, and empty trade-log header. |
 | `tests/` | Offline unit + integration tests. |
+
+For a future strategy, add a new package under `kalshi_auto_trader/<strategy>/`
+with its own config/model/market mapping. Reuse `KalshiClient`, `orders`, and
+`ledger` rather than copying Kalshi API or bookkeeping code.
 
 ---
 
 ## Updating the model data
 
-`data/match_predictions.csv` is the **pre-tournament** snapshot (trained through
-2026-06-10) on purpose — edges are measured against a model that hasn't seen any
-results, so they aren't inflated by hindsight. Replace it only if you genuinely
-want a different model; keep the same columns.
+`data/world_cup/match_predictions.csv` is the **pre-tournament** snapshot
+(trained through 2026-06-10) on purpose — edges are measured against a model
+that hasn't seen any results, so they aren't inflated by hindsight. Replace it
+only if you genuinely want a different model; keep the same columns.

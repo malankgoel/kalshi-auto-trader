@@ -49,7 +49,7 @@ then places the trades.
 ```bash
 cd kalshi-auto-trader
 python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+python3 -m pip install -e .
 ```
 
 Auth (needed for `--live` and `--demo`; download an RSA API key from your Kalshi
@@ -59,6 +59,10 @@ account → Settings → API):
 export KALSHI_API_KEY_ID="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 export KALSHI_PRIVATE_KEY_PATH="/path/to/kalshi_private_key.pem"
 ```
+
+`.env.example` lists the supported local starting values. Export them in your
+shell or load them with your preferred environment manager; the trader does not
+implicitly load `.env` files.
 
 ---
 
@@ -74,6 +78,8 @@ python3 execute_trades.py --home France --away Senegal   # a specific fixture
 python3 execute_trades.py --match-id 21                  # by schedule id
 python3 execute_trades.py --bankroll 200                 # override Kelly bankroll
 python3 execute_trades.py --max-total 20                 # tighter run cap
+
+kalshi-world-cup --help                                  # installed CLI
 ```
 
 The next game is the earliest scheduled fixture that hasn't kicked off and has a

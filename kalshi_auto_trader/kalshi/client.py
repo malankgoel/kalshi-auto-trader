@@ -189,6 +189,14 @@ class KalshiClient:
         re-sending the same id is rejected (409), so a retry can't double-place.
         Returns the created order object.
         """
+        if action not in ("buy", "sell"):
+            raise ValueError("action must be 'buy' or 'sell'")
+        if side not in ("yes", "no"):
+            raise ValueError("side must be 'yes' or 'no'")
+        if order_type not in settings.ORDER_TYPES:
+            raise ValueError("order_type must be 'market' or 'limit'")
+        if count <= 0:
+            raise ValueError("count must be positive")
         body: dict[str, Any] = {
             "ticker": ticker,
             "action": action,

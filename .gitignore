@@ -5,6 +5,11 @@ __pycache__/
 venv/
 .pytest_cache/
 .ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
 
 # Secrets & keys -- NEVER commit your Kalshi private key
 *.pem

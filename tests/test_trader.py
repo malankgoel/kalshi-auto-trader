@@ -7,6 +7,7 @@ import os
 import sys
 
 from pytest import approx
+import pytest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -88,6 +89,15 @@ def test_limit_params_side_and_clamp(monkeypatch):
     assert ex.build_order_params("yes", 1, 95.0, "limit")["yes_price"] == 99
 
 
+def test_order_params_reject_invalid_inputs():
+    with pytest.raises(ValueError, match="side"):
+        ex.build_order_params("maybe", 1, 50.0, "market")
+    with pytest.raises(ValueError, match="order_type"):
+        ex.build_order_params("yes", 1, 50.0, "stop")
+    with pytest.raises(ValueError, match="count"):
+        ex.build_order_params("yes", 0, 50.0, "market")
+
+
 # ----------------------------- price extraction --------------------------- #
 def test_yes_price_mid_then_last():
     assert mm.yes_price_cents({"yes_bid": 40, "yes_ask": 44}) == approx(42.0)
@@ -97,6 +107,8 @@ def test_yes_price_mid_then_last():
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)
+    with pytest.raises(ValueError, match="side"):
+        mm.side_ask_cents({}, "maybe")
 
 
 # ----------------------------- mapping ------------------------------------ #
@@ -189,3 +201,10 @@ def test_trade_log_appends_and_settles(tmp_path):
     assert settled["profit"] == "6.00"
     assert settled["bankroll_after"] == "56.00"
     assert trade_log.current_bankroll(str(path)) == 56.0
+
+
+def test_trade_log_repairs_empty_file(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    path.touch()
+    trade_log.ensure_log(path)
+    assert path.read_text(encoding="utf-8").startswith("created_at,updated_at,")

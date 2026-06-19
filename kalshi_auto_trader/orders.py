@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 import uuid
+from typing import Literal
 
 from kalshi_auto_trader import settings
 
@@ -18,9 +19,19 @@ def size_order(stake_dollars: float, price_cents: float) -> int:
     return max(count, 0)
 
 
-def build_order_params(side: str, count: int, price_cents: float,
-                       order_type: str) -> dict:
+def build_order_params(
+    side: Literal["yes", "no"],
+    count: int,
+    price_cents: float,
+    order_type: Literal["market", "limit"],
+) -> dict:
     """Convert a side/count/ask into Kalshi order fields."""
+    if side not in ("yes", "no"):
+        raise ValueError("side must be 'yes' or 'no'")
+    if order_type not in settings.ORDER_TYPES:
+        raise ValueError("order_type must be 'market' or 'limit'")
+    if count <= 0:
+        raise ValueError("count must be positive")
     params = {
         "order_type": order_type,
         "yes_price": None,
@@ -49,4 +60,3 @@ def stable_client_order_id(namespace: str, key: str) -> str:
     """Deterministic UUID for idempotent Kalshi order submission."""
     ns = uuid.uuid5(uuid.NAMESPACE_URL, namespace)
     return str(uuid.uuid5(ns, key))
-

@@ -185,6 +185,8 @@ def build_odds_row(idx: dict, home: str, away: str) -> dict:
 def side_ask_cents(market: dict, side: str) -> Optional[float]:
     """Cost (cents/contract) to BUY ``side`` now: the ask for that side. Falls
     back to 100 - opposite bid when an explicit ask isn't quoted."""
+    if side not in ("yes", "no"):
+        raise ValueError("side must be 'yes' or 'no'")
     if side == "yes":
         v = _cents(market, "yes_ask_dollars", "yes_ask")
         if v is None:
@@ -273,6 +275,8 @@ def resolve_order(idx: dict, line: str, side: str, selection: str,
     btts: the BTTS-YES market; YES = both score, NO = not both.
     """
     buy_side = side.strip().lower()
+    if buy_side not in ("yes", "no"):
+        raise ValueError("side must be 'YES' or 'NO'")
     if line in ("winner", "winner_draw"):
         if "draw" in _norm(selection) or _norm(selection_team) in ("draw", "tie", ""):
             return idx.get("draw"), buy_side

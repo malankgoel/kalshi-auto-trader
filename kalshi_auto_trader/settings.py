@@ -6,6 +6,7 @@ the app package. This module should stay reusable for future strategies.
 
 from __future__ import annotations
 
+import math
 import os
 
 PACKAGE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -14,9 +15,10 @@ REPO_ROOT = os.path.dirname(PACKAGE_DIR)
 
 def _env_float(name: str, default: float) -> float:
     try:
-        return float(os.environ.get(name, default))
+        value = float(os.environ.get(name, default))
     except (TypeError, ValueError):
         return default
+    return value if math.isfinite(value) else default
 
 
 def _env_int(name: str, default: int) -> int:

@@ -159,10 +159,17 @@ def resolve_bankroll(args, ledger_bankroll: float) -> float:
     return ledger_bankroll
 
 
-def main() -> None:
+def positive_float(value: str) -> float:
+    parsed = float(value)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("value must be greater than zero")
+    return parsed
+
+
+def build_parser() -> argparse.ArgumentParser:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--order-type", choices=["market", "limit"],
+    ap.add_argument("--order-type", choices=sorted(settings.ORDER_TYPES),
                     default=settings.ORDER_TYPE)
     ap.add_argument("--live", action="store_true",
                     help="actually submit orders (default: dry-run)")
@@ -171,11 +178,15 @@ def main() -> None:
     ap.add_argument("--match-id", help="trade a specific fixture by schedule id")
     ap.add_argument("--home", help="home team (with --away) to trade a specific game")
     ap.add_argument("--away", help="away team")
-    ap.add_argument("--bankroll", type=float, default=None,
+    ap.add_argument("--bankroll", type=positive_float, default=None,
                     help="override Kelly bankroll (default: logged bankroll)")
-    ap.add_argument("--max-total", type=float, default=None,
+    ap.add_argument("--max-total", type=positive_float, default=None,
                     help="override per-run total spend cap (dollars)")
-    args = ap.parse_args()
+    return ap
+
+
+def main(argv: list[str] | None = None) -> None:
+    args = build_parser().parse_args(argv)
 
     if args.max_total is not None:
         settings.MAX_TOTAL_COST = args.max_total

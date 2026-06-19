@@ -26,6 +26,11 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
+def _env_choice(name: str, default: str, choices: frozenset[str]) -> str:
+    value = os.environ.get(name, default).strip().lower()
+    return value if value in choices else default
+
+
 # --------------------------------------------------------------------------- #
 # Generic betting rules                                                        #
 # --------------------------------------------------------------------------- #
@@ -56,7 +61,8 @@ KALSHI_PRIVATE_KEY_PATH = os.environ.get("KALSHI_PRIVATE_KEY_PATH")
 # --------------------------------------------------------------------------- #
 # "market" or "limit". Override per run with --order-type, or globally with
 # KALSHI_ORDER_TYPE. Sizing is identical; only the price field sent differs.
-ORDER_TYPE = os.environ.get("KALSHI_ORDER_TYPE", "market").lower()
+ORDER_TYPES = frozenset({"market", "limit"})
+ORDER_TYPE = _env_choice("KALSHI_ORDER_TYPE", "market", ORDER_TYPES)
 LIMIT_BUFFER_CENTS = _env_int("KALSHI_LIMIT_BUFFER_CENTS", 2)     # limit = ask + this
 MARKET_SLIPPAGE_CENTS = _env_int("KALSHI_MARKET_SLIPPAGE_CENTS", 3)  # market buy_max_cost headroom
 

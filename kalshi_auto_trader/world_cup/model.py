@@ -11,6 +11,7 @@ from __future__ import annotations
 import csv
 import datetime as dt
 from dataclasses import dataclass
+from os import PathLike
 from typing import Optional
 
 from kalshi_auto_trader import settings
@@ -20,7 +21,7 @@ from kalshi_auto_trader.world_cup import config
 # --------------------------------------------------------------------------- #
 # data loading                                                                #
 # --------------------------------------------------------------------------- #
-def _read_csv(path: str) -> list[dict]:
+def _read_csv(path: str | PathLike[str]) -> list[dict]:
     with open(path, newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))
 
@@ -62,7 +63,7 @@ def _parse(iso_utc: str) -> Optional[dt.datetime]:
     try:
         return dt.datetime.strptime(iso_utc, "%Y-%m-%dT%H:%M:%SZ").replace(
             tzinfo=dt.timezone.utc)
-    except Exception:  # noqa: BLE001
+    except ValueError:
         return None
 
 
@@ -152,7 +153,7 @@ def staked_fraction(kelly_full: float) -> float:
 # --------------------------------------------------------------------------- #
 # bet flagging                                                                #
 # --------------------------------------------------------------------------- #
-@dataclass
+@dataclass(frozen=True, slots=True)
 class Bet:
     line: str            # "winner" | "over_under" | "btts"
     selection: str       # e.g. "NO Brazil", "OVER 2.5", "BTTS YES"

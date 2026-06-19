@@ -36,6 +36,8 @@ class KalshiClient:
         private_key_path: Optional[str] = settings.KALSHI_PRIVATE_KEY_PATH,
         timeout: int = 20,
     ) -> None:
+        if timeout <= 0:
+            raise ValueError("timeout must be positive")
         base_url = base_url or settings.KALSHI_BASE_URL or settings.PROD_BASE_URL
         self.base_url = base_url.rstrip("/")
         self.key_id = key_id
@@ -55,6 +57,16 @@ class KalshiClient:
     @property
     def authenticated(self) -> bool:
         return self._private_key is not None
+
+    def close(self) -> None:
+        """Release pooled HTTP connections held by the client session."""
+        self.session.close()
+
+    def __enter__(self) -> "KalshiClient":
+        return self
+
+    def __exit__(self, *_exc_info: object) -> None:
+        self.close()
 
     # ------------------------------------------------------------------ #
     # signing                                                            #

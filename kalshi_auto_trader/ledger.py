@@ -69,7 +69,7 @@ def _resolve_path(path: str | os.PathLike | None = None) -> str:
 
 def ensure_log(path: str | os.PathLike | None = None) -> None:
     path = _resolve_path(path)
-    if os.path.exists(path):
+    if os.path.exists(path) and os.path.getsize(path) > 0:
         return
     directory = os.path.dirname(path)
     if directory:

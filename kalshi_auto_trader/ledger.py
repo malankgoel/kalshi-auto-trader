@@ -10,6 +10,7 @@ from __future__ import annotations
 import csv
 import datetime as dt
 import os
+import tempfile
 from typing import Optional
 
 from kalshi_auto_trader import settings
@@ -88,11 +89,21 @@ def read_rows(path: str | os.PathLike | None = None) -> list[dict]:
 def write_rows(rows: list[dict], path: str | os.PathLike | None = None) -> None:
     path = _resolve_path(path)
     ensure_log(path)
-    with open(path, "w", newline="", encoding="utf-8") as fh:
-        writer = csv.DictWriter(fh, fieldnames=COLUMNS)
-        writer.writeheader()
-        for row in rows:
-            writer.writerow({k: row.get(k, "") for k in COLUMNS})
+    directory = os.path.dirname(os.path.abspath(path))
+    temp_path = ""
+    try:
+        with tempfile.NamedTemporaryFile(
+            "w", newline="", encoding="utf-8", dir=directory, delete=False
+        ) as fh:
+            temp_path = fh.name
+            writer = csv.DictWriter(fh, fieldnames=COLUMNS)
+            writer.writeheader()
+            for row in rows:
+                writer.writerow({k: row.get(k, "") for k in COLUMNS})
+        os.replace(temp_path, path)
+    finally:
+        if temp_path and os.path.exists(temp_path):
+            os.unlink(temp_path)
 
 
 def current_bankroll(path: str | os.PathLike | None = None) -> float:

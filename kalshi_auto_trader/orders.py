@@ -41,6 +41,7 @@ def build_order_params(
         "yes_price": None,
         "no_price": None,
         "buy_max_cost": None,
+        "risk_cost": None,
     }
     if order_type == "limit":
         limit_price = int(round(price_cents + settings.LIMIT_BUFFER_CENTS))
@@ -51,12 +52,13 @@ def build_order_params(
         params["yes_price" if side == "yes" else "no_price"] = limit_price
         params["limit_price"] = limit_price
         params["est_cost"] = round(count * limit_price / 100.0, 2)
+        params["risk_cost"] = params["est_cost"]
     else:
-        params["buy_max_cost"] = int(math.ceil(
-            count * (price_cents + settings.MARKET_SLIPPAGE_CENTS)
-        ))
+        max_price = min(100.0, price_cents + settings.MARKET_SLIPPAGE_CENTS)
+        params["buy_max_cost"] = int(math.ceil(count * max_price))
         params["limit_price"] = None
         params["est_cost"] = round(count * price_cents / 100.0, 2)
+        params["risk_cost"] = round(params["buy_max_cost"] / 100.0, 2)
     return params
 
 

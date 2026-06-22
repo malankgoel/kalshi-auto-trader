@@ -92,9 +92,12 @@ def _event_date(event_ticker: str) -> str:
     return f"20{m.group(1)}-{mm}-{m.group(3)}" if mm else ""
 
 
-def _date_diff_days(d1: str, d2: str) -> int:
+def _date_diff_days(d1: str, d2: str) -> Optional[int]:
     fmt = "%Y-%m-%d"
-    return (dt.datetime.strptime(d1, fmt) - dt.datetime.strptime(d2, fmt)).days
+    try:
+        return (dt.datetime.strptime(d1, fmt) - dt.datetime.strptime(d2, fmt)).days
+    except ValueError:
+        return None
 
 
 def _market_blob(market: dict) -> str:
@@ -109,8 +112,10 @@ def _match_teams(market: dict, home: str, away: str, game_date: str = "") -> boo
     """True if the market belongs to this fixture (date-aware, alias-tolerant)."""
     ev = market.get("event_ticker", "")
     ev_date = _event_date(ev)
-    if game_date and ev_date and abs(_date_diff_days(game_date, ev_date)) > 1:
-        return False  # +/-1 day: ticker uses UTC date, our date is local kickoff
+    if game_date and ev_date:
+        date_diff = _date_diff_days(game_date, ev_date)
+        if date_diff is None or abs(date_diff) > 1:
+            return False  # +/-1 day: ticker uses UTC date, game date is local
     hc, ac = _event_codes(ev)
     home_code, away_code = TEAM_CODES.get(home), TEAM_CODES.get(away)
     if hc and home_code and away_code and {hc, ac} == {home_code, away_code}:

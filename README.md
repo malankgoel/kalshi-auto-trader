@@ -169,6 +169,9 @@ Fully offline (no network, no keys): de-vig, edge flagging, Kelly, sizing/caps,
 market+limit params, price extraction, bet→market mapping, and an end-to-end
 `plan_bets` check against an injected fake client.
 
+For the standard contributor checks, run `make check`. GitHub Actions runs the
+same offline suite on supported Python versions for every push and pull request.
+
 ---
 
 ## Repository layout

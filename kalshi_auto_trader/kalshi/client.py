@@ -35,6 +35,7 @@ class KalshiClient:
         key_id: Optional[str] = settings.KALSHI_API_KEY_ID,
         private_key_path: Optional[str] = settings.KALSHI_PRIVATE_KEY_PATH,
         timeout: int = 20,
+        session: Optional[requests.Session] = None,
     ) -> None:
         if timeout <= 0:
             raise ValueError("timeout must be positive")
@@ -42,7 +43,7 @@ class KalshiClient:
         self.base_url = base_url.rstrip("/")
         self.key_id = key_id
         self.timeout = timeout
-        self.session = requests.Session()
+        self.session = session if session is not None else requests.Session()
         self._private_key = None
         if key_id and private_key_path:
             if not _HAVE_CRYPTO:

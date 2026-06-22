@@ -185,8 +185,16 @@ def build_parser() -> argparse.ArgumentParser:
     return ap
 
 
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    if bool(args.home) != bool(args.away):
+        parser.error("--home and --away must be provided together")
+    return args
+
+
 def main(argv: list[str] | None = None) -> None:
-    args = build_parser().parse_args(argv)
+    args = parse_args(argv)
 
     if args.max_total is not None:
         settings.MAX_TOTAL_COST = args.max_total

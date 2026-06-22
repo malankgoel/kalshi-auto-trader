@@ -73,6 +73,9 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
     (b) have not kicked off yet, earliest first. Knockout fixtures (TBD teams)
     have no prediction and are naturally excluded."""
     now = now or _now()
+    if now.tzinfo is None:
+        raise ValueError("now must be timezone-aware")
+    now = now.astimezone(dt.timezone.utc)
     preds = load_predictions()
     sched = load_schedule()
     games = []

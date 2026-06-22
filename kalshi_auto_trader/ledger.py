@@ -100,6 +100,8 @@ def write_rows(rows: list[dict], path: str | os.PathLike | None = None) -> None:
             writer.writeheader()
             for row in rows:
                 writer.writerow({k: row.get(k, "") for k in COLUMNS})
+            fh.flush()
+            os.fsync(fh.fileno())
         os.replace(temp_path, path)
     finally:
         if temp_path and os.path.exists(temp_path):

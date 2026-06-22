@@ -13,11 +13,15 @@ standalone copy: the trader repo never imports the model repo.
 from __future__ import annotations
 
 import datetime as dt
+import logging
 import re
 import unicodedata
 from typing import Optional
 
 from kalshi_auto_trader.world_cup import config
+
+
+logger = logging.getLogger(__name__)
 
 
 # --------------------------------------------------------------------------- #
@@ -256,7 +260,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
                         if not token:
                             token = _event_token(m.get("event_ticker", ""))
             except Exception as exc:  # noqa: BLE001
-                print(f"    ! winner series {s}: {exc}")
+                logger.warning("winner series %s: %s", s, exc)
         if token:
             for s in ou_btts:
                 try:
@@ -264,7 +268,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
                         if _event_token(m.get("event_ticker", "")) == token:
                             _classify_line(m, line_of.get(s, ""), idx)
                 except Exception as exc:  # noqa: BLE001
-                    print(f"    ! series {s}: {exc}")
+                    logger.warning("series %s: %s", s, exc)
         if idx["winner"] and idx["over"] and idx["btts"]:
             break
     return idx

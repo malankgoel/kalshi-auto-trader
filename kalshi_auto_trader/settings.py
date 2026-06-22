@@ -18,14 +18,15 @@ def _env_float(name: str, default: float) -> float:
         value = float(os.environ.get(name, default))
     except (TypeError, ValueError):
         return default
-    return value if math.isfinite(value) else default
+    return value if math.isfinite(value) and value >= 0 else default
 
 
 def _env_int(name: str, default: int) -> int:
     try:
-        return int(os.environ.get(name, default))
+        value = int(os.environ.get(name, default))
     except (TypeError, ValueError):
         return default
+    return value if value >= 0 else default
 
 
 def _env_choice(name: str, default: str, choices: frozenset[str]) -> str:

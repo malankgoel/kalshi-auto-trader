@@ -79,6 +79,7 @@ def test_market_params_buy_max_cost(monkeypatch):
     p = ex.build_order_params("yes", 10, 44.0, "market")
     assert p["yes_price"] is None and p["buy_max_cost"] == 10 * 47
     assert p["est_cost"] == approx(4.40)
+    assert p["risk_cost"] == approx(4.70)
 
 
 def test_limit_params_side_and_clamp(monkeypatch):
@@ -87,6 +88,13 @@ def test_limit_params_side_and_clamp(monkeypatch):
     assert p["no_price"] == 22 and p["yes_price"] is None and p["buy_max_cost"] is None
     monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 10)
     assert ex.build_order_params("yes", 1, 95.0, "limit")["yes_price"] == 99
+
+
+def test_market_max_cost_never_exceeds_contract_payout(monkeypatch):
+    monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 10)
+    p = ex.build_order_params("yes", 3, 95.0, "market")
+    assert p["buy_max_cost"] == 300
+    assert p["risk_cost"] == 3.0
 
 
 def test_order_params_reject_invalid_inputs():
@@ -167,6 +175,7 @@ def test_plan_bets_end_to_end():
     assert placed, "expected at least one actionable order"
     arg = [p for p in placed if "Argentina" in p["selection"]][0]
     assert arg["buy_side"] == "yes" and arg["count"] >= 1 and arg["buy_max_cost"]
+    assert arg["risk_cost"] >= arg["est_cost"]
 
 
 # ----------------------------- trade log ---------------------------------- #

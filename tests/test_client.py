@@ -40,3 +40,24 @@ def test_create_order_rejects_invalid_fields_before_auth(override, message):
 
     with pytest.raises(ValueError, match=message):
         client.create_order(**fields)
+
+
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"side": "yes", "yes_price": None},
+        {"side": "yes", "yes_price": 100},
+        {"side": "no", "no_price": 0},
+    ],
+)
+def test_limit_order_requires_valid_selected_side_price(fields):
+    client = KalshiClient()
+    with pytest.raises(ValueError, match="limit .*_price"):
+        client.create_order(
+            ticker="TEST-TICKER",
+            action="buy",
+            count=1,
+            order_type="limit",
+            client_order_id="test-order",
+            **fields,
+        )

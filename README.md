@@ -94,8 +94,8 @@ identical; only the price field sent to Kalshi changes:
 
 | Type | How it prices | Trade-off |
 |---|---|---|
-| `market` | Fills now at best available; `buy_max_cost = count × (ask + MARKET_SLIPPAGE_CENTS)` caps spend so a thin book can't fill far above the quote. | Certain fill, some slippage. |
-| `limit` | Posts a limit at `ask + LIMIT_BUFFER_CENTS` (clamped 1–99¢) on the side being bought. | Controls price; may not fill if the market moves. |
+| `market` | Fills now at best available; `buy_max_cost = count × min(100, ask + KALSHI_MARKET_SLIPPAGE_CENTS)` caps spend so a thin book can't fill far above the quote. | Certain fill, some slippage. |
+| `limit` | Posts a limit at `ask + KALSHI_LIMIT_BUFFER_CENTS` (clamped 1–99¢) on the side being bought. | Controls price; may not fill if the market moves. |
 
 ```bash
 export KALSHI_ORDER_TYPE=limit   # make limit the default
@@ -153,7 +153,7 @@ World Cup-specific data paths and market series live in
 | `MAX_ORDER_COST` | `25` | max $ on a single order |
 | `MAX_TOTAL_COST` | `100` | max $ across one run |
 | `MAX_CONTRACTS_PER_ORDER` | `500` | hard contract cap per order |
-| `LIMIT_BUFFER_CENTS` | `2` | limit price = ask + this |
+| `KALSHI_LIMIT_BUFFER_CENTS` | `2` | limit price = ask + this |
 | `KALSHI_MARKET_SLIPPAGE_CENTS` | `3` | market `buy_max_cost` headroom |
 
 ---
@@ -170,7 +170,8 @@ market+limit params, price extraction, bet→market mapping, and an end-to-end
 `plan_bets` check against an injected fake client.
 
 For the standard contributor checks, run `make check`. GitHub Actions runs the
-same offline suite on supported Python versions for every push and pull request.
+same lint, test, and compilation checks on supported Python versions for every
+push and pull request.
 
 ---
 

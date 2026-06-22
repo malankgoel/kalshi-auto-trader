@@ -11,7 +11,9 @@ from kalshi_auto_trader import settings
 
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
-    if stake_dollars <= 0 or not price_cents or price_cents <= 0:
+    if not (math.isfinite(stake_dollars) and math.isfinite(price_cents)):
+        return 0
+    if stake_dollars <= 0 or price_cents <= 0 or price_cents > 100:
         return 0
     count = int((stake_dollars * 100.0) // price_cents)
     count = min(count, settings.MAX_CONTRACTS_PER_ORDER)
@@ -32,6 +34,8 @@ def build_order_params(
         raise ValueError("order_type must be 'market' or 'limit'")
     if count <= 0:
         raise ValueError("count must be positive")
+    if not math.isfinite(price_cents) or not 0 < price_cents <= 100:
+        raise ValueError("price_cents must be between 0 and 100")
     params = {
         "order_type": order_type,
         "yes_price": None,

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+import math
 from dataclasses import dataclass
 from os import PathLike
 from typing import Optional
@@ -189,7 +190,13 @@ def _c2p(v) -> Optional[float]:
     """Cents (0-100) -> probability (0-1). '' / None -> None."""
     if v is None or v == "":
         return None
-    return float(v) / 100.0
+    try:
+        cents = float(v)
+    except (TypeError, ValueError):
+        return None
+    if not math.isfinite(cents) or not 0 <= cents <= 100:
+        return None
+    return cents / 100.0
 
 
 def flag_bets(game: dict, odds: dict) -> list[Bet]:

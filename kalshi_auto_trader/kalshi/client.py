@@ -198,6 +198,10 @@ class KalshiClient:
             raise ValueError("order_type must be 'market' or 'limit'")
         if count <= 0:
             raise ValueError("count must be positive")
+        if order_type == "limit":
+            selected_price = yes_price if side == "yes" else no_price
+            if selected_price is None or not 1 <= selected_price <= 99:
+                raise ValueError(f"limit {side}_price must be between 1 and 99")
         body: dict[str, Any] = {
             "ticker": ticker,
             "action": action,

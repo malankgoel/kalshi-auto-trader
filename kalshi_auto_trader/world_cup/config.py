@@ -18,7 +18,7 @@ TRADE_LOG_FILE = settings.TRADE_LOG_FILE or DATA_DIR / "trade_log.csv"
 
 # 2026 World Cup per-match series. Must match the wording Kalshi uses.
 KALSHI_SERIES = {
-    "winner": ["KXWCGAME"],
-    "over_under": ["KXWCTOTAL"],
-    "btts": ["KXWCBTTS"],
+    "winner": ("KXWCGAME",),
+    "over_under": ("KXWCTOTAL",),
+    "btts": ("KXWCBTTS",),
 }

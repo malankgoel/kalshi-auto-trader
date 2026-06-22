@@ -77,10 +77,10 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
             plan["skip"] = "stake < 1 contract"; plans.append(plan); continue
 
         params = build_order_params(buy_side, count, ask, order_type)
-        if running + params["est_cost"] > settings.MAX_TOTAL_COST:
+        if running + params["risk_cost"] > settings.MAX_TOTAL_COST:
             plan["skip"] = f"run cap ${settings.MAX_TOTAL_COST:.0f}"; plans.append(plan)
             continue
-        running += params["est_cost"]
+        running += params["risk_cost"]
         plan.update(ticker=market.get("ticker", ""), buy_side=buy_side,
                     ask=round(ask, 1), count=count,
                     client_order_id=client_order_id(game, b.selection), **params)
@@ -106,10 +106,10 @@ def print_header(game: dict, odds: dict, bankroll: float, order_type: str,
 
 def print_plan(plans: list[dict], live: bool) -> float:
     actionable = [p for p in plans if not p.get("skip")]
-    total = sum(p["est_cost"] for p in actionable)
+    total = sum(p["risk_cost"] for p in actionable)
     print(f"\n{len(actionable)} order(s) to place / {len(plans)} flagged\n")
     hdr = (f"{'Selection':16} {'Mdl':>4} {'Fair':>4} {'Edge':>5} {'Ask':>5} "
-           f"{'Cnt':>4} {'Price':>6} {'Cost':>7}")
+           f"{'Cnt':>4} {'Price':>6} {'Max':>7}")
     print(hdr); print("-" * len(hdr))
     for p in plans:
         if p.get("skip"):
@@ -121,9 +121,9 @@ def print_plan(plans: list[dict], live: bool) -> float:
         price_s = f"{price}c" if price is not None else "mkt"
         print(f"{p['selection'][:16]:16} {p['model_prob']*100:>3.0f}% "
               f"{p['fair_prob']*100:>3.0f}% {p['edge']*100:>+4.0f}% {p['ask']:>4.0f}c "
-              f"{p['count']:>4} {price_s:>6} ${p['est_cost']:>6.2f}")
+              f"{p['count']:>4} {price_s:>6} ${p['risk_cost']:>6.2f}")
     print("-" * len(hdr))
-    print(f"{'TOTAL est. cost':>54}  ${total:.2f}  (run cap ${settings.MAX_TOTAL_COST:.0f})")
+    print(f"{'TOTAL max cost':>54}  ${total:.2f}  (run cap ${settings.MAX_TOTAL_COST:.0f})")
     return total
 
 

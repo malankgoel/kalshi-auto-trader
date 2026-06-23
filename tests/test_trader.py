@@ -229,3 +229,13 @@ def test_trade_log_repairs_empty_file(tmp_path):
     path.touch()
     trade_log.ensure_log(path)
     assert path.read_text(encoding="utf-8").startswith("created_at,updated_at,")
+
+
+def test_trade_log_ignores_nonfinite_bankroll_values(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    trade_log.write_rows([
+        {"created_at": "1", "bankroll_before": "nan"},
+        {"created_at": "2", "bankroll_before": "65.25"},
+        {"created_at": "3", "settled_at": "3", "bankroll_after": "inf"},
+    ], path)
+    assert trade_log.current_bankroll(path) == 65.25

@@ -192,7 +192,9 @@ push and pull request.
 
 For a future strategy, add a new package under `kalshi_auto_trader/<strategy>/`
 with its own config/model/market mapping. Reuse `KalshiClient`, `orders`, and
-`ledger` rather than copying Kalshi API or bookkeeping code.
+`ledger` rather than copying Kalshi API or bookkeeping code. See
+`docs/strategy-guide.md` for the expected split between shared Kalshi logic and
+strategy-specific code.
 
 ---
 

@@ -17,6 +17,11 @@ def clamp_limit_price(price_cents: float) -> int:
     )
 
 
+def market_max_price(price_cents: float) -> float:
+    """Maximum market-order cents per contract after slippage headroom."""
+    return min(100.0, price_cents + settings.MARKET_SLIPPAGE_CENTS)
+
+
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
     if not (math.isfinite(stake_dollars) and math.isfinite(price_cents)):

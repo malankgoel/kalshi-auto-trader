@@ -9,6 +9,14 @@ from typing import Literal
 from kalshi_auto_trader import settings
 
 
+def clamp_limit_price(price_cents: float) -> int:
+    """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
+    return max(
+        settings.MIN_PRICE_CENTS,
+        min(settings.MAX_PRICE_CENTS, int(round(price_cents))),
+    )
+
+
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
     if not (math.isfinite(stake_dollars) and math.isfinite(price_cents)):

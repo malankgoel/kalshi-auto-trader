@@ -155,6 +155,8 @@ World Cup-specific data paths and market series live in
 | `MAX_CONTRACTS_PER_ORDER` | `500` | hard contract cap per order |
 | `KALSHI_LIMIT_BUFFER_CENTS` | `2` | limit price = ask + this |
 | `KALSHI_MARKET_SLIPPAGE_CENTS` | `3` | market `buy_max_cost` headroom |
+| `KALSHI_HTTP_TIMEOUT` | `20` | seconds to wait for each Kalshi HTTP request |
+| `KALSHI_MARKET_PAGE_LIMIT` | `200` | page size for market discovery requests |
 
 ---
 

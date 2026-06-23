@@ -144,7 +144,10 @@ class KalshiClient:
     # ------------------------------------------------------------------ #
     def list_markets(self, *, series_ticker: Optional[str] = None,
                      event_ticker: Optional[str] = None,
-                     status: Optional[str] = None, limit: int = 200) -> list[dict]:
+                     status: Optional[str] = None,
+                     limit: int = settings.KALSHI_MARKET_PAGE_LIMIT) -> list[dict]:
+        if limit <= 0:
+            raise ValueError("limit must be positive")
         out, cursor = [], None
         while True:
             params: dict[str, Any] = {"limit": limit}

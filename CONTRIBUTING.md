@@ -11,7 +11,8 @@ make check
 
 Keep exchange-wide behavior in `kalshi_auto_trader/kalshi`, `orders.py`, or
 `ledger.py`. Strategy-specific models, market mappings, and data paths belong
-under `kalshi_auto_trader/<strategy>/`.
+under `kalshi_auto_trader/<strategy>/`; use `docs/strategy-guide.md` as the
+template before adding a new app.
 
 Never commit API keys, private key files, or populated trade ledgers. New order
 and risk behavior should include an offline regression test.

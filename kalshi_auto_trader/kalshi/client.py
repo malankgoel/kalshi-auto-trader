@@ -34,7 +34,7 @@ class KalshiClient:
         base_url: Optional[str] = None,
         key_id: Optional[str] = settings.KALSHI_API_KEY_ID,
         private_key_path: Optional[str] = settings.KALSHI_PRIVATE_KEY_PATH,
-        timeout: int = 20,
+        timeout: int = settings.KALSHI_HTTP_TIMEOUT,
         session: Optional[requests.Session] = None,
     ) -> None:
         if timeout <= 0:

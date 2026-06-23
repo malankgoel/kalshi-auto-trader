@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+import math
 import os
 import tempfile
 from typing import Optional
@@ -298,9 +299,10 @@ def _norm(value) -> str:
 
 def _float(value) -> float:
     try:
-        return float(value)
+        parsed = float(value)
     except (TypeError, ValueError):
         return 0.0
+    return parsed if math.isfinite(parsed) else 0.0
 
 
 def _round(value) -> str:

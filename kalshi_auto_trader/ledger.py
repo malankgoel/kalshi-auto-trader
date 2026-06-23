@@ -118,19 +118,19 @@ def current_bankroll(path: str | os.PathLike | None = None) -> float:
                                            r.get("created_at", ""))):
         val = row.get("bankroll_after")
         if val not in ("", None):
-            try:
-                bankroll = float(val)
-                found_settled = True
-            except ValueError:
+            parsed = _finite_float(val)
+            if parsed is None:
                 continue
+            bankroll = parsed
+            found_settled = True
     if not found_settled:
         for row in rows:
             val = row.get("bankroll_before")
             if val not in ("", None):
-                try:
-                    bankroll = float(val)
-                except ValueError:
+                parsed = _finite_float(val)
+                if parsed is None:
                     continue
+                bankroll = parsed
     return round(bankroll, 2)
 
 
@@ -297,12 +297,16 @@ def _norm(value) -> str:
     return str(value or "").strip().lower()
 
 
-def _float(value) -> float:
+def _finite_float(value) -> Optional[float]:
     try:
         parsed = float(value)
     except (TypeError, ValueError):
-        return 0.0
-    return parsed if math.isfinite(parsed) else 0.0
+        return None
+    return parsed if math.isfinite(parsed) else None
+
+
+def _float(value) -> float:
+    return _finite_float(value) or 0.0
 
 
 def _round(value) -> str:

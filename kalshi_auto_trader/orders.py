@@ -52,11 +52,7 @@ def build_order_params(
         "risk_cost": None,
     }
     if order_type == "limit":
-        limit_price = int(round(price_cents + settings.LIMIT_BUFFER_CENTS))
-        limit_price = max(
-            settings.MIN_PRICE_CENTS,
-            min(settings.MAX_PRICE_CENTS, limit_price),
-        )
+        limit_price = clamp_limit_price(price_cents + settings.LIMIT_BUFFER_CENTS)
         params["yes_price" if side == "yes" else "no_price"] = limit_price
         params["limit_price"] = limit_price
         params["est_cost"] = round(count * limit_price / 100.0, 2)

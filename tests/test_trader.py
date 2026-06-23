@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
-from kalshi_auto_trader.orders import clamp_limit_price
+from kalshi_auto_trader.orders import clamp_limit_price, market_max_price
 from kalshi_auto_trader.world_cup import markets as mm
 from kalshi_auto_trader.world_cup import model
 from kalshi_auto_trader.world_cup import trader as ex
@@ -101,6 +101,12 @@ def test_market_max_cost_never_exceeds_contract_payout(monkeypatch):
     p = ex.build_order_params("yes", 3, 95.0, "market")
     assert p["buy_max_cost"] == 300
     assert p["risk_cost"] == 3.0
+
+
+def test_market_max_price_respects_contract_payout(monkeypatch):
+    monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 10)
+    assert market_max_price(95.0) == 100.0
+    assert market_max_price(44.0) == 54.0
 
 
 def test_order_params_reject_invalid_inputs():

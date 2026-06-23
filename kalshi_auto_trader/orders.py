@@ -63,7 +63,7 @@ def build_order_params(
         params["est_cost"] = round(count * limit_price / 100.0, 2)
         params["risk_cost"] = params["est_cost"]
     else:
-        max_price = min(100.0, price_cents + settings.MARKET_SLIPPAGE_CENTS)
+        max_price = market_max_price(price_cents)
         params["buy_max_cost"] = int(math.ceil(count * max_price))
         params["limit_price"] = None
         params["est_cost"] = round(count * price_cents / 100.0, 2)

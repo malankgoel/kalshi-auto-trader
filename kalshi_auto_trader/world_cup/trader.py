@@ -28,7 +28,7 @@ from __future__ import annotations
 import argparse
 import sys
 
-from kalshi_auto_trader import ledger, settings
+from kalshi_auto_trader import ledger, risk, settings
 from kalshi_auto_trader.kalshi import KalshiClient
 from kalshi_auto_trader.orders import (
     build_order_params,
@@ -77,7 +77,7 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
             plan["skip"] = "stake < 1 contract"; plans.append(plan); continue
 
         params = build_order_params(buy_side, count, ask, order_type)
-        if running + params["risk_cost"] > settings.MAX_TOTAL_COST:
+        if risk.exceeds_run_budget(running, params["risk_cost"], settings.MAX_TOTAL_COST):
             plan["skip"] = f"run cap ${settings.MAX_TOTAL_COST:.0f}"; plans.append(plan)
             continue
         running += params["risk_cost"]

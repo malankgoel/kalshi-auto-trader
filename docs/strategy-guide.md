@@ -1,0 +1,28 @@
+# Strategy Guide
+
+Use this layout when adding another prediction app, such as a new tournament,
+sport, or event category.
+
+## Keep Shared Kalshi Logic Shared
+
+Reuse these modules instead of copying API or bookkeeping code:
+
+| Module | Use |
+|---|---|
+| `kalshi_auto_trader.kalshi` | Public market discovery, authenticated account reads, and order submission. |
+| `kalshi_auto_trader.orders` | Contract sizing, market/limit order parameters, and stable client order IDs. |
+| `kalshi_auto_trader.ledger` | CSV trade logging, settlement updates, and bankroll recovery. |
+| `kalshi_auto_trader.risk` | Run-level spend cap accounting. |
+| `kalshi_auto_trader.settings` | Environment-backed runtime, auth, order, and risk settings. |
+
+## Keep Strategy Logic Isolated
+
+Create a strategy package under `kalshi_auto_trader/<strategy_name>/` for:
+
+- model input files and path config
+- market-series identifiers and matching rules
+- model probability normalization and edge detection
+- CLI options specific to that strategy
+- printed plan formatting specific to the strategy's bet types
+
+The World Cup app in `kalshi_auto_trader/world_cup/` is the current reference.

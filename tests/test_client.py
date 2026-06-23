@@ -17,6 +17,12 @@ def test_client_context_manager_closes_session():
     client.session.close.assert_called_once_with()
 
 
+def test_list_markets_rejects_nonpositive_limit():
+    client = KalshiClient()
+    with pytest.raises(ValueError, match="limit"):
+        client.list_markets(limit=0)
+
+
 @pytest.mark.parametrize(
     ("override", "message"),
     [

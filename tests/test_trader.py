@@ -13,6 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
+from kalshi_auto_trader.orders import clamp_limit_price
 from kalshi_auto_trader.world_cup import markets as mm
 from kalshi_auto_trader.world_cup import model
 from kalshi_auto_trader.world_cup import trader as ex
@@ -88,6 +89,11 @@ def test_limit_params_side_and_clamp(monkeypatch):
     assert p["no_price"] == 22 and p["yes_price"] is None and p["buy_max_cost"] is None
     monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 10)
     assert ex.build_order_params("yes", 1, 95.0, "limit")["yes_price"] == 99
+
+
+def test_limit_price_clamp_bounds():
+    assert clamp_limit_price(-4) == settings.MIN_PRICE_CENTS
+    assert clamp_limit_price(101) == settings.MAX_PRICE_CENTS
 
 
 def test_market_max_cost_never_exceeds_contract_payout(monkeypatch):

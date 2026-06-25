@@ -1,4 +1,7 @@
-"""Compatibility wrapper for the World Cup trader CLI."""
+"""Compatibility wrapper for the World Cup trader CLI.
+
+Prefer the installed ``kalshi-world-cup`` command for new automation.
+"""
 
 from kalshi_auto_trader.world_cup.trader import main as world_cup_main
 

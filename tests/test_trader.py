@@ -118,6 +118,12 @@ def test_order_params_reject_invalid_inputs():
         ex.build_order_params("yes", 0, 50.0, "market")
 
 
+@pytest.mark.parametrize("count", [1.5, True])
+def test_order_params_reject_noninteger_counts(count):
+    with pytest.raises(ValueError, match="positive integer"):
+        ex.build_order_params("yes", count, 50.0, "market")
+
+
 # ----------------------------- price extraction --------------------------- #
 def test_yes_price_mid_then_last():
     assert mm.yes_price_cents({"yes_bid": 40, "yes_ask": 44}) == approx(42.0)

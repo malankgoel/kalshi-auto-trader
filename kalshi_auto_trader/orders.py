@@ -45,8 +45,8 @@ def build_order_params(
         raise ValueError("side must be 'yes' or 'no'")
     if order_type not in settings.ORDER_TYPES:
         raise ValueError("order_type must be 'market' or 'limit'")
-    if count <= 0:
-        raise ValueError("count must be positive")
+    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        raise ValueError("count must be a positive integer")
     if not math.isfinite(price_cents) or not 0 < price_cents <= 100:
         raise ValueError("price_cents must be between 0 and 100")
     params = {

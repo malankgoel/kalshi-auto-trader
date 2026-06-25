@@ -191,6 +191,9 @@ def build_parser() -> argparse.ArgumentParser:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = build_parser()
     args = parser.parse_args(argv)
+    args.match_id = args.match_id.strip() if args.match_id else None
+    args.home = args.home.strip() if args.home else None
+    args.away = args.away.strip() if args.away else None
     if bool(args.home) != bool(args.away):
         parser.error("--home and --away must be provided together")
     return args

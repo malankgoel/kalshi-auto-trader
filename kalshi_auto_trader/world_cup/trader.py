@@ -26,6 +26,7 @@ Env for live/demo: KALSHI_API_KEY_ID, KALSHI_PRIVATE_KEY_PATH.
 from __future__ import annotations
 
 import argparse
+import math
 import sys
 
 from kalshi_auto_trader import ledger, risk, settings
@@ -161,8 +162,10 @@ def resolve_bankroll(args, ledger_bankroll: float) -> float:
 
 def positive_float(value: str) -> float:
     parsed = float(value)
-    if parsed <= 0:
-        raise argparse.ArgumentTypeError("value must be greater than zero")
+    if not math.isfinite(parsed) or parsed <= 0:
+        raise argparse.ArgumentTypeError(
+            "value must be a finite number greater than zero"
+        )
     return parsed
 
 

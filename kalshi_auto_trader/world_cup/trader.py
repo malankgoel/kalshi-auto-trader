@@ -134,7 +134,7 @@ def print_plan(plans: list[dict], live: bool) -> float:
 
 def place_orders(client, game: dict, plans: list[dict], order_type: str,
                  bankroll: float, environment: str) -> None:
-    for p in [p for p in plans if not p.get("skip")]:
+    for p in actionable_plans(plans):
         try:
             order = client.create_order(
                 ticker=p["ticker"], action="buy", side=p["buy_side"],

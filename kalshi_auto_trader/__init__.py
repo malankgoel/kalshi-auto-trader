@@ -2,4 +2,4 @@
 
 __version__ = "0.1.0"
 
-__all__ = ["__version__", "ledger", "orders", "risk", "settings"]
+__all__ = ["__version__", "ledger", "orders", "risk", "settings", "strategy"]

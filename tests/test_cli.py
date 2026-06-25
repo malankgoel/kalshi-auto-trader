@@ -15,3 +15,9 @@ def test_cli_accepts_positive_risk_overrides():
 def test_cli_rejects_nonpositive_risk_overrides(flag):
     with pytest.raises(SystemExit):
         build_parser().parse_args([flag, "0"])
+
+
+@pytest.mark.parametrize("value", ["nan", "inf", "-inf"])
+def test_cli_rejects_nonfinite_risk_overrides(value):
+    with pytest.raises(SystemExit):
+        build_parser().parse_args(["--bankroll", value])

@@ -19,6 +19,7 @@ Reuse these modules instead of copying API or bookkeeping code:
 
 Create a strategy package under `kalshi_auto_trader/<strategy_name>/` for:
 
+- a `STRATEGY` metadata object declared with `StrategyMetadata`
 - model input files and path config
 - market-series identifiers and matching rules
 - model probability normalization and edge detection

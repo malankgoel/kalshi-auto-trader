@@ -190,6 +190,14 @@ def test_plan_bets_end_to_end():
     assert arg["risk_cost"] >= arg["est_cost"]
 
 
+def test_actionable_plans_filters_skips():
+    plans = [
+        {"selection": "A", "skip": None},
+        {"selection": "B", "skip": "no ask"},
+    ]
+    assert ex.actionable_plans(plans) == [plans[0]]
+
+
 # ----------------------------- trade log ---------------------------------- #
 def test_trade_log_appends_and_settles(tmp_path):
     path = tmp_path / "trade_log.csv"

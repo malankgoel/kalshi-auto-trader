@@ -92,6 +92,10 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
 # --------------------------------------------------------------------------- #
 # rendering + execution                                                       #
 # --------------------------------------------------------------------------- #
+def actionable_plans(plans: list[dict]) -> list[dict]:
+    return [p for p in plans if not p.get("skip")]
+
+
 def print_header(game: dict, odds: dict, bankroll: float, order_type: str,
                  live: bool) -> None:
     mode = "LIVE" if live else "DRY-RUN"

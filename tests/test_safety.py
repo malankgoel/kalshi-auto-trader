@@ -41,5 +41,14 @@ def test_cli_requires_both_fixture_teams(argv):
         parse_args(argv)
 
 
+def test_cli_strips_fixture_selectors():
+    args = parse_args([
+        "--home", " France ", "--away", " Senegal ", "--match-id", " 21 ",
+    ])
+    assert args.home == "France"
+    assert args.away == "Senegal"
+    assert args.match_id == "21"
+
+
 def test_market_series_configuration_is_immutable():
     assert all(isinstance(series, tuple) for series in config.KALSHI_SERIES.values())

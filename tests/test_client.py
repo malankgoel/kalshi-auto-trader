@@ -48,6 +48,20 @@ def test_create_order_rejects_invalid_fields_before_auth(override, message):
         client.create_order(**fields)
 
 
+@pytest.mark.parametrize("count", [1.5, True])
+def test_create_order_rejects_noninteger_count_before_auth(count):
+    client = KalshiClient()
+    with pytest.raises(ValueError, match="positive integer"):
+        client.create_order(
+            ticker="TEST-TICKER",
+            action="buy",
+            side="yes",
+            count=count,
+            order_type="market",
+            client_order_id="test-order",
+        )
+
+
 @pytest.mark.parametrize(
     "fields",
     [

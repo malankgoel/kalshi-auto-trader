@@ -110,7 +110,7 @@ def print_header(game: dict, odds: dict, bankroll: float, order_type: str,
 
 
 def print_plan(plans: list[dict], live: bool) -> float:
-    actionable = [p for p in plans if not p.get("skip")]
+    actionable = actionable_plans(plans)
     total = sum(p["risk_cost"] for p in actionable)
     print(f"\n{len(actionable)} order(s) to place / {len(plans)} flagged\n")
     hdr = (f"{'Selection':16} {'Mdl':>4} {'Fair':>4} {'Edge':>5} {'Ask':>5} "

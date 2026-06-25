@@ -6,7 +6,7 @@ import pytest
 
 from kalshi_auto_trader.kalshi import KalshiClient
 from kalshi_auto_trader.orders import build_order_params, size_order
-from kalshi_auto_trader.world_cup import config, model
+from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
 from kalshi_auto_trader.world_cup.trader import parse_args
 
 
@@ -52,3 +52,8 @@ def test_cli_strips_fixture_selectors():
 
 def test_market_series_configuration_is_immutable():
     assert all(isinstance(series, tuple) for series in config.KALSHI_SERIES.values())
+
+
+def test_world_cup_strategy_metadata_matches_name():
+    assert STRATEGY.name == STRATEGY_NAME
+    assert STRATEGY.package == "kalshi_auto_trader.world_cup"

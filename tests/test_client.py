@@ -45,6 +45,7 @@ def test_get_market_requires_ticker():
         ({"order_type": "stop"}, "order_type"),
         ({"count": 0}, "count"),
         ({"ticker": " "}, "ticker"),
+        ({"client_order_id": " "}, "client_order_id"),
     ],
 )
 def test_create_order_rejects_invalid_fields_before_auth(override, message):

@@ -99,7 +99,7 @@ class KalshiClient:
     def get(self, path: str, params: Optional[dict] = None) -> dict[str, Any]:
         url = self.base_url + path
         sign_path = urlparse(url).path
-        for attempt in range(4):
+        for attempt in range(settings.KALSHI_HTTP_RETRIES):
             headers = self._headers("GET", sign_path)
             resp = self.session.get(
                 url, params=params, headers=headers, timeout=self.timeout

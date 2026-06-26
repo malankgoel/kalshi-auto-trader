@@ -96,7 +96,14 @@ class KalshiClient:
     # ------------------------------------------------------------------ #
     # low-level GET / POST                                               #
     # ------------------------------------------------------------------ #
+    @staticmethod
+    def _api_path(path: str) -> str:
+        if not path.startswith("/"):
+            raise ValueError("API path must start with '/'")
+        return path
+
     def get(self, path: str, params: Optional[dict] = None) -> dict[str, Any]:
+        path = self._api_path(path)
         url = self.base_url + path
         sign_path = urlparse(url).path
         for attempt in range(settings.KALSHI_HTTP_RETRIES):

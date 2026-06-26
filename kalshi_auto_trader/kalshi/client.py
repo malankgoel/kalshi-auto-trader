@@ -122,6 +122,7 @@ class KalshiClient:
     def post(self, path: str, body: dict) -> dict[str, Any]:
         """Authenticated POST. Raises on non-2xx with the server's error text
         attached so failures are debuggable."""
+        path = self._api_path(path)
         if not self._private_key:
             raise RuntimeError(
                 "A Kalshi API key is required for this action. Set "

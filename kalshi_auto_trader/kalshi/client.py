@@ -205,6 +205,8 @@ class KalshiClient:
         """
         if not ticker.strip():
             raise ValueError("ticker is required")
+        if not client_order_id.strip():
+            raise ValueError("client_order_id is required")
         if action not in ("buy", "sell"):
             raise ValueError("action must be 'buy' or 'sell'")
         if side not in ("yes", "no"):

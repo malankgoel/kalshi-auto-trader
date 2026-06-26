@@ -23,6 +23,14 @@ def test_list_markets_rejects_nonpositive_limit():
         client.list_markets(limit=0)
 
 
+@pytest.mark.parametrize("method", ["get", "post"])
+def test_client_rejects_api_paths_without_leading_slash(method):
+    client = KalshiClient()
+    call = getattr(client, method)
+    with pytest.raises(ValueError, match="API path"):
+        call("markets", {} if method == "post" else None)
+
+
 @pytest.mark.parametrize(
     ("override", "message"),
     [

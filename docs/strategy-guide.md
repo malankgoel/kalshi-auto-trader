@@ -15,6 +15,10 @@ Reuse these modules instead of copying API or bookkeeping code:
 | `kalshi_auto_trader.risk` | Run-level spend cap accounting. |
 | `kalshi_auto_trader.settings` | Environment-backed runtime, auth, order, and risk settings. |
 
+Shared client helpers validate API paths, market tickers, order tickers, and
+client order IDs before making requests. Strategy packages should pass trimmed,
+non-empty identifiers into those helpers rather than preparing raw URL paths.
+
 ## Keep Strategy Logic Isolated
 
 Create a strategy package under `kalshi_auto_trader/<strategy_name>/` for:

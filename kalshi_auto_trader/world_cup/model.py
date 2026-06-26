@@ -144,6 +144,8 @@ def devig_binary(yes: float, no: Optional[float]) -> float:
 def kelly_fraction(model_prob: float, entry_price: float) -> float:
     """Full-Kelly fraction for a YES-style contract bought at ``entry_price``
     (probability). f* = (p - price) / (1 - price); 0 when no positive edge."""
+    if not (math.isfinite(model_prob) and math.isfinite(entry_price)):
+        return 0.0
     if entry_price <= 0 or entry_price >= 1:
         return 0.0
     return max(0.0, (model_prob - entry_price) / (1.0 - entry_price))

@@ -59,6 +59,7 @@ KALSHI_BASE_URL = os.environ.get("KALSHI_BASE_URL")  # full override if set
 KALSHI_API_KEY_ID = os.environ.get("KALSHI_API_KEY_ID")
 KALSHI_PRIVATE_KEY_PATH = os.environ.get("KALSHI_PRIVATE_KEY_PATH")
 KALSHI_HTTP_TIMEOUT = _env_int("KALSHI_HTTP_TIMEOUT", 20)
+KALSHI_HTTP_RETRIES = max(1, _env_int("KALSHI_HTTP_RETRIES", 4))
 KALSHI_MARKET_PAGE_LIMIT = _env_int("KALSHI_MARKET_PAGE_LIMIT", 200)
 
 # --------------------------------------------------------------------------- #

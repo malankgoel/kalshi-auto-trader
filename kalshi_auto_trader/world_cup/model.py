@@ -153,6 +153,8 @@ def kelly_fraction(model_prob: float, entry_price: float) -> float:
 
 def staked_fraction(kelly_full: float) -> float:
     """Half-Kelly, capped -- the share of bankroll actually risked."""
+    if not math.isfinite(kelly_full):
+        return 0.0
     return min(settings.KELLY_FRACTION * kelly_full, settings.MAX_STAKE_FRACTION)
 
 

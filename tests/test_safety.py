@@ -41,6 +41,11 @@ def test_kelly_rejects_nonfinite_values(value):
     assert model.kelly_fraction(0.6, value) == 0.0
 
 
+@pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
+def test_staked_fraction_rejects_nonfinite_values(value):
+    assert model.staked_fraction(value) == 0.0
+
+
 @pytest.mark.parametrize("argv", [["--home", "France"], ["--away", "Senegal"]])
 def test_cli_requires_both_fixture_teams(argv):
     with pytest.raises(SystemExit):

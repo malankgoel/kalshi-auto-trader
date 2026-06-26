@@ -122,7 +122,7 @@ class KalshiClient:
             )
         url = self.base_url + path
         sign_path = urlparse(url).path
-        for attempt in range(4):
+        for attempt in range(settings.KALSHI_HTTP_RETRIES):
             headers = self._headers("POST", sign_path)  # fresh timestamp per try
             headers["Content-Type"] = "application/json"
             resp = self.session.post(

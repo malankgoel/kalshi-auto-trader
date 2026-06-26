@@ -31,6 +31,12 @@ def test_client_rejects_api_paths_without_leading_slash(method):
         call("markets", {} if method == "post" else None)
 
 
+def test_get_market_requires_ticker():
+    client = KalshiClient()
+    with pytest.raises(ValueError, match="ticker"):
+        client.get_market(" ")
+
+
 @pytest.mark.parametrize(
     ("override", "message"),
     [

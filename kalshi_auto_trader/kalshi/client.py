@@ -175,6 +175,8 @@ class KalshiClient:
         return out
 
     def get_market(self, ticker: str) -> dict:
+        if not ticker.strip():
+            raise ValueError("ticker is required")
         return self.get(f"/markets/{ticker}").get("market", {})
 
     # ------------------------------------------------------------------ #

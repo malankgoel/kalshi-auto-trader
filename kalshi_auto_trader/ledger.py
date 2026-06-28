@@ -314,10 +314,12 @@ def _float(value) -> float:
 def _round(value) -> str:
     if value in ("", None):
         return ""
-    return f"{float(value):.4f}"
+    parsed = _finite_float(value)
+    return "" if parsed is None else f"{parsed:.4f}"
 
 
 def _money(value) -> str:
     if value in ("", None):
         return ""
-    return f"{float(value):.2f}"
+    parsed = _finite_float(value)
+    return "" if parsed is None else f"{parsed:.2f}"

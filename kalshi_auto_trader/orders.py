@@ -49,8 +49,7 @@ def build_order_params(
     order_type: Literal["market", "limit"],
 ) -> dict:
     """Convert a side/count/ask into Kalshi order fields."""
-    if side not in ("yes", "no"):
-        raise ValueError("side must be 'yes' or 'no'")
+    validate_order_side(side)
     if order_type not in settings.ORDER_TYPES:
         raise ValueError("order_type must be 'market' or 'limit'")
     if isinstance(count, bool) or not isinstance(count, int) or count <= 0:

@@ -23,6 +23,13 @@ def test_list_markets_rejects_nonpositive_limit():
         client.list_markets(limit=0)
 
 
+@pytest.mark.parametrize("limit", [1.5, True])
+def test_list_markets_rejects_noninteger_limits(limit):
+    client = KalshiClient()
+    with pytest.raises(ValueError, match="positive integer"):
+        client.list_markets(limit=limit)
+
+
 @pytest.mark.parametrize("method", ["get", "post"])
 def test_client_rejects_api_paths_without_leading_slash(method):
     client = KalshiClient()

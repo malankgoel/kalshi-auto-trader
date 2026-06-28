@@ -143,6 +143,8 @@ def _field_cents(order: dict, *keys: str) -> Optional[float]:
             val = float(val)
         except (TypeError, ValueError):
             continue
+        if not math.isfinite(val):
+            continue
         return val * 100.0 if key.endswith("_dollars") else val
     return None
 

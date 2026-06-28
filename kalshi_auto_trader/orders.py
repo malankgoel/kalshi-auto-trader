@@ -9,6 +9,14 @@ from typing import Literal
 from kalshi_auto_trader import settings
 
 
+ORDER_SIDES = frozenset({"yes", "no"})
+
+
+def validate_order_side(side: str) -> None:
+    if side not in ORDER_SIDES:
+        raise ValueError("side must be 'yes' or 'no'")
+
+
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
     return max(

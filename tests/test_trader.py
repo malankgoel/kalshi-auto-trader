@@ -173,6 +173,14 @@ def test_build_odds_row_from_index():
     assert row["winner_home_price"] == approx(60.0)  # mid of 58/62
 
 
+def test_fixture_matching_ignores_nonstring_dates():
+    market = {
+        "event_ticker": "KXWCGAME-26JUN16ARGALG",
+        "yes_sub_title": "Argentina",
+    }
+    assert not mm._match_teams(market, "Argentina", "Algeria", True)
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

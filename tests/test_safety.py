@@ -5,7 +5,7 @@ import math
 import pytest
 
 from kalshi_auto_trader.kalshi import KalshiClient
-from kalshi_auto_trader.orders import build_order_params, size_order
+from kalshi_auto_trader.orders import build_order_params, market_max_price, size_order
 from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
 from kalshi_auto_trader.world_cup.trader import parse_args
 
@@ -14,6 +14,11 @@ from kalshi_auto_trader.world_cup.trader import parse_args
 def test_size_order_rejects_nonfinite_values(value):
     assert size_order(value, 50) == 0
     assert size_order(10, value) == 0
+
+
+@pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
+def test_market_max_price_rejects_nonfinite_values(value):
+    assert market_max_price(value) == 0.0
 
 
 def test_order_params_reject_out_of_range_price():

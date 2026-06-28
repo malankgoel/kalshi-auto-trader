@@ -13,7 +13,11 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
-from kalshi_auto_trader.orders import clamp_limit_price, market_max_price
+from kalshi_auto_trader.orders import (
+    clamp_limit_price,
+    market_max_price,
+    validate_order_side,
+)
 from kalshi_auto_trader.world_cup import markets as mm
 from kalshi_auto_trader.world_cup import model
 from kalshi_auto_trader.world_cup import trader as ex
@@ -116,6 +120,12 @@ def test_order_params_reject_invalid_inputs():
         ex.build_order_params("yes", 1, 50.0, "stop")
     with pytest.raises(ValueError, match="count"):
         ex.build_order_params("yes", 0, 50.0, "market")
+
+
+def test_validate_order_side_rejects_invalid_side():
+    validate_order_side("yes")
+    with pytest.raises(ValueError, match="side"):
+        validate_order_side("maybe")
 
 
 @pytest.mark.parametrize("count", [1.5, True])

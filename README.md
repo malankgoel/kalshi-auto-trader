@@ -170,7 +170,9 @@ python3 -m pytest tests/ -q
 
 Fully offline (no network, no keys): de-vig, edge flagging, Kelly, sizing/caps,
 market+limit params, price extraction, bet→market mapping, and an end-to-end
-`plan_bets` check against an injected fake client.
+`plan_bets` check against an injected fake client. The tests also cover
+malformed and nonfinite inputs at the shared order, model, market, and ledger
+boundaries.
 
 For the standard contributor checks, run `make check`. GitHub Actions runs the
 same lint, test, and compilation checks on supported Python versions for every

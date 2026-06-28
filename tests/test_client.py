@@ -17,6 +17,12 @@ def test_client_context_manager_closes_session():
     client.session.close.assert_called_once_with()
 
 
+@pytest.mark.parametrize("timeout", [0, 1.5, True])
+def test_client_rejects_invalid_timeout(timeout):
+    with pytest.raises(ValueError, match="positive integer"):
+        KalshiClient(timeout=timeout)
+
+
 def test_list_markets_rejects_nonpositive_limit():
     client = KalshiClient()
     with pytest.raises(ValueError, match="limit"):

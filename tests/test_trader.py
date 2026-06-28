@@ -248,6 +248,12 @@ def test_trade_log_appends_and_settles(tmp_path):
     assert trade_log.current_bankroll(str(path)) == 56.0
 
 
+def test_placed_price_ignores_nonfinite_order_prices():
+    plan = {"buy_side": "yes", "limit_price": 44, "ask": 40}
+    order = {"average_fill_price": "nan", "yes_price": "inf"}
+    assert trade_log.placed_price(plan, order) == (44.0, "limit_price")
+
+
 def test_trade_log_repairs_empty_file(tmp_path):
     path = tmp_path / "trade_log.csv"
     path.touch()

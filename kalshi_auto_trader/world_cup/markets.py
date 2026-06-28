@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import datetime as dt
 import logging
+import math
 import re
 import unicodedata
 from typing import Optional
@@ -151,6 +152,8 @@ def _cents(market: dict, *keys) -> Optional[float]:
         try:
             v = float(v)
         except (TypeError, ValueError):
+            continue
+        if not math.isfinite(v):
             continue
         return v * 100.0 if k.endswith("_dollars") else v
     return None

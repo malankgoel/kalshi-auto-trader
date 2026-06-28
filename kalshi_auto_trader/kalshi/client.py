@@ -154,8 +154,8 @@ class KalshiClient:
                      event_ticker: Optional[str] = None,
                      status: Optional[str] = None,
                      limit: int = settings.KALSHI_MARKET_PAGE_LIMIT) -> list[dict]:
-        if limit <= 0:
-            raise ValueError("limit must be positive")
+        if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+            raise ValueError("limit must be a positive integer")
         out, cursor = [], None
         while True:
             params: dict[str, Any] = {"limit": limit}

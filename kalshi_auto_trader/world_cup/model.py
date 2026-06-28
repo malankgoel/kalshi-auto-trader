@@ -137,6 +137,10 @@ def devig_three_way(home: float, draw: float, away: float) -> tuple[float, float
 
 
 def devig_binary(yes: float, no: Optional[float]) -> float:
+    if not math.isfinite(yes):
+        return 0.0
+    if no is not None and not math.isfinite(no):
+        return yes
     if no is None:
         return yes
     s = yes + no

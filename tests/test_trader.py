@@ -254,6 +254,26 @@ def test_placed_price_ignores_nonfinite_order_prices():
     assert trade_log.placed_price(plan, order) == (44.0, "limit_price")
 
 
+def test_trade_log_blanks_nonfinite_numeric_fields(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    game = _game()
+    plan = {
+        "client_order_id": "nonfinite-row",
+        "buy_side": "yes",
+        "model_prob": float("nan"),
+        "stake": float("inf"),
+        "limit_price": 40,
+        "ask": 40,
+    }
+    trade_log.append_order(
+        game, plan, {}, bankroll=float("nan"), environment="demo", path=path
+    )
+    row = trade_log.read_rows(path)[0]
+    assert row["model_prob"] == ""
+    assert row["recommended_stake"] == ""
+    assert row["bankroll_before"] == ""
+
+
 def test_trade_log_repairs_empty_file(tmp_path):
     path = tmp_path / "trade_log.csv"
     path.touch()

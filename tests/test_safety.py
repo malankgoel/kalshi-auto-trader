@@ -56,6 +56,11 @@ def test_devig_three_way_rejects_nonfinite_values(value):
     assert model.devig_three_way(value, 0.3, 0.2) == (0.0, 0.0, 0.0)
 
 
+def test_devig_binary_handles_nonfinite_values():
+    assert model.devig_binary(math.nan, 0.4) == 0.0
+    assert model.devig_binary(0.6, math.inf) == 0.6
+
+
 @pytest.mark.parametrize("argv", [["--home", "France"], ["--away", "Senegal"]])
 def test_cli_requires_both_fixture_teams(argv):
     with pytest.raises(SystemExit):

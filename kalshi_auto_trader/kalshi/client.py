@@ -37,8 +37,8 @@ class KalshiClient:
         timeout: int = settings.KALSHI_HTTP_TIMEOUT,
         session: Optional[requests.Session] = None,
     ) -> None:
-        if timeout <= 0:
-            raise ValueError("timeout must be positive")
+        if isinstance(timeout, bool) or not isinstance(timeout, int) or timeout <= 0:
+            raise ValueError("timeout must be a positive integer")
         base_url = base_url or settings.KALSHI_BASE_URL or settings.PROD_BASE_URL
         self.base_url = base_url.rstrip("/")
         self.key_id = key_id

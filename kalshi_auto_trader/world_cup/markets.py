@@ -101,7 +101,7 @@ def _date_diff_days(d1: str, d2: str) -> Optional[int]:
     fmt = "%Y-%m-%d"
     try:
         return (dt.datetime.strptime(d1, fmt) - dt.datetime.strptime(d2, fmt)).days
-    except ValueError:
+    except (TypeError, ValueError):
         return None
 
 

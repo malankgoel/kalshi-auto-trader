@@ -79,6 +79,11 @@ def test_cli_strips_fixture_selectors():
     assert match_args.match_id == "21"
 
 
+def test_cli_rejects_conflicting_fixture_selectors():
+    with pytest.raises(SystemExit):
+        parse_args(["--match-id", "21", "--home", "France", "--away", "Senegal"])
+
+
 def test_market_series_configuration_is_immutable():
     assert all(isinstance(series, tuple) for series in config.KALSHI_SERIES.values())
 

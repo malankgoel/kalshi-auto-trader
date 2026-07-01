@@ -96,6 +96,10 @@ def actionable_plans(plans: list[dict]) -> list[dict]:
     return [p for p in plans if not p.get("skip")]
 
 
+def total_risk_cost(plans: list[dict]) -> float:
+    return round(sum(p["risk_cost"] for p in actionable_plans(plans)), 2)
+
+
 def print_header(game: dict, odds: dict, bankroll: float, order_type: str,
                  live: bool) -> None:
     mode = "LIVE" if live else "DRY-RUN"

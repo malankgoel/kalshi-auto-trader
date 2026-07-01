@@ -2,6 +2,8 @@
 
 import math
 
+import pytest
+
 from kalshi_auto_trader import risk
 
 
@@ -27,3 +29,13 @@ def test_remaining_run_budget_never_negative():
 def test_remaining_run_budget_rejects_nonfinite_inputs():
     assert risk.remaining_run_budget(math.inf, 1.0) == 0.0
     assert risk.remaining_run_budget(10.0, math.nan) == 0.0
+
+
+def test_dollars_to_cents_rounds_to_integer_cents():
+    assert risk.dollars_to_cents(12.345) == 1234
+
+
+def test_dollars_to_cents_rejects_invalid_amounts():
+    for value in (math.nan, math.inf, -1.0):
+        with pytest.raises(ValueError):
+            risk.dollars_to_cents(value)

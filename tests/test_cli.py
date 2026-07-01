@@ -5,6 +5,7 @@ import pytest
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.world_cup.trader import (
     build_parser,
+    live_auth_error,
     resolve_environment,
     select_game,
 )
@@ -29,6 +30,12 @@ def test_game_selector_uses_match_id():
     game = select_game(args)
     assert game is not None
     assert game["match_id"] == "1"
+
+
+def test_live_auth_error_only_for_unauthenticated_live_runs():
+    assert live_auth_error(False, False) is None
+    assert live_auth_error(True, True) is None
+    assert "API key" in live_auth_error(True, False)
 
 
 @pytest.mark.parametrize("flag", ["--bankroll", "--max-total"])

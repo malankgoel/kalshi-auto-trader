@@ -217,8 +217,8 @@ def main(argv: list[str] | None = None) -> None:
     if args.max_total is not None:
         settings.MAX_TOTAL_COST = args.max_total
 
-    environment = "demo" if args.demo else "prod"
-    client = KalshiClient(base_url=settings.DEMO_BASE_URL if args.demo else None)
+    environment, base_url = resolve_environment(args)
+    client = KalshiClient(base_url=base_url)
     settled = ledger.settle_pending(client, path=config.TRADE_LOG_FILE)
     ledger_bankroll = ledger.current_bankroll(path=config.TRADE_LOG_FILE)
     if settled:

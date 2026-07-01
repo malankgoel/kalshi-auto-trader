@@ -200,6 +200,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     args.away = args.away.strip() if args.away else None
     if bool(args.home) != bool(args.away):
         parser.error("--home and --away must be provided together")
+    if args.match_id and (args.home or args.away):
+        parser.error("--match-id cannot be combined with --home/--away")
     return args
 
 

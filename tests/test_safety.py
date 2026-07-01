@@ -68,12 +68,15 @@ def test_cli_requires_both_fixture_teams(argv):
 
 
 def test_cli_strips_fixture_selectors():
-    args = parse_args([
-        "--home", " France ", "--away", " Senegal ", "--match-id", " 21 ",
+    team_args = parse_args([
+        "--home", " France ", "--away", " Senegal ",
     ])
-    assert args.home == "France"
-    assert args.away == "Senegal"
-    assert args.match_id == "21"
+    match_args = parse_args([
+        "--match-id", " 21 ",
+    ])
+    assert team_args.home == "France"
+    assert team_args.away == "Senegal"
+    assert match_args.match_id == "21"
 
 
 def test_market_series_configuration_is_immutable():

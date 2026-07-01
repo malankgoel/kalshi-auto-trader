@@ -189,6 +189,13 @@ def live_auth_error(live: bool, authenticated: bool) -> str | None:
     return None
 
 
+def normalize_optional_text(value: str | None) -> str | None:
+    if value is None:
+        return None
+    value = value.strip()
+    return value or None
+
+
 def positive_float(value: str) -> float:
     parsed = float(value)
     if not math.isfinite(parsed) or parsed <= 0:

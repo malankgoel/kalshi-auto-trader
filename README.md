@@ -84,6 +84,8 @@ kalshi-world-cup --help                                  # installed CLI
 
 The next game is the earliest scheduled fixture that hasn't kicked off and has a
 pre-tournament prediction (knockout games with TBD teams are skipped until set).
+Use either `--match-id` or the `--home`/`--away` pair for a specific fixture;
+the CLI rejects mixing both selector styles in one run.
 
 ---
 

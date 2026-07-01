@@ -170,6 +170,12 @@ def resolve_environment(args) -> tuple[str, str | None]:
     return "prod", None
 
 
+def select_game(args) -> dict | None:
+    if args.match_id or (args.home and args.away):
+        return model.find_game(args.match_id or "", args.home or "", args.away or "")
+    return model.next_game()
+
+
 def positive_float(value: str) -> float:
     parsed = float(value)
     if not math.isfinite(parsed) or parsed <= 0:

@@ -226,6 +226,14 @@ def test_actionable_plans_filters_skips():
     assert ex.actionable_plans(plans) == [plans[0]]
 
 
+def test_total_risk_cost_ignores_skipped_plans():
+    plans = [
+        {"risk_cost": 1.235, "skip": None},
+        {"risk_cost": 99.0, "skip": "cap"},
+    ]
+    assert ex.total_risk_cost(plans) == 1.24
+
+
 # ----------------------------- trade log ---------------------------------- #
 def test_trade_log_appends_and_settles(tmp_path):
     path = tmp_path / "trade_log.csv"

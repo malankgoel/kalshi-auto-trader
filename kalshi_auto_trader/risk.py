@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import math
+
 
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
     """Dollars left before a run-level spend cap is exhausted."""
+    if not (math.isfinite(max_total_cost) and math.isfinite(spent_cost)):
+        return 0.0
     return max(round(max_total_cost - spent_cost, 2), 0.0)
 
 

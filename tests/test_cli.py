@@ -3,7 +3,11 @@
 import pytest
 
 from kalshi_auto_trader import settings
-from kalshi_auto_trader.world_cup.trader import build_parser, resolve_environment
+from kalshi_auto_trader.world_cup.trader import (
+    build_parser,
+    resolve_environment,
+    select_game,
+)
 
 
 def test_cli_accepts_positive_risk_overrides():
@@ -18,6 +22,13 @@ def test_environment_resolver_maps_demo_flag():
     assert resolve_environment(parser.parse_args(["--demo"])) == (
         "demo", settings.DEMO_BASE_URL,
     )
+
+
+def test_game_selector_uses_match_id():
+    args = build_parser().parse_args(["--match-id", "1"])
+    game = select_game(args)
+    assert game is not None
+    assert game["match_id"] == "1"
 
 
 @pytest.mark.parametrize("flag", ["--bankroll", "--max-total"])

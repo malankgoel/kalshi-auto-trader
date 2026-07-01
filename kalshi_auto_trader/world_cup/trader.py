@@ -239,9 +239,9 @@ def main(argv: list[str] | None = None) -> None:
     if settled:
         print(f"Settled {settled} logged order(s). Ledger bankroll: "
               f"${ledger_bankroll:.2f}")
-    if args.live and not client.authenticated:
-        sys.exit("Live trading needs an API key. Set KALSHI_API_KEY_ID and "
-                 "KALSHI_PRIVATE_KEY_PATH (see README).")
+    auth_error = live_auth_error(args.live, client.authenticated)
+    if auth_error:
+        sys.exit(auth_error)
 
     game = select_game(args)
     if not game:

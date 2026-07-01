@@ -13,6 +13,12 @@ def test_exceeds_run_budget_rejects_over_cap():
     assert risk.exceeds_run_budget(7.25, 2.76, 10.0)
 
 
+def test_exceeds_run_budget_rejects_nonfinite_inputs():
+    assert risk.exceeds_run_budget(math.nan, 1.0, 10.0)
+    assert risk.exceeds_run_budget(1.0, math.inf, 10.0)
+    assert risk.exceeds_run_budget(1.0, 2.0, math.nan)
+
+
 def test_remaining_run_budget_never_negative():
     assert risk.remaining_run_budget(10.0, 7.25) == 2.75
     assert risk.remaining_run_budget(10.0, 12.0) == 0.0

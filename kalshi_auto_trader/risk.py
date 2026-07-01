@@ -17,3 +17,10 @@ def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: floa
     if not all(math.isfinite(v) for v in (spent_cost, next_cost, max_total_cost)):
         return True
     return round(spent_cost + next_cost, 2) > max_total_cost
+
+
+def dollars_to_cents(amount: float) -> int:
+    """Convert a non-negative dollar amount to integer cents."""
+    if not math.isfinite(amount) or amount < 0:
+        raise ValueError("amount must be a non-negative finite number")
+    return int(round(amount * 100))

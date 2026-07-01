@@ -33,3 +33,5 @@ Create a strategy package under `kalshi_auto_trader/<strategy_name>/` for:
 - printed plan formatting specific to the strategy's bet types
 
 The World Cup app in `kalshi_auto_trader/world_cup/` is the current reference.
+When adding a CLI, keep argument normalization, environment selection, and auth
+checks in small helpers so they can be tested without placing orders.

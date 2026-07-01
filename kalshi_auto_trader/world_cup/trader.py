@@ -164,6 +164,12 @@ def resolve_bankroll(args, ledger_bankroll: float) -> float:
     return ledger_bankroll
 
 
+def resolve_environment(args) -> tuple[str, str | None]:
+    if args.demo:
+        return "demo", settings.DEMO_BASE_URL
+    return "prod", None
+
+
 def positive_float(value: str) -> float:
     parsed = float(value)
     if not math.isfinite(parsed) or parsed <= 0:

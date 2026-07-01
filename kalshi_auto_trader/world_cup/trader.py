@@ -176,6 +176,15 @@ def select_game(args) -> dict | None:
     return model.next_game()
 
 
+def live_auth_error(live: bool, authenticated: bool) -> str | None:
+    if live and not authenticated:
+        return (
+            "Live trading needs an API key. Set KALSHI_API_KEY_ID and "
+            "KALSHI_PRIVATE_KEY_PATH (see README)."
+        )
+    return None
+
+
 def positive_float(value: str) -> float:
     parsed = float(value)
     if not math.isfinite(parsed) or parsed <= 0:

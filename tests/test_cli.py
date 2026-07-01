@@ -6,6 +6,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.world_cup.trader import (
     build_parser,
     live_auth_error,
+    normalize_optional_text,
     resolve_environment,
     select_game,
 )
@@ -36,6 +37,12 @@ def test_live_auth_error_only_for_unauthenticated_live_runs():
     assert live_auth_error(False, False) is None
     assert live_auth_error(True, True) is None
     assert "API key" in live_auth_error(True, False)
+
+
+def test_optional_text_normalizer_strips_and_blanks():
+    assert normalize_optional_text(None) is None
+    assert normalize_optional_text("  France ") == "France"
+    assert normalize_optional_text("   ") is None
 
 
 @pytest.mark.parametrize("flag", ["--bankroll", "--max-total"])

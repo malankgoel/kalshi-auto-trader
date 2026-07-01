@@ -234,10 +234,7 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit("Live trading needs an API key. Set KALSHI_API_KEY_ID and "
                  "KALSHI_PRIVATE_KEY_PATH (see README).")
 
-    if args.match_id or (args.home and args.away):
-        game = model.find_game(args.match_id or "", args.home or "", args.away or "")
-    else:
-        game = model.next_game()
+    game = select_game(args)
     if not game:
         sys.exit("No upcoming fixture with a model prediction was found.")
 

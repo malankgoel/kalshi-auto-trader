@@ -14,4 +14,6 @@ def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
 
 def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
     """Return True when adding ``next_cost`` would breach the run cap."""
+    if not all(math.isfinite(v) for v in (spent_cost, next_cost, max_total_cost)):
+        return True
     return round(spent_cost + next_cost, 2) > max_total_cost

@@ -2,13 +2,22 @@
 
 import pytest
 
-from kalshi_auto_trader.world_cup.trader import build_parser
+from kalshi_auto_trader import settings
+from kalshi_auto_trader.world_cup.trader import build_parser, resolve_environment
 
 
 def test_cli_accepts_positive_risk_overrides():
     args = build_parser().parse_args(["--bankroll", "75", "--max-total", "15"])
     assert args.bankroll == 75.0
     assert args.max_total == 15.0
+
+
+def test_environment_resolver_maps_demo_flag():
+    parser = build_parser()
+    assert resolve_environment(parser.parse_args([])) == ("prod", None)
+    assert resolve_environment(parser.parse_args(["--demo"])) == (
+        "demo", settings.DEMO_BASE_URL,
+    )
 
 
 @pytest.mark.parametrize("flag", ["--bankroll", "--max-total"])

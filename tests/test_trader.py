@@ -18,6 +18,7 @@ from kalshi_auto_trader.orders import (
     market_max_price,
     validate_order_count,
     validate_order_side,
+    validate_order_type,
 )
 from kalshi_auto_trader.world_cup import markets as mm
 from kalshi_auto_trader.world_cup import model
@@ -133,6 +134,12 @@ def test_validate_order_count_rejects_invalid_count():
     validate_order_count(1)
     with pytest.raises(ValueError, match="positive integer"):
         validate_order_count(True)
+
+
+def test_validate_order_type_rejects_invalid_type():
+    validate_order_type("market")
+    with pytest.raises(ValueError, match="order_type"):
+        validate_order_type("stop")
 
 
 @pytest.mark.parametrize("count", [1.5, True])

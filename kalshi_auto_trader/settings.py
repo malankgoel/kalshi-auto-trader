@@ -80,7 +80,7 @@ MARKET_SLIPPAGE_CENTS = _env_int("KALSHI_MARKET_SLIPPAGE_CENTS", 3)  # market bu
 # --------------------------------------------------------------------------- #
 # Risk caps  (hard stops, enforced regardless of model stake)                 #
 # --------------------------------------------------------------------------- #
-MAX_CONTRACTS_PER_ORDER = _env_int("MAX_CONTRACTS_PER_ORDER", 500)
+MAX_CONTRACTS_PER_ORDER = _env_positive_int("MAX_CONTRACTS_PER_ORDER", 500)
 MAX_ORDER_COST = _env_float("MAX_ORDER_COST", 25.0)    # dollars, single order
 MAX_TOTAL_COST = _env_float("MAX_TOTAL_COST", 100.0)   # dollars, one run total
 MIN_PRICE_CENTS = 1

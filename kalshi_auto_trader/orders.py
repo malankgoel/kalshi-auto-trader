@@ -10,6 +10,12 @@ from kalshi_auto_trader import settings
 
 
 ORDER_SIDES = frozenset({"yes", "no"})
+ORDER_ACTIONS = frozenset({"buy", "sell"})
+
+
+def validate_order_action(action: str) -> None:
+    if action not in ORDER_ACTIONS:
+        raise ValueError("action must be 'buy' or 'sell'")
 
 
 def validate_order_side(side: str) -> None:

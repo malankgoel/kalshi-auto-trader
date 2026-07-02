@@ -29,6 +29,11 @@ def _env_int(name: str, default: int) -> int:
     return value if value >= 0 else default
 
 
+def _env_positive_int(name: str, default: int) -> int:
+    value = _env_int(name, default)
+    return value if value > 0 else default
+
+
 def _env_choice(name: str, default: str, choices: frozenset[str]) -> str:
     value = os.environ.get(name, default).strip().lower()
     return value if value in choices else default

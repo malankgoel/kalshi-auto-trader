@@ -62,8 +62,7 @@ def build_order_params(
 ) -> dict:
     """Convert a side/count/ask into Kalshi order fields."""
     validate_order_side(side)
-    if order_type not in settings.ORDER_TYPES:
-        raise ValueError("order_type must be 'market' or 'limit'")
+    validate_order_type(order_type)
     validate_order_count(count)
     if not math.isfinite(price_cents) or not 0 < price_cents <= 100:
         raise ValueError("price_cents must be between 0 and 100")

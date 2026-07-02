@@ -19,7 +19,11 @@ from urllib.parse import urlparse
 import requests
 
 from kalshi_auto_trader import settings
-from kalshi_auto_trader.orders import validate_order_count, validate_order_type
+from kalshi_auto_trader.orders import (
+    validate_order_action,
+    validate_order_count,
+    validate_order_type,
+)
 
 try:  # signing only needed when an API key is configured
     from cryptography.hazmat.primitives import hashes, serialization
@@ -208,8 +212,7 @@ class KalshiClient:
             raise ValueError("ticker is required")
         if not client_order_id.strip():
             raise ValueError("client_order_id is required")
-        if action not in ("buy", "sell"):
-            raise ValueError("action must be 'buy' or 'sell'")
+        validate_order_action(action)
         if side not in ("yes", "no"):
             raise ValueError("side must be 'yes' or 'no'")
         validate_order_type(order_type)

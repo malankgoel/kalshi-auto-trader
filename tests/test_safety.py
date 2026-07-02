@@ -6,7 +6,12 @@ import pytest
 
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.kalshi import KalshiClient
-from kalshi_auto_trader.orders import build_order_params, market_max_price, size_order
+from kalshi_auto_trader.orders import (
+    build_order_params,
+    market_max_price,
+    size_order,
+    stable_client_order_id,
+)
 from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
 from kalshi_auto_trader.world_cup.trader import parse_args
 
@@ -30,6 +35,12 @@ def test_positive_int_env_parser_rejects_zero(monkeypatch):
 def test_order_params_reject_out_of_range_price():
     with pytest.raises(ValueError, match="price_cents"):
         build_order_params("yes", 1, 101, "market")
+
+
+@pytest.mark.parametrize(("namespace", "key"), [("", "x"), ("ns", " ")])
+def test_stable_order_id_rejects_blank_inputs(namespace, key):
+    with pytest.raises(ValueError, match="namespace"):
+        stable_client_order_id(namespace, key)
 
 
 def test_client_accepts_an_application_owned_session():

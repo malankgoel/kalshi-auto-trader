@@ -12,6 +12,7 @@ from kalshi_auto_trader.orders import (
     size_order,
     stable_client_order_id,
 )
+from kalshi_auto_trader.strategy import StrategyMetadata
 from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
 from kalshi_auto_trader.world_cup.trader import parse_args
 
@@ -108,3 +109,8 @@ def test_market_series_configuration_is_immutable():
 def test_world_cup_strategy_metadata_matches_name():
     assert STRATEGY.name == STRATEGY_NAME
     assert STRATEGY.package == "kalshi_auto_trader.world_cup"
+
+
+def test_strategy_metadata_requires_nonblank_fields():
+    with pytest.raises(ValueError, match="name"):
+        StrategyMetadata(name=" ", package="pkg", description="desc")

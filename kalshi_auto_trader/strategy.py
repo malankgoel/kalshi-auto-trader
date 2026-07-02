@@ -12,3 +12,8 @@ class StrategyMetadata:
     name: str
     package: str
     description: str
+
+    def __post_init__(self) -> None:
+        for field in ("name", "package", "description"):
+            if not getattr(self, field).strip():
+                raise ValueError(f"{field} is required")

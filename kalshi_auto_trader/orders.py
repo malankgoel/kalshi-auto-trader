@@ -17,6 +17,11 @@ def validate_order_side(side: str) -> None:
         raise ValueError("side must be 'yes' or 'no'")
 
 
+def validate_order_count(count: int) -> None:
+    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+        raise ValueError("count must be a positive integer")
+
+
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
     return max(

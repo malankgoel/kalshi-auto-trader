@@ -16,6 +16,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
     market_max_price,
+    validate_order_count,
     validate_order_side,
 )
 from kalshi_auto_trader.world_cup import markets as mm
@@ -126,6 +127,12 @@ def test_validate_order_side_rejects_invalid_side():
     validate_order_side("yes")
     with pytest.raises(ValueError, match="side"):
         validate_order_side("maybe")
+
+
+def test_validate_order_count_rejects_invalid_count():
+    validate_order_count(1)
+    with pytest.raises(ValueError, match="positive integer"):
+        validate_order_count(True)
 
 
 @pytest.mark.parametrize("count", [1.5, True])

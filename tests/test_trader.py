@@ -16,6 +16,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
     market_max_price,
+    validate_order_action,
     validate_order_count,
     validate_order_side,
     validate_order_type,
@@ -140,6 +141,12 @@ def test_validate_order_type_rejects_invalid_type():
     validate_order_type("market")
     with pytest.raises(ValueError, match="order_type"):
         validate_order_type("stop")
+
+
+def test_validate_order_action_rejects_invalid_action():
+    validate_order_action("buy")
+    with pytest.raises(ValueError, match="action"):
+        validate_order_action("hold")
 
 
 @pytest.mark.parametrize("count", [1.5, True])

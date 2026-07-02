@@ -22,6 +22,11 @@ def validate_order_count(count: int) -> None:
         raise ValueError("count must be a positive integer")
 
 
+def validate_order_type(order_type: str) -> None:
+    if order_type not in settings.ORDER_TYPES:
+        raise ValueError("order_type must be 'market' or 'limit'")
+
+
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
     return max(

@@ -4,6 +4,7 @@ import math
 
 import pytest
 
+from kalshi_auto_trader import settings
 from kalshi_auto_trader.kalshi import KalshiClient
 from kalshi_auto_trader.orders import build_order_params, market_max_price, size_order
 from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
@@ -19,6 +20,11 @@ def test_size_order_rejects_nonfinite_values(value):
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
 def test_market_max_price_rejects_nonfinite_values(value):
     assert market_max_price(value) == 0.0
+
+
+def test_positive_int_env_parser_rejects_zero(monkeypatch):
+    monkeypatch.setenv("KALSHI_TEST_POSITIVE_INT", "0")
+    assert settings._env_positive_int("KALSHI_TEST_POSITIVE_INT", 4) == 4
 
 
 def test_order_params_reject_out_of_range_price():

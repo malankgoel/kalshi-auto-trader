@@ -211,9 +211,11 @@ class KalshiClient:
         re-sending the same id is rejected (409), so a retry can't double-place.
         Returns the created order object.
         """
-        if not ticker.strip():
+        ticker = ticker.strip()
+        client_order_id = client_order_id.strip()
+        if not ticker:
             raise ValueError("ticker is required")
-        if not client_order_id.strip():
+        if not client_order_id:
             raise ValueError("client_order_id is required")
         validate_order_action(action)
         validate_order_side(side)

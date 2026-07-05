@@ -23,6 +23,11 @@ def test_client_rejects_invalid_timeout(timeout):
         KalshiClient(timeout=timeout)
 
 
+def test_client_rejects_blank_base_url():
+    with pytest.raises(ValueError, match="base_url"):
+        KalshiClient(base_url=" ")
+
+
 def test_list_markets_rejects_nonpositive_limit():
     client = KalshiClient()
     with pytest.raises(ValueError, match="limit"):

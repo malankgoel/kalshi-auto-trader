@@ -99,6 +99,23 @@ def test_create_order_rejects_noninteger_count_before_auth(count):
         )
 
 
+def test_create_order_strips_identifiers_before_posting():
+    client = KalshiClient()
+    client.post = Mock(return_value={"order": {"id": "created"}})
+
+    assert client.create_order(
+        ticker=" TEST-TICKER ",
+        action="buy",
+        side="yes",
+        count=1,
+        order_type="market",
+        client_order_id=" order-1 ",
+    ) == {"id": "created"}
+    _, body = client.post.call_args.args
+    assert body["ticker"] == "TEST-TICKER"
+    assert body["client_order_id"] == "order-1"
+
+
 @pytest.mark.parametrize(
     "fields",
     [

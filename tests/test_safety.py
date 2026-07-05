@@ -30,6 +30,10 @@ def test_market_max_price_rejects_nonfinite_values(value):
     assert market_max_price(value) == 0.0
 
 
+def test_market_max_price_floors_negative_prices():
+    assert market_max_price(-10.0) == 0.0
+
+
 def test_positive_int_env_parser_rejects_zero(monkeypatch):
     monkeypatch.setenv("KALSHI_TEST_POSITIVE_INT", "0")
     assert settings._env_positive_int("KALSHI_TEST_POSITIVE_INT", 4) == 4

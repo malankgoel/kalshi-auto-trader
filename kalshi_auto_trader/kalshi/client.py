@@ -22,6 +22,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     validate_order_action,
     validate_order_count,
+    validate_order_side,
     validate_order_type,
 )
 
@@ -213,8 +214,7 @@ class KalshiClient:
         if not client_order_id.strip():
             raise ValueError("client_order_id is required")
         validate_order_action(action)
-        if side not in ("yes", "no"):
-            raise ValueError("side must be 'yes' or 'no'")
+        validate_order_side(side)
         validate_order_type(order_type)
         validate_order_count(count)
         if order_type == "limit":

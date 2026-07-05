@@ -8,6 +8,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.kalshi import KalshiClient
 from kalshi_auto_trader.orders import (
     build_order_params,
+    clamp_limit_price,
     market_max_price,
     size_order,
     stable_client_order_id,
@@ -43,6 +44,12 @@ def test_order_params_reject_out_of_range_price():
 def test_limit_price_validator_rejects_out_of_range_values(price):
     with pytest.raises(ValueError, match="limit yes_price"):
         validate_limit_price(price, "yes")
+
+
+@pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
+def test_limit_price_clamp_rejects_nonfinite_values(value):
+    with pytest.raises(ValueError, match="finite"):
+        clamp_limit_price(value)
 
 
 @pytest.mark.parametrize(("namespace", "key"), [("", "x"), ("ns", " ")])

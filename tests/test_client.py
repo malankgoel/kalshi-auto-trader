@@ -50,6 +50,14 @@ def test_get_market_requires_ticker():
         client.get_market(" ")
 
 
+def test_get_market_strips_ticker_before_request():
+    client = KalshiClient()
+    client.get = Mock(return_value={"market": {"ticker": "TEST-TICKER"}})
+
+    assert client.get_market(" TEST-TICKER ") == {"ticker": "TEST-TICKER"}
+    client.get.assert_called_once_with("/markets/TEST-TICKER")
+
+
 @pytest.mark.parametrize(
     ("override", "message"),
     [

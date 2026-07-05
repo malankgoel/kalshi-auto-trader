@@ -49,7 +49,7 @@ class KalshiClient:
         base_url = base_url or settings.KALSHI_BASE_URL or settings.PROD_BASE_URL
         if not base_url.strip():
             raise ValueError("base_url is required")
-        self.base_url = base_url.rstrip("/")
+        self.base_url = base_url.strip().rstrip("/")
         self.key_id = key_id
         self.timeout = timeout
         self.session = session if session is not None else requests.Session()

@@ -40,6 +40,8 @@ def validate_limit_price(price_cents: int, side: str) -> None:
 
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
+    if not math.isfinite(price_cents):
+        raise ValueError("price_cents must be finite")
     return max(
         settings.MIN_PRICE_CENTS,
         min(settings.MAX_PRICE_CENTS, int(round(price_cents))),

@@ -33,6 +33,11 @@ def validate_order_type(order_type: str) -> None:
         raise ValueError("order_type must be 'market' or 'limit'")
 
 
+def validate_limit_price(price_cents: int, side: str) -> None:
+    if price_cents is None or not 1 <= price_cents <= 99:
+        raise ValueError(f"limit {side}_price must be between 1 and 99")
+
+
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
     return max(

@@ -28,6 +28,11 @@ def test_client_rejects_blank_base_url():
         KalshiClient(base_url=" ")
 
 
+def test_client_normalizes_base_url():
+    client = KalshiClient(base_url=" https://example.test/ ")
+    assert client.base_url == "https://example.test"
+
+
 def test_list_markets_rejects_nonpositive_limit():
     client = KalshiClient()
     with pytest.raises(ValueError, match="limit"):

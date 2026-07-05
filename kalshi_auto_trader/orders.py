@@ -101,7 +101,9 @@ def build_order_params(
 
 def stable_client_order_id(namespace: str, key: str) -> str:
     """Deterministic UUID for idempotent Kalshi order submission."""
-    if not namespace.strip() or not key.strip():
+    namespace = namespace.strip()
+    key = key.strip()
+    if not namespace or not key:
         raise ValueError("namespace and key are required")
     ns = uuid.uuid5(uuid.NAMESPACE_URL, namespace)
     return str(uuid.uuid5(ns, key))

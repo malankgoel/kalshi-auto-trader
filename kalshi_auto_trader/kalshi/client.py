@@ -20,6 +20,7 @@ import requests
 
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
+    validate_limit_price,
     validate_order_action,
     validate_order_count,
     validate_order_side,
@@ -219,8 +220,7 @@ class KalshiClient:
         validate_order_count(count)
         if order_type == "limit":
             selected_price = yes_price if side == "yes" else no_price
-            if selected_price is None or not 1 <= selected_price <= 99:
-                raise ValueError(f"limit {side}_price must be between 1 and 99")
+            validate_limit_price(selected_price, side)
         body: dict[str, Any] = {
             "ticker": ticker,
             "action": action,

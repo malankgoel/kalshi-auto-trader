@@ -51,6 +51,13 @@ def test_stable_order_id_rejects_blank_inputs(namespace, key):
         stable_client_order_id(namespace, key)
 
 
+def test_stable_order_id_strips_inputs_before_hashing():
+    assert stable_client_order_id(" world-cup ", " match-21 ") == stable_client_order_id(
+        "world-cup",
+        "match-21",
+    )
+
+
 def test_client_accepts_an_application_owned_session():
     session = object()
     client = KalshiClient(session=session)

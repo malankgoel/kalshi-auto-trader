@@ -55,3 +55,9 @@ def test_cli_rejects_nonpositive_risk_overrides(flag):
 def test_cli_rejects_nonfinite_risk_overrides(value):
     with pytest.raises(SystemExit):
         build_parser().parse_args(["--bankroll", value])
+
+
+@pytest.mark.parametrize("flag", ["--bankroll", "--max-total"])
+def test_cli_rejects_nonnumeric_risk_overrides(flag):
+    with pytest.raises(SystemExit):
+        build_parser().parse_args([flag, "not-a-number"])

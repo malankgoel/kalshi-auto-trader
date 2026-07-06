@@ -5,6 +5,9 @@ from __future__ import annotations
 import math
 
 
+__all__ = ["dollars_to_cents", "exceeds_run_budget", "remaining_run_budget"]
+
+
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
     """Dollars left before a run-level spend cap is exhausted."""
     if not (math.isfinite(max_total_cost) and math.isfinite(spent_cost)):

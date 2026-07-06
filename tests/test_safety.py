@@ -139,3 +139,14 @@ def test_world_cup_strategy_metadata_matches_name():
 def test_strategy_metadata_requires_nonblank_fields():
     with pytest.raises(ValueError, match="name"):
         StrategyMetadata(name=" ", package="pkg", description="desc")
+
+
+def test_strategy_metadata_strips_text_fields():
+    metadata = StrategyMetadata(
+        name=" World Cup ",
+        package=" kalshi_auto_trader.world_cup ",
+        description=" Match prediction strategy ",
+    )
+    assert metadata.name == "World Cup"
+    assert metadata.package == "kalshi_auto_trader.world_cup"
+    assert metadata.description == "Match prediction strategy"

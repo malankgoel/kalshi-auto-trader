@@ -322,6 +322,11 @@ def test_trade_log_repairs_empty_file(tmp_path):
     assert path.read_text(encoding="utf-8").startswith("created_at,updated_at,")
 
 
+def test_trade_log_rejects_blank_path():
+    with pytest.raises(ValueError, match="trade log path"):
+        trade_log.ensure_log(" ")
+
+
 def test_trade_log_ignores_nonfinite_bankroll_values(tmp_path):
     path = tmp_path / "trade_log.csv"
     trade_log.write_rows([

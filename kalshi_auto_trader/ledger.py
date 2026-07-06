@@ -64,7 +64,7 @@ def _now() -> str:
 
 def _resolve_path(path: str | os.PathLike | None = None) -> str:
     resolved = os.fspath(path) if path else settings.TRADE_LOG_FILE
-    if not resolved:
+    if not str(resolved).strip():
         raise ValueError("A trade log path is required.")
     return resolved
 

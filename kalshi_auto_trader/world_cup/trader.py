@@ -197,7 +197,12 @@ def normalize_optional_text(value: str | None) -> str | None:
 
 
 def positive_float(value: str) -> float:
-    parsed = float(value)
+    try:
+        parsed = float(value)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            "value must be a finite number greater than zero"
+        ) from exc
     if not math.isfinite(parsed) or parsed <= 0:
         raise argparse.ArgumentTypeError(
             "value must be a finite number greater than zero"

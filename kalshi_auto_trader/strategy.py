@@ -5,6 +5,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 
+__all__ = ["StrategyMetadata"]
+
+
 @dataclass(frozen=True, slots=True)
 class StrategyMetadata:
     """Small identity record for a strategy package."""

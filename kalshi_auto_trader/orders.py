@@ -20,6 +20,7 @@ __all__ = [
     "market_max_price",
     "size_order",
     "stable_client_order_id",
+    "validate_buy_max_cost",
     "validate_limit_price",
     "validate_order_action",
     "validate_order_count",
@@ -55,6 +56,15 @@ def validate_limit_price(price_cents: int, side: str) -> None:
         or not 1 <= price_cents <= 99
     ):
         raise ValueError(f"limit {side}_price must be between 1 and 99")
+
+
+def validate_buy_max_cost(buy_max_cost: int) -> None:
+    if (
+        isinstance(buy_max_cost, bool)
+        or not isinstance(buy_max_cost, int)
+        or buy_max_cost <= 0
+    ):
+        raise ValueError("buy_max_cost must be a positive integer")
 
 
 def clamp_limit_price(price_cents: float) -> int:

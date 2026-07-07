@@ -170,6 +170,8 @@ class KalshiClient:
         while True:
             params: dict[str, Any] = {"limit": limit}
             if series_ticker:
+                series_ticker = series_ticker.strip()
+            if series_ticker:
                 params["series_ticker"] = series_ticker
             if event_ticker:
                 params["event_ticker"] = event_ticker

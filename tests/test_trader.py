@@ -295,6 +295,27 @@ def test_placed_price_ignores_nonfinite_order_prices():
     assert trade_log.placed_price(plan, order) == (44.0, "limit_price")
 
 
+def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    trade_log.write_rows([
+        {
+            "status": "pending",
+            "ticker": " TEST-TICKER ",
+            "placed_price_cents": "40",
+            "count": "1",
+            "buy_side": "yes",
+            "bankroll_before": "50.00",
+        }
+    ], path)
+
+    class _MarketClient:
+        def get_market(self, ticker):
+            assert ticker == "TEST-TICKER"
+            return {"status": "settled", "result": "yes"}
+
+    assert trade_log.settle_pending(_MarketClient(), path) == 1
+
+
 def test_trade_log_blanks_nonfinite_numeric_fields(tmp_path):
     path = tmp_path / "trade_log.csv"
     game = _game()

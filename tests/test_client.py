@@ -77,6 +77,7 @@ def test_get_market_strips_ticker_before_request():
         ({"count": 0}, "count"),
         ({"ticker": " "}, "ticker"),
         ({"client_order_id": " "}, "client_order_id"),
+        ({"buy_max_cost": 0}, "buy_max_cost"),
     ],
 )
 def test_create_order_rejects_invalid_fields_before_auth(override, message):

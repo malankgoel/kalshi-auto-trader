@@ -20,6 +20,7 @@ import requests
 
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
+    validate_buy_max_cost,
     validate_limit_price,
     validate_order_action,
     validate_order_count,
@@ -226,6 +227,8 @@ class KalshiClient:
         if order_type == "limit":
             selected_price = yes_price if side == "yes" else no_price
             validate_limit_price(selected_price, side)
+        if buy_max_cost is not None:
+            validate_buy_max_cost(buy_max_cost)
         body: dict[str, Any] = {
             "ticker": ticker,
             "action": action,

@@ -50,6 +50,12 @@ def test_limit_price_validator_rejects_out_of_range_values(price):
         validate_limit_price(price, "yes")
 
 
+@pytest.mark.parametrize("price", [1.5, True])
+def test_limit_price_validator_rejects_noninteger_values(price):
+    with pytest.raises(ValueError, match="limit no_price"):
+        validate_limit_price(price, "no")
+
+
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
 def test_limit_price_clamp_rejects_nonfinite_values(value):
     with pytest.raises(ValueError, match="finite"):

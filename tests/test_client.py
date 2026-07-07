@@ -46,6 +46,22 @@ def test_list_markets_rejects_noninteger_limits(limit):
         client.list_markets(limit=limit)
 
 
+def test_list_markets_normalizes_optional_filters():
+    client = KalshiClient()
+    client.get = Mock(return_value={"markets": [], "cursor": None})
+
+    assert client.list_markets(
+        series_ticker=" SERIES ",
+        event_ticker=" ",
+        status=" open ",
+        limit=7,
+    ) == []
+    client.get.assert_called_once_with(
+        "/markets",
+        {"limit": 7, "series_ticker": "SERIES", "status": "open"},
+    )
+
+
 @pytest.mark.parametrize("method", ["get", "post"])
 def test_client_rejects_api_paths_without_leading_slash(method):
     client = KalshiClient()

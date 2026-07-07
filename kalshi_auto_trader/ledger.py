@@ -263,6 +263,7 @@ def _recompute_bankrolls(rows: list[dict]) -> None:
 
 
 def _safe_market(client, ticker: str) -> dict:
+    ticker = str(ticker or "").strip()
     if not ticker:
         return {}
     try:

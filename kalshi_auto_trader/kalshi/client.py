@@ -178,6 +178,8 @@ class KalshiClient:
             if event_ticker:
                 params["event_ticker"] = event_ticker
             if status:
+                status = status.strip()
+            if status:
                 params["status"] = status
             if cursor:
                 params["cursor"] = cursor

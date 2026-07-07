@@ -39,6 +39,26 @@ from kalshi_auto_trader.orders import (
 from kalshi_auto_trader.world_cup import config, markets as mm, model
 
 
+__all__ = [
+    "actionable_plans",
+    "build_parser",
+    "client_order_id",
+    "live_auth_error",
+    "main",
+    "normalize_optional_text",
+    "parse_args",
+    "place_orders",
+    "plan_bets",
+    "positive_float",
+    "print_header",
+    "print_plan",
+    "resolve_bankroll",
+    "resolve_environment",
+    "select_game",
+    "total_risk_cost",
+]
+
+
 def client_order_id(game: dict, selection: str) -> str:
     """One bet -> one order, stable across re-runs (so Kalshi dedups retries)."""
     key = f"{game['date']}:{game['home_team']} vs {game['away_team']}:{selection}"

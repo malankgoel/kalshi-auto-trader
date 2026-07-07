@@ -12,6 +12,7 @@ from kalshi_auto_trader.orders import (
     market_max_price,
     size_order,
     stable_client_order_id,
+    validate_buy_max_cost,
     validate_limit_price,
 )
 from kalshi_auto_trader.strategy import StrategyMetadata
@@ -54,6 +55,12 @@ def test_limit_price_validator_rejects_out_of_range_values(price):
 def test_limit_price_validator_rejects_noninteger_values(price):
     with pytest.raises(ValueError, match="limit no_price"):
         validate_limit_price(price, "no")
+
+
+@pytest.mark.parametrize("buy_max_cost", [0, -1, 1.5, True])
+def test_buy_max_cost_validator_rejects_invalid_values(buy_max_cost):
+    with pytest.raises(ValueError, match="buy_max_cost"):
+        validate_buy_max_cost(buy_max_cost)
 
 
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])

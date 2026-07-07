@@ -316,6 +316,27 @@ def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
     assert trade_log.settle_pending(_MarketClient(), path) == 1
 
 
+def test_trade_log_skips_invalid_settlement_rows(tmp_path):
+    path = tmp_path / "trade_log.csv"
+    trade_log.write_rows([
+        {
+            "status": "pending",
+            "ticker": "TEST-TICKER",
+            "placed_price_cents": "0",
+            "count": "1",
+            "buy_side": "yes",
+            "bankroll_before": "50.00",
+        }
+    ], path)
+
+    class _MarketClient:
+        def get_market(self, _ticker):
+            return {"status": "settled", "result": "yes"}
+
+    assert trade_log.settle_pending(_MarketClient(), path) == 0
+    assert trade_log.read_rows(path)[0]["status"] == "pending"
+
+
 def test_trade_log_blanks_nonfinite_numeric_fields(tmp_path):
     path = tmp_path / "trade_log.csv"
     game = _game()

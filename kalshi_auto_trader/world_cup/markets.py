@@ -24,6 +24,16 @@ from kalshi_auto_trader.world_cup import config
 
 logger = logging.getLogger(__name__)
 
+__all__ = [
+    "TEAM_ALIASES",
+    "TEAM_CODES",
+    "build_market_index",
+    "build_odds_row",
+    "resolve_order",
+    "side_ask_cents",
+    "yes_price_cents",
+]
+
 
 # --------------------------------------------------------------------------- #
 # normalisation + team naming                                                 #

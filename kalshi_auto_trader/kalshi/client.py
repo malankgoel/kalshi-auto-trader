@@ -36,6 +36,9 @@ except Exception:  # pragma: no cover - optional dependency
     _HAVE_CRYPTO = False
 
 
+__all__ = ["KalshiClient"]
+
+
 class KalshiClient:
     def __init__(
         self,

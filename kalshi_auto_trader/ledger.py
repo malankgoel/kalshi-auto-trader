@@ -57,6 +57,17 @@ COLUMNS = [
     "bankroll_after",
 ]
 
+__all__ = [
+    "COLUMNS",
+    "append_order",
+    "current_bankroll",
+    "ensure_log",
+    "placed_price",
+    "read_rows",
+    "settle_pending",
+    "write_rows",
+]
+
 
 def _now() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")

@@ -39,3 +39,8 @@ def test_dollars_to_cents_rejects_invalid_amounts():
     for value in (math.nan, math.inf, -1.0):
         with pytest.raises(ValueError):
             risk.dollars_to_cents(value)
+
+
+def test_dollars_to_cents_rejects_boolean_amounts():
+    with pytest.raises(ValueError):
+        risk.dollars_to_cents(True)

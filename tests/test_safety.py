@@ -140,6 +140,11 @@ def test_devig_binary_rejects_out_of_range_yes_values(value):
     assert model.devig_binary(value, 0.4) == 0.0
 
 
+@pytest.mark.parametrize("value", [-0.1, 1.1])
+def test_devig_binary_ignores_out_of_range_no_values(value):
+    assert model.devig_binary(0.6, value) == 0.6
+
+
 @pytest.mark.parametrize("argv", [["--home", "France"], ["--away", "Senegal"]])
 def test_cli_requires_both_fixture_teams(argv):
     with pytest.raises(SystemExit):

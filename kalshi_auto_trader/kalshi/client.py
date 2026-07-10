@@ -21,6 +21,7 @@ import requests
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     normalize_order_action,
+    normalize_order_side,
     validate_buy_max_cost,
     validate_limit_price,
     validate_order_action,
@@ -221,6 +222,7 @@ class KalshiClient:
         ticker = normalize_required_text(ticker, "ticker")
         client_order_id = normalize_required_text(client_order_id, "client_order_id")
         action = normalize_order_action(action)
+        side = normalize_order_side(side)
         validate_order_action(action)
         validate_order_side(side)
         validate_order_type(order_type)

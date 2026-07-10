@@ -177,8 +177,7 @@ class KalshiClient:
             event_ticker = normalize_optional_text(event_ticker)
             if event_ticker:
                 params["event_ticker"] = event_ticker
-            if status:
-                status = status.strip()
+            status = normalize_optional_text(status)
             if status:
                 params["status"] = status
             if cursor:

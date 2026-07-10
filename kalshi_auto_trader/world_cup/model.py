@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from os import PathLike
 from typing import Optional
 
-from kalshi_auto_trader import settings
+from kalshi_auto_trader import probability, settings
 from kalshi_auto_trader.world_cup import config
 
 
@@ -217,15 +217,7 @@ def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
 
 def _c2p(v) -> Optional[float]:
     """Cents (0-100) -> probability (0-1). '' / None -> None."""
-    if v is None or v == "":
-        return None
-    try:
-        cents = float(v)
-    except (TypeError, ValueError):
-        return None
-    if not math.isfinite(cents) or not 0 <= cents <= 100:
-        return None
-    return cents / 100.0
+    return probability.cents_to_probability(v)
 
 
 def flag_bets(game: dict, odds: dict) -> list[Bet]:

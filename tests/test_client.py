@@ -166,6 +166,21 @@ def test_create_order_normalizes_action_before_posting():
     assert client.post.call_args.args[1]["action"] == "buy"
 
 
+def test_create_order_normalizes_side_before_posting():
+    client = KalshiClient()
+    client.post = Mock(return_value={"order": {}})
+
+    client.create_order(
+        ticker="TEST-TICKER",
+        action="buy",
+        side=" YES ",
+        count=1,
+        order_type="market",
+        client_order_id="order-1",
+    )
+    assert client.post.call_args.args[1]["side"] == "yes"
+
+
 @pytest.mark.parametrize(
     "fields",
     [

@@ -7,6 +7,7 @@ import uuid
 from typing import Literal
 
 from kalshi_auto_trader import settings
+from kalshi_auto_trader.text import normalize_required_text
 
 
 ORDER_SIDES = frozenset({"yes", "no"})
@@ -132,9 +133,7 @@ def build_order_params(
 
 def stable_client_order_id(namespace: str, key: str) -> str:
     """Deterministic UUID for idempotent Kalshi order submission."""
-    namespace = namespace.strip()
-    key = key.strip()
-    if not namespace or not key:
-        raise ValueError("namespace and key are required")
+    namespace = normalize_required_text(namespace, "namespace")
+    key = normalize_required_text(key, "key")
     ns = uuid.uuid5(uuid.NAMESPACE_URL, namespace)
     return str(uuid.uuid5(ns, key))

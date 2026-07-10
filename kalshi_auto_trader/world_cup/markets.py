@@ -19,6 +19,7 @@ import re
 import unicodedata
 from typing import Optional
 
+from kalshi_auto_trader.orders import normalize_order_side
 from kalshi_auto_trader.world_cup import config
 
 
@@ -209,6 +210,7 @@ def build_odds_row(idx: dict, home: str, away: str) -> dict:
 def side_ask_cents(market: dict, side: str) -> Optional[float]:
     """Cost (cents/contract) to BUY ``side`` now: the ask for that side. Falls
     back to 100 - opposite bid when an explicit ask isn't quoted."""
+    side = normalize_order_side(side)
     if side not in ("yes", "no"):
         raise ValueError("side must be 'yes' or 'no'")
     if side == "yes":

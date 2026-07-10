@@ -21,6 +21,7 @@ __all__ = [
     "market_max_price",
     "normalize_order_action",
     "normalize_order_side",
+    "normalize_order_type",
     "size_order",
     "stable_client_order_id",
     "validate_buy_max_cost",
@@ -38,6 +39,10 @@ def normalize_order_action(action: str) -> str:
 
 def normalize_order_side(side: str) -> str:
     return normalize_required_text(side, "side").lower()
+
+
+def normalize_order_type(order_type: str) -> str:
+    return normalize_required_text(order_type, "order_type").lower()
 
 
 def validate_order_action(action: str) -> None:
@@ -58,6 +63,7 @@ def validate_order_count(count: int) -> None:
 
 
 def validate_order_type(order_type: str) -> None:
+    order_type = normalize_order_type(order_type)
     if order_type not in settings.ORDER_TYPES:
         raise ValueError("order_type must be 'market' or 'limit'")
 

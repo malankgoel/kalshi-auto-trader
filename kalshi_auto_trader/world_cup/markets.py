@@ -165,7 +165,9 @@ def _cents(market: dict, *keys) -> Optional[float]:
             continue
         if not math.isfinite(v):
             continue
-        return v * 100.0 if k.endswith("_dollars") else v
+        cents = v * 100.0 if k.endswith("_dollars") else v
+        if 0 <= cents <= 100:
+            return cents
     return None
 
 

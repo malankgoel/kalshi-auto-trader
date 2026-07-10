@@ -1,6 +1,6 @@
 """Tests for shared public module surfaces."""
 
-from kalshi_auto_trader import ledger, orders, risk, settings, strategy
+from kalshi_auto_trader import ledger, orders, risk, settings, strategy, text
 from kalshi_auto_trader.kalshi import client
 from kalshi_auto_trader.world_cup import markets, model, trader
 
@@ -12,6 +12,7 @@ def test_shared_modules_export_expected_entry_points():
         ledger: {"append_order", "settle_pending"},
         settings: {"ORDER_TYPE", "MAX_TOTAL_COST"},
         strategy: {"StrategyMetadata"},
+        text: {"normalize_optional_text", "normalize_required_text"},
         client: {"KalshiClient"},
         model: {"Bet", "flag_bets"},
         markets: {"build_market_index", "resolve_order"},

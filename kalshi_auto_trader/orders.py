@@ -19,6 +19,7 @@ __all__ = [
     "build_order_params",
     "clamp_limit_price",
     "market_max_price",
+    "normalize_order_action",
     "size_order",
     "stable_client_order_id",
     "validate_buy_max_cost",
@@ -30,7 +31,12 @@ __all__ = [
 ]
 
 
+def normalize_order_action(action: str) -> str:
+    return normalize_required_text(action, "action").lower()
+
+
 def validate_order_action(action: str) -> None:
+    action = normalize_order_action(action)
     if action not in ORDER_ACTIONS:
         raise ValueError("action must be 'buy' or 'sell'")
 

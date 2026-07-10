@@ -20,6 +20,7 @@ __all__ = [
     "clamp_limit_price",
     "market_max_price",
     "normalize_order_action",
+    "normalize_order_side",
     "size_order",
     "stable_client_order_id",
     "validate_buy_max_cost",
@@ -35,6 +36,10 @@ def normalize_order_action(action: str) -> str:
     return normalize_required_text(action, "action").lower()
 
 
+def normalize_order_side(side: str) -> str:
+    return normalize_required_text(side, "side").lower()
+
+
 def validate_order_action(action: str) -> None:
     action = normalize_order_action(action)
     if action not in ORDER_ACTIONS:
@@ -42,6 +47,7 @@ def validate_order_action(action: str) -> None:
 
 
 def validate_order_side(side: str) -> None:
+    side = normalize_order_side(side)
     if side not in ORDER_SIDES:
         raise ValueError("side must be 'yes' or 'no'")
 

@@ -8,7 +8,13 @@ from kalshi_auto_trader.world_cup import markets, model, trader
 
 def test_shared_modules_export_expected_entry_points():
     expected = {
-        orders: {"build_order_params", "stable_client_order_id"},
+        orders: {
+            "build_order_params",
+            "normalize_order_action",
+            "normalize_order_side",
+            "normalize_order_type",
+            "stable_client_order_id",
+        },
         probability: {"cents_to_probability", "is_probability"},
         risk: {"dollars_to_cents", "remaining_run_budget"},
         ledger: {"append_order", "settle_pending"},

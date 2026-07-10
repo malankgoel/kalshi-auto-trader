@@ -231,6 +231,10 @@ def test_fixture_matching_ignores_nonstring_dates():
     assert not mm._match_teams(market, "Argentina", "Algeria", True)
 
 
+def test_team_key_normalizes_case_and_accents():
+    assert mm.team_key("Curaçao") == "curacao"
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

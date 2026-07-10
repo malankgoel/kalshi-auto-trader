@@ -36,6 +36,7 @@ from kalshi_auto_trader.orders import (
     size_order,
     stable_client_order_id,
 )
+from kalshi_auto_trader.text import normalize_optional_text as _normalize_optional_text
 from kalshi_auto_trader.world_cup import config, markets as mm, model
 
 
@@ -210,10 +211,7 @@ def live_auth_error(live: bool, authenticated: bool) -> str | None:
 
 
 def normalize_optional_text(value: str | None) -> str | None:
-    if value is None:
-        return None
-    value = value.strip()
-    return value or None
+    return _normalize_optional_text(value)
 
 
 def positive_float(value: str) -> float:

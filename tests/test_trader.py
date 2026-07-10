@@ -16,6 +16,9 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
     market_max_price,
+    normalize_order_action,
+    normalize_order_side,
+    normalize_order_type,
     validate_order_action,
     validate_order_count,
     validate_order_side,
@@ -168,6 +171,12 @@ def test_validate_order_action_rejects_invalid_action():
     validate_order_action("buy")
     with pytest.raises(ValueError, match="action"):
         validate_order_action("hold")
+
+
+def test_order_normalizers_return_canonical_values():
+    assert normalize_order_action(" BUY ") == "buy"
+    assert normalize_order_side(" YES ") == "yes"
+    assert normalize_order_type(" LIMIT ") == "limit"
 
 
 @pytest.mark.parametrize("count", [1.5, True])

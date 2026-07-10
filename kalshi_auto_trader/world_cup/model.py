@@ -168,7 +168,7 @@ def kelly_fraction(model_prob: float, entry_price: float) -> float:
     (probability). f* = (p - price) / (1 - price); 0 when no positive edge."""
     if not probability.is_probability(model_prob):
         return 0.0
-    if entry_price <= 0 or entry_price >= 1:
+    if not probability.is_probability(entry_price) or entry_price in (0.0, 1.0):
         return 0.0
     return max(0.0, (model_prob - entry_price) / (1.0 - entry_price))
 

@@ -27,7 +27,7 @@ from kalshi_auto_trader.orders import (
     validate_order_side,
     validate_order_type,
 )
-from kalshi_auto_trader.text import normalize_required_text
+from kalshi_auto_trader.text import normalize_optional_text, normalize_required_text
 
 try:  # signing only needed when an API key is configured
     from cryptography.hazmat.primitives import hashes, serialization
@@ -171,8 +171,7 @@ class KalshiClient:
         out, cursor = [], None
         while True:
             params: dict[str, Any] = {"limit": limit}
-            if series_ticker:
-                series_ticker = series_ticker.strip()
+            series_ticker = normalize_optional_text(series_ticker)
             if series_ticker:
                 params["series_ticker"] = series_ticker
             if event_ticker:

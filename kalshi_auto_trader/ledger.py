@@ -15,6 +15,7 @@ import tempfile
 from typing import Optional
 
 from kalshi_auto_trader import settings
+from kalshi_auto_trader.text import normalize_required_text
 
 
 COLUMNS = [
@@ -75,9 +76,7 @@ def _now() -> str:
 
 def _resolve_path(path: str | os.PathLike | None = None) -> str:
     resolved = os.fspath(path) if path else settings.TRADE_LOG_FILE
-    if not str(resolved).strip():
-        raise ValueError("A trade log path is required.")
-    return resolved
+    return normalize_required_text(resolved, "trade log path")
 
 
 def ensure_log(path: str | os.PathLike | None = None) -> None:

@@ -125,6 +125,11 @@ def test_devig_three_way_rejects_nonfinite_values(value):
     assert model.devig_three_way(value, 0.3, 0.2) == (0.0, 0.0, 0.0)
 
 
+@pytest.mark.parametrize("value", [-0.1, 1.1])
+def test_devig_three_way_rejects_out_of_range_values(value):
+    assert model.devig_three_way(value, 0.3, 0.2) == (0.0, 0.0, 0.0)
+
+
 def test_devig_binary_handles_nonfinite_values():
     assert model.devig_binary(math.nan, 0.4) == 0.0
     assert model.devig_binary(0.6, math.inf) == 0.6

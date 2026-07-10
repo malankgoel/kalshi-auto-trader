@@ -1,5 +1,6 @@
 """Tests for shared public module surfaces."""
 
+import kalshi_auto_trader
 from kalshi_auto_trader import ledger, orders, risk, settings, strategy, text
 from kalshi_auto_trader.kalshi import client
 from kalshi_auto_trader.world_cup import markets, model, trader
@@ -20,3 +21,7 @@ def test_shared_modules_export_expected_entry_points():
     }
     for module, names in expected.items():
         assert names <= set(module.__all__)
+
+
+def test_package_exports_text_module():
+    assert "text" in kalshi_auto_trader.__all__

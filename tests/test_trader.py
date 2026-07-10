@@ -48,6 +48,12 @@ def test_parse_kickoff_utc_handles_valid_and_invalid_values():
     assert model.parse_kickoff_utc("not-a-time") is None
 
 
+def test_find_game_normalizes_lookup_inputs():
+    game = model.find_game(home=" Argentina ", away=" Algeria ")
+    assert game is not None
+    assert game["home_team"] == "Argentina"
+
+
 # ----------------------------- model: flagging ---------------------------- #
 def _game():
     return {"home_team": "Argentina", "away_team": "Algeria", "date": "2026-06-16",

@@ -11,6 +11,10 @@ def test_optional_text_normalizer_strips_and_blanks():
     assert text.normalize_optional_text("   ") is None
 
 
+def test_optional_text_normalizer_stringifies_values():
+    assert text.normalize_optional_text(123) == "123"
+
+
 def test_required_text_normalizer_rejects_blank_values():
     with pytest.raises(ValueError, match="ticker"):
         text.normalize_required_text(" ", "ticker")

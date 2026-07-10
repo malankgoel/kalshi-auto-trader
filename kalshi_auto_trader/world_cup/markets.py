@@ -32,6 +32,7 @@ __all__ = [
     "build_odds_row",
     "resolve_order",
     "side_ask_cents",
+    "team_key",
     "yes_price_cents",
 ]
 
@@ -76,7 +77,11 @@ TEAM_CODES = {
 
 
 def _team_aliases(team: str) -> list[str]:
-    return [_norm(team)] + [_norm(a) for a in TEAM_ALIASES.get(team, [])]
+    return [team_key(team)] + [team_key(a) for a in TEAM_ALIASES.get(team, [])]
+
+
+def team_key(team: str) -> str:
+    return _norm(team)
 
 
 # --------------------------------------------------------------------------- #

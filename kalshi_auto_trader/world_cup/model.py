@@ -30,6 +30,7 @@ __all__ = [
     "load_predictions",
     "load_schedule",
     "next_game",
+    "parse_kickoff_utc",
     "staked_fraction",
     "upcoming_games",
 ]
@@ -77,6 +78,10 @@ def _now() -> dt.datetime:
 
 
 def _parse(iso_utc: str) -> Optional[dt.datetime]:
+    return parse_kickoff_utc(iso_utc)
+
+
+def parse_kickoff_utc(iso_utc: str) -> Optional[dt.datetime]:
     try:
         return dt.datetime.strptime(iso_utc, "%Y-%m-%dT%H:%M:%SZ").replace(
             tzinfo=dt.timezone.utc)

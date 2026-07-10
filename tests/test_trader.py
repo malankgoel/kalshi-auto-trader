@@ -186,6 +186,10 @@ def test_side_ask_complement():
         mm.side_ask_cents({}, "maybe")
 
 
+def test_side_ask_normalizes_side_text():
+    assert mm.side_ask_cents({"yes_ask": 44}, " YES ") == approx(44.0)
+
+
 # ----------------------------- mapping ------------------------------------ #
 def _index():
     return {"winner": {"argentina": {"ticker": "KXWCGAME-26JUN16ARGALG-ARG",

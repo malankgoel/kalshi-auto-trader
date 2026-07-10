@@ -43,6 +43,11 @@ def test_kelly_zero_without_edge():
     assert model.kelly_fraction(0.60, 0.50) == approx(0.2)  # (.6-.5)/(1-.5)
 
 
+def test_parse_kickoff_utc_handles_valid_and_invalid_values():
+    assert model.parse_kickoff_utc("2026-06-16T20:00:00Z") is not None
+    assert model.parse_kickoff_utc("not-a-time") is None
+
+
 # ----------------------------- model: flagging ---------------------------- #
 def _game():
     return {"home_team": "Argentina", "away_team": "Algeria", "date": "2026-06-16",

@@ -98,6 +98,11 @@ def test_limit_params_side_and_clamp(monkeypatch):
     assert ex.build_order_params("yes", 1, 95.0, "limit")["yes_price"] == 99
 
 
+def test_order_params_normalize_side_text():
+    params = ex.build_order_params(" NO ", 1, 20.0, "limit")
+    assert params["no_price"] is not None
+
+
 def test_limit_price_clamp_bounds():
     assert clamp_limit_price(-4) == settings.MIN_PRICE_CENTS
     assert clamp_limit_price(101) == settings.MAX_PRICE_CENTS

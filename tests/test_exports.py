@@ -16,7 +16,7 @@ def test_shared_modules_export_expected_entry_points():
         strategy: {"StrategyMetadata"},
         text: {"normalize_optional_text", "normalize_required_text"},
         client: {"KalshiClient"},
-        model: {"Bet", "flag_bets"},
+        model: {"Bet", "flag_bets", "parse_kickoff_utc"},
         markets: {"build_market_index", "resolve_order"},
         trader: {"plan_bets", "parse_args"},
     }

@@ -175,6 +175,10 @@ def test_yes_price_ignores_nonfinite_quotes():
     assert mm.yes_price_cents({"yes_bid": "nan", "last_price": 39}) == approx(39.0)
 
 
+def test_yes_price_ignores_out_of_range_quotes():
+    assert mm.yes_price_cents({"last_price": 101}) is None
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

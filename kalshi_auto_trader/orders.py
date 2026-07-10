@@ -116,6 +116,7 @@ def build_order_params(
     order_type: Literal["market", "limit"],
 ) -> dict:
     """Convert a side/count/ask into Kalshi order fields."""
+    side = normalize_order_side(side)
     validate_order_side(side)
     validate_order_type(order_type)
     validate_order_count(count)

@@ -151,6 +151,21 @@ def test_create_order_strips_identifiers_before_posting():
     assert body["client_order_id"] == "order-1"
 
 
+def test_create_order_normalizes_action_before_posting():
+    client = KalshiClient()
+    client.post = Mock(return_value={"order": {}})
+
+    client.create_order(
+        ticker="TEST-TICKER",
+        action=" BUY ",
+        side="yes",
+        count=1,
+        order_type="market",
+        client_order_id="order-1",
+    )
+    assert client.post.call_args.args[1]["action"] == "buy"
+
+
 @pytest.mark.parametrize(
     "fields",
     [

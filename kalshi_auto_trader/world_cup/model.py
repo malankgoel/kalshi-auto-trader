@@ -16,6 +16,7 @@ from os import PathLike
 from typing import Optional
 
 from kalshi_auto_trader import probability, settings
+from kalshi_auto_trader.text import normalize_optional_text
 from kalshi_auto_trader.world_cup import config
 
 
@@ -126,6 +127,9 @@ def next_game(now: Optional[dt.datetime] = None) -> Optional[dict]:
 
 def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[dict]:
     """Look up a specific fixture (ignores the kickoff filter), for manual runs."""
+    match_id = normalize_optional_text(match_id) or ""
+    home = normalize_optional_text(home) or ""
+    away = normalize_optional_text(away) or ""
     preds = load_predictions()
     sched = load_schedule()
     for (h, a), pred in preds.items():

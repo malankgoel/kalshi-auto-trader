@@ -69,9 +69,12 @@ def test_limit_price_clamp_rejects_nonfinite_values(value):
         clamp_limit_price(value)
 
 
-@pytest.mark.parametrize(("namespace", "key"), [("", "x"), ("ns", " ")])
-def test_stable_order_id_rejects_blank_inputs(namespace, key):
-    with pytest.raises(ValueError, match="namespace"):
+@pytest.mark.parametrize(
+    ("namespace", "key", "message"),
+    [("", "x", "namespace"), ("ns", " ", "key")],
+)
+def test_stable_order_id_rejects_blank_inputs(namespace, key, message):
+    with pytest.raises(ValueError, match=message):
         stable_client_order_id(namespace, key)
 
 

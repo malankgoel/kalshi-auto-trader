@@ -14,6 +14,7 @@ Reuse these modules instead of copying API or bookkeeping code:
 | `kalshi_auto_trader.ledger` | CSV trade logging, settlement updates, and bankroll recovery. |
 | `kalshi_auto_trader.risk` | Run-level spend cap accounting. |
 | `kalshi_auto_trader.settings` | Environment-backed runtime, auth, order, and risk settings. |
+| `kalshi_auto_trader.text` | Shared text normalization for identifiers, paths, and optional CLI values. |
 
 Shared client helpers validate API paths, market tickers, order tickers, and
 client order IDs before making requests. Strategy packages should pass trimmed,

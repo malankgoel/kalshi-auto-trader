@@ -174,8 +174,7 @@ class KalshiClient:
             series_ticker = normalize_optional_text(series_ticker)
             if series_ticker:
                 params["series_ticker"] = series_ticker
-            if event_ticker:
-                event_ticker = event_ticker.strip()
+            event_ticker = normalize_optional_text(event_ticker)
             if event_ticker:
                 params["event_ticker"] = event_ticker
             if status:

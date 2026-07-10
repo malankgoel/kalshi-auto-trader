@@ -120,6 +120,10 @@ def test_staked_fraction_rejects_nonfinite_values(value):
     assert model.staked_fraction(value) == 0.0
 
 
+def test_staked_fraction_floors_negative_values():
+    assert model.staked_fraction(-0.1) == 0.0
+
+
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
 def test_devig_three_way_rejects_nonfinite_values(value):
     assert model.devig_three_way(value, 0.3, 0.2) == (0.0, 0.0, 0.0)

@@ -103,6 +103,11 @@ def test_order_params_normalize_side_text():
     assert params["no_price"] is not None
 
 
+def test_order_params_normalize_order_type_text():
+    params = ex.build_order_params("yes", 1, 20.0, " LIMIT ")
+    assert params["limit_price"] is not None
+
+
 def test_limit_price_clamp_bounds():
     assert clamp_limit_price(-4) == settings.MIN_PRICE_CENTS
     assert clamp_limit_price(101) == settings.MAX_PRICE_CENTS

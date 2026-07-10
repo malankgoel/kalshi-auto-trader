@@ -146,7 +146,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
 # probability math (de-vig + Kelly)                                           #
 # --------------------------------------------------------------------------- #
 def devig_three_way(home: float, draw: float, away: float) -> tuple[float, float, float]:
-    if not all(math.isfinite(v) for v in (home, draw, away)):
+    if not all(probability.is_probability(v) for v in (home, draw, away)):
         return 0.0, 0.0, 0.0
     s = home + draw + away
     return (home / s, draw / s, away / s) if s > 0 else (0.0, 0.0, 0.0)

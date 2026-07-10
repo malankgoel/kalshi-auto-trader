@@ -62,6 +62,14 @@ def test_list_markets_normalizes_optional_filters():
     )
 
 
+def test_list_markets_skips_blank_optional_filters():
+    client = KalshiClient()
+    client.get = Mock(return_value={"markets": [], "cursor": None})
+
+    client.list_markets(series_ticker=" ", event_ticker=" ", status=" ", limit=3)
+    client.get.assert_called_once_with("/markets", {"limit": 3})
+
+
 @pytest.mark.parametrize("method", ["get", "post"])
 def test_client_rejects_api_paths_without_leading_slash(method):
     client = KalshiClient()

@@ -110,6 +110,11 @@ def test_kelly_rejects_out_of_range_model_probabilities(value):
     assert model.kelly_fraction(value, 0.5) == 0.0
 
 
+@pytest.mark.parametrize("entry_price", [0.0, 1.0])
+def test_kelly_rejects_endpoint_entry_prices(entry_price):
+    assert model.kelly_fraction(0.6, entry_price) == 0.0
+
+
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])
 def test_staked_fraction_rejects_nonfinite_values(value):
     assert model.staked_fraction(value) == 0.0

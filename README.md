@@ -190,7 +190,7 @@ push and pull request.
 | `kalshi_auto_trader/kalshi/client.py` | Reusable Kalshi REST client: signed reads/writes, orders, balance. |
 | `kalshi_auto_trader/orders.py` | Reusable order sizing, price fields, and idempotent client order IDs. |
 | `kalshi_auto_trader/probability.py` | Shared probability and quote conversion helpers. |
-| `kalshi_auto_trader/ledger.py` | Reusable CSV order ledger and settlement/bankroll logic. |
+| `kalshi_auto_trader/ledger.py` | Reusable CSV order ledger, settlement parsing, profit math, and bankroll logic. |
 | `kalshi_auto_trader/settings.py` | Shared env-overridable runtime, risk, auth, and order settings. |
 | `kalshi_auto_trader/world_cup/` | World Cup-specific model, market matching, config, and CLI planning. |
 | `data/world_cup/` | Bundled World Cup model snapshot, schedule, and empty trade-log header. |

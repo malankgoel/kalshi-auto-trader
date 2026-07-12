@@ -31,3 +31,9 @@ def test_cents_to_probability_converts_valid_quotes():
 def test_cents_to_probability_rejects_invalid_quotes():
     for value in (None, "", "bad", -1, 101, math.nan):
         assert probability.cents_to_probability(value) is None
+
+
+def test_probability_to_cents_converts_and_clamps_values():
+    assert probability.probability_to_cents(0.375) == 37.5
+    assert probability.probability_to_cents(-0.2) == 0.0
+    assert probability.probability_to_cents(1.2) == 100.0

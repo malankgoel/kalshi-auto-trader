@@ -29,7 +29,7 @@ import argparse
 import math
 import sys
 
-from kalshi_auto_trader import ledger, risk, settings
+from kalshi_auto_trader import ledger, probability, risk, settings
 from kalshi_auto_trader.kalshi import KalshiClient
 from kalshi_auto_trader.orders import (
     build_order_params,
@@ -77,7 +77,8 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
         plan = {"selection": b.selection, "side": b.side, "line": b.line,
                 "selection_team": b.selection_team,
                 "model_prob": b.model_prob, "fair_prob": b.fair_prob,
-                "edge": b.edge, "market_price_cents": b.market_price * 100.0,
+                "edge": b.edge,
+                "market_price_cents": probability.probability_to_cents(b.market_price),
                 "kelly_fraction": model.staked_fraction(b.kelly_full),
                 "skip": None}
         frac = plan["kelly_fraction"]

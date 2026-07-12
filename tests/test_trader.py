@@ -338,6 +338,11 @@ def test_placed_price_ignores_nonfinite_order_prices():
     assert trade_log.placed_price(plan, order) == (44.0, "limit_price")
 
 
+def test_settlement_profit_for_win_and_loss():
+    assert trade_log.settlement_profit(10, 40.0, True) == 6.0
+    assert trade_log.settlement_profit(10, 40.0, False) == -4.0
+
+
 def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
     path = tmp_path / "trade_log.csv"
     trade_log.write_rows([

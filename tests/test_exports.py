@@ -15,7 +15,12 @@ def test_shared_modules_export_expected_entry_points():
             "normalize_order_type",
             "stable_client_order_id",
         },
-        probability: {"cents_to_probability", "clamp_probability", "is_probability"},
+        probability: {
+            "cents_to_probability",
+            "clamp_probability",
+            "is_probability",
+            "probability_to_cents",
+        },
         risk: {"dollars_to_cents", "remaining_run_budget"},
         ledger: {"append_order", "settle_pending"},
         settings: {"ORDER_TYPE", "MAX_TOTAL_COST"},

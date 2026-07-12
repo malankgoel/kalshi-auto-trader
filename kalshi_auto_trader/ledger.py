@@ -230,6 +230,11 @@ def append_order(game: dict, plan: dict, order: dict, *, bankroll: float,
     write_rows(rows, path)
 
 
+def settlement_profit(count: int, placed_price_cents: float, won: bool) -> float:
+    price = placed_price_cents / 100.0
+    return round(count * (1.0 - price), 2) if won else round(-count * price, 2)
+
+
 def settle_pending(client, path: str | os.PathLike | None = None) -> int:
     """Update pending rows from Kalshi market settlement data.
 

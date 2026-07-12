@@ -6,11 +6,17 @@ import math
 from typing import Optional
 
 
-__all__ = ["cents_to_probability", "is_probability"]
+__all__ = ["cents_to_probability", "clamp_probability", "is_probability"]
 
 
 def is_probability(value: float) -> bool:
     return math.isfinite(value) and 0.0 <= value <= 1.0
+
+
+def clamp_probability(value: float) -> float:
+    if not math.isfinite(value):
+        return 0.0
+    return max(0.0, min(1.0, value))
 
 
 def cents_to_probability(value) -> Optional[float]:

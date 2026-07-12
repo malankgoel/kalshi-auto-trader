@@ -291,6 +291,10 @@ def _safe_market(client, ticker: str) -> dict:
 
 
 def _market_winner(market: dict) -> Optional[str]:
+    return market_winner(market)
+
+
+def market_winner(market: dict) -> Optional[str]:
     for key in ("result", "settlement_value", "settled_result", "winning_side",
                 "winner", "outcome"):
         val = _norm(market.get(key, ""))

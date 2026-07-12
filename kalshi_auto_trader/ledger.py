@@ -237,6 +237,10 @@ def settlement_profit(count: int, placed_price_cents: float, won: bool) -> float
     return round(count * (1.0 - price), 2) if won else round(-count * price, 2)
 
 
+def is_pending_status(status: str | None) -> bool:
+    return _norm(status) in ("", "pending", "submitted")
+
+
 def settle_pending(client, path: str | os.PathLike | None = None) -> int:
     """Update pending rows from Kalshi market settlement data.
 

@@ -353,6 +353,10 @@ def test_market_winner_infers_from_settled_prices():
     assert trade_log.market_winner({"status": "settled", "last_price": 1}) == "no"
 
 
+def test_market_winner_ignores_unsettled_prices():
+    assert trade_log.market_winner({"status": "open", "last_price": 99}) is None
+
+
 def test_pending_status_helper_accepts_settleable_rows():
     assert trade_log.is_pending_status("")
     assert trade_log.is_pending_status(" submitted ")

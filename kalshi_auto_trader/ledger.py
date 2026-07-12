@@ -250,7 +250,7 @@ def settle_pending(client, path: str | os.PathLike | None = None) -> int:
     rows = read_rows(path)
     changed = 0
     for row in rows:
-        if row.get("status") not in ("pending", "submitted", ""):
+        if not is_pending_status(row.get("status")):
             continue
         winner = _market_winner(_safe_market(client, row.get("ticker", "")))
         if winner is None:

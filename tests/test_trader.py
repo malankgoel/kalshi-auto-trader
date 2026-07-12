@@ -278,6 +278,7 @@ def test_plan_bets_end_to_end():
     assert placed, "expected at least one actionable order"
     arg = [p for p in placed if "Argentina" in p["selection"]][0]
     assert arg["buy_side"] == "yes" and arg["count"] >= 1 and arg["buy_max_cost"]
+    assert 0.0 <= arg["market_price_cents"] <= 100.0
     assert arg["risk_cost"] >= arg["est_cost"]
 
 

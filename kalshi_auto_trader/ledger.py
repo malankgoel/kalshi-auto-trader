@@ -63,6 +63,7 @@ __all__ = [
     "append_order",
     "current_bankroll",
     "ensure_log",
+    "market_winner",
     "placed_price",
     "read_rows",
     "settlement_profit",

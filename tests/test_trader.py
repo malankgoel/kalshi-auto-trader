@@ -343,6 +343,11 @@ def test_settlement_profit_for_win_and_loss():
     assert trade_log.settlement_profit(10, 40.0, False) == -4.0
 
 
+def test_market_winner_reads_explicit_result_fields():
+    assert trade_log.market_winner({"result": "yes"}) == "yes"
+    assert trade_log.market_winner({"winning_side": "NO"}) == "no"
+
+
 def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
     path = tmp_path / "trade_log.csv"
     trade_log.write_rows([

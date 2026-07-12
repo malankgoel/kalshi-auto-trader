@@ -65,6 +65,7 @@ __all__ = [
     "ensure_log",
     "placed_price",
     "read_rows",
+    "settlement_profit",
     "settle_pending",
     "write_rows",
 ]

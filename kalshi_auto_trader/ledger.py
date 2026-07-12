@@ -254,7 +254,7 @@ def settle_pending(client, path: str | os.PathLike | None = None) -> int:
         if count <= 0 or price <= 0 or price > 1:
             continue
         won = row.get("buy_side") == winner
-        profit = round(count * (1.0 - price), 2) if won else round(-count * price, 2)
+        profit = settlement_profit(count, price * 100.0, won)
         row["status"] = "won" if won else "lost"
         row["result"] = winner
         row["profit"] = _money(profit)

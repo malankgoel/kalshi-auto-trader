@@ -63,6 +63,7 @@ __all__ = [
     "append_order",
     "current_bankroll",
     "ensure_log",
+    "is_pending_status",
     "market_winner",
     "placed_price",
     "read_rows",

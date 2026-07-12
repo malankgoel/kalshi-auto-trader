@@ -22,6 +22,8 @@ client order IDs before making requests. Strategy packages should pass trimmed,
 non-empty identifiers into those helpers rather than preparing raw URL paths.
 Order and model helpers also treat nonfinite numeric inputs as invalid, so
 strategy code should normalize raw feeds before planning bets.
+Ledger helpers expose settlement result parsing, pending-status checks, and
+profit math so strategy packages do not need to duplicate bankroll accounting.
 
 ## Keep Strategy Logic Isolated
 

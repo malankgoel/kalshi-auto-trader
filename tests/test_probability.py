@@ -16,6 +16,13 @@ def test_is_probability_rejects_invalid_values():
         assert not probability.is_probability(value)
 
 
+def test_clamp_probability_bounds_values():
+    assert probability.clamp_probability(-0.2) == 0.0
+    assert probability.clamp_probability(0.4) == 0.4
+    assert probability.clamp_probability(1.2) == 1.0
+    assert probability.clamp_probability(math.nan) == 0.0
+
+
 def test_cents_to_probability_converts_valid_quotes():
     assert probability.cents_to_probability("37.5") == 0.375
     assert probability.cents_to_probability(100) == 1.0

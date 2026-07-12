@@ -353,6 +353,12 @@ def test_market_winner_infers_from_settled_prices():
     assert trade_log.market_winner({"status": "settled", "last_price": 1}) == "no"
 
 
+def test_pending_status_helper_accepts_settleable_rows():
+    assert trade_log.is_pending_status("")
+    assert trade_log.is_pending_status(" submitted ")
+    assert not trade_log.is_pending_status("won")
+
+
 def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
     path = tmp_path / "trade_log.csv"
     trade_log.write_rows([

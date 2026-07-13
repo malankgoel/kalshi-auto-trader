@@ -16,6 +16,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
     estimated_order_cost,
+    limit_order_price,
     market_buy_max_cost,
     market_max_price,
     normalize_order_action,
@@ -127,6 +128,11 @@ def test_order_params_normalize_order_type_text():
 def test_limit_price_clamp_bounds():
     assert clamp_limit_price(-4) == settings.MIN_PRICE_CENTS
     assert clamp_limit_price(101) == settings.MAX_PRICE_CENTS
+
+
+def test_limit_order_price_applies_buffer(monkeypatch):
+    monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 2)
+    assert limit_order_price(44.0) == 46
 
 
 def test_market_max_cost_never_exceeds_contract_payout(monkeypatch):

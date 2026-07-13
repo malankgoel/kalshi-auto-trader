@@ -19,6 +19,7 @@ __all__ = [
     "build_order_params",
     "clamp_limit_price",
     "estimated_order_cost",
+    "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
     "normalize_order_action",
@@ -110,6 +111,10 @@ def estimated_order_cost(count: int, price_cents: float) -> float:
     if not math.isfinite(price_cents) or price_cents < 0:
         raise ValueError("price_cents must be a non-negative finite number")
     return round(count * price_cents / 100.0, 2)
+
+
+def limit_order_price(price_cents: float) -> int:
+    return clamp_limit_price(price_cents + settings.LIMIT_BUFFER_CENTS)
 
 
 def market_buy_max_cost(count: int, price_cents: float) -> int:

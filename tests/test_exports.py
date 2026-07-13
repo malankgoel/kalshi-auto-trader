@@ -11,6 +11,7 @@ def test_shared_modules_export_expected_entry_points():
         orders: {
             "build_order_params",
             "estimated_order_cost",
+            "market_buy_max_cost",
             "normalize_order_action",
             "normalize_order_side",
             "normalize_order_type",

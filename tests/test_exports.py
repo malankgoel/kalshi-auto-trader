@@ -21,7 +21,12 @@ def test_shared_modules_export_expected_entry_points():
             "is_probability",
             "probability_to_cents",
         },
-        risk: {"cents_to_dollars", "dollars_to_cents", "remaining_run_budget"},
+        risk: {
+            "cents_to_dollars",
+            "cost_to_cents",
+            "dollars_to_cents",
+            "remaining_run_budget",
+        },
         ledger: {
             "append_order",
             "is_pending_status",

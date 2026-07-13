@@ -19,6 +19,7 @@ __all__ = [
     "build_order_params",
     "clamp_limit_price",
     "estimated_order_cost",
+    "market_buy_max_cost",
     "market_max_price",
     "normalize_order_action",
     "normalize_order_side",
@@ -109,6 +110,11 @@ def estimated_order_cost(count: int, price_cents: float) -> float:
     if not math.isfinite(price_cents) or price_cents < 0:
         raise ValueError("price_cents must be a non-negative finite number")
     return round(count * price_cents / 100.0, 2)
+
+
+def market_buy_max_cost(count: int, price_cents: float) -> int:
+    validate_order_count(count)
+    return int(math.ceil(count * market_max_price(price_cents)))
 
 
 def size_order(stake_dollars: float, price_cents: float) -> int:

@@ -25,6 +25,7 @@ def test_shared_modules_export_expected_entry_points():
             "cents_to_dollars",
             "cost_to_cents",
             "dollars_to_cents",
+            "nonnegative_finite",
             "remaining_run_budget",
         },
         ledger: {

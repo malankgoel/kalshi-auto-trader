@@ -15,6 +15,7 @@ from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
+    estimated_order_cost,
     market_max_price,
     normalize_order_action,
     normalize_order_side,
@@ -138,6 +139,10 @@ def test_market_max_price_respects_contract_payout(monkeypatch):
     monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 10)
     assert market_max_price(95.0) == 100.0
     assert market_max_price(44.0) == 54.0
+
+
+def test_estimated_order_cost_helper():
+    assert estimated_order_cost(3, 44.5) == 1.34
 
 
 def test_order_params_reject_invalid_inputs():

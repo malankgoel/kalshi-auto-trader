@@ -305,7 +305,7 @@ def main(argv: list[str] | None = None) -> None:
         bal = client.get_balance().get("balance", 0)
         balance_dollars = risk.cents_to_dollars(bal)
         print(f"\nAccount balance: ${balance_dollars:.2f}")
-        if risk.dollars_to_cents(total) > bal:
+        if risk.cost_to_cents(total) > bal:
             sys.exit(f"Planned spend ${total:.2f} exceeds balance ${balance_dollars:.2f}. "
                      f"Aborting -- no orders sent.")
     except SystemExit:

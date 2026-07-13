@@ -5,7 +5,12 @@ from __future__ import annotations
 import math
 
 
-__all__ = ["dollars_to_cents", "exceeds_run_budget", "remaining_run_budget"]
+__all__ = [
+    "cents_to_dollars",
+    "dollars_to_cents",
+    "exceeds_run_budget",
+    "remaining_run_budget",
+]
 
 
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
@@ -27,3 +32,14 @@ def dollars_to_cents(amount: float) -> int:
     if isinstance(amount, bool) or not math.isfinite(amount) or amount < 0:
         raise ValueError("amount must be a non-negative finite number")
     return int(round(amount * 100))
+
+
+def cents_to_dollars(amount_cents: int) -> float:
+    """Convert a non-negative integer cent amount to dollars."""
+    if (
+        isinstance(amount_cents, bool)
+        or not isinstance(amount_cents, int)
+        or amount_cents < 0
+    ):
+        raise ValueError("amount_cents must be a non-negative integer")
+    return round(amount_cents / 100.0, 2)

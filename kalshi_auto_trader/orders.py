@@ -154,7 +154,7 @@ def build_order_params(
         max_price = market_max_price(price_cents)
         params["buy_max_cost"] = int(math.ceil(count * max_price))
         params["limit_price"] = None
-        params["est_cost"] = round(count * price_cents / 100.0, 2)
+        params["est_cost"] = estimated_order_cost(count, price_cents)
         params["risk_cost"] = round(params["buy_max_cost"] / 100.0, 2)
     return params
 

@@ -10,8 +10,13 @@ __all__ = [
     "cost_to_cents",
     "dollars_to_cents",
     "exceeds_run_budget",
+    "nonnegative_finite",
     "remaining_run_budget",
 ]
+
+
+def nonnegative_finite(value: float) -> bool:
+    return not isinstance(value, bool) and math.isfinite(value) and value >= 0
 
 
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:

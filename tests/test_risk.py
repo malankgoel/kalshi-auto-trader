@@ -44,3 +44,13 @@ def test_dollars_to_cents_rejects_invalid_amounts():
 def test_dollars_to_cents_rejects_boolean_amounts():
     with pytest.raises(ValueError):
         risk.dollars_to_cents(True)
+
+
+def test_cents_to_dollars_converts_integer_cents():
+    assert risk.cents_to_dollars(1234) == 12.34
+
+
+def test_cents_to_dollars_rejects_invalid_amounts():
+    for value in (-1, 1.5, True):
+        with pytest.raises(ValueError):
+            risk.cents_to_dollars(value)

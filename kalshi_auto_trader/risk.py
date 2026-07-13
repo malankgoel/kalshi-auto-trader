@@ -7,6 +7,7 @@ import math
 
 __all__ = [
     "cents_to_dollars",
+    "cost_to_cents",
     "dollars_to_cents",
     "exceeds_run_budget",
     "remaining_run_budget",
@@ -43,3 +44,8 @@ def cents_to_dollars(amount_cents: int) -> float:
     ):
         raise ValueError("amount_cents must be a non-negative integer")
     return round(amount_cents / 100.0, 2)
+
+
+def cost_to_cents(cost_dollars: float) -> int:
+    """Convert a planned dollar cost to cents for balance comparisons."""
+    return dollars_to_cents(cost_dollars)

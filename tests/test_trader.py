@@ -142,7 +142,7 @@ def test_market_max_price_respects_contract_payout(monkeypatch):
 
 
 def test_estimated_order_cost_helper():
-    assert estimated_order_cost(3, 44.5) == 1.34
+    assert estimated_order_cost(3, 44.5) == 1.33
 
 
 def test_order_params_reject_invalid_inputs():

@@ -148,7 +148,7 @@ def build_order_params(
         limit_price = clamp_limit_price(price_cents + settings.LIMIT_BUFFER_CENTS)
         params["yes_price" if side == "yes" else "no_price"] = limit_price
         params["limit_price"] = limit_price
-        params["est_cost"] = round(count * limit_price / 100.0, 2)
+        params["est_cost"] = estimated_order_cost(count, limit_price)
         params["risk_cost"] = params["est_cost"]
     else:
         max_price = market_max_price(price_cents)

@@ -7,6 +7,14 @@ import pytest
 from kalshi_auto_trader import risk
 
 
+def test_nonnegative_finite_predicate():
+    assert risk.nonnegative_finite(0.0)
+    assert risk.nonnegative_finite(1.25)
+    assert not risk.nonnegative_finite(-0.01)
+    assert not risk.nonnegative_finite(math.nan)
+    assert not risk.nonnegative_finite(True)
+
+
 def test_exceeds_run_budget_allows_exact_cap():
     assert not risk.exceeds_run_budget(7.25, 2.75, 10.0)
 

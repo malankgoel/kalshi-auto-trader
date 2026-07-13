@@ -54,3 +54,7 @@ def test_cents_to_dollars_rejects_invalid_amounts():
     for value in (-1, 1.5, True):
         with pytest.raises(ValueError):
             risk.cents_to_dollars(value)
+
+
+def test_cost_to_cents_matches_dollar_conversion():
+    assert risk.cost_to_cents(4.56) == 456

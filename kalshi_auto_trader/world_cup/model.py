@@ -215,12 +215,11 @@ class Bet:
 def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
               model_yes: float, fair_yes: float, yes_price: float,
               no_price: Optional[float]) -> Optional[Bet]:
-    eps = 1e-9
     diff = probability.probability_edge(model_yes, fair_yes)
-    if diff >= settings.EDGE_THRESHOLD - eps:
+    if meets_edge_threshold(diff):
         side, label = "YES", yes_label
         model_win, fair_win, price = model_yes, fair_yes, yes_price
-    elif -diff >= settings.EDGE_THRESHOLD - eps:
+    elif meets_edge_threshold(-diff):
         side, label = "NO", no_label
         model_win, fair_win = 1.0 - model_yes, 1.0 - fair_yes
         price = no_price if no_price is not None else (1.0 - yes_price)

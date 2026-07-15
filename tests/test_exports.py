@@ -31,6 +31,7 @@ def test_shared_modules_export_expected_entry_points():
             "cost_to_cents",
             "dollars_to_cents",
             "nonnegative_finite",
+            "planned_total_cost",
             "remaining_run_budget",
             "run_budget_allows",
         },

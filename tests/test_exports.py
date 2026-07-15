@@ -24,6 +24,7 @@ def test_shared_modules_export_expected_entry_points():
             "cents_to_probability",
             "clamp_probability",
             "is_probability",
+            "probability_edge",
             "probability_to_cents",
         },
         risk: {

@@ -12,6 +12,7 @@ __all__ = [
     "exceeds_run_budget",
     "nonnegative_finite",
     "remaining_run_budget",
+    "run_budget_allows",
 ]
 
 
@@ -31,6 +32,11 @@ def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: floa
     if not all(math.isfinite(v) for v in (spent_cost, next_cost, max_total_cost)):
         return True
     return round(spent_cost + next_cost, 2) > max_total_cost
+
+
+def run_budget_allows(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
+    """Return True when the next planned cost stays within the run cap."""
+    return not exceeds_run_budget(spent_cost, next_cost, max_total_cost)
 
 
 def dollars_to_cents(amount: float) -> int:

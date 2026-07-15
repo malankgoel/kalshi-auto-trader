@@ -210,7 +210,7 @@ def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
               model_yes: float, fair_yes: float, yes_price: float,
               no_price: Optional[float]) -> Optional[Bet]:
     eps = 1e-9
-    diff = model_yes - fair_yes
+    diff = probability.probability_edge(model_yes, fair_yes)
     if diff >= settings.EDGE_THRESHOLD - eps:
         side, label = "YES", yes_label
         model_win, fair_win, price = model_yes, fair_yes, yes_price
@@ -222,7 +222,8 @@ def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
         return None
     return Bet(line=name, selection=label, side=side, selection_team=selection_team,
                model_prob=model_win, fair_prob=fair_win, market_price=price,
-               edge=model_win - fair_win, kelly_full=kelly_fraction(model_win, price))
+               edge=probability.probability_edge(model_win, fair_win),
+               kelly_full=kelly_fraction(model_win, price))
 
 
 def _c2p(v) -> Optional[float]:

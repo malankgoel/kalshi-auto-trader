@@ -28,6 +28,7 @@ __all__ = [
     "normalize_order_type",
     "size_order",
     "stable_client_order_id",
+    "tradable_price_cents",
     "validate_buy_max_cost",
     "validate_limit_price",
     "validate_order_action",
@@ -96,6 +97,11 @@ def finite_price_cents(price_cents: float) -> bool:
         return not isinstance(price_cents, bool) and math.isfinite(price_cents)
     except TypeError:
         return False
+
+
+def tradable_price_cents(price_cents: float) -> bool:
+    """Return True when a quote can be used to size a buy order."""
+    return finite_price_cents(price_cents) and 0 < price_cents <= 100
 
 
 def clamp_limit_price(price_cents: float) -> int:

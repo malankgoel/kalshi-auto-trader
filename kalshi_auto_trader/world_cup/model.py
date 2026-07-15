@@ -30,6 +30,7 @@ __all__ = [
     "kickoff_utc",
     "load_predictions",
     "load_schedule",
+    "meets_edge_threshold",
     "next_game",
     "parse_kickoff_utc",
     "staked_fraction",
@@ -188,6 +189,11 @@ def staked_fraction(kelly_full: float) -> float:
         return 0.0
     return min(settings.KELLY_FRACTION * max(kelly_full, 0.0),
                settings.MAX_STAKE_FRACTION)
+
+
+def meets_edge_threshold(edge: float) -> bool:
+    """Return True when an edge clears the configured strategy threshold."""
+    return math.isfinite(edge) and edge >= settings.EDGE_THRESHOLD - 1e-9
 
 
 # --------------------------------------------------------------------------- #

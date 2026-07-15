@@ -19,6 +19,10 @@ def test_exceeds_run_budget_allows_exact_cap():
     assert not risk.exceeds_run_budget(7.25, 2.75, 10.0)
 
 
+def test_run_budget_allows_exact_cap():
+    assert risk.run_budget_allows(7.25, 2.75, 10.0)
+
+
 def test_exceeds_run_budget_rejects_over_cap():
     assert risk.exceeds_run_budget(7.25, 2.76, 10.0)
 

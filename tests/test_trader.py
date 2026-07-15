@@ -86,6 +86,11 @@ def test_no_flag_when_market_agrees():
     assert all(b.line != "btts" for b in bets)  # 35 vs 35 -> no btts bet
 
 
+def test_edge_threshold_helper():
+    assert model.meets_edge_threshold(settings.EDGE_THRESHOLD)
+    assert not model.meets_edge_threshold(settings.EDGE_THRESHOLD - 0.01)
+
+
 def test_under_is_no_side_on_over_market():
     odds = {"over_2_5_price": 60}   # market over 60%, model 40% -> bet UNDER (NO)
     bets = model.flag_bets(_game(), odds)

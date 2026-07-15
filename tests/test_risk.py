@@ -44,6 +44,11 @@ def test_remaining_run_budget_never_negative():
     assert risk.remaining_run_budget(10.0, 12.0) == 0.0
 
 
+def test_planned_total_cost_rounds_and_rejects_nonfinite_inputs():
+    assert risk.planned_total_cost(1.234, 2.345) == 3.58
+    assert risk.planned_total_cost(math.nan, 2.0) == math.inf
+
+
 def test_remaining_run_budget_rejects_nonfinite_inputs():
     assert risk.remaining_run_budget(math.inf, 1.0) == 0.0
     assert risk.remaining_run_budget(10.0, math.nan) == 0.0

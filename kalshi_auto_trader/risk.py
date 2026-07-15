@@ -11,6 +11,7 @@ __all__ = [
     "dollars_to_cents",
     "exceeds_run_budget",
     "nonnegative_finite",
+    "planned_total_cost",
     "remaining_run_budget",
     "run_budget_allows",
 ]
@@ -25,6 +26,13 @@ def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
     if not (math.isfinite(max_total_cost) and math.isfinite(spent_cost)):
         return 0.0
     return max(round(max_total_cost - spent_cost, 2), 0.0)
+
+
+def planned_total_cost(spent_cost: float, next_cost: float) -> float:
+    """Rounded dollars committed after adding the next planned order."""
+    if not (math.isfinite(spent_cost) and math.isfinite(next_cost)):
+        return math.inf
+    return round(spent_cost + next_cost, 2)
 
 
 def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:

@@ -40,6 +40,7 @@ def test_shared_modules_export_expected_entry_points():
             "append_order",
             "is_pending_status",
             "market_winner",
+            "settlement_status",
             "settlement_profit",
             "settle_pending",
         },

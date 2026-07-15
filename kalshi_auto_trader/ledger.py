@@ -67,6 +67,7 @@ __all__ = [
     "market_winner",
     "placed_price",
     "read_rows",
+    "settlement_status",
     "settlement_profit",
     "settle_pending",
     "write_rows",
@@ -236,6 +237,10 @@ def append_order(game: dict, plan: dict, order: dict, *, bankroll: float,
 def settlement_profit(count: int, placed_price_cents: float, won: bool) -> float:
     price = placed_price_cents / 100.0
     return round(count * (1.0 - price), 2) if won else round(-count * price, 2)
+
+
+def settlement_status(won: bool) -> str:
+    return "won" if won else "lost"
 
 
 def is_pending_status(status: str | None) -> bool:

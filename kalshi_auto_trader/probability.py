@@ -10,6 +10,7 @@ __all__ = [
     "cents_to_probability",
     "clamp_probability",
     "is_probability",
+    "probability_edge",
     "probability_to_cents",
 ]
 
@@ -38,3 +39,10 @@ def cents_to_probability(value) -> Optional[float]:
 
 def probability_to_cents(value: float) -> float:
     return round(clamp_probability(value) * 100.0, 4)
+
+
+def probability_edge(model_prob: float, fair_prob: float) -> float:
+    """Model probability minus fair market probability."""
+    if not (is_probability(model_prob) and is_probability(fair_prob)):
+        return 0.0
+    return model_prob - fair_prob

@@ -16,6 +16,7 @@ from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
     estimated_order_cost,
+    finite_price_cents,
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
@@ -150,6 +151,13 @@ def test_market_max_price_respects_contract_payout(monkeypatch):
 
 def test_estimated_order_cost_helper():
     assert estimated_order_cost(3, 44.5) == 1.33
+
+
+def test_finite_price_cents_predicate():
+    assert finite_price_cents(44.5)
+    assert not finite_price_cents(float("nan"))
+    assert not finite_price_cents(True)
+    assert not finite_price_cents("44")
 
 
 def test_market_buy_max_cost_helper(monkeypatch):

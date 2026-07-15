@@ -18,6 +18,7 @@ def test_shared_modules_export_expected_entry_points():
             "normalize_order_side",
             "normalize_order_type",
             "stable_client_order_id",
+            "tradable_price_cents",
         },
         probability: {
             "cents_to_probability",

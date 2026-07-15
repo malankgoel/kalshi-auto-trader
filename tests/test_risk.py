@@ -27,6 +27,12 @@ def test_exceeds_run_budget_rejects_over_cap():
     assert risk.exceeds_run_budget(7.25, 2.76, 10.0)
 
 
+def test_run_budget_allows_rejects_over_cap_and_nonfinite_inputs():
+    assert not risk.run_budget_allows(7.25, 2.76, 10.0)
+    assert not risk.run_budget_allows(math.nan, 1.0, 10.0)
+    assert not risk.run_budget_allows(1.0, math.inf, 10.0)
+
+
 def test_exceeds_run_budget_rejects_nonfinite_inputs():
     assert risk.exceeds_run_budget(math.nan, 1.0, 10.0)
     assert risk.exceeds_run_budget(1.0, math.inf, 10.0)

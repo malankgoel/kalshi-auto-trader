@@ -32,6 +32,7 @@ def test_shared_modules_export_expected_entry_points():
             "dollars_to_cents",
             "nonnegative_finite",
             "remaining_run_budget",
+            "run_budget_allows",
         },
         ledger: {
             "append_order",

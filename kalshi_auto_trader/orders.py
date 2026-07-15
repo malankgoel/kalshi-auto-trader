@@ -139,9 +139,9 @@ def market_buy_max_cost(count: int, price_cents: float) -> int:
 
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
-    if not (math.isfinite(stake_dollars) and math.isfinite(price_cents)):
+    if not math.isfinite(stake_dollars) or not tradable_price_cents(price_cents):
         return 0
-    if stake_dollars <= 0 or price_cents <= 0 or price_cents > 100:
+    if stake_dollars <= 0:
         return 0
     count = int((stake_dollars * 100.0) // price_cents)
     count = min(count, settings.MAX_CONTRACTS_PER_ORDER)

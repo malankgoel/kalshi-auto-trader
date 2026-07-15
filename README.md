@@ -143,6 +143,10 @@ until Kalshi exposes a settled result.
 Reusable Kalshi/runtime settings live in `kalshi_auto_trader/settings.py`.
 World Cup-specific data paths and market series live in
 `kalshi_auto_trader/world_cup/config.py`.
+Shared Kalshi mechanics live outside the World Cup package: `orders.py` owns
+quote validation, sizing, and order params; `risk.py` owns run-cap math and
+cent/dollar conversion; `probability.py` owns reusable probability conversion
+and edge helpers; `ledger.py` owns trade-log settlement helpers.
 
 | Env var | Default | Meaning |
 |---|---|---|

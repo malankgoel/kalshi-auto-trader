@@ -117,7 +117,7 @@ def market_max_price(price_cents: float) -> float:
 
 def estimated_order_cost(count: int, price_cents: float) -> float:
     validate_order_count(count)
-    if not math.isfinite(price_cents) or price_cents < 0:
+    if not finite_price_cents(price_cents) or price_cents < 0:
         raise ValueError("price_cents must be a non-negative finite number")
     return round(count * price_cents / 100.0, 2)
 

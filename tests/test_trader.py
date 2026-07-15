@@ -23,6 +23,7 @@ from kalshi_auto_trader.orders import (
     normalize_order_action,
     normalize_order_side,
     normalize_order_type,
+    tradable_price_cents,
     validate_order_action,
     validate_order_count,
     validate_order_side,
@@ -158,6 +159,14 @@ def test_finite_price_cents_predicate():
     assert not finite_price_cents(float("nan"))
     assert not finite_price_cents(True)
     assert not finite_price_cents("44")
+
+
+def test_tradable_price_cents_predicate():
+    assert tradable_price_cents(1)
+    assert tradable_price_cents(100.0)
+    assert not tradable_price_cents(0)
+    assert not tradable_price_cents(100.01)
+    assert not tradable_price_cents(float("inf"))
 
 
 def test_market_buy_max_cost_helper(monkeypatch):

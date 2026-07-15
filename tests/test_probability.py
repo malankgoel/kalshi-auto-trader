@@ -37,3 +37,8 @@ def test_probability_to_cents_converts_and_clamps_values():
     assert probability.probability_to_cents(0.375) == 37.5
     assert probability.probability_to_cents(-0.2) == 0.0
     assert probability.probability_to_cents(1.2) == 100.0
+
+
+def test_probability_edge_returns_model_minus_market():
+    assert round(probability.probability_edge(0.62, 0.50), 2) == 0.12
+    assert probability.probability_edge(math.nan, 0.50) == 0.0

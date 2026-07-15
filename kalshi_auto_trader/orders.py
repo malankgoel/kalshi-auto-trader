@@ -161,7 +161,7 @@ def build_order_params(
     validate_order_side(side)
     validate_order_type(order_type)
     validate_order_count(count)
-    if not math.isfinite(price_cents) or not 0 < price_cents <= 100:
+    if not tradable_price_cents(price_cents):
         raise ValueError("price_cents must be between 0 and 100")
     params = {
         "order_type": order_type,

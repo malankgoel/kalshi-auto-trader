@@ -19,6 +19,7 @@ __all__ = [
     "build_order_params",
     "clamp_limit_price",
     "estimated_order_cost",
+    "finite_price_cents",
     "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
@@ -87,6 +88,14 @@ def validate_buy_max_cost(buy_max_cost: int) -> None:
         or buy_max_cost <= 0
     ):
         raise ValueError("buy_max_cost must be a positive integer")
+
+
+def finite_price_cents(price_cents: float) -> bool:
+    """Return True when a cents quote is a finite non-boolean number."""
+    try:
+        return not isinstance(price_cents, bool) and math.isfinite(price_cents)
+    except TypeError:
+        return False
 
 
 def clamp_limit_price(price_cents: float) -> int:

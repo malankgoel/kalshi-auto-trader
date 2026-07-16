@@ -68,7 +68,7 @@ def validate_order_side(side: str) -> None:
 
 
 def validate_order_count(count: int) -> None:
-    if isinstance(count, bool) or not isinstance(count, int) or count <= 0:
+    if not order_count_is_valid(count):
         raise ValueError("count must be a positive integer")
 
 

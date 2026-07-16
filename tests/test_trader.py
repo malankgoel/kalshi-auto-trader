@@ -21,6 +21,7 @@ from kalshi_auto_trader.orders import (
     market_buy_max_cost,
     market_max_price,
     normalize_order_action,
+    order_count_is_valid,
     normalize_order_side,
     normalize_order_type,
     tradable_price_cents,
@@ -198,6 +199,12 @@ def test_validate_order_count_rejects_invalid_count():
     validate_order_count(1)
     with pytest.raises(ValueError, match="positive integer"):
         validate_order_count(True)
+
+
+def test_order_count_predicate_rejects_non_positive_values():
+    assert order_count_is_valid(1)
+    assert not order_count_is_valid(0)
+    assert not order_count_is_valid(True)
 
 
 def test_validate_order_type_rejects_invalid_type():

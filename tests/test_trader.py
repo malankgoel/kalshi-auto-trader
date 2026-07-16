@@ -22,6 +22,7 @@ from kalshi_auto_trader.orders import (
     market_max_price,
     normalize_order_action,
     order_count_is_valid,
+    order_side_is_valid,
     normalize_order_side,
     normalize_order_type,
     tradable_price_cents,
@@ -193,6 +194,12 @@ def test_validate_order_side_rejects_invalid_side():
     validate_order_side("yes")
     with pytest.raises(ValueError, match="side"):
         validate_order_side("maybe")
+
+
+def test_order_side_predicate_normalizes_values():
+    assert order_side_is_valid(" YES ")
+    assert order_side_is_valid("no")
+    assert not order_side_is_valid("maybe")
 
 
 def test_validate_order_count_rejects_invalid_count():

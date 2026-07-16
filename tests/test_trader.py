@@ -414,6 +414,11 @@ def test_settlement_status_helper():
     assert trade_log.settlement_status(False) == "lost"
 
 
+def test_settlement_won_helper_normalizes_sides():
+    assert trade_log.settlement_won(" YES ", "yes")
+    assert not trade_log.settlement_won("no", "yes")
+
+
 def test_market_winner_reads_explicit_result_fields():
     assert trade_log.market_winner({"result": "yes"}) == "yes"
     assert trade_log.market_winner({"winning_side": "NO"}) == "no"

@@ -46,6 +46,7 @@ def test_shared_modules_export_expected_entry_points():
             "market_winner",
             "settlement_status",
             "settlement_profit",
+            "settlement_won",
             "settle_pending",
         },
         settings: {"ORDER_TYPE", "MAX_TOTAL_COST"},

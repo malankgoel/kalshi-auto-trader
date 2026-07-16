@@ -23,6 +23,7 @@ from kalshi_auto_trader.orders import (
     normalize_order_action,
     order_count_is_valid,
     order_side_is_valid,
+    order_type_is_valid,
     normalize_order_side,
     normalize_order_type,
     tradable_price_cents,
@@ -218,6 +219,12 @@ def test_validate_order_type_rejects_invalid_type():
     validate_order_type("market")
     with pytest.raises(ValueError, match="order_type"):
         validate_order_type("stop")
+
+
+def test_order_type_predicate_normalizes_values():
+    assert order_type_is_valid(" MARKET ")
+    assert order_type_is_valid("limit")
+    assert not order_type_is_valid("stop")
 
 
 def test_validate_order_action_rejects_invalid_action():

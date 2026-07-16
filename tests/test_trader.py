@@ -259,6 +259,12 @@ def test_yes_price_ignores_out_of_range_quotes():
     assert mm.yes_price_cents({"last_price": 101}) is None
 
 
+def test_first_price_cents_reads_dollar_and_cent_fields():
+    market = {"bad": "nan", "yes_ask_dollars": "0.44", "yes_ask": 47}
+    assert mm.first_price_cents(market, "bad", "yes_ask_dollars", "yes_ask") == 44.0
+    assert mm.first_price_cents({"last_price": 101}, "last_price") is None
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

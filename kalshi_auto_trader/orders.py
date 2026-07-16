@@ -27,6 +27,7 @@ __all__ = [
     "normalize_order_side",
     "normalize_order_type",
     "order_count_is_valid",
+    "order_side_is_valid",
     "size_order",
     "stable_client_order_id",
     "tradable_price_cents",
@@ -53,6 +54,13 @@ def normalize_order_type(order_type: str) -> str:
 
 def order_count_is_valid(count: int) -> bool:
     return not isinstance(count, bool) and isinstance(count, int) and count > 0
+
+
+def order_side_is_valid(side: str) -> bool:
+    try:
+        return normalize_order_side(side) in ORDER_SIDES
+    except ValueError:
+        return False
 
 
 def validate_order_action(action: str) -> None:

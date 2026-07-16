@@ -186,13 +186,13 @@ def first_price_cents(market: dict, *keys) -> Optional[float]:
 def yes_price_cents(market: dict) -> Optional[float]:
     """A YES price (cents, 0-100) for de-vigging: mid of the live yes book if
     both sides quote, else the last traded price."""
-    yb = _cents(market, "yes_bid_dollars", "yes_bid")
-    ya = _cents(market, "yes_ask_dollars", "yes_ask")
+    yb = first_price_cents(market, "yes_bid_dollars", "yes_bid")
+    ya = first_price_cents(market, "yes_ask_dollars", "yes_ask")
     if yb is not None and ya is not None and ya >= yb and (yb + ya) > 0:
         return max(0.0, min(100.0, (yb + ya) / 2.0))
     for k in ("last_price_dollars", "last_price",
               "previous_price_dollars", "previous_price"):
-        v = _cents(market, k)
+        v = first_price_cents(market, k)
         if v is not None:
             return max(0.0, min(100.0, v))
     return None

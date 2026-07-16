@@ -88,8 +88,7 @@ def validate_order_count(count: int) -> None:
 
 
 def validate_order_type(order_type: str) -> None:
-    order_type = normalize_order_type(order_type)
-    if order_type not in settings.ORDER_TYPES:
+    if not order_type_is_valid(order_type):
         raise ValueError("order_type must be 'market' or 'limit'")
 
 

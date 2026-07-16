@@ -225,14 +225,14 @@ def side_ask_cents(market: dict, side: str) -> Optional[float]:
     if side not in ("yes", "no"):
         raise ValueError("side must be 'yes' or 'no'")
     if side == "yes":
-        v = _cents(market, "yes_ask_dollars", "yes_ask")
+        v = first_price_cents(market, "yes_ask_dollars", "yes_ask")
         if v is None:
-            nb = _cents(market, "no_bid_dollars", "no_bid")
+            nb = first_price_cents(market, "no_bid_dollars", "no_bid")
             v = 100.0 - nb if nb is not None else None
     else:  # no
-        v = _cents(market, "no_ask_dollars", "no_ask")
+        v = first_price_cents(market, "no_ask_dollars", "no_ask")
         if v is None:
-            yb = _cents(market, "yes_bid_dollars", "yes_bid")
+            yb = first_price_cents(market, "yes_bid_dollars", "yes_bid")
             v = 100.0 - yb if yb is not None else None
     if v is None:
         return None

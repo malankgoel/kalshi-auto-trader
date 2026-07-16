@@ -6,6 +6,7 @@ import math
 
 
 __all__ = [
+    "budget_usage_fraction",
     "cents_to_dollars",
     "cost_to_cents",
     "dollars_to_cents",
@@ -26,6 +27,18 @@ def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
     if not (math.isfinite(max_total_cost) and math.isfinite(spent_cost)):
         return 0.0
     return max(round(max_total_cost - spent_cost, 2), 0.0)
+
+
+def budget_usage_fraction(max_total_cost: float, spent_cost: float) -> float:
+    """Share of a run-level spend cap already reserved, clamped to 0-1."""
+    try:
+        if max_total_cost <= 0 or not math.isfinite(max_total_cost):
+            return 0.0
+        if not math.isfinite(spent_cost):
+            return 0.0
+    except TypeError:
+        return 0.0
+    return max(0.0, min(1.0, round(spent_cost / max_total_cost, 4)))
 
 
 def planned_total_cost(spent_cost: float, next_cost: float) -> float:

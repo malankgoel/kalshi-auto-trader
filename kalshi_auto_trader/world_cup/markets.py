@@ -30,6 +30,7 @@ __all__ = [
     "TEAM_CODES",
     "build_market_index",
     "build_odds_row",
+    "first_price_cents",
     "resolve_order",
     "side_ask_cents",
     "team_key",
@@ -175,6 +176,11 @@ def _cents(market: dict, *keys) -> Optional[float]:
         if 0 <= cents <= 100:
             return cents
     return None
+
+
+def first_price_cents(market: dict, *keys) -> Optional[float]:
+    """Return the first finite cents quote from the requested market fields."""
+    return _cents(market, *keys)
 
 
 def yes_price_cents(market: dict) -> Optional[float]:

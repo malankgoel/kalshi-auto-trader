@@ -28,6 +28,7 @@ __all__ = [
     "normalize_order_type",
     "order_count_is_valid",
     "order_side_is_valid",
+    "order_type_is_valid",
     "size_order",
     "stable_client_order_id",
     "tradable_price_cents",
@@ -59,6 +60,13 @@ def order_count_is_valid(count: int) -> bool:
 def order_side_is_valid(side: str) -> bool:
     try:
         return normalize_order_side(side) in ORDER_SIDES
+    except ValueError:
+        return False
+
+
+def order_type_is_valid(order_type: str) -> bool:
+    try:
+        return normalize_order_type(order_type) in settings.ORDER_TYPES
     except ValueError:
         return False
 

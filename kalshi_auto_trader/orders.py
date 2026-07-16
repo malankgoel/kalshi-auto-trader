@@ -70,8 +70,7 @@ def validate_order_action(action: str) -> None:
 
 
 def validate_order_side(side: str) -> None:
-    side = normalize_order_side(side)
-    if side not in ORDER_SIDES:
+    if not order_side_is_valid(side):
         raise ValueError("side must be 'yes' or 'no'")
 
 

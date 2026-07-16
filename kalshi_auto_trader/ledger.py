@@ -67,6 +67,7 @@ __all__ = [
     "market_winner",
     "placed_price",
     "read_rows",
+    "settlement_won",
     "settlement_status",
     "settlement_profit",
     "settle_pending",
@@ -241,6 +242,10 @@ def settlement_profit(count: int, placed_price_cents: float, won: bool) -> float
 
 def settlement_status(won: bool) -> str:
     return "won" if won else "lost"
+
+
+def settlement_won(buy_side: str, winner: str) -> bool:
+    return _norm(buy_side) == _norm(winner)
 
 
 def is_pending_status(status: str | None) -> bool:

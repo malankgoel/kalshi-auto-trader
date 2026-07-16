@@ -13,7 +13,7 @@ Reuse these modules instead of copying API or bookkeeping code:
 | `kalshi_auto_trader.orders` | Contract sizing, market/limit order parameters, and stable client order IDs. |
 | `kalshi_auto_trader.probability` | Shared probability validation and quote conversion helpers. |
 | `kalshi_auto_trader.ledger` | CSV trade logging, settlement updates, and bankroll recovery. |
-| `kalshi_auto_trader.risk` | Run-level spend cap accounting. |
+| `kalshi_auto_trader.risk` | Run-level spend cap accounting, remaining budget, and utilization checks. |
 | `kalshi_auto_trader.settings` | Environment-backed runtime, auth, order, and risk settings. |
 | `kalshi_auto_trader.text` | Shared text normalization for identifiers, paths, and optional CLI values. |
 

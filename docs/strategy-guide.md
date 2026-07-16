@@ -20,11 +20,14 @@ Reuse these modules instead of copying API or bookkeeping code:
 Shared client helpers validate API paths, market tickers, order tickers, and
 client order IDs before making requests. Strategy packages should pass trimmed,
 non-empty identifiers into those helpers rather than preparing raw URL paths.
-Order pricing helpers centralize limit buffers, market spend caps, and estimated
-cost math. Model helpers also treat nonfinite numeric inputs as invalid, so
-strategy code should normalize raw feeds before planning bets.
+Order pricing helpers centralize side/type/count predicates, limit buffers,
+market spend caps, and estimated cost math. Market helpers expose quote readers
+that reject nonfinite and out-of-range prices before strategy code sizes orders.
+Model helpers also treat nonfinite numeric inputs as invalid, so strategy code
+should normalize raw feeds before planning bets.
 Ledger helpers expose settlement result parsing, pending-status checks, and
-profit math so strategy packages do not need to duplicate bankroll accounting.
+profit/win helpers so strategy packages do not need to duplicate bankroll
+accounting.
 
 ## Keep Strategy Logic Isolated
 

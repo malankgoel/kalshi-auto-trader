@@ -15,6 +15,7 @@ def test_shared_modules_export_expected_entry_points():
             "limit_order_price",
             "market_buy_max_cost",
             "normalize_order_action",
+            "order_count_is_valid",
             "normalize_order_side",
             "normalize_order_type",
             "stable_client_order_id",

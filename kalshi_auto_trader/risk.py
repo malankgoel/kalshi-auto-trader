@@ -6,6 +6,7 @@ import math
 
 
 __all__ = [
+    "balance_covers_cost",
     "budget_usage_fraction",
     "cents_to_dollars",
     "cost_to_cents",
@@ -58,6 +59,16 @@ def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: floa
 def run_budget_allows(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
     """Return True when the next planned cost stays within the run cap."""
     return not exceeds_run_budget(spent_cost, next_cost, max_total_cost)
+
+
+def balance_covers_cost(balance_cents: int, cost_dollars: float) -> bool:
+    """Return True when an account balance can cover a planned dollar cost."""
+    try:
+        cents_to_dollars(balance_cents)
+        planned_cents = cost_to_cents(cost_dollars)
+    except ValueError:
+        return False
+    return planned_cents <= balance_cents
 
 
 def dollars_to_cents(amount: float) -> int:

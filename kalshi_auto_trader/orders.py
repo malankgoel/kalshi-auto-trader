@@ -124,11 +124,7 @@ def valid_buy_max_cost(buy_max_cost: int) -> bool:
 
 
 def validate_buy_max_cost(buy_max_cost: int) -> None:
-    if (
-        isinstance(buy_max_cost, bool)
-        or not isinstance(buy_max_cost, int)
-        or buy_max_cost <= 0
-    ):
+    if not valid_buy_max_cost(buy_max_cost):
         raise ValueError("buy_max_cost must be a positive integer")
 
 

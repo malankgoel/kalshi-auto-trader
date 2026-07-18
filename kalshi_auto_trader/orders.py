@@ -80,8 +80,7 @@ def order_type_is_valid(order_type: str) -> bool:
 
 
 def validate_order_action(action: str) -> None:
-    action = normalize_order_action(action)
-    if action not in ORDER_ACTIONS:
+    if not order_action_is_valid(action):
         raise ValueError("action must be 'buy' or 'sell'")
 
 

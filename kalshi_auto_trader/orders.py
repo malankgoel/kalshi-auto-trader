@@ -23,6 +23,7 @@ __all__ = [
     "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
+    "nonnegative_price_cents",
     "normalize_order_action",
     "normalize_order_side",
     "normalize_order_type",
@@ -128,6 +129,11 @@ def finite_price_cents(price_cents: float) -> bool:
 def tradable_price_cents(price_cents: float) -> bool:
     """Return True when a quote can be used to size a buy order."""
     return finite_price_cents(price_cents) and 0 < price_cents <= 100
+
+
+def nonnegative_price_cents(price_cents: float) -> bool:
+    """Return True when a cents value is finite and at least zero."""
+    return finite_price_cents(price_cents) and price_cents >= 0
 
 
 def clamp_limit_price(price_cents: float) -> int:

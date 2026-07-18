@@ -33,6 +33,7 @@ from kalshi_auto_trader.orders import (
     validate_order_count,
     validate_order_side,
     validate_order_type,
+    valid_limit_price_cents,
 )
 from kalshi_auto_trader.world_cup import markets as mm
 from kalshi_auto_trader.world_cup import model
@@ -140,6 +141,14 @@ def test_order_params_normalize_order_type_text():
 def test_limit_price_clamp_bounds():
     assert clamp_limit_price(-4) == settings.MIN_PRICE_CENTS
     assert clamp_limit_price(101) == settings.MAX_PRICE_CENTS
+
+
+def test_limit_price_predicate_accepts_only_valid_order_prices():
+    assert valid_limit_price_cents(1)
+    assert valid_limit_price_cents(99)
+    assert not valid_limit_price_cents(0)
+    assert not valid_limit_price_cents(100)
+    assert not valid_limit_price_cents(True)
 
 
 def test_limit_order_price_applies_buffer(monkeypatch):

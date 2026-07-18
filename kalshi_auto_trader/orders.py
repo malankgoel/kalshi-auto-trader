@@ -192,7 +192,7 @@ def size_order(stake_dollars: float, price_cents: float) -> int:
         return 0
     count = int((stake_dollars * 100.0) // price_cents)
     count = min(count, settings.MAX_CONTRACTS_PER_ORDER)
-    count = min(count, int((settings.MAX_ORDER_COST * 100.0) // price_cents))
+    count = min(count, int(max_order_cost_cents() // price_cents))
     return max(count, 0)
 
 

@@ -221,8 +221,9 @@ def _evaluate(name: str, yes_label: str, no_label: str, selection_team: str,
         model_win, fair_win, price = model_yes, fair_yes, yes_price
     elif meets_edge_threshold(-diff):
         side, label = "NO", no_label
-        model_win, fair_win = 1.0 - model_yes, 1.0 - fair_yes
-        price = no_price if no_price is not None else (1.0 - yes_price)
+        model_win = probability.probability_complement(model_yes)
+        fair_win = probability.probability_complement(fair_yes)
+        price = no_price if no_price is not None else probability.probability_complement(yes_price)
     else:
         return None
     return Bet(line=name, selection=label, side=side, selection_team=selection_team,

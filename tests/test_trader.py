@@ -20,6 +20,7 @@ from kalshi_auto_trader.orders import (
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
+    max_order_cost_cents,
     nonnegative_price_cents,
     normalize_order_action,
     order_action_is_valid,
@@ -110,6 +111,11 @@ def test_size_floor_and_caps(monkeypatch):
     assert ex.size_order(0.30, 45.0) == 0
     monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.0)
     assert ex.size_order(100.0, 50.0) == 4
+
+
+def test_max_order_cost_cents_helper(monkeypatch):
+    monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.5)
+    assert max_order_cost_cents() == 250.0
 
 
 def test_market_params_buy_max_cost(monkeypatch):

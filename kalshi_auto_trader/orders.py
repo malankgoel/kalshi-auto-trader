@@ -20,6 +20,7 @@ __all__ = [
     "clamp_limit_price",
     "estimated_order_cost",
     "finite_price_cents",
+    "limit_price_field",
     "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
@@ -127,6 +128,12 @@ def valid_buy_max_cost(buy_max_cost: int) -> bool:
 def validate_buy_max_cost(buy_max_cost: int) -> None:
     if not valid_buy_max_cost(buy_max_cost):
         raise ValueError("buy_max_cost must be a positive integer")
+
+
+def limit_price_field(side: str) -> str:
+    side = normalize_order_side(side)
+    validate_order_side(side)
+    return "yes_price" if side == "yes" else "no_price"
 
 
 def finite_price_cents(price_cents: float) -> bool:

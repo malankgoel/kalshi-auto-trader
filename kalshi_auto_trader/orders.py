@@ -23,6 +23,7 @@ __all__ = [
     "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
+    "max_order_cost_cents",
     "nonnegative_price_cents",
     "normalize_order_action",
     "normalize_order_side",
@@ -177,6 +178,10 @@ def limit_order_price(price_cents: float) -> int:
 def market_buy_max_cost(count: int, price_cents: float) -> int:
     validate_order_count(count)
     return int(math.ceil(count * market_max_price(price_cents)))
+
+
+def max_order_cost_cents() -> float:
+    return settings.MAX_ORDER_COST * 100.0
 
 
 def size_order(stake_dollars: float, price_cents: float) -> int:

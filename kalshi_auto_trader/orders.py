@@ -226,7 +226,7 @@ def build_order_params(
     }
     if order_type == "limit":
         limit_price = limit_order_price(price_cents)
-        params["yes_price" if side == "yes" else "no_price"] = limit_price
+        params[limit_price_field(side)] = limit_price
         params["limit_price"] = limit_price
         params["est_cost"] = estimated_order_cost(count, limit_price)
         params["risk_cost"] = params["est_cost"]

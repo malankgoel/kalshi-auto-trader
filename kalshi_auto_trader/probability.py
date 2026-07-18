@@ -10,6 +10,7 @@ __all__ = [
     "cents_to_probability",
     "clamp_probability",
     "is_probability",
+    "probability_complement",
     "probability_edge",
     "probability_to_cents",
 ]
@@ -39,6 +40,13 @@ def cents_to_probability(value) -> Optional[float]:
 
 def probability_to_cents(value: float) -> float:
     return round(clamp_probability(value) * 100.0, 4)
+
+
+def probability_complement(value: float) -> float:
+    """Return the complementary probability when ``value`` is valid."""
+    if not is_probability(value):
+        return 0.0
+    return 1.0 - value
 
 
 def probability_edge(model_prob: float, fair_prob: float) -> float:

@@ -150,6 +150,9 @@ reusable probability conversion and edge helpers; `ledger.py` owns trade-log
 settlement helpers.
 Order helpers also expose action, limit-price, and max-cost predicates so new
 strategies can validate outbound Kalshi payloads before touching the client.
+Probability helpers expose complement math for NO-side contracts, risk helpers
+own account-balance coverage checks, and order helpers keep a shared params
+template for generated Kalshi payloads.
 
 | Env var | Default | Meaning |
 |---|---|---|

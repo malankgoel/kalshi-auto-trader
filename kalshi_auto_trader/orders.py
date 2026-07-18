@@ -228,13 +228,7 @@ def build_order_params(
     validate_order_count(count)
     if not tradable_price_cents(price_cents):
         raise ValueError("price_cents must be between 0 and 100")
-    params = {
-        "order_type": order_type,
-        "yes_price": None,
-        "no_price": None,
-        "buy_max_cost": None,
-        "risk_cost": None,
-    }
+    params = order_params_template(order_type)
     if order_type == "limit":
         limit_price = limit_order_price(price_cents)
         params[limit_price_field(side)] = limit_price

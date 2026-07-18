@@ -13,8 +13,11 @@ from kalshi_auto_trader.orders import (
     size_order,
     stable_client_order_id,
     valid_buy_max_cost,
+    validate_order_action,
     validate_buy_max_cost,
     validate_limit_price,
+    validate_order_side,
+    validate_order_type,
 )
 from kalshi_auto_trader.strategy import StrategyMetadata
 from kalshi_auto_trader.world_cup import STRATEGY, STRATEGY_NAME, config, model
@@ -44,6 +47,19 @@ def test_positive_int_env_parser_rejects_zero(monkeypatch):
 def test_order_params_reject_out_of_range_price():
     with pytest.raises(ValueError, match="price_cents"):
         build_order_params("yes", 1, 101, "market")
+
+
+@pytest.mark.parametrize(
+    ("validator", "message"),
+    [
+        (validate_order_action, "action"),
+        (validate_order_side, "side"),
+        (validate_order_type, "order_type"),
+    ],
+)
+def test_order_text_validators_reject_blank_values(validator, message):
+    with pytest.raises(ValueError, match=message):
+        validator(" ")
 
 
 @pytest.mark.parametrize("price", [None, 0, 100])

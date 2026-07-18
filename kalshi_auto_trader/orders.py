@@ -35,6 +35,7 @@ __all__ = [
     "stable_client_order_id",
     "tradable_price_cents",
     "validate_buy_max_cost",
+    "valid_limit_price_cents",
     "validate_limit_price",
     "validate_order_action",
     "validate_order_count",
@@ -98,6 +99,14 @@ def validate_order_count(count: int) -> None:
 def validate_order_type(order_type: str) -> None:
     if not order_type_is_valid(order_type):
         raise ValueError("order_type must be 'market' or 'limit'")
+
+
+def valid_limit_price_cents(price_cents: int) -> bool:
+    return (
+        not isinstance(price_cents, bool)
+        and isinstance(price_cents, int)
+        and 1 <= price_cents <= 99
+    )
 
 
 def validate_limit_price(price_cents: int, side: str) -> None:

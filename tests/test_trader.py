@@ -26,6 +26,7 @@ from kalshi_auto_trader.orders import (
     normalize_order_action,
     order_action_is_valid,
     order_count_is_valid,
+    order_params_template,
     order_side_is_valid,
     order_type_is_valid,
     normalize_order_side,
@@ -143,6 +144,17 @@ def test_order_params_normalize_side_text():
 def test_order_params_normalize_order_type_text():
     params = ex.build_order_params("yes", 1, 20.0, " LIMIT ")
     assert params["limit_price"] is not None
+
+
+def test_order_params_template_sets_empty_price_fields():
+    params = order_params_template("market")
+    assert params == {
+        "order_type": "market",
+        "yes_price": None,
+        "no_price": None,
+        "buy_max_cost": None,
+        "risk_cost": None,
+    }
 
 
 def test_limit_price_clamp_bounds():

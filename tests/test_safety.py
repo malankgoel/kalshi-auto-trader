@@ -12,6 +12,7 @@ from kalshi_auto_trader.orders import (
     market_max_price,
     size_order,
     stable_client_order_id,
+    valid_buy_max_cost,
     validate_buy_max_cost,
     validate_limit_price,
 )
@@ -61,6 +62,13 @@ def test_limit_price_validator_rejects_noninteger_values(price):
 def test_buy_max_cost_validator_rejects_invalid_values(buy_max_cost):
     with pytest.raises(ValueError, match="buy_max_cost"):
         validate_buy_max_cost(buy_max_cost)
+
+
+def test_buy_max_cost_predicate_requires_positive_integer():
+    assert valid_buy_max_cost(1)
+    assert not valid_buy_max_cost(0)
+    assert not valid_buy_max_cost(True)
+    assert not valid_buy_max_cost(1.5)
 
 
 @pytest.mark.parametrize("value", [math.nan, math.inf, -math.inf])

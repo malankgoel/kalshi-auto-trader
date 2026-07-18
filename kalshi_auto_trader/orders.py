@@ -110,11 +110,7 @@ def valid_limit_price_cents(price_cents: int) -> bool:
 
 
 def validate_limit_price(price_cents: int, side: str) -> None:
-    if (
-        isinstance(price_cents, bool)
-        or not isinstance(price_cents, int)
-        or not 1 <= price_cents <= 99
-    ):
+    if not valid_limit_price_cents(price_cents):
         raise ValueError(f"limit {side}_price must be between 1 and 99")
 
 

@@ -148,6 +148,8 @@ quote validation, order-side/type/count predicates, sizing, and order params;
 `risk.py` owns run-cap math and cent/dollar conversion; `probability.py` owns
 reusable probability conversion and edge helpers; `ledger.py` owns trade-log
 settlement helpers.
+Order helpers also expose action, limit-price, and max-cost predicates so new
+strategies can validate outbound Kalshi payloads before touching the client.
 
 | Env var | Default | Meaning |
 |---|---|---|

@@ -257,7 +257,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
             (game["model_away_win"], fa, ap, game["away_team"], game["away_team"]),
         ):
             b = _evaluate("winner", f"YES {label}", f"NO {label}", team,
-                          model_p, fair_p, raw_p, 1.0 - raw_p)
+                          model_p, fair_p, raw_p, probability.probability_complement(raw_p))
             if b:
                 bets.append(b)
 
@@ -265,7 +265,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     if op is not None:
         b = _evaluate("over_under", "OVER 2.5", "UNDER 2.5", "",
                       game["model_over_2_5"], devig_binary(op, up), op,
-                      up if up is not None else (1.0 - op))
+                      up if up is not None else probability.probability_complement(op))
         if b:
             bets.append(b)
 
@@ -273,7 +273,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     if by is not None:
         b = _evaluate("btts", "BTTS YES", "BTTS NO", "",
                       game["model_btts"], devig_binary(by, bn), by,
-                      bn if bn is not None else (1.0 - by))
+                      bn if bn is not None else probability.probability_complement(by))
         if b:
             bets.append(b)
 

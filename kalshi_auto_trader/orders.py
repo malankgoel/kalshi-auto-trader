@@ -34,6 +34,7 @@ __all__ = [
     "size_order",
     "stable_client_order_id",
     "tradable_price_cents",
+    "valid_buy_max_cost",
     "validate_buy_max_cost",
     "valid_limit_price_cents",
     "validate_limit_price",
@@ -112,6 +113,14 @@ def valid_limit_price_cents(price_cents: int) -> bool:
 def validate_limit_price(price_cents: int, side: str) -> None:
     if not valid_limit_price_cents(price_cents):
         raise ValueError(f"limit {side}_price must be between 1 and 99")
+
+
+def valid_buy_max_cost(buy_max_cost: int) -> bool:
+    return (
+        not isinstance(buy_max_cost, bool)
+        and isinstance(buy_max_cost, int)
+        and buy_max_cost > 0
+    )
 
 
 def validate_buy_max_cost(buy_max_cost: int) -> None:

@@ -21,6 +21,7 @@ from kalshi_auto_trader.orders import (
     market_buy_max_cost,
     market_max_price,
     normalize_order_action,
+    order_action_is_valid,
     order_count_is_valid,
     order_side_is_valid,
     order_type_is_valid,
@@ -231,6 +232,12 @@ def test_validate_order_action_rejects_invalid_action():
     validate_order_action("buy")
     with pytest.raises(ValueError, match="action"):
         validate_order_action("hold")
+
+
+def test_order_action_predicate_normalizes_values():
+    assert order_action_is_valid(" BUY ")
+    assert order_action_is_valid("sell")
+    assert not order_action_is_valid("hold")
 
 
 def test_order_normalizers_return_canonical_values():

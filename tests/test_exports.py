@@ -20,6 +20,7 @@ def test_shared_modules_export_expected_entry_points():
             "normalize_order_action",
             "order_action_is_valid",
             "order_count_is_valid",
+            "order_params_template",
             "order_side_is_valid",
             "order_type_is_valid",
             "normalize_order_side",

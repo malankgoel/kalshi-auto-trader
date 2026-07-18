@@ -87,3 +87,10 @@ def test_cents_to_dollars_rejects_invalid_amounts():
 
 def test_cost_to_cents_matches_dollar_conversion():
     assert risk.cost_to_cents(4.56) == 456
+
+
+def test_balance_covers_cost_helper():
+    assert risk.balance_covers_cost(456, 4.56)
+    assert not risk.balance_covers_cost(455, 4.56)
+    assert not risk.balance_covers_cost(True, 1.0)
+    assert not risk.balance_covers_cost(100, math.nan)

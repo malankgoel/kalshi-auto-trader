@@ -14,6 +14,7 @@ def test_shared_modules_export_expected_entry_points():
             "finite_price_cents",
             "limit_order_price",
             "market_buy_max_cost",
+            "max_order_cost_cents",
             "nonnegative_price_cents",
             "normalize_order_action",
             "order_action_is_valid",

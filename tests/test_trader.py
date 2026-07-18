@@ -17,6 +17,7 @@ from kalshi_auto_trader.orders import (
     clamp_limit_price,
     estimated_order_cost,
     finite_price_cents,
+    limit_price_field,
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
@@ -155,6 +156,11 @@ def test_limit_price_predicate_accepts_only_valid_order_prices():
     assert not valid_limit_price_cents(0)
     assert not valid_limit_price_cents(100)
     assert not valid_limit_price_cents(True)
+
+
+def test_limit_price_field_helper_normalizes_side():
+    assert limit_price_field(" YES ") == "yes_price"
+    assert limit_price_field("no") == "no_price"
 
 
 def test_limit_order_price_applies_buffer(monkeypatch):

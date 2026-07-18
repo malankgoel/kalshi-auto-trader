@@ -29,6 +29,7 @@ __all__ = [
     "normalize_order_action",
     "normalize_order_side",
     "normalize_order_type",
+    "order_params_template",
     "order_action_is_valid",
     "order_count_is_valid",
     "order_side_is_valid",
@@ -134,6 +135,16 @@ def limit_price_field(side: str) -> str:
     side = normalize_order_side(side)
     validate_order_side(side)
     return "yes_price" if side == "yes" else "no_price"
+
+
+def order_params_template(order_type: str) -> dict:
+    return {
+        "order_type": order_type,
+        "yes_price": None,
+        "no_price": None,
+        "buy_max_cost": None,
+        "risk_cost": None,
+    }
 
 
 def finite_price_cents(price_cents: float) -> bool:

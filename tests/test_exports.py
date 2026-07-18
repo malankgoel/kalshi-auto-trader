@@ -37,6 +37,7 @@ def test_shared_modules_export_expected_entry_points():
             "probability_to_cents",
         },
         risk: {
+            "balance_covers_cost",
             "budget_usage_fraction",
             "cents_to_dollars",
             "cost_to_cents",

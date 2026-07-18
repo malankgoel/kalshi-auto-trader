@@ -20,6 +20,7 @@ from kalshi_auto_trader.orders import (
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
+    nonnegative_price_cents,
     normalize_order_action,
     order_action_is_valid,
     order_count_is_valid,
@@ -176,6 +177,13 @@ def test_tradable_price_cents_predicate():
     assert not tradable_price_cents(0)
     assert not tradable_price_cents(100.01)
     assert not tradable_price_cents(float("inf"))
+
+
+def test_nonnegative_price_cents_predicate():
+    assert nonnegative_price_cents(0)
+    assert nonnegative_price_cents(44.5)
+    assert not nonnegative_price_cents(-0.01)
+    assert not nonnegative_price_cents(float("nan"))
 
 
 def test_market_buy_max_cost_helper(monkeypatch):

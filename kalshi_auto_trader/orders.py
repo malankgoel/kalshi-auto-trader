@@ -241,7 +241,7 @@ def build_order_params(
         params[limit_price_field(side)] = limit_price
         params["limit_price"] = limit_price
         params["est_cost"] = estimated_order_cost(count, limit_price)
-        params["risk_cost"] = params["est_cost"]
+        params["risk_cost"] = limit_risk_cost(count, limit_price)
     else:
         params["buy_max_cost"] = market_buy_max_cost(count, price_cents)
         params["limit_price"] = None

@@ -13,6 +13,7 @@ def test_shared_modules_export_expected_entry_points():
             "estimated_order_cost",
             "finite_price_cents",
             "limit_price_field",
+            "limit_risk_cost",
             "limit_order_price",
             "market_buy_max_cost",
             "max_order_cost_cents",

@@ -16,6 +16,7 @@ __all__ = [
     "planned_total_cost",
     "remaining_run_budget",
     "run_budget_allows",
+    "run_budget_remaining_after",
 ]
 
 
@@ -47,6 +48,16 @@ def planned_total_cost(spent_cost: float, next_cost: float) -> float:
     if not (math.isfinite(spent_cost) and math.isfinite(next_cost)):
         return math.inf
     return round(spent_cost + next_cost, 2)
+
+
+def run_budget_remaining_after(
+    max_total_cost: float, spent_cost: float, next_cost: float
+) -> float:
+    """Dollars left after reserving a candidate next order."""
+    total = planned_total_cost(spent_cost, next_cost)
+    if not math.isfinite(max_total_cost) or not math.isfinite(total):
+        return 0.0
+    return max(round(max_total_cost - total, 2), 0.0)
 
 
 def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:

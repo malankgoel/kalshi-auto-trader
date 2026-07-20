@@ -514,6 +514,12 @@ def test_pending_status_helper_accepts_settleable_rows():
     assert not trade_log.is_pending_status("won")
 
 
+def test_settled_status_helper_accepts_final_rows():
+    assert trade_log.is_settled_status("won")
+    assert trade_log.is_settled_status(" LOST ")
+    assert not trade_log.is_settled_status("pending")
+
+
 def test_trade_log_strips_ticker_before_settlement_lookup(tmp_path):
     path = tmp_path / "trade_log.csv"
     trade_log.write_rows([

@@ -58,6 +58,7 @@ def test_shared_modules_export_expected_entry_points():
         ledger: {
             "append_order",
             "is_pending_status",
+            "is_settled_status",
             "market_winner",
             "settlement_status",
             "settlement_profit",

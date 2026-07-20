@@ -21,6 +21,7 @@ __all__ = [
     "estimated_order_cost",
     "finite_price_cents",
     "limit_price_field",
+    "limit_risk_cost",
     "limit_order_price",
     "market_buy_max_cost",
     "market_max_price",
@@ -187,6 +188,12 @@ def estimated_order_cost(count: int, price_cents: float) -> float:
     if not nonnegative_price_cents(price_cents):
         raise ValueError("price_cents must be a non-negative finite number")
     return round(count * price_cents / 100.0, 2)
+
+
+def limit_risk_cost(count: int, limit_price_cents: int) -> float:
+    """Dollar risk for a limit buy at the submitted limit price."""
+    validate_limit_price(limit_price_cents, "selected")
+    return estimated_order_cost(count, limit_price_cents)
 
 
 def limit_order_price(price_cents: float) -> int:

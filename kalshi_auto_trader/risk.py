@@ -69,7 +69,10 @@ def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: floa
 
 def run_budget_allows(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
     """Return True when the next planned cost stays within the run cap."""
-    return not exceeds_run_budget(spent_cost, next_cost, max_total_cost)
+    return (
+        math.isfinite(max_total_cost)
+        and planned_total_cost(spent_cost, next_cost) <= max_total_cost
+    )
 
 
 def balance_covers_cost(balance_cents: int, cost_dollars: float) -> bool:

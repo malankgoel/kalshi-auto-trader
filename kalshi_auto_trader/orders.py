@@ -227,11 +227,7 @@ def contracts_for_stake(stake_dollars: float, price_cents: float) -> int:
 
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
-    if not math.isfinite(stake_dollars) or not tradable_price_cents(price_cents):
-        return 0
-    if stake_dollars <= 0:
-        return 0
-    count = int((stake_dollars * 100.0) // price_cents)
+    count = contracts_for_stake(stake_dollars, price_cents)
     count = min(count, settings.MAX_CONTRACTS_PER_ORDER)
     count = min(count, int(max_order_cost_cents() // price_cents))
     return max(count, 0)

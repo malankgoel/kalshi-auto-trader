@@ -22,6 +22,7 @@ from kalshi_auto_trader.orders import (
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
+    market_risk_cost,
     max_order_cost_cents,
     nonnegative_price_cents,
     normalize_order_action,
@@ -229,6 +230,11 @@ def test_nonnegative_price_cents_predicate():
 def test_market_buy_max_cost_helper(monkeypatch):
     monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 3)
     assert market_buy_max_cost(10, 44.0) == 470
+
+
+def test_market_risk_cost_helper(monkeypatch):
+    monkeypatch.setattr(settings, "MARKET_SLIPPAGE_CENTS", 3)
+    assert market_risk_cost(10, 44.0) == 4.7
 
 
 def test_order_params_reject_invalid_inputs():

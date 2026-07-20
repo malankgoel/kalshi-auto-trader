@@ -49,6 +49,7 @@ def test_shared_modules_export_expected_entry_points():
             "planned_total_cost",
             "remaining_run_budget",
             "run_budget_allows",
+            "run_budget_remaining_after",
         },
         ledger: {
             "append_order",

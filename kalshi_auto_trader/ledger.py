@@ -294,7 +294,7 @@ def _recompute_bankrolls(rows: list[dict]) -> None:
     for row in rows:
         if bankroll is None:
             bankroll = _float(row.get("bankroll_before")) or settings.BANKROLL
-        if row.get("status") not in ("won", "lost"):
+        if not is_settled_status(row.get("status")):
             row["bankroll_after"] = ""
             continue
         bankroll = round(bankroll + _float(row.get("profit")), 2)

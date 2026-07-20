@@ -9,6 +9,7 @@ from typing import Optional
 __all__ = [
     "cents_to_probability",
     "clamp_probability",
+    "edge_clears_threshold",
     "is_probability",
     "probability_complement",
     "probability_edge",
@@ -54,3 +55,11 @@ def probability_edge(model_prob: float, fair_prob: float) -> float:
     if not (is_probability(model_prob) and is_probability(fair_prob)):
         return 0.0
     return model_prob - fair_prob
+
+
+def edge_clears_threshold(edge: float, threshold: float) -> bool:
+    """Return True when a finite edge reaches a finite threshold."""
+    try:
+        return math.isfinite(edge) and math.isfinite(threshold) and edge >= threshold
+    except TypeError:
+        return False

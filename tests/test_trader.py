@@ -15,6 +15,7 @@ from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
     clamp_limit_price,
+    contracts_for_stake,
     estimated_order_cost,
     finite_price_cents,
     limit_price_field,
@@ -115,6 +116,12 @@ def test_size_floor_and_caps(monkeypatch):
     assert ex.size_order(0.30, 45.0) == 0
     monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.0)
     assert ex.size_order(100.0, 50.0) == 4
+
+
+def test_contracts_for_stake_helper():
+    assert contracts_for_stake(4.33, 45.0) == 9
+    assert contracts_for_stake(0.0, 45.0) == 0
+    assert contracts_for_stake(10.0, 0.0) == 0
 
 
 def test_max_order_cost_cents_helper(monkeypatch):

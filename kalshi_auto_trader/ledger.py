@@ -64,6 +64,7 @@ __all__ = [
     "current_bankroll",
     "ensure_log",
     "is_pending_status",
+    "is_settled_status",
     "market_winner",
     "placed_price",
     "read_rows",
@@ -250,6 +251,10 @@ def settlement_won(buy_side: str, winner: str) -> bool:
 
 def is_pending_status(status: str | None) -> bool:
     return _norm(status) in ("", "pending", "submitted")
+
+
+def is_settled_status(status: str | None) -> bool:
+    return _norm(status) in ("won", "lost")
 
 
 def settle_pending(client, path: str | os.PathLike | None = None) -> int:

@@ -16,6 +16,7 @@ def test_shared_modules_export_expected_entry_points():
             "limit_risk_cost",
             "limit_order_price",
             "market_buy_max_cost",
+            "market_risk_cost",
             "max_order_cost_cents",
             "nonnegative_price_cents",
             "normalize_order_action",

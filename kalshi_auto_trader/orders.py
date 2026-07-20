@@ -17,6 +17,7 @@ __all__ = [
     "ORDER_ACTIONS",
     "ORDER_SIDES",
     "build_order_params",
+    "contracts_for_order_cap",
     "contracts_for_stake",
     "clamp_limit_price",
     "estimated_order_cost",
@@ -223,6 +224,13 @@ def contracts_for_stake(stake_dollars: float, price_cents: float) -> int:
     if stake_dollars <= 0:
         return 0
     return int((stake_dollars * 100.0) // price_cents)
+
+
+def contracts_for_order_cap(price_cents: float) -> int:
+    """Whole contracts allowed by the configured per-order cost cap."""
+    if not tradable_price_cents(price_cents):
+        return 0
+    return int(max_order_cost_cents() // price_cents)
 
 
 def size_order(stake_dollars: float, price_cents: float) -> int:

@@ -193,7 +193,7 @@ def staked_fraction(kelly_full: float) -> float:
 
 def meets_edge_threshold(edge: float) -> bool:
     """Return True when an edge clears the configured strategy threshold."""
-    return math.isfinite(edge) and edge >= settings.EDGE_THRESHOLD - 1e-9
+    return probability.edge_clears_threshold(edge, settings.EDGE_THRESHOLD - 1e-9)
 
 
 # --------------------------------------------------------------------------- #

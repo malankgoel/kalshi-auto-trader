@@ -17,6 +17,7 @@ __all__ = [
     "ORDER_ACTIONS",
     "ORDER_SIDES",
     "build_order_params",
+    "contracts_for_stake",
     "clamp_limit_price",
     "estimated_order_cost",
     "finite_price_cents",
@@ -213,6 +214,15 @@ def market_risk_cost(count: int, price_cents: float) -> float:
 
 def max_order_cost_cents() -> float:
     return settings.MAX_ORDER_COST * 100.0
+
+
+def contracts_for_stake(stake_dollars: float, price_cents: float) -> int:
+    """Whole contracts affordable by a stake at the given cents quote."""
+    if not math.isfinite(stake_dollars) or not tradable_price_cents(price_cents):
+        return 0
+    if stake_dollars <= 0:
+        return 0
+    return int((stake_dollars * 100.0) // price_cents)
 
 
 def size_order(stake_dollars: float, price_cents: float) -> int:

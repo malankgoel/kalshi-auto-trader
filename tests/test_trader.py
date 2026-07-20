@@ -18,6 +18,7 @@ from kalshi_auto_trader.orders import (
     estimated_order_cost,
     finite_price_cents,
     limit_price_field,
+    limit_risk_cost,
     limit_order_price,
     market_buy_max_cost,
     market_max_price,
@@ -178,6 +179,12 @@ def test_limit_price_field_helper_normalizes_side():
 def test_limit_order_price_applies_buffer(monkeypatch):
     monkeypatch.setattr(settings, "LIMIT_BUFFER_CENTS", 2)
     assert limit_order_price(44.0) == 46
+
+
+def test_limit_risk_cost_helper():
+    assert limit_risk_cost(3, 44) == 1.32
+    with pytest.raises(ValueError, match="limit selected_price"):
+        limit_risk_cost(3, 100)
 
 
 def test_market_max_cost_never_exceeds_contract_payout(monkeypatch):

@@ -47,3 +47,9 @@ def test_probability_complement_handles_valid_and_invalid_values():
 def test_probability_edge_returns_model_minus_market():
     assert round(probability.probability_edge(0.62, 0.50), 2) == 0.12
     assert probability.probability_edge(math.nan, 0.50) == 0.0
+
+
+def test_edge_clears_threshold_helper():
+    assert probability.edge_clears_threshold(0.10, 0.10)
+    assert not probability.edge_clears_threshold(0.099, 0.10)
+    assert not probability.edge_clears_threshold(math.nan, 0.10)

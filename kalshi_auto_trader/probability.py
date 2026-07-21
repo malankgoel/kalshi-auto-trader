@@ -31,7 +31,7 @@ def is_probability(value: float) -> bool:
 
 
 def clamp_probability(value: float) -> float:
-    if not math.isfinite(value):
+    if not finite_number(value):
         return 0.0
     return max(0.0, min(1.0, value))
 

@@ -154,7 +154,7 @@ def _match_teams(market: dict, home: str, away: str, game_date: str = "") -> boo
     home_code, away_code = TEAM_CODES.get(home), TEAM_CODES.get(away)
     if hc and home_code and away_code and {hc, ac} == {home_code, away_code}:
         return True
-    blob = _market_blob(market)
+    blob = market_text(market)
     return (any(a in blob for a in _team_aliases(home))
             and any(a in blob for a in _team_aliases(away)))
 

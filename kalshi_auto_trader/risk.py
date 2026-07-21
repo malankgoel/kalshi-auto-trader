@@ -35,7 +35,7 @@ def nonnegative_finite(value: float) -> bool:
 
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:
     """Dollars left before a run-level spend cap is exhausted."""
-    if not (math.isfinite(max_total_cost) and math.isfinite(spent_cost)):
+    if not (finite_amount(max_total_cost) and finite_amount(spent_cost)):
         return 0.0
     return max(round(max_total_cost - spent_cost, 2), 0.0)
 
@@ -64,14 +64,14 @@ def run_budget_remaining_after(
 ) -> float:
     """Dollars left after reserving a candidate next order."""
     total = planned_total_cost(spent_cost, next_cost)
-    if not math.isfinite(max_total_cost) or not math.isfinite(total):
+    if not finite_amount(max_total_cost) or not finite_amount(total):
         return 0.0
     return max(round(max_total_cost - total, 2), 0.0)
 
 
 def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
     """Return True when adding ``next_cost`` would breach the run cap."""
-    if not math.isfinite(max_total_cost):
+    if not finite_amount(max_total_cost):
         return True
     return planned_total_cost(spent_cost, next_cost) > max_total_cost
 
@@ -79,7 +79,7 @@ def exceeds_run_budget(spent_cost: float, next_cost: float, max_total_cost: floa
 def run_budget_allows(spent_cost: float, next_cost: float, max_total_cost: float) -> bool:
     """Return True when the next planned cost stays within the run cap."""
     return (
-        math.isfinite(max_total_cost)
+        finite_amount(max_total_cost)
         and planned_total_cost(spent_cost, next_cost) <= max_total_cost
     )
 

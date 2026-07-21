@@ -12,10 +12,10 @@ def has_text(value: str | None) -> bool:
 
 
 def normalize_optional_text(value: str | None) -> str | None:
-    if value is None:
+    if not has_text(value):
         return None
     value = str(value).strip()
-    return value or None
+    return value
 
 
 def normalize_required_text(value: str, label: str) -> str:

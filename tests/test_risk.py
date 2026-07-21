@@ -7,6 +7,13 @@ import pytest
 from kalshi_auto_trader import risk
 
 
+def test_finite_amount_predicate_rejects_non_numeric_values():
+    assert risk.finite_amount(1.25)
+    assert not risk.finite_amount(True)
+    assert not risk.finite_amount("1.25")
+    assert not risk.finite_amount(math.inf)
+
+
 def test_nonnegative_finite_predicate():
     assert risk.nonnegative_finite(0.0)
     assert risk.nonnegative_finite(1.25)
@@ -31,6 +38,7 @@ def test_run_budget_allows_rejects_over_cap_and_nonfinite_inputs():
     assert not risk.run_budget_allows(7.25, 2.76, 10.0)
     assert not risk.run_budget_allows(math.nan, 1.0, 10.0)
     assert not risk.run_budget_allows(1.0, math.inf, 10.0)
+    assert not risk.run_budget_allows(1.0, 2.0, "10.0")
 
 
 def test_exceeds_run_budget_rejects_nonfinite_inputs():
@@ -53,6 +61,7 @@ def test_budget_usage_fraction_clamps_to_run_cap():
 def test_planned_total_cost_rounds_and_rejects_nonfinite_inputs():
     assert risk.planned_total_cost(1.234, 2.345) == 3.58
     assert risk.planned_total_cost(math.nan, 2.0) == math.inf
+    assert risk.planned_total_cost("1.0", 2.0) == math.inf
 
 
 def test_run_budget_remaining_after_candidate_order():

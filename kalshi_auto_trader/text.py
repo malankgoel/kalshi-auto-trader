@@ -3,7 +3,12 @@
 from __future__ import annotations
 
 
-__all__ = ["normalize_optional_text", "normalize_required_text"]
+__all__ = ["has_text", "normalize_optional_text", "normalize_required_text"]
+
+
+def has_text(value: str | None) -> bool:
+    """Return True when a value has non-whitespace text after string coercion."""
+    return value is not None and bool(str(value).strip())
 
 
 def normalize_optional_text(value: str | None) -> str | None:

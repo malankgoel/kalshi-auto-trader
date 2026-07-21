@@ -385,6 +385,11 @@ def test_team_key_normalizes_case_and_accents():
     assert mm.team_key("Curaçao") == "curacao"
 
 
+def test_event_token_extracts_fixture_token():
+    assert mm.event_token("KXWCGAME-26JUN16ARGALG-ARG") == "26JUN16ARGALG"
+    assert mm.event_token("bad") == ""
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

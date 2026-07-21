@@ -5,6 +5,13 @@ import math
 from kalshi_auto_trader import probability
 
 
+def test_finite_number_rejects_non_numeric_values():
+    assert probability.finite_number(0.5)
+    assert not probability.finite_number(True)
+    assert not probability.finite_number("0.5")
+    assert not probability.finite_number(math.nan)
+
+
 def test_is_probability_accepts_closed_unit_interval():
     assert probability.is_probability(0.0)
     assert probability.is_probability(0.5)
@@ -21,6 +28,7 @@ def test_clamp_probability_bounds_values():
     assert probability.clamp_probability(0.4) == 0.4
     assert probability.clamp_probability(1.2) == 1.0
     assert probability.clamp_probability(math.nan) == 0.0
+    assert probability.clamp_probability("0.4") == 0.0
 
 
 def test_cents_to_probability_converts_valid_quotes():
@@ -53,3 +61,4 @@ def test_edge_clears_threshold_helper():
     assert probability.edge_clears_threshold(0.10, 0.10)
     assert not probability.edge_clears_threshold(0.099, 0.10)
     assert not probability.edge_clears_threshold(math.nan, 0.10)
+    assert not probability.edge_clears_threshold("0.10", 0.10)

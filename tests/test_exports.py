@@ -76,6 +76,7 @@ def test_shared_modules_export_expected_entry_points():
             "build_market_index",
             "event_token",
             "first_price_cents",
+            "market_text",
             "resolve_order",
             "team_key",
         },

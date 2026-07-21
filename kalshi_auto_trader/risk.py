@@ -30,7 +30,7 @@ def finite_amount(value: float) -> bool:
 
 
 def nonnegative_finite(value: float) -> bool:
-    return not isinstance(value, bool) and math.isfinite(value) and value >= 0
+    return finite_amount(value) and value >= 0
 
 
 def remaining_run_budget(max_total_cost: float, spent_cost: float) -> float:

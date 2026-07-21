@@ -54,7 +54,7 @@ def budget_usage_fraction(max_total_cost: float, spent_cost: float) -> float:
 
 def planned_total_cost(spent_cost: float, next_cost: float) -> float:
     """Rounded dollars committed after adding the next planned order."""
-    if not (math.isfinite(spent_cost) and math.isfinite(next_cost)):
+    if not (finite_amount(spent_cost) and finite_amount(next_cost)):
         return math.inf
     return round(spent_cost + next_cost, 2)
 

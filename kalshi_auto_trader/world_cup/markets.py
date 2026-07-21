@@ -32,6 +32,7 @@ __all__ = [
     "build_odds_row",
     "event_token",
     "first_price_cents",
+    "market_text",
     "resolve_order",
     "side_ask_cents",
     "team_key",
@@ -134,6 +135,11 @@ def _market_blob(market: dict) -> str:
         ("title", "subtitle", "yes_sub_title", "no_sub_title",
          "ticker", "event_ticker")
     )
+
+
+def market_text(market: dict) -> str:
+    """Normalized text blob used for team alias matching."""
+    return _market_blob(market)
 
 
 def _match_teams(market: dict, home: str, away: str, game_date: str = "") -> bool:

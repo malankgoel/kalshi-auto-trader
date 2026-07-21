@@ -30,6 +30,7 @@ __all__ = [
     "TEAM_CODES",
     "build_market_index",
     "build_odds_row",
+    "event_token",
     "first_price_cents",
     "resolve_order",
     "side_ask_cents",
@@ -99,6 +100,11 @@ def _event_token(event_ticker: str) -> str:
     one game, e.g. 'KXWCGAME-26JUN16ARGALG-ARG' -> '26JUN16ARGALG'."""
     m = re.search(r"\d{2}[A-Z]{3}\d{2}[A-Z]{6}", (event_ticker or "").upper())
     return m.group(0) if m else ""
+
+
+def event_token(event_ticker: str) -> str:
+    """Public wrapper for the shared date+teams token in Kalshi event tickers."""
+    return _event_token(event_ticker)
 
 
 _MONTHS = {"JAN": "01", "FEB": "02", "MAR": "03", "APR": "04", "MAY": "05",

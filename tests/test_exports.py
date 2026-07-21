@@ -50,6 +50,7 @@ def test_shared_modules_export_expected_entry_points():
             "cents_to_dollars",
             "cost_to_cents",
             "dollars_to_cents",
+            "finite_amount",
             "nonnegative_finite",
             "planned_total_cost",
             "remaining_run_budget",

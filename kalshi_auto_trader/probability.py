@@ -10,11 +10,20 @@ __all__ = [
     "cents_to_probability",
     "clamp_probability",
     "edge_clears_threshold",
+    "finite_number",
     "is_probability",
     "probability_complement",
     "probability_edge",
     "probability_to_cents",
 ]
+
+
+def finite_number(value: float) -> bool:
+    """Return True for finite non-boolean numeric inputs."""
+    try:
+        return not isinstance(value, bool) and math.isfinite(value)
+    except TypeError:
+        return False
 
 
 def is_probability(value: float) -> bool:

@@ -292,14 +292,14 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
                     if _match_teams(m, home, away, date):
                         _classify_winner(m, home, away, idx)
                         if not token:
-                            token = _event_token(m.get("event_ticker", ""))
+                            token = event_token(m.get("event_ticker", ""))
             except Exception as exc:  # noqa: BLE001
                 logger.warning("winner series %s: %s", s, exc)
         if token:
             for s in ou_btts:
                 try:
                     for m in client.list_markets(series_ticker=s, status=status):
-                        if _event_token(m.get("event_ticker", "")) == token:
+                        if event_token(m.get("event_ticker", "")) == token:
                             _classify_line(m, line_of.get(s, ""), idx)
                 except Exception as exc:  # noqa: BLE001
                     logger.warning("series %s: %s", s, exc)

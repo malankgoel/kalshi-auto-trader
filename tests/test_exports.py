@@ -38,6 +38,7 @@ def test_shared_modules_export_expected_entry_points():
             "cents_to_probability",
             "clamp_probability",
             "edge_clears_threshold",
+            "finite_number",
             "is_probability",
             "probability_complement",
             "probability_edge",

@@ -27,7 +27,7 @@ def finite_number(value: float) -> bool:
 
 
 def is_probability(value: float) -> bool:
-    return math.isfinite(value) and 0.0 <= value <= 1.0
+    return finite_number(value) and 0.0 <= value <= 1.0
 
 
 def clamp_probability(value: float) -> float:

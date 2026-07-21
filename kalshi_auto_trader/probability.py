@@ -68,7 +68,4 @@ def probability_edge(model_prob: float, fair_prob: float) -> float:
 
 def edge_clears_threshold(edge: float, threshold: float) -> bool:
     """Return True when a finite edge reaches a finite threshold."""
-    try:
-        return math.isfinite(edge) and math.isfinite(threshold) and edge >= threshold
-    except TypeError:
-        return False
+    return finite_number(edge) and finite_number(threshold) and edge >= threshold

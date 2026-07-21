@@ -12,12 +12,21 @@ __all__ = [
     "cost_to_cents",
     "dollars_to_cents",
     "exceeds_run_budget",
+    "finite_amount",
     "nonnegative_finite",
     "planned_total_cost",
     "remaining_run_budget",
     "run_budget_allows",
     "run_budget_remaining_after",
 ]
+
+
+def finite_amount(value: float) -> bool:
+    """Return True for finite non-boolean numeric dollar amounts."""
+    try:
+        return not isinstance(value, bool) and math.isfinite(value)
+    except TypeError:
+        return False
 
 
 def nonnegative_finite(value: float) -> bool:

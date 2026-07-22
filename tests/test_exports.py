@@ -85,7 +85,7 @@ def test_shared_modules_export_expected_entry_points():
             "resolve_order",
             "team_key",
         },
-        trader: {"plan_bets", "parse_args"},
+        trader: {"mark_plan_skipped", "plan_bets", "parse_args"},
     }
     for module, names in expected.items():
         assert names <= set(module.__all__)

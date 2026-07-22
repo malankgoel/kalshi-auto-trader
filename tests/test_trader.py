@@ -552,6 +552,13 @@ def test_pending_status_helper_accepts_settleable_rows():
     assert not trade_log.is_pending_status("won")
 
 
+def test_ledger_status_constants_match_predicates():
+    assert "pending" in trade_log.PENDING_STATUSES
+    assert "submitted" in trade_log.PENDING_STATUSES
+    assert "won" in trade_log.SETTLED_STATUSES
+    assert "lost" in trade_log.SETTLED_STATUSES
+
+
 def test_settled_status_helper_accepts_final_rows():
     assert trade_log.is_settled_status("won")
     assert trade_log.is_settled_status(" LOST ")

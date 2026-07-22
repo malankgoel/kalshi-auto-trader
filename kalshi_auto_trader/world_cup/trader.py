@@ -46,6 +46,7 @@ __all__ = [
     "client_order_id",
     "live_auth_error",
     "main",
+    "mark_plan_skipped",
     "normalize_optional_text",
     "parse_args",
     "place_orders",
@@ -64,6 +65,11 @@ def client_order_id(game: dict, selection: str) -> str:
     """One bet -> one order, stable across re-runs (so Kalshi dedups retries)."""
     key = f"{game['date']}:{game['home_team']} vs {game['away_team']}:{selection}"
     return stable_client_order_id("kalshi-auto-trader", key)
+
+
+def mark_plan_skipped(plan: dict, reason: str) -> dict:
+    plan["skip"] = reason
+    return plan
 
 
 # --------------------------------------------------------------------------- #

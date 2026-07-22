@@ -10,6 +10,7 @@ def test_shared_modules_export_expected_entry_points():
     expected = {
         orders: {
             "build_order_params",
+            "capped_contract_count",
             "contracts_for_order_cap",
             "contracts_for_stake",
             "estimated_order_cost",

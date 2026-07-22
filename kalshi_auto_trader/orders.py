@@ -22,6 +22,7 @@ __all__ = [
     "clamp_limit_price",
     "estimated_order_cost",
     "finite_price_cents",
+    "finite_stake_dollars",
     "limit_price_field",
     "limit_risk_cost",
     "limit_order_price",
@@ -155,6 +156,14 @@ def finite_price_cents(price_cents: float) -> bool:
     """Return True when a cents quote is a finite non-boolean number."""
     try:
         return not isinstance(price_cents, bool) and math.isfinite(price_cents)
+    except TypeError:
+        return False
+
+
+def finite_stake_dollars(stake_dollars: float) -> bool:
+    """Return True when a stake value is a finite non-boolean dollar amount."""
+    try:
+        return not isinstance(stake_dollars, bool) and math.isfinite(stake_dollars)
     except TypeError:
         return False
 

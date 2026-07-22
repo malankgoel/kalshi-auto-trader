@@ -196,22 +196,15 @@ class KalshiClient:
                      event_ticker: Optional[str] = None,
                      status: Optional[str] = None,
                      limit: int = settings.KALSHI_MARKET_PAGE_LIMIT) -> list[dict]:
-        if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
-            raise ValueError("limit must be a positive integer")
         out, cursor = [], None
         while True:
-            params: dict[str, Any] = {"limit": limit}
-            series_ticker = normalize_optional_text(series_ticker)
-            if series_ticker:
-                params["series_ticker"] = series_ticker
-            event_ticker = normalize_optional_text(event_ticker)
-            if event_ticker:
-                params["event_ticker"] = event_ticker
-            status = normalize_optional_text(status)
-            if status:
-                params["status"] = status
-            if cursor:
-                params["cursor"] = cursor
+            params = market_query_params(
+                limit=limit,
+                series_ticker=series_ticker,
+                event_ticker=event_ticker,
+                status=status,
+                cursor=cursor,
+            )
             data = self.get("/markets", params)
             out.extend(data.get("markets", []))
             cursor = data.get("cursor")

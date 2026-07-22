@@ -14,6 +14,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from kalshi_auto_trader import ledger as trade_log
 from kalshi_auto_trader import settings
 from kalshi_auto_trader.orders import (
+    capped_contract_count,
     clamp_limit_price,
     contracts_for_order_cap,
     contracts_for_stake,
@@ -137,6 +138,14 @@ def test_contracts_for_order_cap_helper(monkeypatch):
     monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.0)
     assert contracts_for_order_cap(50.0) == 4
     assert contracts_for_order_cap(0.0) == 0
+
+
+def test_capped_contract_count_helper(monkeypatch):
+    monkeypatch.setattr(settings, "MAX_CONTRACTS_PER_ORDER", 5)
+    monkeypatch.setattr(settings, "MAX_ORDER_COST", 2.0)
+    assert capped_contract_count(10, 50.0) == 4
+    assert capped_contract_count(3, 50.0) == 3
+    assert capped_contract_count(0, 50.0) == 0
 
 
 def test_max_order_cost_cents_helper(monkeypatch):

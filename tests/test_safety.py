@@ -93,6 +93,11 @@ def test_limit_price_clamp_rejects_nonfinite_values(value):
         clamp_limit_price(value)
 
 
+def test_limit_price_clamp_rejects_nonnumeric_values():
+    with pytest.raises(ValueError, match="finite"):
+        clamp_limit_price("44")
+
+
 @pytest.mark.parametrize(
     ("namespace", "key", "message"),
     [("", "x", "namespace"), ("ns", " ", "key")],

@@ -41,7 +41,33 @@ except Exception:  # pragma: no cover - optional dependency
     _HAVE_CRYPTO = False
 
 
-__all__ = ["KalshiClient"]
+__all__ = ["KalshiClient", "market_query_params"]
+
+
+def market_query_params(
+    *,
+    limit: int,
+    series_ticker: Optional[str] = None,
+    event_ticker: Optional[str] = None,
+    status: Optional[str] = None,
+    cursor: Optional[str] = None,
+) -> dict[str, Any]:
+    if isinstance(limit, bool) or not isinstance(limit, int) or limit <= 0:
+        raise ValueError("limit must be a positive integer")
+    params: dict[str, Any] = {"limit": limit}
+    series_ticker = normalize_optional_text(series_ticker)
+    if series_ticker:
+        params["series_ticker"] = series_ticker
+    event_ticker = normalize_optional_text(event_ticker)
+    if event_ticker:
+        params["event_ticker"] = event_ticker
+    status = normalize_optional_text(status)
+    if status:
+        params["status"] = status
+    cursor = normalize_optional_text(cursor)
+    if cursor:
+        params["cursor"] = cursor
+    return params
 
 
 class KalshiClient:

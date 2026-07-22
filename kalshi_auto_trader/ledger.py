@@ -259,7 +259,7 @@ def is_pending_status(status: str | None) -> bool:
 
 
 def is_settled_status(status: str | None) -> bool:
-    return _norm(status) in ("won", "lost")
+    return _norm(status) in SETTLED_STATUSES
 
 
 def settle_pending(client, path: str | os.PathLike | None = None) -> int:

@@ -23,6 +23,7 @@ from kalshi_auto_trader.orders import (
     normalize_order_action,
     normalize_order_side,
     normalize_order_type,
+    selected_limit_price,
     validate_buy_max_cost,
     validate_limit_price,
     validate_order_action,
@@ -230,7 +231,7 @@ class KalshiClient:
         validate_order_type(order_type)
         validate_order_count(count)
         if order_type == "limit":
-            selected_price = yes_price if side == "yes" else no_price
+            selected_price = selected_limit_price(side, yes_price, no_price)
             validate_limit_price(selected_price, side)
         if buy_max_cost is not None:
             validate_buy_max_cost(buy_max_cost)

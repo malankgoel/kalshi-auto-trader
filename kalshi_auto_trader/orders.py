@@ -40,6 +40,7 @@ __all__ = [
     "order_count_is_valid",
     "order_side_is_valid",
     "order_type_is_valid",
+    "selected_limit_price",
     "size_order",
     "stable_client_order_id",
     "tradable_price_cents",
@@ -122,6 +123,13 @@ def valid_limit_price_cents(price_cents: int) -> bool:
 def validate_limit_price(price_cents: int, side: str) -> None:
     if not valid_limit_price_cents(price_cents):
         raise ValueError(f"limit {side}_price must be between 1 and 99")
+
+
+def selected_limit_price(side: str, yes_price: int | None, no_price: int | None) -> int | None:
+    """Return the limit price attached to the selected buy side."""
+    side = normalize_order_side(side)
+    validate_order_side(side)
+    return yes_price if side == "yes" else no_price
 
 
 def valid_buy_max_cost(buy_max_cost: int) -> bool:

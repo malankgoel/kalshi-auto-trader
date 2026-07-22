@@ -14,6 +14,7 @@ def test_shared_modules_export_expected_entry_points():
             "contracts_for_stake",
             "estimated_order_cost",
             "finite_price_cents",
+            "finite_stake_dollars",
             "limit_price_field",
             "limit_risk_cost",
             "limit_order_price",

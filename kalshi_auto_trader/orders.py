@@ -253,9 +253,7 @@ def capped_contract_count(count: int, price_cents: float) -> int:
 def size_order(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts bought by ``stake_dollars`` at ``price_cents``."""
     count = contracts_for_stake(stake_dollars, price_cents)
-    count = min(count, settings.MAX_CONTRACTS_PER_ORDER)
-    count = min(count, contracts_for_order_cap(price_cents))
-    return max(count, 0)
+    return capped_contract_count(count, price_cents)
 
 
 def build_order_params(

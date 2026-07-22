@@ -106,7 +106,8 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
 
         count = size_order(stake, ask)
         if count < 1:
-            plan["skip"] = "stake < 1 contract"; plans.append(plan); continue
+            plans.append(mark_plan_skipped(plan, "stake < 1 contract"))
+            continue
 
         params = build_order_params(buy_side, count, ask, order_type)
         if not risk.run_budget_allows(running, params["risk_cost"], settings.MAX_TOTAL_COST):

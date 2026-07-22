@@ -228,7 +228,7 @@ def max_order_cost_cents() -> float:
 
 def contracts_for_stake(stake_dollars: float, price_cents: float) -> int:
     """Whole contracts affordable by a stake at the given cents quote."""
-    if not math.isfinite(stake_dollars) or not tradable_price_cents(price_cents):
+    if not finite_stake_dollars(stake_dollars) or not tradable_price_cents(price_cents):
         return 0
     if stake_dollars <= 0:
         return 0

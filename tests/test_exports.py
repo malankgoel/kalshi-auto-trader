@@ -61,6 +61,8 @@ def test_shared_modules_export_expected_entry_points():
             "run_budget_remaining_after",
         },
         ledger: {
+            "PENDING_STATUSES",
+            "SETTLED_STATUSES",
             "append_order",
             "is_pending_status",
             "is_settled_status",

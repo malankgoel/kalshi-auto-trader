@@ -58,8 +58,11 @@ COLUMNS = [
     "bankroll_after",
 ]
 
+PENDING_STATUSES = frozenset({"", "pending", "submitted"})
+
 __all__ = [
     "COLUMNS",
+    "PENDING_STATUSES",
     "append_order",
     "current_bankroll",
     "ensure_log",

@@ -91,7 +91,8 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
         stake = round(bankroll * frac, 2)
         plan["stake"] = stake
         if stake <= 0:
-            plan["skip"] = "no +EV Kelly stake"; plans.append(plan); continue
+            plans.append(mark_plan_skipped(plan, "no +EV Kelly stake"))
+            continue
 
         market, buy_side = mm.resolve_order(idx, b.line, b.side, b.selection,
                                             b.selection_team)

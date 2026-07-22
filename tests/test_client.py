@@ -5,6 +5,7 @@ from unittest.mock import Mock
 import pytest
 
 from kalshi_auto_trader.kalshi import KalshiClient
+from kalshi_auto_trader.kalshi.client import market_query_params
 
 
 def test_client_context_manager_closes_session():
@@ -37,6 +38,21 @@ def test_list_markets_rejects_nonpositive_limit():
     client = KalshiClient()
     with pytest.raises(ValueError, match="limit"):
         client.list_markets(limit=0)
+
+
+def test_market_query_params_normalizes_filters_and_cursor():
+    assert market_query_params(
+        limit=7,
+        series_ticker=" SERIES ",
+        event_ticker=" ",
+        status=" open ",
+        cursor=" next ",
+    ) == {
+        "limit": 7,
+        "series_ticker": "SERIES",
+        "status": "open",
+        "cursor": "next",
+    }
 
 
 @pytest.mark.parametrize("limit", [1.5, True])

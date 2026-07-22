@@ -19,6 +19,7 @@ from kalshi_auto_trader.orders import (
     contracts_for_stake,
     estimated_order_cost,
     finite_price_cents,
+    finite_stake_dollars,
     limit_price_field,
     limit_risk_cost,
     limit_order_price,
@@ -123,6 +124,13 @@ def test_contracts_for_stake_helper():
     assert contracts_for_stake(4.33, 45.0) == 9
     assert contracts_for_stake(0.0, 45.0) == 0
     assert contracts_for_stake(10.0, 0.0) == 0
+    assert contracts_for_stake("10.0", 45.0) == 0
+
+
+def test_finite_stake_helper_rejects_invalid_values():
+    assert finite_stake_dollars(1.25)
+    assert not finite_stake_dollars(True)
+    assert not finite_stake_dollars("1.25")
 
 
 def test_contracts_for_order_cap_helper(monkeypatch):

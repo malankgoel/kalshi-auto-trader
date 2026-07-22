@@ -37,6 +37,7 @@ from kalshi_auto_trader.orders import (
     order_type_is_valid,
     normalize_order_side,
     normalize_order_type,
+    selected_limit_price,
     tradable_price_cents,
     validate_order_action,
     validate_order_count,
@@ -206,6 +207,11 @@ def test_limit_price_predicate_accepts_only_valid_order_prices():
 def test_limit_price_field_helper_normalizes_side():
     assert limit_price_field(" YES ") == "yes_price"
     assert limit_price_field("no") == "no_price"
+
+
+def test_selected_limit_price_uses_buy_side():
+    assert selected_limit_price(" YES ", 44, 55) == 44
+    assert selected_limit_price("no", 44, 55) == 55
 
 
 def test_limit_order_price_applies_buffer(monkeypatch):

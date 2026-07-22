@@ -253,7 +253,7 @@ def settlement_won(buy_side: str, winner: str) -> bool:
 
 
 def is_pending_status(status: str | None) -> bool:
-    return _norm(status) in ("", "pending", "submitted")
+    return _norm(status) in PENDING_STATUSES
 
 
 def is_settled_status(status: str | None) -> bool:

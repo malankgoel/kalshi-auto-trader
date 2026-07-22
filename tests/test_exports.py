@@ -31,6 +31,7 @@ def test_shared_modules_export_expected_entry_points():
             "order_type_is_valid",
             "normalize_order_side",
             "normalize_order_type",
+            "selected_limit_price",
             "stable_client_order_id",
             "tradable_price_cents",
             "valid_buy_max_cost",

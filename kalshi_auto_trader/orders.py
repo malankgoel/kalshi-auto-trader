@@ -181,7 +181,7 @@ def nonnegative_price_cents(price_cents: float) -> bool:
 
 def clamp_limit_price(price_cents: float) -> int:
     """Clamp a requested limit price into Kalshi's valid 1-99 cent range."""
-    if not math.isfinite(price_cents):
+    if not finite_price_cents(price_cents):
         raise ValueError("price_cents must be finite")
     return max(
         settings.MIN_PRICE_CENTS,

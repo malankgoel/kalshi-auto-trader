@@ -26,6 +26,7 @@ __all__ = [
     "devig_three_way",
     "find_game",
     "flag_bets",
+    "game_key",
     "kelly_fraction",
     "kickoff_utc",
     "load_predictions",
@@ -41,6 +42,11 @@ __all__ = [
 # --------------------------------------------------------------------------- #
 # data loading                                                                #
 # --------------------------------------------------------------------------- #
+def game_key(home: str, away: str) -> tuple[str, str]:
+    """Canonical key for fixture-indexed model and schedule rows."""
+    return home, away
+
+
 def _read_csv(path: str | PathLike[str]) -> list[dict]:
     with open(path, newline="", encoding="utf-8") as fh:
         return list(csv.DictReader(fh))

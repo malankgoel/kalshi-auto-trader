@@ -273,14 +273,14 @@ class KalshiClient:
             validate_limit_price(selected_price, side)
         if buy_max_cost is not None:
             validate_buy_max_cost(buy_max_cost)
-        body: dict[str, Any] = {
-            "ticker": ticker,
-            "action": action,
-            "side": side,
-            "count": int(count),
-            "type": order_type,
-            "client_order_id": client_order_id,
-        }
+        body = order_request_body(
+            ticker=ticker,
+            action=action,
+            side=side,
+            count=count,
+            order_type=order_type,
+            client_order_id=client_order_id,
+        )
         if order_type == "limit":
             if yes_price is not None:
                 body["yes_price"] = int(yes_price)

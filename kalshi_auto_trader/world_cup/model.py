@@ -70,7 +70,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
 
 
 def load_schedule() -> dict[tuple[str, str], dict]:
-    return {(r["home_team"], r["away_team"]): r
+    return {game_key(r["home_team"], r["away_team"]): r
             for r in _read_csv(config.SCHEDULE_FILE)}
 
 

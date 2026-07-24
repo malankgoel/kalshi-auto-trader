@@ -28,6 +28,7 @@ __all__ = [
     "flag_bets",
     "game_key",
     "kelly_fraction",
+    "matches_fixture",
     "kickoff_utc",
     "load_predictions",
     "load_schedule",
@@ -156,6 +157,11 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
             "model_btts": pred["btts"],
         }
     return None
+
+
+def matches_fixture(row_home: str, row_away: str, home: str, away: str) -> bool:
+    """Case-insensitive comparison for manual fixture selection."""
+    return row_home.lower() == home.lower() and row_away.lower() == away.lower()
 
 
 # --------------------------------------------------------------------------- #

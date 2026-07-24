@@ -5,7 +5,12 @@ from unittest.mock import Mock
 import pytest
 
 from kalshi_auto_trader.kalshi import KalshiClient
-from kalshi_auto_trader.kalshi.client import market_query_params
+from kalshi_auto_trader.kalshi.client import (
+    attach_buy_max_cost,
+    attach_limit_prices,
+    market_query_params,
+    order_request_body,
+)
 
 
 def test_client_context_manager_closes_session():
@@ -53,6 +58,31 @@ def test_market_query_params_normalizes_filters_and_cursor():
         "status": "open",
         "cursor": "next",
     }
+
+
+def test_order_request_body_sets_base_order_fields():
+    assert order_request_body(
+        ticker="TEST",
+        action="buy",
+        side="yes",
+        count=2,
+        order_type="market",
+        client_order_id="order-1",
+    ) == {
+        "ticker": "TEST",
+        "action": "buy",
+        "side": "yes",
+        "count": 2,
+        "type": "market",
+        "client_order_id": "order-1",
+    }
+
+
+def test_order_body_attachment_helpers_mutate_payload():
+    body = {"ticker": "TEST"}
+    assert attach_limit_prices(body, 44, None) is body
+    assert attach_buy_max_cost(body, 123) is body
+    assert body == {"ticker": "TEST", "yes_price": 44, "buy_max_cost": 123}
 
 
 @pytest.mark.parametrize("limit", [1.5, True])

@@ -43,6 +43,7 @@ except Exception:  # pragma: no cover - optional dependency
 
 __all__ = [
     "KalshiClient",
+    "attach_buy_max_cost",
     "attach_limit_prices",
     "market_query_params",
     "order_request_body",
@@ -101,6 +102,12 @@ def attach_limit_prices(
         body["yes_price"] = int(yes_price)
     if no_price is not None:
         body["no_price"] = int(no_price)
+    return body
+
+
+def attach_buy_max_cost(body: dict[str, Any], buy_max_cost: Optional[int]) -> dict[str, Any]:
+    if buy_max_cost is not None:
+        body["buy_max_cost"] = int(buy_max_cost)
     return body
 
 

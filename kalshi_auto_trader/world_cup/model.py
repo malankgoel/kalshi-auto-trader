@@ -56,7 +56,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
     """Pre-tournament model probabilities keyed by (home_team, away_team)."""
     out: dict[tuple[str, str], dict] = {}
     for r in _read_csv(config.PREDICTIONS_FILE):
-        out[(r["home_team"], r["away_team"])] = {
+        out[game_key(r["home_team"], r["away_team"])] = {
             "match_id": r.get("match_id", ""),
             "group": r.get("group", ""),
             "home_win": float(r["home_win"]),

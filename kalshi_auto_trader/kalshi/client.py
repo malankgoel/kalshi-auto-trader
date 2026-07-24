@@ -41,7 +41,7 @@ except Exception:  # pragma: no cover - optional dependency
     _HAVE_CRYPTO = False
 
 
-__all__ = ["KalshiClient", "market_query_params"]
+__all__ = ["KalshiClient", "market_query_params", "order_request_body"]
 
 
 def market_query_params(
@@ -68,6 +68,25 @@ def market_query_params(
     if cursor:
         params["cursor"] = cursor
     return params
+
+
+def order_request_body(
+    *,
+    ticker: str,
+    action: str,
+    side: str,
+    count: int,
+    order_type: str,
+    client_order_id: str,
+) -> dict[str, Any]:
+    return {
+        "ticker": ticker,
+        "action": action,
+        "side": side,
+        "count": int(count),
+        "type": order_type,
+        "client_order_id": client_order_id,
+    }
 
 
 class KalshiClient:

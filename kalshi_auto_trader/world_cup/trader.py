@@ -108,7 +108,7 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
             continue
         ask = mm.side_ask_cents(market, buy_side)
         if ask is None or ask <= 0:
-            plans.append(mark_plan_skipped(plan, "no ask price"))
+            plans.append(mark_plan_skipped(plan, SKIP_NO_ASK))
             continue
 
         count = size_order(stake, ask)

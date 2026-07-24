@@ -78,6 +78,10 @@ def test_find_game_normalizes_lookup_inputs():
     assert game["home_team"] == "Argentina"
 
 
+def test_game_key_matches_fixture_tuple():
+    assert model.game_key("Argentina", "Algeria") == ("Argentina", "Algeria")
+
+
 # ----------------------------- model: flagging ---------------------------- #
 def _game():
     return {"home_team": "Argentina", "away_team": "Algeria", "date": "2026-06-16",

@@ -102,7 +102,7 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
         market, buy_side = mm.resolve_order(idx, b.line, b.side, b.selection,
                                             b.selection_team)
         if not market:
-            plans.append(mark_plan_skipped(plan, "no live market"))
+            plans.append(mark_plan_skipped(plan, SKIP_NO_MARKET))
             continue
         ask = mm.side_ask_cents(market, buy_side)
         if ask is None or ask <= 0:

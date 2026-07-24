@@ -305,6 +305,5 @@ class KalshiClient:
         )
         if order_type == "limit":
             attach_limit_prices(body, yes_price, no_price)
-        if buy_max_cost is not None:
-            body["buy_max_cost"] = int(buy_max_cost)
+        attach_buy_max_cost(body, buy_max_cost)
         return self.post("/portfolio/orders", body).get("order", {})

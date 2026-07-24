@@ -40,7 +40,10 @@ from kalshi_auto_trader.text import normalize_optional_text as _normalize_option
 from kalshi_auto_trader.world_cup import config, markets as mm, model
 
 
+SKIP_NO_STAKE = "no +EV Kelly stake"
+
 __all__ = [
+    "SKIP_NO_STAKE",
     "actionable_plans",
     "build_parser",
     "client_order_id",

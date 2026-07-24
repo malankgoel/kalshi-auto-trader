@@ -76,7 +76,13 @@ def test_shared_modules_export_expected_entry_points():
         strategy: {"StrategyMetadata"},
         text: {"has_text", "normalize_optional_text", "normalize_required_text"},
         client: {"KalshiClient", "market_query_params"},
-        model: {"Bet", "flag_bets", "meets_edge_threshold", "parse_kickoff_utc"},
+        model: {
+            "Bet",
+            "flag_bets",
+            "game_key",
+            "meets_edge_threshold",
+            "parse_kickoff_utc",
+        },
         markets: {
             "build_market_index",
             "event_token",

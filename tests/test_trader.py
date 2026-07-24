@@ -82,6 +82,11 @@ def test_game_key_matches_fixture_tuple():
     assert model.game_key("Argentina", "Algeria") == ("Argentina", "Algeria")
 
 
+def test_matches_fixture_is_case_insensitive():
+    assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
+    assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")
+
+
 # ----------------------------- model: flagging ---------------------------- #
 def _game():
     return {"home_team": "Argentina", "away_team": "Algeria", "date": "2026-06-16",

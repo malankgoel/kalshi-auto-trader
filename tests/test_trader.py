@@ -469,6 +469,17 @@ def test_actionable_plans_filters_skips():
     assert ex.actionable_plans(plans) == [plans[0]]
 
 
+def test_skip_reason_constants_are_stable():
+    assert ex.SKIP_NO_STAKE == "no +EV Kelly stake"
+    assert ex.SKIP_NO_MARKET == "no live market"
+    assert ex.SKIP_NO_ASK == "no ask price"
+    assert ex.SKIP_SMALL_STAKE == "stake < 1 contract"
+
+
+def test_run_cap_skip_reason_formats_cap():
+    assert ex.run_cap_skip_reason(12.5) == "run cap $12"
+
+
 def test_total_risk_cost_ignores_skipped_plans():
     plans = [
         {"risk_cost": 1.235, "skip": None},

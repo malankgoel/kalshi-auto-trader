@@ -143,7 +143,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
     for (h, a), pred in preds.items():
         if match_id and str(pred["match_id"]) != str(match_id):
             continue
-        if home and away and (h.lower() != home.lower() or a.lower() != away.lower()):
+        if home and away and not matches_fixture(h, a, home, away):
             continue
         if not match_id and not (home and away):
             continue

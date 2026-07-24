@@ -65,6 +65,7 @@ __all__ = [
     "print_plan",
     "resolve_bankroll",
     "resolve_environment",
+    "run_cap_skip_reason",
     "select_game",
     "total_risk_cost",
 ]
@@ -79,6 +80,10 @@ def client_order_id(game: dict, selection: str) -> str:
 def mark_plan_skipped(plan: dict, reason: str) -> dict:
     plan["skip"] = reason
     return plan
+
+
+def run_cap_skip_reason(max_total_cost: float) -> str:
+    return f"run cap ${max_total_cost:.0f}"
 
 
 # --------------------------------------------------------------------------- #

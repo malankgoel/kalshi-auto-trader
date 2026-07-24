@@ -80,6 +80,7 @@ def test_shared_modules_export_expected_entry_points():
             "Bet",
             "flag_bets",
             "game_key",
+            "matches_fixture",
             "meets_edge_threshold",
             "parse_kickoff_utc",
         },

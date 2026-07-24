@@ -41,7 +41,12 @@ except Exception:  # pragma: no cover - optional dependency
     _HAVE_CRYPTO = False
 
 
-__all__ = ["KalshiClient", "market_query_params", "order_request_body"]
+__all__ = [
+    "KalshiClient",
+    "attach_limit_prices",
+    "market_query_params",
+    "order_request_body",
+]
 
 
 def market_query_params(
@@ -87,6 +92,16 @@ def order_request_body(
         "type": order_type,
         "client_order_id": client_order_id,
     }
+
+
+def attach_limit_prices(
+    body: dict[str, Any], yes_price: Optional[int], no_price: Optional[int]
+) -> dict[str, Any]:
+    if yes_price is not None:
+        body["yes_price"] = int(yes_price)
+    if no_price is not None:
+        body["no_price"] = int(no_price)
+    return body
 
 
 class KalshiClient:

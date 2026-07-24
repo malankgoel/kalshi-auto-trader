@@ -43,11 +43,13 @@ from kalshi_auto_trader.world_cup import config, markets as mm, model
 SKIP_NO_STAKE = "no +EV Kelly stake"
 SKIP_NO_MARKET = "no live market"
 SKIP_NO_ASK = "no ask price"
+SKIP_SMALL_STAKE = "stake < 1 contract"
 
 __all__ = [
     "SKIP_NO_ASK",
     "SKIP_NO_MARKET",
     "SKIP_NO_STAKE",
+    "SKIP_SMALL_STAKE",
     "actionable_plans",
     "build_parser",
     "client_order_id",

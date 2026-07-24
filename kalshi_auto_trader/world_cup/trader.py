@@ -125,7 +125,7 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
 
         params = build_order_params(buy_side, count, ask, order_type)
         if not risk.run_budget_allows(running, params["risk_cost"], settings.MAX_TOTAL_COST):
-            plans.append(mark_plan_skipped(plan, f"run cap ${settings.MAX_TOTAL_COST:.0f}"))
+            plans.append(mark_plan_skipped(plan, run_cap_skip_reason(settings.MAX_TOTAL_COST)))
             continue
         running += params["risk_cost"]
         plan.update(ticker=market.get("ticker", ""), buy_side=buy_side,

@@ -115,7 +115,7 @@ def plan_bets(game: dict, bets: list, idx: dict, bankroll: float,
 
         count = size_order(stake, ask)
         if count < 1:
-            plans.append(mark_plan_skipped(plan, "stake < 1 contract"))
+            plans.append(mark_plan_skipped(plan, SKIP_SMALL_STAKE))
             continue
 
         params = build_order_params(buy_side, count, ask, order_type)

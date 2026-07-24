@@ -75,7 +75,13 @@ def test_shared_modules_export_expected_entry_points():
         settings: {"ORDER_TYPE", "MAX_TOTAL_COST"},
         strategy: {"StrategyMetadata"},
         text: {"has_text", "normalize_optional_text", "normalize_required_text"},
-        client: {"KalshiClient", "market_query_params"},
+        client: {
+            "KalshiClient",
+            "attach_buy_max_cost",
+            "attach_limit_prices",
+            "market_query_params",
+            "order_request_body",
+        },
         model: {
             "Bet",
             "flag_bets",

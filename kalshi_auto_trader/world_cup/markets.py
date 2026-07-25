@@ -35,6 +35,7 @@ __all__ = [
     "event_date",
     "event_token",
     "first_price_cents",
+    "is_two_five_line",
     "market_text",
     "resolve_order",
     "side_ask_cents",
@@ -184,6 +185,11 @@ def _is_2_5_line(market: dict) -> bool:
         if v is not None and "2.5" in str(v):
             return True
     return False
+
+
+def is_two_five_line(market: dict) -> bool:
+    """Return True when a totals market describes the 2.5-goals line."""
+    return _is_2_5_line(market)
 
 
 # --------------------------------------------------------------------------- #

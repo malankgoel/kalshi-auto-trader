@@ -30,6 +30,7 @@ __all__ = [
     "TEAM_CODES",
     "build_market_index",
     "build_odds_row",
+    "event_codes",
     "event_token",
     "first_price_cents",
     "market_text",
@@ -94,6 +95,11 @@ def _event_codes(event_ticker: str) -> tuple[str, str]:
     m = re.search(r"\d{2}[A-Z]{3}\d{2}([A-Z]{3})([A-Z]{3})",
                   (event_ticker or "").upper())
     return (m.group(1), m.group(2)) if m else ("", "")
+
+
+def event_codes(event_ticker: str) -> tuple[str, str]:
+    """Return the two team-code tokens embedded in a Kalshi event ticker."""
+    return _event_codes(event_ticker)
 
 
 def _event_token(event_ticker: str) -> str:

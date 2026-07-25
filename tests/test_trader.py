@@ -447,6 +447,12 @@ def test_market_text_normalizes_matching_fields():
     assert "kxwcgame-26jun16cuwjpn" in text
 
 
+def test_totals_line_predicate_finds_two_point_five_line():
+    assert mm.is_two_five_line({"title": "Total goals over 2.5"})
+    assert mm.is_two_five_line({"cap_strike": "2.5"})
+    assert not mm.is_two_five_line({"title": "Total goals over 1.5"})
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

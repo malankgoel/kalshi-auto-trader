@@ -30,6 +30,7 @@ __all__ = [
     "TEAM_CODES",
     "build_market_index",
     "build_odds_row",
+    "date_diff_days",
     "event_codes",
     "event_date",
     "event_token",
@@ -139,6 +140,11 @@ def _date_diff_days(d1: str, d2: str) -> Optional[int]:
         return (dt.datetime.strptime(d1, fmt) - dt.datetime.strptime(d2, fmt)).days
     except (TypeError, ValueError):
         return None
+
+
+def date_diff_days(d1: str, d2: str) -> Optional[int]:
+    """Return whole day difference for YYYY-MM-DD strings, or None if invalid."""
+    return _date_diff_days(d1, d2)
 
 
 def _market_blob(market: dict) -> str:

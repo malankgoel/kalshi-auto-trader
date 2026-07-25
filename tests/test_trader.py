@@ -427,6 +427,11 @@ def test_event_codes_extract_team_codes():
     assert mm.event_codes("bad") == ("", "")
 
 
+def test_event_date_extracts_ticker_date():
+    assert mm.event_date("KXWCGAME-26JUN16ARGALG-ARG") == "2026-06-16"
+    assert mm.event_date("bad") == ""
+
+
 def test_market_text_normalizes_matching_fields():
     text = mm.market_text({
         "title": "Curaçao vs Japan",

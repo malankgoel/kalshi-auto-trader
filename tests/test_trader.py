@@ -453,6 +453,12 @@ def test_totals_line_predicate_finds_two_point_five_line():
     assert not mm.is_two_five_line({"title": "Total goals over 1.5"})
 
 
+def test_market_index_template_has_expected_shape():
+    idx = mm.market_index_template()
+    assert idx == {"winner": {}, "draw": None, "over": None, "btts": None}
+    assert idx["winner"] is not mm.market_index_template()["winner"]
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

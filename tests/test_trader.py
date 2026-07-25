@@ -422,6 +422,11 @@ def test_event_token_extracts_fixture_token():
     assert mm.event_token("bad") == ""
 
 
+def test_event_codes_extract_team_codes():
+    assert mm.event_codes("KXWCGAME-26JUN16ARGALG-ARG") == ("ARG", "ALG")
+    assert mm.event_codes("bad") == ("", "")
+
+
 def test_market_text_normalizes_matching_fields():
     text = mm.market_text({
         "title": "Curaçao vs Japan",

@@ -36,6 +36,7 @@ __all__ = [
     "event_token",
     "first_price_cents",
     "is_two_five_line",
+    "market_index_template",
     "market_text",
     "resolve_order",
     "side_ask_cents",
@@ -190,6 +191,11 @@ def _is_2_5_line(market: dict) -> bool:
 def is_two_five_line(market: dict) -> bool:
     """Return True when a totals market describes the 2.5-goals line."""
     return _is_2_5_line(market)
+
+
+def market_index_template() -> dict:
+    """Return the empty per-fixture market index shape used by strategies."""
+    return {"winner": {}, "draw": None, "over": None, "btts": None}
 
 
 # --------------------------------------------------------------------------- #

@@ -345,7 +345,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
                             _classify_line(m, line_of.get(s, ""), idx)
                 except Exception as exc:  # noqa: BLE001
                     logger.warning("series %s: %s", s, exc)
-        if idx["winner"] and idx["over"] and idx["btts"]:
+        if market_index_complete(idx):
             break
     return idx
 

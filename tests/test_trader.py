@@ -459,6 +459,15 @@ def test_market_index_template_has_expected_shape():
     assert idx["winner"] is not mm.market_index_template()["winner"]
 
 
+def test_market_index_completion_requires_core_markets():
+    idx = mm.market_index_template()
+    assert not mm.market_index_complete(idx)
+    idx.update(winner={"argentina": {}}, over={}, btts={})
+    assert not mm.market_index_complete(idx)
+    idx.update(over={"ticker": "OVER"}, btts={"ticker": "BTTS"})
+    assert mm.market_index_complete(idx)
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

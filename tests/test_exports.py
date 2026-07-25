@@ -92,6 +92,7 @@ def test_shared_modules_export_expected_entry_points():
         },
         markets: {
             "build_market_index",
+            "date_diff_days",
             "event_codes",
             "event_date",
             "event_token",

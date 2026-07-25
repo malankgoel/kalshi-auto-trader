@@ -157,7 +157,7 @@ def market_text(market: dict) -> str:
 def _match_teams(market: dict, home: str, away: str, game_date: str = "") -> bool:
     """True if the market belongs to this fixture (date-aware, alias-tolerant)."""
     ev = market.get("event_ticker", "")
-    ev_date = _event_date(ev)
+    ev_date = event_date(ev)
     if game_date and ev_date:
         date_diff = _date_diff_days(game_date, ev_date)
         if date_diff is None or abs(date_diff) > 1:

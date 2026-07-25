@@ -97,6 +97,7 @@ def test_shared_modules_export_expected_entry_points():
             "event_date",
             "event_token",
             "first_price_cents",
+            "is_two_five_line",
             "market_text",
             "resolve_order",
             "team_key",

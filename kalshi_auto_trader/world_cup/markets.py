@@ -31,6 +31,7 @@ __all__ = [
     "build_market_index",
     "build_odds_row",
     "event_codes",
+    "event_date",
     "event_token",
     "first_price_cents",
     "market_text",
@@ -125,6 +126,11 @@ def _event_date(event_ticker: str) -> str:
         return ""
     mm = _MONTHS.get(m.group(2))
     return f"20{m.group(1)}-{mm}-{m.group(3)}" if mm else ""
+
+
+def event_date(event_ticker: str) -> str:
+    """Return the event date encoded in a Kalshi event ticker, if present."""
+    return _event_date(event_ticker)
 
 
 def _date_diff_days(d1: str, d2: str) -> Optional[int]:

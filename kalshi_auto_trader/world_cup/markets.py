@@ -297,7 +297,7 @@ def _classify_line(m: dict, line: str, idx: dict) -> None:
         if not yes_sub.startswith("no") and idx.get("btts") is None:
             idx["btts"] = m
     elif line == "over_under":
-        if _is_2_5_line(m) and "under" not in yes_sub and idx.get("over") is None:
+        if is_two_five_line(m) and "under" not in yes_sub and idx.get("over") is None:
             idx["over"] = m  # YES = OVER side
 
 

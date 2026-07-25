@@ -316,7 +316,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
     their titles) are then matched by that exact token. Statuses are swept
     because the three lines can open for trading at different times.
     """
-    idx: dict = {"winner": {}, "draw": None, "over": None, "btts": None}
+    idx: dict = market_index_template()
     token = ""
     line_of = {s: ln for ln, lst in config.KALSHI_SERIES.items() for s in lst}
     ou_btts = config.KALSHI_SERIES["over_under"] + config.KALSHI_SERIES["btts"]

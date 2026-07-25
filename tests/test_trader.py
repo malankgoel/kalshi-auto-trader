@@ -432,6 +432,11 @@ def test_event_date_extracts_ticker_date():
     assert mm.event_date("bad") == ""
 
 
+def test_date_diff_days_handles_valid_and_invalid_dates():
+    assert mm.date_diff_days("2026-06-17", "2026-06-16") == 1
+    assert mm.date_diff_days("bad", "2026-06-16") is None
+
+
 def test_market_text_normalizes_matching_fields():
     text = mm.market_text({
         "title": "Curaçao vs Japan",

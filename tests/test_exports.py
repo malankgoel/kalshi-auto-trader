@@ -93,6 +93,7 @@ def test_shared_modules_export_expected_entry_points():
         markets: {
             "build_market_index",
             "event_codes",
+            "event_date",
             "event_token",
             "first_price_cents",
             "market_text",

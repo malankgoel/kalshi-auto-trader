@@ -156,7 +156,7 @@ def _match_teams(market: dict, home: str, away: str, game_date: str = "") -> boo
         date_diff = _date_diff_days(game_date, ev_date)
         if date_diff is None or abs(date_diff) > 1:
             return False  # +/-1 day: ticker uses UTC date, game date is local
-    hc, ac = _event_codes(ev)
+    hc, ac = event_codes(ev)
     home_code, away_code = TEAM_CODES.get(home), TEAM_CODES.get(away)
     if hc and home_code and away_code and {hc, ac} == {home_code, away_code}:
         return True

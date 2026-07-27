@@ -102,6 +102,7 @@ def test_shared_modules_export_expected_entry_points():
             "market_index_complete",
             "market_index_template",
             "market_text",
+            "non_winner_series",
             "resolve_order",
             "series_line_lookup",
             "team_key",

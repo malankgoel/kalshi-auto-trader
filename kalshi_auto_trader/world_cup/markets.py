@@ -330,7 +330,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
     line_of = {s: ln for ln, lst in config.KALSHI_SERIES.items() for s in lst}
     ou_btts = config.KALSHI_SERIES["over_under"] + config.KALSHI_SERIES["btts"]
 
-    for status in ("open", "unopened", None):
+    for status in MARKET_STATUS_SWEEP:
         for s in config.KALSHI_SERIES["winner"]:
             try:
                 for m in client.list_markets(series_ticker=s, status=status):

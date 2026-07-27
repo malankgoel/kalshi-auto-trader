@@ -340,7 +340,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
     idx: dict = market_index_template()
     token = ""
     line_of = series_line_lookup(config.KALSHI_SERIES)
-    ou_btts = config.KALSHI_SERIES["over_under"] + config.KALSHI_SERIES["btts"]
+    supplemental_series = non_winner_series(config.KALSHI_SERIES)
 
     for status in MARKET_STATUS_SWEEP:
         for s in config.KALSHI_SERIES["winner"]:
@@ -353,7 +353,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
             except Exception as exc:  # noqa: BLE001
                 logger.warning("winner series %s: %s", s, exc)
         if token:
-            for s in ou_btts:
+            for s in supplemental_series:
                 try:
                     for m in client.list_markets(series_ticker=s, status=status):
                         if event_token(m.get("event_ticker", "")) == token:

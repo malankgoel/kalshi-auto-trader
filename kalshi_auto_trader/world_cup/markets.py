@@ -40,6 +40,7 @@ __all__ = [
     "market_index_complete",
     "market_index_template",
     "market_text",
+    "non_winner_series",
     "resolve_order",
     "series_line_lookup",
     "side_ask_cents",
@@ -211,6 +212,11 @@ def market_index_complete(idx: dict) -> bool:
 def series_line_lookup(series_by_line: dict[str, tuple[str, ...]]) -> dict[str, str]:
     """Map Kalshi series tickers back to their strategy line names."""
     return {series: line for line, tickers in series_by_line.items() for series in tickers}
+
+
+def non_winner_series(series_by_line: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
+    """Return per-match non-winner series that share the fixture event token."""
+    return tuple(series_by_line.get("over_under", ())) + tuple(series_by_line.get("btts", ()))
 
 
 # --------------------------------------------------------------------------- #

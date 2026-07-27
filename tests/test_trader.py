@@ -487,6 +487,13 @@ def test_non_winner_series_combines_totals_and_btts():
     }) == ("KXWCTOTAL", "KXWCBTTS")
 
 
+def test_winner_series_reads_winner_line():
+    assert mm.winner_series({
+        "winner": ("KXWCGAME",),
+        "over_under": ("KXWCTOTAL",),
+    }) == ("KXWCGAME",)
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

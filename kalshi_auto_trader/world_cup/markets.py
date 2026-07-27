@@ -346,10 +346,11 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
     idx: dict = market_index_template()
     token = ""
     line_of = series_line_lookup(config.KALSHI_SERIES)
+    primary_series = winner_series(config.KALSHI_SERIES)
     supplemental_series = non_winner_series(config.KALSHI_SERIES)
 
     for status in MARKET_STATUS_SWEEP:
-        for s in config.KALSHI_SERIES["winner"]:
+        for s in primary_series:
             try:
                 for m in client.list_markets(series_ticker=s, status=status):
                     if _match_teams(m, home, away, date):

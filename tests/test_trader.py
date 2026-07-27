@@ -468,6 +468,10 @@ def test_market_index_completion_requires_core_markets():
     assert mm.market_index_complete(idx)
 
 
+def test_market_status_sweep_checks_open_then_unopened():
+    assert mm.MARKET_STATUS_SWEEP == ("open", "unopened", None)
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

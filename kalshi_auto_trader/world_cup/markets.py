@@ -45,6 +45,7 @@ __all__ = [
     "series_line_lookup",
     "side_ask_cents",
     "team_key",
+    "winner_series",
     "yes_price_cents",
 ]
 
@@ -217,6 +218,11 @@ def series_line_lookup(series_by_line: dict[str, tuple[str, ...]]) -> dict[str, 
 def non_winner_series(series_by_line: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
     """Return per-match non-winner series that share the fixture event token."""
     return tuple(series_by_line.get("over_under", ())) + tuple(series_by_line.get("btts", ()))
+
+
+def winner_series(series_by_line: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
+    """Return winner-market series tickers from a line-series mapping."""
+    return tuple(series_by_line.get("winner", ()))
 
 
 # --------------------------------------------------------------------------- #

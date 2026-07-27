@@ -472,6 +472,13 @@ def test_market_status_sweep_checks_open_then_unopened():
     assert mm.MARKET_STATUS_SWEEP == ("open", "unopened", None)
 
 
+def test_series_line_lookup_maps_series_to_lines():
+    assert mm.series_line_lookup({
+        "winner": ("KXWCGAME",),
+        "btts": ("KXWCBTTS",),
+    }) == {"KXWCGAME": "winner", "KXWCBTTS": "btts"}
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

@@ -333,7 +333,7 @@ def build_market_index(client, home: str, away: str, date: str) -> dict:
     """
     idx: dict = market_index_template()
     token = ""
-    line_of = {s: ln for ln, lst in config.KALSHI_SERIES.items() for s in lst}
+    line_of = series_line_lookup(config.KALSHI_SERIES)
     ou_btts = config.KALSHI_SERIES["over_under"] + config.KALSHI_SERIES["btts"]
 
     for status in MARKET_STATUS_SWEEP:

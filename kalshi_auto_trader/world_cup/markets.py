@@ -41,6 +41,7 @@ __all__ = [
     "market_index_template",
     "market_text",
     "resolve_order",
+    "series_line_lookup",
     "side_ask_cents",
     "team_key",
     "yes_price_cents",
@@ -205,6 +206,11 @@ def market_index_template() -> dict:
 def market_index_complete(idx: dict) -> bool:
     """Return True once winner, totals, and BTTS markets are indexed."""
     return bool(idx.get("winner") and idx.get("over") and idx.get("btts"))
+
+
+def series_line_lookup(series_by_line: dict[str, tuple[str, ...]]) -> dict[str, str]:
+    """Map Kalshi series tickers back to their strategy line names."""
+    return {series: line for line, tickers in series_by_line.items() for series in tickers}
 
 
 # --------------------------------------------------------------------------- #

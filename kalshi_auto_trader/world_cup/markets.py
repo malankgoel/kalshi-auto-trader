@@ -26,6 +26,7 @@ from kalshi_auto_trader.world_cup import config
 logger = logging.getLogger(__name__)
 
 __all__ = [
+    "MARKET_STATUS_SWEEP",
     "TEAM_ALIASES",
     "TEAM_CODES",
     "build_market_index",
@@ -44,6 +45,8 @@ __all__ = [
     "team_key",
     "yes_price_cents",
 ]
+
+MARKET_STATUS_SWEEP = ("open", "unopened", None)
 
 
 # --------------------------------------------------------------------------- #

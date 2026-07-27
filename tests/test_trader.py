@@ -494,6 +494,12 @@ def test_winner_series_reads_winner_line():
     }) == ("KXWCGAME",)
 
 
+def test_line_series_returns_configured_line_series():
+    series = {"winner": ("KXWCGAME",), "btts": ("KXWCBTTS",)}
+    assert mm.line_series(series, "btts") == ("KXWCBTTS",)
+    assert mm.line_series(series, "missing") == ()
+
+
 def test_client_order_id_stable():
     g = _game()
     assert ex.client_order_id(g, "YES Argentina") == ex.client_order_id(g, "YES Argentina")

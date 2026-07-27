@@ -99,6 +99,7 @@ def test_shared_modules_export_expected_entry_points():
             "event_token",
             "first_price_cents",
             "is_two_five_line",
+            "line_series",
             "market_index_complete",
             "market_index_template",
             "market_text",

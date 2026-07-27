@@ -91,6 +91,7 @@ def test_shared_modules_export_expected_entry_points():
             "parse_kickoff_utc",
         },
         markets: {
+            "MARKET_STATUS_SWEEP",
             "build_market_index",
             "date_diff_days",
             "event_codes",

@@ -37,6 +37,7 @@ __all__ = [
     "event_token",
     "first_price_cents",
     "is_two_five_line",
+    "line_series",
     "market_index_complete",
     "market_index_template",
     "market_text",
@@ -223,6 +224,11 @@ def non_winner_series(series_by_line: dict[str, tuple[str, ...]]) -> tuple[str, 
 def winner_series(series_by_line: dict[str, tuple[str, ...]]) -> tuple[str, ...]:
     """Return winner-market series tickers from a line-series mapping."""
     return tuple(series_by_line.get("winner", ()))
+
+
+def line_series(series_by_line: dict[str, tuple[str, ...]], line: str) -> tuple[str, ...]:
+    """Return configured series tickers for one strategy line."""
+    return tuple(series_by_line.get(line, ()))
 
 
 # --------------------------------------------------------------------------- #

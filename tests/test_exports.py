@@ -93,6 +93,7 @@ def test_shared_modules_export_expected_entry_points():
         markets: {
             "LAST_PRICE_FIELDS",
             "MARKET_STATUS_SWEEP",
+            "NO_BID_PRICE_FIELDS",
             "YES_ASK_PRICE_FIELDS",
             "YES_BID_PRICE_FIELDS",
             "build_market_index",

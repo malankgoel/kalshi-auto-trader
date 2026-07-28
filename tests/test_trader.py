@@ -376,6 +376,10 @@ def test_yes_bid_price_fields_prefer_dollar_then_cent_quotes():
     assert mm.YES_BID_PRICE_FIELDS == ("yes_bid_dollars", "yes_bid")
 
 
+def test_yes_ask_price_fields_prefer_dollar_then_cent_quotes():
+    assert mm.YES_ASK_PRICE_FIELDS == ("yes_ask_dollars", "yes_ask")
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

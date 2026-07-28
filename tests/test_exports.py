@@ -92,6 +92,7 @@ def test_shared_modules_export_expected_entry_points():
         },
         markets: {
             "MARKET_STATUS_SWEEP",
+            "YES_ASK_PRICE_FIELDS",
             "YES_BID_PRICE_FIELDS",
             "build_market_index",
             "date_diff_days",

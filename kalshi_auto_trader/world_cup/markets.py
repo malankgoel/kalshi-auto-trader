@@ -276,8 +276,7 @@ def yes_price_cents(market: dict) -> Optional[float]:
     ya = first_price_cents(market, *YES_ASK_PRICE_FIELDS)
     if yb is not None and ya is not None and ya >= yb and (yb + ya) > 0:
         return max(0.0, min(100.0, (yb + ya) / 2.0))
-    for k in ("last_price_dollars", "last_price",
-              "previous_price_dollars", "previous_price"):
+    for k in LAST_PRICE_FIELDS:
         v = first_price_cents(market, k)
         if v is not None:
             return max(0.0, min(100.0, v))

@@ -372,6 +372,10 @@ def test_first_price_cents_reads_dollar_and_cent_fields():
     assert mm.first_price_cents({"last_price": 101}, "last_price") is None
 
 
+def test_yes_bid_price_fields_prefer_dollar_then_cent_quotes():
+    assert mm.YES_BID_PRICE_FIELDS == ("yes_bid_dollars", "yes_bid")
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

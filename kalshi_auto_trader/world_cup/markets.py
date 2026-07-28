@@ -28,6 +28,7 @@ logger = logging.getLogger(__name__)
 __all__ = [
     "MARKET_STATUS_SWEEP",
     "LAST_PRICE_FIELDS",
+    "NO_BID_PRICE_FIELDS",
     "TEAM_ALIASES",
     "TEAM_CODES",
     "YES_BID_PRICE_FIELDS",
@@ -60,6 +61,7 @@ LAST_PRICE_FIELDS = (
     "previous_price_dollars",
     "previous_price",
 )
+NO_BID_PRICE_FIELDS = ("no_bid_dollars", "no_bid")
 YES_BID_PRICE_FIELDS = ("yes_bid_dollars", "yes_bid")
 YES_ASK_PRICE_FIELDS = ("yes_ask_dollars", "yes_ask")
 

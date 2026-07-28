@@ -29,6 +29,7 @@ __all__ = [
     "MARKET_STATUS_SWEEP",
     "TEAM_ALIASES",
     "TEAM_CODES",
+    "YES_BID_PRICE_FIELDS",
     "build_market_index",
     "build_odds_row",
     "date_diff_days",
@@ -51,6 +52,7 @@ __all__ = [
 ]
 
 MARKET_STATUS_SWEEP = ("open", "unopened", None)
+YES_BID_PRICE_FIELDS = ("yes_bid_dollars", "yes_bid")
 
 
 # --------------------------------------------------------------------------- #

@@ -413,6 +413,10 @@ def test_over_2_5_price_key_names_odds_row_field():
     assert mm.OVER_2_5_PRICE_KEY == "over_2_5_price"
 
 
+def test_btts_yes_price_key_names_odds_row_field():
+    assert mm.BTTS_YES_PRICE_KEY == "btts_yes_price"
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

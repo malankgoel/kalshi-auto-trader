@@ -32,6 +32,7 @@ __all__ = [
     "NO_BID_PRICE_FIELDS",
     "TEAM_ALIASES",
     "TEAM_CODES",
+    "WINNER_HOME_PRICE_KEY",
     "YES_BID_PRICE_FIELDS",
     "YES_ASK_PRICE_FIELDS",
     "build_market_index",
@@ -64,6 +65,7 @@ LAST_PRICE_FIELDS = (
 )
 NO_ASK_PRICE_FIELDS = ("no_ask_dollars", "no_ask")
 NO_BID_PRICE_FIELDS = ("no_bid_dollars", "no_bid")
+WINNER_HOME_PRICE_KEY = "winner_home_price"
 YES_BID_PRICE_FIELDS = ("yes_bid_dollars", "yes_bid")
 YES_ASK_PRICE_FIELDS = ("yes_ask_dollars", "yes_ask")
 

@@ -97,6 +97,7 @@ def test_shared_modules_export_expected_entry_points():
             "NO_BID_PRICE_FIELDS",
             "YES_ASK_PRICE_FIELDS",
             "YES_BID_PRICE_FIELDS",
+            "WINNER_HOME_PRICE_KEY",
             "build_market_index",
             "date_diff_days",
             "event_codes",

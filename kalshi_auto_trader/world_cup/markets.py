@@ -304,7 +304,7 @@ def build_odds_row(idx: dict, home: str, away: str) -> dict:
                 row[key] = round(p, 1)
 
     put(WINNER_HOME_PRICE_KEY, idx["winner"].get(_norm(home)))
-    put("winner_away_price", idx["winner"].get(_norm(away)))
+    put(WINNER_AWAY_PRICE_KEY, idx["winner"].get(_norm(away)))
     put("winner_draw_price", idx.get("draw"))
     put("over_2_5_price", idx.get("over"))
     put("btts_yes_price", idx.get("btts"))

@@ -52,6 +52,7 @@ __all__ = [
     "market_index_template",
     "market_text",
     "non_winner_series",
+    "odds_price_keys",
     "resolve_order",
     "series_line_lookup",
     "side_ask_cents",
@@ -295,6 +296,17 @@ def yes_price_cents(market: dict) -> Optional[float]:
         if v is not None:
             return max(0.0, min(100.0, v))
     return None
+
+
+def odds_price_keys() -> tuple[str, ...]:
+    """Return odds-row keys populated from a resolved market index."""
+    return (
+        WINNER_HOME_PRICE_KEY,
+        WINNER_AWAY_PRICE_KEY,
+        WINNER_DRAW_PRICE_KEY,
+        OVER_2_5_PRICE_KEY,
+        BTTS_YES_PRICE_KEY,
+    )
 
 
 def build_odds_row(idx: dict, home: str, away: str) -> dict:

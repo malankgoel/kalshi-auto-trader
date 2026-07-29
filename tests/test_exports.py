@@ -91,6 +91,7 @@ def test_shared_modules_export_expected_entry_points():
             "parse_kickoff_utc",
         },
         markets: {
+            "BTTS_YES_PRICE_KEY",
             "LAST_PRICE_FIELDS",
             "MARKET_STATUS_SWEEP",
             "NO_ASK_PRICE_FIELDS",

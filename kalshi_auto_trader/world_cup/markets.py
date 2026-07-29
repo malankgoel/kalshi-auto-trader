@@ -30,6 +30,7 @@ __all__ = [
     "LAST_PRICE_FIELDS",
     "NO_ASK_PRICE_FIELDS",
     "NO_BID_PRICE_FIELDS",
+    "OVER_2_5_PRICE_KEY",
     "TEAM_ALIASES",
     "TEAM_CODES",
     "WINNER_AWAY_PRICE_KEY",
@@ -67,6 +68,7 @@ LAST_PRICE_FIELDS = (
 )
 NO_ASK_PRICE_FIELDS = ("no_ask_dollars", "no_ask")
 NO_BID_PRICE_FIELDS = ("no_bid_dollars", "no_bid")
+OVER_2_5_PRICE_KEY = "over_2_5_price"
 WINNER_AWAY_PRICE_KEY = "winner_away_price"
 WINNER_DRAW_PRICE_KEY = "winner_draw_price"
 WINNER_HOME_PRICE_KEY = "winner_home_price"

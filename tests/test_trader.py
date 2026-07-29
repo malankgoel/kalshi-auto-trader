@@ -397,6 +397,10 @@ def test_no_ask_price_fields_prefer_dollar_then_cent_quotes():
     assert mm.NO_ASK_PRICE_FIELDS == ("no_ask_dollars", "no_ask")
 
 
+def test_winner_home_price_key_names_odds_row_field():
+    assert mm.WINNER_HOME_PRICE_KEY == "winner_home_price"
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

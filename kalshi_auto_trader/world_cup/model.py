@@ -17,7 +17,7 @@ from typing import Optional
 
 from kalshi_auto_trader import probability, settings
 from kalshi_auto_trader.text import normalize_optional_text
-from kalshi_auto_trader.world_cup import config
+from kalshi_auto_trader.world_cup import config, markets
 
 
 __all__ = [
@@ -258,7 +258,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     """
     bets: list[Bet] = []
 
-    hp, dp, ap = (_c2p(odds.get("winner_home_price")),
+    hp, dp, ap = (_c2p(odds.get(markets.WINNER_HOME_PRICE_KEY)),
                   _c2p(odds.get("winner_draw_price")),
                   _c2p(odds.get("winner_away_price")))
     if None not in (hp, dp, ap):

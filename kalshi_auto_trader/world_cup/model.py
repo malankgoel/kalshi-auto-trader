@@ -259,7 +259,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     bets: list[Bet] = []
 
     hp, dp, ap = (_c2p(odds.get(markets.WINNER_HOME_PRICE_KEY)),
-                  _c2p(odds.get("winner_draw_price")),
+                  _c2p(odds.get(markets.WINNER_DRAW_PRICE_KEY)),
                   _c2p(odds.get("winner_away_price")))
     if None not in (hp, dp, ap):
         fh, fd, fa = devig_three_way(hp, dp, ap)

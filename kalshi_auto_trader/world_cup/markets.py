@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 
 __all__ = [
     "MARKET_STATUS_SWEEP",
+    "BTTS_NO_PRICE_KEY",
     "BTTS_YES_PRICE_KEY",
     "LAST_PRICE_FIELDS",
     "NO_ASK_PRICE_FIELDS",
@@ -63,6 +64,7 @@ __all__ = [
 ]
 
 MARKET_STATUS_SWEEP = ("open", "unopened", None)
+BTTS_NO_PRICE_KEY = "btts_no_price"
 BTTS_YES_PRICE_KEY = "btts_yes_price"
 LAST_PRICE_FIELDS = (
     "last_price_dollars",

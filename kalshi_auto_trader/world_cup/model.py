@@ -273,7 +273,10 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
             if b:
                 bets.append(b)
 
-    op, up = _c2p(odds.get(markets.OVER_2_5_PRICE_KEY)), _c2p(odds.get("under_2_5_price"))
+    op, up = (
+        _c2p(odds.get(markets.OVER_2_5_PRICE_KEY)),
+        _c2p(odds.get(markets.UNDER_2_5_PRICE_KEY)),
+    )
     if op is not None:
         b = _evaluate("over_under", "OVER 2.5", "UNDER 2.5", "",
                       game["model_over_2_5"], devig_binary(op, up), op,

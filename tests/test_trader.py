@@ -457,6 +457,8 @@ def test_odds_price_keys_lists_build_odds_row_fields():
         mm.OVER_2_5_PRICE_KEY,
         mm.BTTS_YES_PRICE_KEY,
     )
+    assert mm.UNDER_2_5_PRICE_KEY not in mm.odds_price_keys()
+    assert mm.BTTS_NO_PRICE_KEY not in mm.odds_price_keys()
 
 
 def test_complete_odds_price_keys_include_optional_no_side_fields():

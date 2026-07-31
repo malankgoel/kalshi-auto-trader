@@ -284,7 +284,10 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
         if b:
             bets.append(b)
 
-    by, bn = _c2p(odds.get(markets.BTTS_YES_PRICE_KEY)), _c2p(odds.get("btts_no_price"))
+    by, bn = (
+        _c2p(odds.get(markets.BTTS_YES_PRICE_KEY)),
+        _c2p(odds.get(markets.BTTS_NO_PRICE_KEY)),
+    )
     if by is not None:
         b = _evaluate("btts", "BTTS YES", "BTTS NO", "",
                       game["model_btts"], devig_binary(by, bn), by,

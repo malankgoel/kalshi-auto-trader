@@ -474,6 +474,10 @@ def test_side_ask_complement():
         mm.side_ask_cents({}, "maybe")
 
 
+def test_side_ask_no_complements_yes_bid_dollars():
+    assert mm.side_ask_cents({"yes_bid_dollars": "0.41"}, "no") == approx(59.0)
+
+
 def test_side_ask_normalizes_side_text():
     assert mm.side_ask_cents({"yes_ask": 44}, " YES ") == approx(44.0)
 

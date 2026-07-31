@@ -103,6 +103,16 @@ def test_flag_fades_overpriced_favourite():
     assert arg and arg[0].side == "YES" and arg[0].edge >= settings.EDGE_THRESHOLD
 
 
+def test_flag_bets_reads_shared_winner_price_keys():
+    odds = {
+        mm.WINNER_HOME_PRICE_KEY: 60,
+        mm.WINNER_DRAW_PRICE_KEY: 25,
+        mm.WINNER_AWAY_PRICE_KEY: 20,
+    }
+    bets = model.flag_bets(_game(), odds)
+    assert any(b.selection == "YES Argentina" for b in bets)
+
+
 def test_no_flag_when_market_agrees():
     odds = {"winner_home_price": 70, "winner_draw_price": 20, "winner_away_price": 10}
     # under-2.5: model 40% vs market 40% -> no edge either way

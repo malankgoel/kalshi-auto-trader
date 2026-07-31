@@ -413,6 +413,10 @@ def test_over_2_5_price_key_names_odds_row_field():
     assert mm.OVER_2_5_PRICE_KEY == "over_2_5_price"
 
 
+def test_under_2_5_price_key_names_odds_row_field():
+    assert mm.UNDER_2_5_PRICE_KEY == "under_2_5_price"
+
+
 def test_btts_yes_price_key_names_odds_row_field():
     assert mm.BTTS_YES_PRICE_KEY == "btts_yes_price"
 

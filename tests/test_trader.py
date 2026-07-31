@@ -435,6 +435,14 @@ def test_odds_price_keys_lists_build_odds_row_fields():
     )
 
 
+def test_complete_odds_price_keys_include_optional_no_side_fields():
+    assert mm.complete_odds_price_keys() == (
+        *mm.odds_price_keys(),
+        mm.UNDER_2_5_PRICE_KEY,
+        mm.BTTS_NO_PRICE_KEY,
+    )
+
+
 def test_side_ask_complement():
     assert mm.side_ask_cents({"yes_bid": 40}, "no") == approx(60.0)
     assert mm.side_ask_cents({"yes_ask_dollars": "0.47"}, "yes") == approx(47.0)

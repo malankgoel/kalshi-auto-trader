@@ -252,9 +252,8 @@ def _c2p(v) -> Optional[float]:
 def flag_bets(game: dict, odds: dict) -> list[Bet]:
     """Apply the >=10% mispricing rule to one game's live odds.
 
-    ``odds`` carries YES prices in cents per outcome: winner_home_price,
-    winner_draw_price, winner_away_price, over_2_5_price, under_2_5_price,
-    btts_yes_price, btts_no_price (any may be absent).
+    ``odds`` carries cents prices under the keys returned by
+    ``markets.complete_odds_price_keys()``; any key may be absent.
     """
     bets: list[Bet] = []
 

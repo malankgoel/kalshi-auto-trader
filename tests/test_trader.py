@@ -133,6 +133,13 @@ def test_under_is_no_side_on_over_market():
     assert ou.side == "NO" and ou.selection == "UNDER 2.5"
 
 
+def test_flag_bets_reads_shared_totals_price_keys():
+    odds = {mm.OVER_2_5_PRICE_KEY: 60, mm.UNDER_2_5_PRICE_KEY: 40}
+    bets = model.flag_bets(_game(), odds)
+    ou = [b for b in bets if b.line == "over_under"][0]
+    assert ou.side == "NO" and ou.market_price == approx(0.40)
+
+
 # ----------------------------- sizing / params ---------------------------- #
 def test_size_floor_and_caps(monkeypatch):
     assert ex.size_order(4.33, 45.0) == 9

@@ -97,6 +97,7 @@ def test_shared_modules_export_expected_entry_points():
             "NO_ASK_PRICE_FIELDS",
             "NO_BID_PRICE_FIELDS",
             "OVER_2_5_PRICE_KEY",
+            "UNDER_2_5_PRICE_KEY",
             "YES_ASK_PRICE_FIELDS",
             "YES_BID_PRICE_FIELDS",
             "WINNER_AWAY_PRICE_KEY",

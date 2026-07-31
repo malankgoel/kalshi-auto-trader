@@ -43,6 +43,7 @@ __all__ = [
     "YES_ASK_PRICE_FIELDS",
     "build_market_index",
     "build_odds_row",
+    "complete_odds_price_keys",
     "date_diff_days",
     "event_codes",
     "event_date",
@@ -310,6 +311,14 @@ def odds_price_keys() -> tuple[str, ...]:
         WINNER_DRAW_PRICE_KEY,
         OVER_2_5_PRICE_KEY,
         BTTS_YES_PRICE_KEY,
+    )
+
+
+def complete_odds_price_keys() -> tuple[str, ...]:
+    """Return all odds keys accepted by the model input row."""
+    return odds_price_keys() + (
+        UNDER_2_5_PRICE_KEY,
+        BTTS_NO_PRICE_KEY,
     )
 
 

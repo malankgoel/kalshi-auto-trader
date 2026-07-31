@@ -24,6 +24,9 @@ Order pricing helpers centralize action/side/type/count predicates, limit-price
 checks, max-cost checks, limit buffers, market spend caps, and estimated cost
 math. Market helpers expose quote readers that reject nonfinite and out-of-range
 prices before strategy code sizes orders.
+When a strategy builds an odds row for its model, keep the accepted field names
+behind helpers like `odds_price_keys()` and `complete_odds_price_keys()` so the
+model and market mapper share one contract.
 Model helpers also treat nonfinite numeric inputs as invalid, so strategy code
 should normalize raw feeds before planning bets.
 Ledger helpers expose settlement result parsing, pending-status checks, and

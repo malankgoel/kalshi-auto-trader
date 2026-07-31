@@ -105,6 +105,7 @@ def test_shared_modules_export_expected_entry_points():
             "WINNER_DRAW_PRICE_KEY",
             "WINNER_HOME_PRICE_KEY",
             "build_market_index",
+            "complete_odds_price_keys",
             "date_diff_days",
             "event_codes",
             "event_date",

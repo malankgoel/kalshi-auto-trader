@@ -140,6 +140,13 @@ def test_flag_bets_reads_shared_totals_price_keys():
     assert ou.side == "NO" and ou.market_price == approx(0.40)
 
 
+def test_flag_bets_reads_shared_btts_price_keys():
+    odds = {mm.BTTS_YES_PRICE_KEY: 55, mm.BTTS_NO_PRICE_KEY: 45}
+    bets = model.flag_bets(_game(), odds)
+    btts = [b for b in bets if b.line == "btts"][0]
+    assert btts.side == "NO" and btts.market_price == approx(0.45)
+
+
 # ----------------------------- sizing / params ---------------------------- #
 def test_size_floor_and_caps(monkeypatch):
     assert ex.size_order(4.33, 45.0) == 9

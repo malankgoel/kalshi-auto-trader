@@ -421,6 +421,10 @@ def test_btts_yes_price_key_names_odds_row_field():
     assert mm.BTTS_YES_PRICE_KEY == "btts_yes_price"
 
 
+def test_btts_no_price_key_names_odds_row_field():
+    assert mm.BTTS_NO_PRICE_KEY == "btts_no_price"
+
+
 def test_odds_price_keys_lists_build_odds_row_fields():
     assert mm.odds_price_keys() == (
         mm.WINNER_HOME_PRICE_KEY,

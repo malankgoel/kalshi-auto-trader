@@ -42,6 +42,7 @@ __all__ = [
     "parse_kickoff_utc",
     "staked_fraction",
     "strategy_line_names",
+    "totals_selection_labels",
     "upcoming_games",
 ]
 
@@ -56,6 +57,11 @@ WINNER_LINE = "winner"
 def strategy_line_names() -> tuple[str, ...]:
     """Return strategy line identifiers emitted by this model."""
     return (WINNER_LINE, OVER_UNDER_LINE, BTTS_LINE)
+
+
+def totals_selection_labels() -> tuple[str, str]:
+    """Return the YES/NO-facing labels for the 2.5-goals line."""
+    return (OVER_2_5_SELECTION, UNDER_2_5_SELECTION)
 
 
 # --------------------------------------------------------------------------- #

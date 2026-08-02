@@ -95,6 +95,7 @@ def test_shared_modules_export_expected_entry_points():
             "meets_edge_threshold",
             "parse_kickoff_utc",
             "strategy_line_names",
+            "totals_selection_labels",
         },
         markets: {
             "BTTS_NO_PRICE_KEY",

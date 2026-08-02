@@ -25,6 +25,7 @@ __all__ = [
     "BTTS_LINE",
     "OVER_2_5_SELECTION",
     "OVER_UNDER_LINE",
+    "UNDER_2_5_SELECTION",
     "WINNER_LINE",
     "devig_binary",
     "devig_three_way",
@@ -48,6 +49,7 @@ __all__ = [
 BTTS_LINE = "btts"
 OVER_2_5_SELECTION = "OVER 2.5"
 OVER_UNDER_LINE = "over_under"
+UNDER_2_5_SELECTION = "UNDER 2.5"
 WINNER_LINE = "winner"
 
 

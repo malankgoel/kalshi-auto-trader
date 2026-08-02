@@ -296,7 +296,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
         _c2p(odds.get(markets.BTTS_NO_PRICE_KEY)),
     )
     if by is not None:
-        b = _evaluate("btts", "BTTS YES", "BTTS NO", "",
+        b = _evaluate(BTTS_LINE, "BTTS YES", "BTTS NO", "",
                       game["model_btts"], devig_binary(by, bn), by,
                       bn if bn is not None else probability.probability_complement(by))
         if b:

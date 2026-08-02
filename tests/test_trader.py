@@ -94,6 +94,14 @@ def test_btts_line_constant_names_model_line():
     assert model.BTTS_LINE == "btts"
 
 
+def test_strategy_line_names_lists_model_lines():
+    assert model.strategy_line_names() == (
+        model.WINNER_LINE,
+        model.OVER_UNDER_LINE,
+        model.BTTS_LINE,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

@@ -90,6 +90,10 @@ def test_over_under_line_constant_names_model_line():
     assert model.OVER_UNDER_LINE == "over_under"
 
 
+def test_btts_line_constant_names_model_line():
+    assert model.BTTS_LINE == "btts"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

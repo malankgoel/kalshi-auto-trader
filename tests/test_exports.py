@@ -87,6 +87,7 @@ def test_shared_modules_export_expected_entry_points():
             "BTTS_LINE",
             "OVER_2_5_SELECTION",
             "OVER_UNDER_LINE",
+            "UNDER_2_5_SELECTION",
             "WINNER_LINE",
             "flag_bets",
             "game_key",

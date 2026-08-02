@@ -295,7 +295,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
         _c2p(odds.get(markets.UNDER_2_5_PRICE_KEY)),
     )
     if op is not None:
-        b = _evaluate(OVER_UNDER_LINE, OVER_2_5_SELECTION, "UNDER 2.5", "",
+        b = _evaluate(OVER_UNDER_LINE, OVER_2_5_SELECTION, UNDER_2_5_SELECTION, "",
                       game["model_over_2_5"], devig_binary(op, up), op,
                       up if up is not None else probability.probability_complement(op))
         if b:

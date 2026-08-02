@@ -110,6 +110,13 @@ def test_under_2_5_selection_constant_names_label():
     assert model.UNDER_2_5_SELECTION == "UNDER 2.5"
 
 
+def test_totals_selection_labels_return_over_under_labels():
+    assert model.totals_selection_labels() == (
+        model.OVER_2_5_SELECTION,
+        model.UNDER_2_5_SELECTION,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

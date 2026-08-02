@@ -23,6 +23,7 @@ from kalshi_auto_trader.world_cup import config, markets
 __all__ = [
     "Bet",
     "BTTS_LINE",
+    "OVER_2_5_SELECTION",
     "OVER_UNDER_LINE",
     "WINNER_LINE",
     "devig_binary",
@@ -45,6 +46,7 @@ __all__ = [
 
 
 BTTS_LINE = "btts"
+OVER_2_5_SELECTION = "OVER 2.5"
 OVER_UNDER_LINE = "over_under"
 WINNER_LINE = "winner"
 

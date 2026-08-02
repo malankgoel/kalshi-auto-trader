@@ -102,6 +102,10 @@ def test_strategy_line_names_lists_model_lines():
     )
 
 
+def test_over_2_5_selection_constant_names_label():
+    assert model.OVER_2_5_SELECTION == "OVER 2.5"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

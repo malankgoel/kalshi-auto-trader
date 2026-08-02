@@ -84,6 +84,7 @@ def test_shared_modules_export_expected_entry_points():
         },
         model: {
             "Bet",
+            "OVER_UNDER_LINE",
             "WINNER_LINE",
             "flag_bets",
             "game_key",

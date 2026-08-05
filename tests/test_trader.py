@@ -140,6 +140,10 @@ def test_no_selection_prefix_constant_names_prefix():
     assert model.NO_SELECTION_PREFIX == "NO"
 
 
+def test_winner_selection_labels_build_yes_no_labels():
+    assert model.winner_selection_labels("Argentina") == ("YES Argentina", "NO Argentina")
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

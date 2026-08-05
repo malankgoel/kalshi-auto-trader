@@ -125,6 +125,13 @@ def test_btts_no_selection_constant_names_label():
     assert model.BTTS_NO_SELECTION == "BTTS NO"
 
 
+def test_btts_selection_labels_return_yes_no_labels():
+    assert model.btts_selection_labels() == (
+        model.BTTS_YES_SELECTION,
+        model.BTTS_NO_SELECTION,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

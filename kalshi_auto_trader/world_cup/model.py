@@ -303,8 +303,10 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
             (game["model_draw"], fd, dp, "", "Draw"),
             (game["model_away_win"], fa, ap, game["away_team"], game["away_team"]),
         ):
-            b = _evaluate(WINNER_LINE, f"YES {label}", f"NO {label}", team,
-                          model_p, fair_p, raw_p, probability.probability_complement(raw_p))
+            b = _evaluate(
+                WINNER_LINE, f"{YES_SELECTION_PREFIX} {label}", f"NO {label}", team,
+                model_p, fair_p, raw_p, probability.probability_complement(raw_p),
+            )
             if b:
                 bets.append(b)
 

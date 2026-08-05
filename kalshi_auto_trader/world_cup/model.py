@@ -42,6 +42,7 @@ __all__ = [
     "meets_edge_threshold",
     "next_game",
     "parse_kickoff_utc",
+    "btts_selection_labels",
     "staked_fraction",
     "strategy_line_names",
     "totals_selection_labels",
@@ -66,6 +67,11 @@ def strategy_line_names() -> tuple[str, ...]:
 def totals_selection_labels() -> tuple[str, str]:
     """Return the YES/NO-facing labels for the 2.5-goals line."""
     return (OVER_2_5_SELECTION, UNDER_2_5_SELECTION)
+
+
+def btts_selection_labels() -> tuple[str, str]:
+    """Return the YES/NO-facing labels for both-teams-to-score."""
+    return (BTTS_YES_SELECTION, BTTS_NO_SELECTION)
 
 
 # --------------------------------------------------------------------------- #

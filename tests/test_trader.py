@@ -136,6 +136,10 @@ def test_yes_selection_prefix_constant_names_prefix():
     assert model.YES_SELECTION_PREFIX == "YES"
 
 
+def test_no_selection_prefix_constant_names_prefix():
+    assert model.NO_SELECTION_PREFIX == "NO"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

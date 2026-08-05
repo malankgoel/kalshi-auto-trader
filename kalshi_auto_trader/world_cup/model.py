@@ -49,6 +49,7 @@ __all__ = [
     "strategy_line_names",
     "totals_selection_labels",
     "upcoming_games",
+    "winner_selection_labels",
 ]
 
 
@@ -76,6 +77,11 @@ def totals_selection_labels() -> tuple[str, str]:
 def btts_selection_labels() -> tuple[str, str]:
     """Return the YES/NO-facing labels for both-teams-to-score."""
     return (BTTS_YES_SELECTION, BTTS_NO_SELECTION)
+
+
+def winner_selection_labels(label: str) -> tuple[str, str]:
+    """Return the YES/NO-facing labels for one winner outcome label."""
+    return (f"{YES_SELECTION_PREFIX} {label}", f"{NO_SELECTION_PREFIX} {label}")
 
 
 # --------------------------------------------------------------------------- #

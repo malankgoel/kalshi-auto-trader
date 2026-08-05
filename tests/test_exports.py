@@ -85,6 +85,7 @@ def test_shared_modules_export_expected_entry_points():
         model: {
             "Bet",
             "BTTS_LINE",
+            "BTTS_YES_SELECTION",
             "OVER_2_5_SELECTION",
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",

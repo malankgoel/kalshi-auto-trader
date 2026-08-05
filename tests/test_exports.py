@@ -91,6 +91,7 @@ def test_shared_modules_export_expected_entry_points():
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",
             "WINNER_LINE",
+            "btts_selection_labels",
             "flag_bets",
             "game_key",
             "matches_fixture",

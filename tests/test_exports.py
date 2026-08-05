@@ -87,6 +87,7 @@ def test_shared_modules_export_expected_entry_points():
             "BTTS_LINE",
             "BTTS_NO_SELECTION",
             "BTTS_YES_SELECTION",
+            "NO_SELECTION_PREFIX",
             "OVER_2_5_SELECTION",
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",

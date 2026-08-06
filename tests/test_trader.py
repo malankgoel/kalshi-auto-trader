@@ -156,6 +156,10 @@ def test_model_away_win_key_names_game_field():
     assert model.MODEL_AWAY_WIN_KEY == "model_away_win"
 
 
+def test_model_over_2_5_key_names_game_field():
+    assert model.MODEL_OVER_2_5_KEY == "model_over_2_5"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

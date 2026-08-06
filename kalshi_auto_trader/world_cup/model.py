@@ -315,7 +315,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
         for model_p, fair_p, raw_p, team, label in (
             (game[MODEL_HOME_WIN_KEY], fh, hp, game["home_team"], game["home_team"]),
             (game[MODEL_DRAW_KEY], fd, dp, "", "Draw"),
-            (game["model_away_win"], fa, ap, game["away_team"], game["away_team"]),
+            (game[MODEL_AWAY_WIN_KEY], fa, ap, game["away_team"], game["away_team"]),
         ):
             yes_label, no_label = winner_selection_labels(label)
             b = _evaluate(

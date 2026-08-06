@@ -346,7 +346,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     )
     if by is not None:
         b = _evaluate(BTTS_LINE, BTTS_YES_SELECTION, BTTS_NO_SELECTION, "",
-                      game["model_btts"], devig_binary(by, bn), by,
+                      game[MODEL_BTTS_KEY], devig_binary(by, bn), by,
                       bn if bn is not None else probability.probability_complement(by))
         if b:
             bets.append(b)

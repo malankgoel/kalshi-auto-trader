@@ -90,6 +90,7 @@ def test_shared_modules_export_expected_entry_points():
             "MODEL_AWAY_WIN_KEY",
             "MODEL_DRAW_KEY",
             "MODEL_HOME_WIN_KEY",
+            "MODEL_OVER_2_5_KEY",
             "NO_SELECTION_PREFIX",
             "OVER_2_5_SELECTION",
             "OVER_UNDER_LINE",

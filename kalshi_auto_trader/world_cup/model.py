@@ -333,7 +333,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     )
     if op is not None:
         b = _evaluate(OVER_UNDER_LINE, OVER_2_5_SELECTION, UNDER_2_5_SELECTION, "",
-                      game["model_over_2_5"], devig_binary(op, up), op,
+                      game[MODEL_OVER_2_5_KEY], devig_binary(op, up), op,
                       up if up is not None else probability.probability_complement(op))
         if b:
             bets.append(b)

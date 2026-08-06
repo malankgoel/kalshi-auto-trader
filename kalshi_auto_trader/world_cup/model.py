@@ -312,7 +312,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
         fh, fd, fa = devig_three_way(hp, dp, ap)
         for model_p, fair_p, raw_p, team, label in (
             (game[MODEL_HOME_WIN_KEY], fh, hp, game["home_team"], game["home_team"]),
-            (game["model_draw"], fd, dp, "", "Draw"),
+            (game[MODEL_DRAW_KEY], fd, dp, "", "Draw"),
             (game["model_away_win"], fa, ap, game["away_team"], game["away_team"]),
         ):
             yes_label, no_label = winner_selection_labels(label)

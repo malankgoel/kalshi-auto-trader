@@ -144,6 +144,10 @@ def test_winner_selection_labels_build_yes_no_labels():
     assert model.winner_selection_labels("Argentina") == ("YES Argentina", "NO Argentina")
 
 
+def test_model_home_win_key_names_game_field():
+    assert model.MODEL_HOME_WIN_KEY == "model_home_win"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

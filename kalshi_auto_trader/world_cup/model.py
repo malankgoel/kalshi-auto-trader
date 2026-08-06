@@ -25,6 +25,7 @@ __all__ = [
     "BTTS_LINE",
     "BTTS_NO_SELECTION",
     "BTTS_YES_SELECTION",
+    "MODEL_AWAY_WIN_KEY",
     "MODEL_DRAW_KEY",
     "MODEL_HOME_WIN_KEY",
     "NO_SELECTION_PREFIX",
@@ -58,6 +59,7 @@ __all__ = [
 BTTS_LINE = "btts"
 BTTS_NO_SELECTION = "BTTS NO"
 BTTS_YES_SELECTION = "BTTS YES"
+MODEL_AWAY_WIN_KEY = "model_away_win"
 MODEL_DRAW_KEY = "model_draw"
 MODEL_HOME_WIN_KEY = "model_home_win"
 NO_SELECTION_PREFIX = "NO"

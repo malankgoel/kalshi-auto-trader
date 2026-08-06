@@ -160,6 +160,10 @@ def test_model_over_2_5_key_names_game_field():
     assert model.MODEL_OVER_2_5_KEY == "model_over_2_5"
 
 
+def test_model_btts_key_names_game_field():
+    assert model.MODEL_BTTS_KEY == "model_btts"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

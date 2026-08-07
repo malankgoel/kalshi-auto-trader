@@ -50,6 +50,7 @@ __all__ = [
     "load_predictions",
     "load_schedule",
     "meets_edge_threshold",
+    "model_probability_keys",
     "next_game",
     "parse_kickoff_utc",
     "btts_selection_labels",
@@ -104,6 +105,11 @@ def winner_selection_labels(label: str) -> tuple[str, str]:
 def winner_model_keys() -> tuple[str, str, str]:
     """Return game-row model probability keys for three-way winner outcomes."""
     return (MODEL_HOME_WIN_KEY, MODEL_DRAW_KEY, MODEL_AWAY_WIN_KEY)
+
+
+def model_probability_keys() -> tuple[str, ...]:
+    """Return every game-row model probability key consumed by flag_bets."""
+    return winner_model_keys() + (MODEL_OVER_2_5_KEY, MODEL_BTTS_KEY)
 
 
 # --------------------------------------------------------------------------- #

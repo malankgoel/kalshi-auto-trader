@@ -176,6 +176,14 @@ def test_draw_selection_constant_names_label():
     assert model.DRAW_SELECTION == "Draw"
 
 
+def test_winner_model_keys_list_three_way_probability_fields():
+    assert model.winner_model_keys() == (
+        model.MODEL_HOME_WIN_KEY,
+        model.MODEL_DRAW_KEY,
+        model.MODEL_AWAY_WIN_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

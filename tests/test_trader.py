@@ -221,6 +221,14 @@ def test_fixture_metadata_keys_list_non_team_fields():
     )
 
 
+def test_game_row_keys_list_fixture_and_model_fields():
+    assert model.game_row_keys() == (
+        *model.fixture_metadata_keys(),
+        *model.fixture_team_keys(),
+        *model.model_probability_keys(),
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

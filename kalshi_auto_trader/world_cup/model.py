@@ -28,6 +28,7 @@ __all__ = [
     "BTTS_YES_SELECTION",
     "DATE_KEY",
     "DRAW_SELECTION",
+    "GROUP_KEY",
     "HOME_TEAM_KEY",
     "KICKOFF_UTC_KEY",
     "MATCH_ID_KEY",
@@ -73,6 +74,7 @@ BTTS_NO_SELECTION = "BTTS NO"
 BTTS_YES_SELECTION = "BTTS YES"
 DATE_KEY = "date"
 DRAW_SELECTION = "Draw"
+GROUP_KEY = "group"
 HOME_TEAM_KEY = "home_team"
 KICKOFF_UTC_KEY = "kickoff_utc"
 MATCH_ID_KEY = "match_id"

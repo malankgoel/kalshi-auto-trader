@@ -26,6 +26,7 @@ __all__ = [
     "BTTS_LINE",
     "BTTS_NO_SELECTION",
     "BTTS_YES_SELECTION",
+    "DRAW_SELECTION",
     "HOME_TEAM_KEY",
     "MODEL_BTTS_KEY",
     "MODEL_AWAY_WIN_KEY",
@@ -64,6 +65,7 @@ AWAY_TEAM_KEY = "away_team"
 BTTS_LINE = "btts"
 BTTS_NO_SELECTION = "BTTS NO"
 BTTS_YES_SELECTION = "BTTS YES"
+DRAW_SELECTION = "Draw"
 HOME_TEAM_KEY = "home_team"
 MODEL_BTTS_KEY = "model_btts"
 MODEL_AWAY_WIN_KEY = "model_away_win"

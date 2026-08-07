@@ -212,6 +212,15 @@ def test_group_key_names_game_field():
     assert model.GROUP_KEY == "group"
 
 
+def test_fixture_metadata_keys_list_non_team_fields():
+    assert model.fixture_metadata_keys() == (
+        model.MATCH_ID_KEY,
+        model.DATE_KEY,
+        model.KICKOFF_UTC_KEY,
+        model.GROUP_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

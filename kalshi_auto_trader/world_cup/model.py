@@ -202,13 +202,13 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         if kt is None or kt <= now:
             continue
         games.append({
-            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc["date"], "kickoff_utc": ko,
+            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc["date"], KICKOFF_UTC_KEY: ko,
             "group": pred["group"], "home_team": home, "away_team": away,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],
             "model_btts": pred["btts"],
         })
-    games.sort(key=lambda g: (g["kickoff_utc"], g["match_id"]))
+    games.sort(key=lambda g: (g[KICKOFF_UTC_KEY], g[MATCH_ID_KEY]))
     return games
 
 
@@ -235,7 +235,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
         ko = kickoff_utc(sc["date"], sc["time"], sc["utc_offset"]) if sc else ""
         return {
             MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc.get("date", ""),
-            "kickoff_utc": ko, "group": pred["group"], "home_team": h, "away_team": a,
+            KICKOFF_UTC_KEY: ko, "group": pred["group"], "home_team": h, "away_team": a,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],
             "model_btts": pred["btts"],

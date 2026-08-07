@@ -109,6 +109,7 @@ def test_shared_modules_export_expected_entry_points():
             "parse_kickoff_utc",
             "strategy_line_names",
             "totals_selection_labels",
+            "winner_model_keys",
             "winner_selection_labels",
         },
         markets: {

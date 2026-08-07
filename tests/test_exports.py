@@ -83,6 +83,7 @@ def test_shared_modules_export_expected_entry_points():
             "order_request_body",
         },
         model: {
+            "AWAY_TEAM_KEY",
             "Bet",
             "BTTS_LINE",
             "BTTS_NO_SELECTION",

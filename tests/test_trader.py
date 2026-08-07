@@ -184,6 +184,14 @@ def test_winner_model_keys_list_three_way_probability_fields():
     )
 
 
+def test_model_probability_keys_list_all_model_probability_fields():
+    assert model.model_probability_keys() == (
+        *model.winner_model_keys(),
+        model.MODEL_OVER_2_5_KEY,
+        model.MODEL_BTTS_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

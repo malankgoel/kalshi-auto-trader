@@ -204,6 +204,10 @@ def test_date_key_names_game_field():
     assert model.DATE_KEY == "date"
 
 
+def test_kickoff_utc_key_names_game_field():
+    assert model.KICKOFF_UTC_KEY == "kickoff_utc"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

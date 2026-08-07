@@ -57,6 +57,7 @@ __all__ = [
     "strategy_line_names",
     "totals_selection_labels",
     "upcoming_games",
+    "winner_model_keys",
     "winner_selection_labels",
 ]
 
@@ -98,6 +99,11 @@ def btts_selection_labels() -> tuple[str, str]:
 def winner_selection_labels(label: str) -> tuple[str, str]:
     """Return the YES/NO-facing labels for one winner outcome label."""
     return (f"{YES_SELECTION_PREFIX} {label}", f"{NO_SELECTION_PREFIX} {label}")
+
+
+def winner_model_keys() -> tuple[str, str, str]:
+    """Return game-row model probability keys for three-way winner outcomes."""
+    return (MODEL_HOME_WIN_KEY, MODEL_DRAW_KEY, MODEL_AWAY_WIN_KEY)
 
 
 # --------------------------------------------------------------------------- #

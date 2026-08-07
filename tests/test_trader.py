@@ -168,6 +168,10 @@ def test_home_team_key_names_game_field():
     assert model.HOME_TEAM_KEY == "home_team"
 
 
+def test_away_team_key_names_game_field():
+    assert model.AWAY_TEAM_KEY == "away_team"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

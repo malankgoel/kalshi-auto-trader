@@ -29,6 +29,7 @@ __all__ = [
     "DATE_KEY",
     "DRAW_SELECTION",
     "HOME_TEAM_KEY",
+    "KICKOFF_UTC_KEY",
     "MATCH_ID_KEY",
     "MODEL_BTTS_KEY",
     "MODEL_AWAY_WIN_KEY",
@@ -73,6 +74,7 @@ BTTS_YES_SELECTION = "BTTS YES"
 DATE_KEY = "date"
 DRAW_SELECTION = "Draw"
 HOME_TEAM_KEY = "home_team"
+KICKOFF_UTC_KEY = "kickoff_utc"
 MATCH_ID_KEY = "match_id"
 MODEL_BTTS_KEY = "model_btts"
 MODEL_AWAY_WIN_KEY = "model_away_win"

@@ -211,7 +211,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
             continue
         games.append({
             MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc["date"], KICKOFF_UTC_KEY: ko,
-            GROUP_KEY: pred["group"], "home_team": home, "away_team": away,
+            GROUP_KEY: pred["group"], HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],
             "model_btts": pred["btts"],

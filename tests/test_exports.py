@@ -87,6 +87,7 @@ def test_shared_modules_export_expected_entry_points():
             "BTTS_LINE",
             "BTTS_NO_SELECTION",
             "BTTS_YES_SELECTION",
+            "HOME_TEAM_KEY",
             "MODEL_BTTS_KEY",
             "MODEL_AWAY_WIN_KEY",
             "MODEL_DRAW_KEY",

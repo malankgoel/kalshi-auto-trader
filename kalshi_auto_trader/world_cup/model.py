@@ -43,6 +43,7 @@ __all__ = [
     "devig_three_way",
     "find_game",
     "flag_bets",
+    "fixture_team_keys",
     "game_key",
     "kelly_fraction",
     "matches_fixture",
@@ -110,6 +111,11 @@ def winner_model_keys() -> tuple[str, str, str]:
 def model_probability_keys() -> tuple[str, ...]:
     """Return every game-row model probability key consumed by flag_bets."""
     return winner_model_keys() + (MODEL_OVER_2_5_KEY, MODEL_BTTS_KEY)
+
+
+def fixture_team_keys() -> tuple[str, str]:
+    """Return game-row keys identifying the two fixture teams."""
+    return (HOME_TEAM_KEY, AWAY_TEAM_KEY)
 
 
 # --------------------------------------------------------------------------- #

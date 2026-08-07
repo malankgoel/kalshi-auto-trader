@@ -48,6 +48,7 @@ __all__ = [
     "find_game",
     "flag_bets",
     "fixture_team_keys",
+    "fixture_metadata_keys",
     "game_key",
     "kelly_fraction",
     "matches_fixture",
@@ -124,6 +125,11 @@ def model_probability_keys() -> tuple[str, ...]:
 def fixture_team_keys() -> tuple[str, str]:
     """Return game-row keys identifying the two fixture teams."""
     return (HOME_TEAM_KEY, AWAY_TEAM_KEY)
+
+
+def fixture_metadata_keys() -> tuple[str, ...]:
+    """Return non-team fixture metadata keys emitted on game rows."""
+    return (MATCH_ID_KEY, DATE_KEY, KICKOFF_UTC_KEY, GROUP_KEY)
 
 
 # --------------------------------------------------------------------------- #

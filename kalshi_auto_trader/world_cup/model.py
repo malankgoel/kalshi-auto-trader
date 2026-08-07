@@ -319,7 +319,7 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
     if None not in (hp, dp, ap):
         fh, fd, fa = devig_three_way(hp, dp, ap)
         for model_p, fair_p, raw_p, team, label in (
-            (game[MODEL_HOME_WIN_KEY], fh, hp, game["home_team"], game["home_team"]),
+            (game[MODEL_HOME_WIN_KEY], fh, hp, game[HOME_TEAM_KEY], game[HOME_TEAM_KEY]),
             (game[MODEL_DRAW_KEY], fd, dp, "", "Draw"),
             (game[MODEL_AWAY_WIN_KEY], fa, ap, game["away_team"], game["away_team"]),
         ):

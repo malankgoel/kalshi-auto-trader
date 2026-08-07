@@ -88,6 +88,7 @@ def test_shared_modules_export_expected_entry_points():
             "BTTS_LINE",
             "BTTS_NO_SELECTION",
             "BTTS_YES_SELECTION",
+            "DATE_KEY",
             "DRAW_SELECTION",
             "HOME_TEAM_KEY",
             "MATCH_ID_KEY",

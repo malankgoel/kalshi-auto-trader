@@ -22,6 +22,7 @@ from kalshi_auto_trader.world_cup import config, markets
 
 __all__ = [
     "Bet",
+    "AWAY_TEAM_KEY",
     "BTTS_LINE",
     "BTTS_NO_SELECTION",
     "BTTS_YES_SELECTION",
@@ -59,6 +60,7 @@ __all__ = [
 ]
 
 
+AWAY_TEAM_KEY = "away_team"
 BTTS_LINE = "btts"
 BTTS_NO_SELECTION = "BTTS NO"
 BTTS_YES_SELECTION = "BTTS YES"

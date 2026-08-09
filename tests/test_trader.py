@@ -249,6 +249,16 @@ def test_prediction_btts_key_names_source_field():
     assert model.PRED_BTTS_KEY == "both_teams_to_score"
 
 
+def test_prediction_probability_keys_list_source_probability_fields():
+    assert model.prediction_probability_keys() == (
+        model.PRED_HOME_WIN_KEY,
+        model.PRED_DRAW_KEY,
+        model.PRED_AWAY_WIN_KEY,
+        model.PRED_OVER_2_5_KEY,
+        model.PRED_BTTS_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

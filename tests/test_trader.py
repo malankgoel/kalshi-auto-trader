@@ -229,6 +229,10 @@ def test_game_row_keys_list_fixture_and_model_fields():
     )
 
 
+def test_prediction_home_win_key_names_source_field():
+    assert model.PRED_HOME_WIN_KEY == "home_win"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

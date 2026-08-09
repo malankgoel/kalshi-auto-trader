@@ -66,6 +66,7 @@ __all__ = [
     "next_game",
     "parse_kickoff_utc",
     "btts_selection_labels",
+    "prediction_probability_keys",
     "staked_fraction",
     "strategy_line_names",
     "totals_selection_labels",
@@ -146,6 +147,17 @@ def fixture_metadata_keys() -> tuple[str, ...]:
 def game_row_keys() -> tuple[str, ...]:
     """Return all non-derived game-row keys emitted by schedule/model joins."""
     return fixture_metadata_keys() + fixture_team_keys() + model_probability_keys()
+
+
+def prediction_probability_keys() -> tuple[str, ...]:
+    """Return source CSV probability keys consumed by load_predictions."""
+    return (
+        PRED_HOME_WIN_KEY,
+        PRED_DRAW_KEY,
+        PRED_AWAY_WIN_KEY,
+        PRED_OVER_2_5_KEY,
+        PRED_BTTS_KEY,
+    )
 
 
 # --------------------------------------------------------------------------- #

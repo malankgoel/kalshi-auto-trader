@@ -38,6 +38,7 @@ __all__ = [
     "MODEL_HOME_WIN_KEY",
     "MODEL_OVER_2_5_KEY",
     "NO_SELECTION_PREFIX",
+    "PRED_AWAY_WIN_KEY",
     "PRED_DRAW_KEY",
     "PRED_HOME_WIN_KEY",
     "YES_SELECTION_PREFIX",
@@ -88,6 +89,7 @@ MODEL_DRAW_KEY = "model_draw"
 MODEL_HOME_WIN_KEY = "model_home_win"
 MODEL_OVER_2_5_KEY = "model_over_2_5"
 NO_SELECTION_PREFIX = "NO"
+PRED_AWAY_WIN_KEY = "away_win"
 PRED_DRAW_KEY = "draw"
 PRED_HOME_WIN_KEY = "home_win"
 YES_SELECTION_PREFIX = "YES"

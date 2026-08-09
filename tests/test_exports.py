@@ -120,6 +120,7 @@ def test_shared_modules_export_expected_entry_points():
             "meets_edge_threshold",
             "model_probability_keys",
             "parse_kickoff_utc",
+            "prediction_probability_keys",
             "strategy_line_names",
             "totals_selection_labels",
             "winner_model_keys",

@@ -101,6 +101,7 @@ def test_shared_modules_export_expected_entry_points():
             "MODEL_OVER_2_5_KEY",
             "NO_SELECTION_PREFIX",
             "OVER_2_5_SELECTION",
+            "PRED_HOME_WIN_KEY",
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",
             "WINNER_LINE",

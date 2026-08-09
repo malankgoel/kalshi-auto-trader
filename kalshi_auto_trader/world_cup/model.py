@@ -39,6 +39,7 @@ __all__ = [
     "MODEL_OVER_2_5_KEY",
     "NO_SELECTION_PREFIX",
     "PRED_AWAY_WIN_KEY",
+    "PRED_BTTS_KEY",
     "PRED_DRAW_KEY",
     "PRED_HOME_WIN_KEY",
     "PRED_OVER_2_5_KEY",
@@ -91,6 +92,7 @@ MODEL_HOME_WIN_KEY = "model_home_win"
 MODEL_OVER_2_5_KEY = "model_over_2_5"
 NO_SELECTION_PREFIX = "NO"
 PRED_AWAY_WIN_KEY = "away_win"
+PRED_BTTS_KEY = "both_teams_to_score"
 PRED_DRAW_KEY = "draw"
 PRED_HOME_WIN_KEY = "home_win"
 PRED_OVER_2_5_KEY = "over_2_5"

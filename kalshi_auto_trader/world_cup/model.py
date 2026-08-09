@@ -160,7 +160,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
         out[game_key(r["home_team"], r["away_team"])] = {
             "match_id": r.get("match_id", ""),
             "group": r.get("group", ""),
-            "home_win": float(r["home_win"]),
+            "home_win": float(r[PRED_HOME_WIN_KEY]),
             "draw": float(r["draw"]),
             "away_win": float(r["away_win"]),
             "over_2_5": float(r["over_2_5"]),

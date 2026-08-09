@@ -166,7 +166,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
             "group": r.get("group", ""),
             "home_win": float(r[PRED_HOME_WIN_KEY]),
             "draw": float(r[PRED_DRAW_KEY]),
-            "away_win": float(r["away_win"]),
+            "away_win": float(r[PRED_AWAY_WIN_KEY]),
             "over_2_5": float(r["over_2_5"]),
             "under_2_5": float(r["under_2_5"]),
             "btts": float(r["both_teams_to_score"]),

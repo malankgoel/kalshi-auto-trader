@@ -108,6 +108,7 @@ def test_shared_modules_export_expected_entry_points():
             "PRED_HOME_WIN_KEY",
             "PRED_MATCH_ID_KEY",
             "PRED_OVER_2_5_KEY",
+            "PRED_UNDER_2_5_KEY",
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",
             "WINNER_LINE",

@@ -251,12 +251,12 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         sc = sched.get((home, away))
         if not sc:
             continue
-        ko = kickoff_utc(sc["date"], sc["time"], sc["utc_offset"])
+        ko = kickoff_utc(sc[SCHEDULE_DATE_KEY], sc["time"], sc["utc_offset"])
         kt = _parse(ko)
         if kt is None or kt <= now:
             continue
         games.append({
-            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc["date"], KICKOFF_UTC_KEY: ko,
+            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc[SCHEDULE_DATE_KEY], KICKOFF_UTC_KEY: ko,
             GROUP_KEY: pred["group"], HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],
@@ -286,9 +286,9 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
         if not match_id and not (home and away):
             continue
         sc = sched.get((h, a), {})
-        ko = kickoff_utc(sc["date"], sc["time"], sc["utc_offset"]) if sc else ""
+        ko = kickoff_utc(sc[SCHEDULE_DATE_KEY], sc["time"], sc["utc_offset"]) if sc else ""
         return {
-            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc.get("date", ""),
+            MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc.get(SCHEDULE_DATE_KEY, ""),
             KICKOFF_UTC_KEY: ko, GROUP_KEY: pred["group"], HOME_TEAM_KEY: h, AWAY_TEAM_KEY: a,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],

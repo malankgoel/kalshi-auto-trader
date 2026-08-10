@@ -180,7 +180,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
     out: dict[tuple[str, str], dict] = {}
     for r in _read_csv(config.PREDICTIONS_FILE):
         out[game_key(r["home_team"], r["away_team"])] = {
-            "match_id": r.get("match_id", ""),
+            "match_id": r.get(PRED_MATCH_ID_KEY, ""),
             "group": r.get("group", ""),
             "home_win": float(r[PRED_HOME_WIN_KEY]),
             "draw": float(r[PRED_DRAW_KEY]),

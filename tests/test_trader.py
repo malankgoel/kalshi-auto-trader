@@ -278,6 +278,10 @@ def test_prediction_metadata_keys_list_source_metadata_fields():
     )
 
 
+def test_schedule_home_team_key_names_source_field():
+    assert model.SCHEDULE_HOME_TEAM_KEY == "home_team"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

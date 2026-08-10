@@ -45,6 +45,7 @@ __all__ = [
     "PRED_HOME_WIN_KEY",
     "PRED_MATCH_ID_KEY",
     "PRED_OVER_2_5_KEY",
+    "PRED_UNDER_2_5_KEY",
     "YES_SELECTION_PREFIX",
     "OVER_2_5_SELECTION",
     "OVER_UNDER_LINE",
@@ -101,6 +102,7 @@ PRED_GROUP_KEY = "group"
 PRED_HOME_WIN_KEY = "home_win"
 PRED_MATCH_ID_KEY = "match_id"
 PRED_OVER_2_5_KEY = "over_2_5"
+PRED_UNDER_2_5_KEY = "under_2_5"
 YES_SELECTION_PREFIX = "YES"
 OVER_2_5_SELECTION = "OVER 2.5"
 OVER_UNDER_LINE = "over_under"

@@ -69,6 +69,7 @@ __all__ = [
     "next_game",
     "parse_kickoff_utc",
     "btts_selection_labels",
+    "prediction_metadata_keys",
     "prediction_probability_keys",
     "staked_fraction",
     "strategy_line_names",
@@ -164,6 +165,11 @@ def prediction_probability_keys() -> tuple[str, ...]:
         PRED_OVER_2_5_KEY,
         PRED_BTTS_KEY,
     )
+
+
+def prediction_metadata_keys() -> tuple[str, str]:
+    """Return source CSV metadata keys consumed by load_predictions."""
+    return (PRED_MATCH_ID_KEY, PRED_GROUP_KEY)
 
 
 # --------------------------------------------------------------------------- #

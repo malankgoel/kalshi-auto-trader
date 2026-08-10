@@ -271,6 +271,13 @@ def test_prediction_probability_keys_list_source_probability_fields():
     )
 
 
+def test_prediction_metadata_keys_list_source_metadata_fields():
+    assert model.prediction_metadata_keys() == (
+        model.PRED_MATCH_ID_KEY,
+        model.PRED_GROUP_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

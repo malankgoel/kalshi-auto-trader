@@ -305,6 +305,14 @@ def test_schedule_team_keys_list_source_team_fields():
     )
 
 
+def test_schedule_metadata_keys_list_timing_fields():
+    assert model.schedule_metadata_keys() == (
+        model.SCHEDULE_DATE_KEY,
+        model.SCHEDULE_TIME_KEY,
+        model.SCHEDULE_UTC_OFFSET_KEY,
+    )
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

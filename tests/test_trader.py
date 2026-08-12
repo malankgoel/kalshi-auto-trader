@@ -294,6 +294,10 @@ def test_schedule_time_key_names_source_field():
     assert model.SCHEDULE_TIME_KEY == "time"
 
 
+def test_schedule_utc_offset_key_names_source_field():
+    assert model.SCHEDULE_UTC_OFFSET_KEY == "utc_offset"
+
+
 def test_schedule_team_keys_list_source_team_fields():
     assert model.schedule_team_keys() == (
         model.SCHEDULE_HOME_TEAM_KEY,

@@ -112,6 +112,7 @@ def test_shared_modules_export_expected_entry_points():
             "SCHEDULE_AWAY_TEAM_KEY",
             "SCHEDULE_DATE_KEY",
             "SCHEDULE_HOME_TEAM_KEY",
+            "SCHEDULE_TIME_KEY",
             "OVER_UNDER_LINE",
             "UNDER_2_5_SELECTION",
             "WINNER_LINE",

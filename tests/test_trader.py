@@ -290,6 +290,10 @@ def test_schedule_date_key_names_source_field():
     assert model.SCHEDULE_DATE_KEY == "date"
 
 
+def test_schedule_time_key_names_source_field():
+    assert model.SCHEDULE_TIME_KEY == "time"
+
+
 def test_schedule_team_keys_list_source_team_fields():
     assert model.schedule_team_keys() == (
         model.SCHEDULE_HOME_TEAM_KEY,

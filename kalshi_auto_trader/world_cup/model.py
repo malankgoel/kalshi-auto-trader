@@ -225,8 +225,8 @@ def load_predictions() -> dict[tuple[str, str], dict]:
 
 
 def load_schedule() -> dict[tuple[str, str], dict]:
-    return {game_key(r[SCHEDULE_HOME_TEAM_KEY], r[SCHEDULE_AWAY_TEAM_KEY]): r
-            for r in _read_csv(config.SCHEDULE_FILE)}
+    home_key, away_key = schedule_team_keys()
+    return {game_key(r[home_key], r[away_key]): r for r in _read_csv(config.SCHEDULE_FILE)}
 
 
 def kickoff_utc(date_str: str, time_str: str, utc_offset: str) -> str:

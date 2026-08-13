@@ -295,9 +295,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         sc = sched.get((home, away))
         if not sc:
             continue
-        ko = kickoff_utc(
-            sc[SCHEDULE_DATE_KEY], sc[SCHEDULE_TIME_KEY], sc[SCHEDULE_UTC_OFFSET_KEY]
-        )
+        ko = schedule_row_kickoff_utc(sc)
         kt = _parse(ko)
         if kt is None or kt <= now:
             continue

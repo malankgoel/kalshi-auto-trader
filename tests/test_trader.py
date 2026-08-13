@@ -237,6 +237,10 @@ def test_prediction_home_team_key_names_source_field():
     assert model.PRED_HOME_TEAM_KEY == "home_team"
 
 
+def test_prediction_away_team_key_names_source_field():
+    assert model.PRED_AWAY_TEAM_KEY == "away_team"
+
+
 def test_prediction_match_id_key_names_source_field():
     assert model.PRED_MATCH_ID_KEY == "match_id"
 

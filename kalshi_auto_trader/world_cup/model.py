@@ -78,6 +78,7 @@ __all__ = [
     "btts_selection_labels",
     "prediction_metadata_keys",
     "prediction_probability_keys",
+    "prediction_team_keys",
     "schedule_metadata_keys",
     "schedule_team_keys",
     "staked_fraction",
@@ -196,6 +197,11 @@ def prediction_probability_keys() -> tuple[str, ...]:
 def prediction_metadata_keys() -> tuple[str, str]:
     """Return source CSV metadata keys consumed by load_predictions."""
     return (PRED_MATCH_ID_KEY, PRED_GROUP_KEY)
+
+
+def prediction_team_keys() -> tuple[str, str]:
+    """Return source prediction CSV keys identifying the two fixture teams."""
+    return (PRED_HOME_TEAM_KEY, PRED_AWAY_TEAM_KEY)
 
 
 # --------------------------------------------------------------------------- #

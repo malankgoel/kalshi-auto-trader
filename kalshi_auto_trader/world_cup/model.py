@@ -257,6 +257,13 @@ def kickoff_utc(date_str: str, time_str: str, utc_offset: str) -> str:
     return utc.replace(tzinfo=dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
+def schedule_row_kickoff_utc(row: dict) -> str:
+    """Return a schedule row's kickoff timestamp normalized to UTC."""
+    return kickoff_utc(
+        row[SCHEDULE_DATE_KEY], row[SCHEDULE_TIME_KEY], row[SCHEDULE_UTC_OFFSET_KEY]
+    )
+
+
 def _now() -> dt.datetime:
     return dt.datetime.now(dt.timezone.utc)
 

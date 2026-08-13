@@ -330,12 +330,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
         if not match_id and not (home and away):
             continue
         sc = sched.get((h, a), {})
-        ko = (
-            kickoff_utc(
-                sc[SCHEDULE_DATE_KEY], sc[SCHEDULE_TIME_KEY], sc[SCHEDULE_UTC_OFFSET_KEY]
-            )
-            if sc else ""
-        )
+        ko = schedule_row_kickoff_utc(sc) if sc else ""
         return {
             MATCH_ID_KEY: pred["match_id"], DATE_KEY: sc.get(SCHEDULE_DATE_KEY, ""),
             KICKOFF_UTC_KEY: ko, GROUP_KEY: pred["group"], HOME_TEAM_KEY: h, AWAY_TEAM_KEY: a,

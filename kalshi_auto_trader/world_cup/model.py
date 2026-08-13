@@ -80,6 +80,7 @@ __all__ = [
     "prediction_probability_keys",
     "prediction_team_keys",
     "prediction_value_keys",
+    "schedule_row_kickoff_utc",
     "schedule_metadata_keys",
     "schedule_team_keys",
     "staked_fraction",

@@ -335,6 +335,15 @@ def test_schedule_metadata_keys_list_timing_fields():
     )
 
 
+def test_schedule_row_kickoff_utc_reads_schedule_source_fields():
+    row = {
+        model.SCHEDULE_DATE_KEY: "2026-06-16",
+        model.SCHEDULE_TIME_KEY: "20:00",
+        model.SCHEDULE_UTC_OFFSET_KEY: "-4",
+    }
+    assert model.schedule_row_kickoff_utc(row) == "2026-06-17T00:00:00Z"
+
+
 def test_matches_fixture_is_case_insensitive():
     assert model.matches_fixture("Argentina", "Algeria", "argentina", "ALGERIA")
     assert not model.matches_fixture("Argentina", "Algeria", "France", "Algeria")

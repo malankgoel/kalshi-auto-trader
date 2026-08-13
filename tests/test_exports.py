@@ -135,6 +135,7 @@ def test_shared_modules_export_expected_entry_points():
             "prediction_team_keys",
             "prediction_value_keys",
             "schedule_metadata_keys",
+            "schedule_row_kickoff_utc",
             "schedule_team_keys",
             "strategy_line_names",
             "totals_selection_labels",

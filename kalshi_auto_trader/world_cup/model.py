@@ -220,8 +220,9 @@ def _read_csv(path: str | PathLike[str]) -> list[dict]:
 def load_predictions() -> dict[tuple[str, str], dict]:
     """Pre-tournament model probabilities keyed by (home_team, away_team)."""
     out: dict[tuple[str, str], dict] = {}
+    home_key, away_key = prediction_team_keys()
     for r in _read_csv(config.PREDICTIONS_FILE):
-        out[game_key(r[PRED_HOME_TEAM_KEY], r[PRED_AWAY_TEAM_KEY])] = {
+        out[game_key(r[home_key], r[away_key])] = {
             "match_id": r.get(PRED_MATCH_ID_KEY, ""),
             "group": r.get(PRED_GROUP_KEY, ""),
             "home_win": float(r[PRED_HOME_WIN_KEY]),

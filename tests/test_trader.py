@@ -279,6 +279,13 @@ def test_prediction_probability_keys_list_source_probability_fields():
     )
 
 
+def test_prediction_value_keys_list_numeric_source_fields():
+    assert model.prediction_value_keys() == (
+        *model.prediction_probability_keys(),
+        model.PRED_UNDER_2_5_KEY,
+    )
+
+
 def test_prediction_metadata_keys_list_source_metadata_fields():
     assert model.prediction_metadata_keys() == (
         model.PRED_MATCH_ID_KEY,

@@ -101,6 +101,7 @@ def test_shared_modules_export_expected_entry_points():
             "MODEL_OVER_2_5_KEY",
             "NO_SELECTION_PREFIX",
             "OVER_2_5_SELECTION",
+            "PRED_AWAY_TEAM_KEY",
             "PRED_AWAY_WIN_KEY",
             "PRED_BTTS_KEY",
             "PRED_DRAW_KEY",

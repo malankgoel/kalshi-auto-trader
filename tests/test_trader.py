@@ -312,6 +312,17 @@ def test_prediction_row_key_reads_source_team_fields():
     assert model.prediction_row_key(row) == ("Argentina", "Algeria")
 
 
+def test_prediction_row_metadata_reads_optional_source_fields():
+    row = {
+        model.PRED_MATCH_ID_KEY: "1",
+        model.PRED_GROUP_KEY: "A",
+    }
+    assert model.prediction_row_metadata(row) == {
+        model.PRED_MATCH_ID_KEY: "1",
+        model.PRED_GROUP_KEY: "A",
+    }
+
+
 def test_schedule_home_team_key_names_source_field():
     assert model.SCHEDULE_HOME_TEAM_KEY == "home_team"
 

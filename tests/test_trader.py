@@ -269,6 +269,10 @@ def test_prediction_btts_key_names_source_field():
     assert model.PRED_BTTS_KEY == "both_teams_to_score"
 
 
+def test_prediction_btts_value_key_names_loaded_field():
+    assert model.PRED_BTTS_VALUE_KEY == "btts"
+
+
 def test_prediction_probability_keys_list_source_probability_fields():
     assert model.prediction_probability_keys() == (
         model.PRED_HOME_WIN_KEY,

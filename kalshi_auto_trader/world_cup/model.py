@@ -243,7 +243,7 @@ def load_predictions() -> dict[tuple[str, str], dict]:
             "away_win": float(r[away_win_key]),
             "over_2_5": float(r[over_key]),
             "under_2_5": float(r[under_key]),
-            "btts": float(r[btts_key]),
+            PRED_BTTS_VALUE_KEY: float(r[btts_key]),
         }
     return out
 

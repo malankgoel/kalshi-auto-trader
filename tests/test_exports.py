@@ -135,6 +135,7 @@ def test_shared_modules_export_expected_entry_points():
             "prediction_probability_keys",
             "prediction_row_metadata",
             "prediction_row_key",
+            "prediction_row_values",
             "prediction_team_keys",
             "prediction_value_keys",
             "schedule_metadata_keys",

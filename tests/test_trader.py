@@ -290,6 +290,25 @@ def test_prediction_value_keys_list_numeric_source_fields():
     )
 
 
+def test_prediction_row_values_cast_source_fields_to_floats():
+    row = {
+        model.PRED_HOME_WIN_KEY: "0.5",
+        model.PRED_DRAW_KEY: "0.25",
+        model.PRED_AWAY_WIN_KEY: "0.25",
+        model.PRED_OVER_2_5_KEY: "0.6",
+        model.PRED_UNDER_2_5_KEY: "0.4",
+        model.PRED_BTTS_KEY: "0.55",
+    }
+    assert model.prediction_row_values(row) == {
+        model.PRED_HOME_WIN_KEY: 0.5,
+        model.PRED_DRAW_KEY: 0.25,
+        model.PRED_AWAY_WIN_KEY: 0.25,
+        model.PRED_OVER_2_5_KEY: 0.6,
+        model.PRED_UNDER_2_5_KEY: 0.4,
+        model.PRED_BTTS_VALUE_KEY: 0.55,
+    }
+
+
 def test_prediction_metadata_keys_list_source_metadata_fields():
     assert model.prediction_metadata_keys() == (
         model.PRED_MATCH_ID_KEY,

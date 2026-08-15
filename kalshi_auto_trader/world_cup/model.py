@@ -83,6 +83,7 @@ __all__ = [
     "prediction_row_key",
     "prediction_team_keys",
     "prediction_value_keys",
+    "prediction_row_values",
     "schedule_row_kickoff_utc",
     "schedule_metadata_keys",
     "schedule_team_keys",
@@ -227,6 +228,21 @@ def prediction_row_metadata(row: dict) -> dict[str, str]:
     return {
         PRED_MATCH_ID_KEY: row.get(match_id_key, ""),
         PRED_GROUP_KEY: row.get(group_key, ""),
+    }
+
+
+def prediction_row_values(row: dict) -> dict[str, float]:
+    """Return loaded numeric model fields for one prediction CSV row."""
+    home_win_key, draw_key, away_win_key, over_key, btts_key, under_key = (
+        prediction_value_keys()
+    )
+    return {
+        PRED_HOME_WIN_KEY: float(row[home_win_key]),
+        PRED_DRAW_KEY: float(row[draw_key]),
+        PRED_AWAY_WIN_KEY: float(row[away_win_key]),
+        PRED_OVER_2_5_KEY: float(row[over_key]),
+        PRED_UNDER_2_5_KEY: float(row[under_key]),
+        PRED_BTTS_VALUE_KEY: float(row[btts_key]),
     }
 
 

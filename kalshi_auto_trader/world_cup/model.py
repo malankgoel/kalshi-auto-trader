@@ -246,14 +246,12 @@ def _read_csv(path: str | PathLike[str]) -> list[dict]:
 def load_predictions() -> dict[tuple[str, str], dict]:
     """Pre-tournament model probabilities keyed by (home_team, away_team)."""
     out: dict[tuple[str, str], dict] = {}
-    match_id_key, group_key = prediction_metadata_keys()
     home_win_key, draw_key, away_win_key, over_key, btts_key, under_key = (
         prediction_value_keys()
     )
     for r in _read_csv(config.PREDICTIONS_FILE):
         out[prediction_row_key(r)] = {
-            "match_id": r.get(match_id_key, ""),
-            "group": r.get(group_key, ""),
+            **prediction_row_metadata(r),
             "home_win": float(r[home_win_key]),
             "draw": float(r[draw_key]),
             "away_win": float(r[away_win_key]),

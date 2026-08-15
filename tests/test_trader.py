@@ -304,6 +304,14 @@ def test_prediction_team_keys_list_source_team_fields():
     )
 
 
+def test_prediction_row_key_reads_source_team_fields():
+    row = {
+        model.PRED_HOME_TEAM_KEY: "Argentina",
+        model.PRED_AWAY_TEAM_KEY: "Algeria",
+    }
+    assert model.prediction_row_key(row) == ("Argentina", "Algeria")
+
+
 def test_schedule_home_team_key_names_source_field():
     assert model.SCHEDULE_HOME_TEAM_KEY == "home_team"
 

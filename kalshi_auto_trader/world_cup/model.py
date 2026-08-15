@@ -79,6 +79,7 @@ __all__ = [
     "btts_selection_labels",
     "prediction_metadata_keys",
     "prediction_probability_keys",
+    "prediction_row_key",
     "prediction_team_keys",
     "prediction_value_keys",
     "schedule_row_kickoff_utc",
@@ -211,6 +212,12 @@ def prediction_team_keys() -> tuple[str, str]:
 def prediction_value_keys() -> tuple[str, ...]:
     """Return source prediction CSV keys with numeric model values."""
     return prediction_probability_keys() + (PRED_UNDER_2_5_KEY,)
+
+
+def prediction_row_key(row: dict) -> tuple[str, str]:
+    """Return the canonical fixture key for one prediction CSV row."""
+    home_key, away_key = prediction_team_keys()
+    return game_key(row[home_key], row[away_key])
 
 
 # --------------------------------------------------------------------------- #

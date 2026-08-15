@@ -79,6 +79,7 @@ __all__ = [
     "btts_selection_labels",
     "prediction_metadata_keys",
     "prediction_probability_keys",
+    "prediction_row_metadata",
     "prediction_row_key",
     "prediction_team_keys",
     "prediction_value_keys",
@@ -218,6 +219,15 @@ def prediction_row_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one prediction CSV row."""
     home_key, away_key = prediction_team_keys()
     return game_key(row[home_key], row[away_key])
+
+
+def prediction_row_metadata(row: dict) -> dict[str, str]:
+    """Return loaded metadata fields for one prediction CSV row."""
+    match_id_key, group_key = prediction_metadata_keys()
+    return {
+        PRED_MATCH_ID_KEY: row.get(match_id_key, ""),
+        PRED_GROUP_KEY: row.get(group_key, ""),
+    }
 
 
 # --------------------------------------------------------------------------- #

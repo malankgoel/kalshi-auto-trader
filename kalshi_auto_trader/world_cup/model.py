@@ -307,7 +307,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
             GROUP_KEY: pred["group"], HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away,
             "model_home_win": pred["home_win"], "model_draw": pred["draw"],
             "model_away_win": pred["away_win"], "model_over_2_5": pred["over_2_5"],
-            "model_btts": pred["btts"],
+            "model_btts": pred[PRED_BTTS_VALUE_KEY],
         })
     games.sort(key=lambda g: (g[KICKOFF_UTC_KEY], g[MATCH_ID_KEY]))
     return games

@@ -115,6 +115,7 @@ def test_shared_modules_export_expected_entry_points():
             "PRED_MATCH_ID_KEY",
             "PRED_OVER_2_5_VALUE_KEY",
             "PRED_OVER_2_5_KEY",
+            "PRED_UNDER_2_5_VALUE_KEY",
             "PRED_UNDER_2_5_KEY",
             "SCHEDULE_AWAY_TEAM_KEY",
             "SCHEDULE_DATE_KEY",

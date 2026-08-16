@@ -281,6 +281,10 @@ def test_prediction_under_2_5_key_names_source_field():
     assert model.PRED_UNDER_2_5_KEY == "under_2_5"
 
 
+def test_prediction_under_2_5_value_key_names_loaded_field():
+    assert model.PRED_UNDER_2_5_VALUE_KEY == "under_2_5"
+
+
 def test_prediction_btts_key_names_source_field():
     assert model.PRED_BTTS_KEY == "both_teams_to_score"
 

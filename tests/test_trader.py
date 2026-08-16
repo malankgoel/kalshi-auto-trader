@@ -257,6 +257,10 @@ def test_prediction_draw_key_names_source_field():
     assert model.PRED_DRAW_KEY == "draw"
 
 
+def test_prediction_draw_value_key_names_loaded_field():
+    assert model.PRED_DRAW_VALUE_KEY == "draw"
+
+
 def test_prediction_away_win_key_names_source_field():
     assert model.PRED_AWAY_WIN_KEY == "away_win"
 

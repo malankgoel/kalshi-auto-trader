@@ -136,6 +136,7 @@ def test_shared_modules_export_expected_entry_points():
             "meets_edge_threshold",
             "model_probability_keys",
             "parse_kickoff_utc",
+            "prediction_loaded_value_keys",
             "prediction_metadata_keys",
             "prediction_probability_keys",
             "prediction_row_metadata",

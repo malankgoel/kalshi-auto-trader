@@ -310,6 +310,17 @@ def test_prediction_value_keys_list_numeric_source_fields():
     )
 
 
+def test_prediction_loaded_value_keys_list_numeric_loaded_fields():
+    assert model.prediction_loaded_value_keys() == (
+        model.PRED_HOME_WIN_VALUE_KEY,
+        model.PRED_DRAW_VALUE_KEY,
+        model.PRED_AWAY_WIN_VALUE_KEY,
+        model.PRED_OVER_2_5_VALUE_KEY,
+        model.PRED_UNDER_2_5_VALUE_KEY,
+        model.PRED_BTTS_VALUE_KEY,
+    )
+
+
 def test_prediction_row_values_cast_source_fields_to_floats():
     row = {
         model.PRED_HOME_WIN_KEY: "0.5",

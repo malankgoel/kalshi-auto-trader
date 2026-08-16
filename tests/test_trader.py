@@ -265,6 +265,10 @@ def test_prediction_away_win_key_names_source_field():
     assert model.PRED_AWAY_WIN_KEY == "away_win"
 
 
+def test_prediction_away_win_value_key_names_loaded_field():
+    assert model.PRED_AWAY_WIN_VALUE_KEY == "away_win"
+
+
 def test_prediction_over_2_5_key_names_source_field():
     assert model.PRED_OVER_2_5_KEY == "over_2_5"
 

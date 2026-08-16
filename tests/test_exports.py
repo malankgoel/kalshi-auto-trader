@@ -108,6 +108,7 @@ def test_shared_modules_export_expected_entry_points():
             "PRED_DRAW_KEY",
             "PRED_GROUP_KEY",
             "PRED_HOME_TEAM_KEY",
+            "PRED_HOME_WIN_VALUE_KEY",
             "PRED_HOME_WIN_KEY",
             "PRED_MATCH_ID_KEY",
             "PRED_OVER_2_5_KEY",

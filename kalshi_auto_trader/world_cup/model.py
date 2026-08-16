@@ -52,6 +52,7 @@ __all__ = [
     "PRED_MATCH_ID_KEY",
     "PRED_OVER_2_5_VALUE_KEY",
     "PRED_OVER_2_5_KEY",
+    "PRED_UNDER_2_5_VALUE_KEY",
     "PRED_UNDER_2_5_KEY",
     "SCHEDULE_AWAY_TEAM_KEY",
     "SCHEDULE_DATE_KEY",
@@ -130,6 +131,7 @@ PRED_HOME_WIN_KEY = "home_win"
 PRED_MATCH_ID_KEY = "match_id"
 PRED_OVER_2_5_VALUE_KEY = "over_2_5"
 PRED_OVER_2_5_KEY = "over_2_5"
+PRED_UNDER_2_5_VALUE_KEY = "under_2_5"
 PRED_UNDER_2_5_KEY = "under_2_5"
 SCHEDULE_AWAY_TEAM_KEY = "away_team"
 SCHEDULE_DATE_KEY = "date"

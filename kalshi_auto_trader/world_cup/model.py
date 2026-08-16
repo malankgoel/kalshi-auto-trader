@@ -248,7 +248,7 @@ def prediction_row_values(row: dict) -> dict[str, float]:
         PRED_HOME_WIN_VALUE_KEY: float(row[home_win_key]),
         PRED_DRAW_VALUE_KEY: float(row[draw_key]),
         PRED_AWAY_WIN_VALUE_KEY: float(row[away_win_key]),
-        PRED_OVER_2_5_KEY: float(row[over_key]),
+        PRED_OVER_2_5_VALUE_KEY: float(row[over_key]),
         PRED_UNDER_2_5_KEY: float(row[under_key]),
         PRED_BTTS_VALUE_KEY: float(row[btts_key]),
     }

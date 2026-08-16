@@ -45,6 +45,7 @@ __all__ = [
     "PRED_DRAW_KEY",
     "PRED_GROUP_KEY",
     "PRED_HOME_TEAM_KEY",
+    "PRED_HOME_WIN_VALUE_KEY",
     "PRED_HOME_WIN_KEY",
     "PRED_MATCH_ID_KEY",
     "PRED_OVER_2_5_KEY",
@@ -119,6 +120,7 @@ PRED_BTTS_VALUE_KEY = "btts"
 PRED_DRAW_KEY = "draw"
 PRED_GROUP_KEY = "group"
 PRED_HOME_TEAM_KEY = "home_team"
+PRED_HOME_WIN_VALUE_KEY = "home_win"
 PRED_HOME_WIN_KEY = "home_win"
 PRED_MATCH_ID_KEY = "match_id"
 PRED_OVER_2_5_KEY = "over_2_5"

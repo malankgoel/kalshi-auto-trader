@@ -233,6 +233,10 @@ def test_prediction_home_win_key_names_source_field():
     assert model.PRED_HOME_WIN_KEY == "home_win"
 
 
+def test_prediction_home_win_value_key_names_loaded_field():
+    assert model.PRED_HOME_WIN_VALUE_KEY == "home_win"
+
+
 def test_prediction_home_team_key_names_source_field():
     assert model.PRED_HOME_TEAM_KEY == "home_team"
 

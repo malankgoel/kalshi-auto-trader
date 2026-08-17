@@ -249,6 +249,10 @@ def test_prediction_match_id_key_names_source_field():
     assert model.PRED_MATCH_ID_KEY == "match_id"
 
 
+def test_prediction_match_id_value_key_names_loaded_field():
+    assert model.PRED_MATCH_ID_VALUE_KEY == "match_id"
+
+
 def test_prediction_group_key_names_source_field():
     assert model.PRED_GROUP_KEY == "group"
 

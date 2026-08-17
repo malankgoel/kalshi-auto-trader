@@ -257,6 +257,10 @@ def test_prediction_group_key_names_source_field():
     assert model.PRED_GROUP_KEY == "group"
 
 
+def test_prediction_group_value_key_names_loaded_field():
+    assert model.PRED_GROUP_VALUE_KEY == "group"
+
+
 def test_prediction_draw_key_names_source_field():
     assert model.PRED_DRAW_KEY == "draw"
 

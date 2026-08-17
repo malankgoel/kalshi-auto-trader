@@ -251,7 +251,7 @@ def prediction_row_metadata(row: dict) -> dict[str, str]:
     """Return loaded metadata fields for one prediction CSV row."""
     match_id_key, group_key = prediction_metadata_keys()
     return {
-        PRED_MATCH_ID_KEY: row.get(match_id_key, ""),
+        PRED_MATCH_ID_VALUE_KEY: row.get(match_id_key, ""),
         PRED_GROUP_KEY: row.get(group_key, ""),
     }
 

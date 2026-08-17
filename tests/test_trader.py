@@ -355,6 +355,13 @@ def test_prediction_metadata_keys_list_source_metadata_fields():
     )
 
 
+def test_prediction_loaded_metadata_keys_list_loaded_fields():
+    assert model.prediction_loaded_metadata_keys() == (
+        model.PRED_MATCH_ID_VALUE_KEY,
+        model.PRED_GROUP_VALUE_KEY,
+    )
+
+
 def test_prediction_team_keys_list_source_team_fields():
     assert model.prediction_team_keys() == (
         model.PRED_HOME_TEAM_KEY,

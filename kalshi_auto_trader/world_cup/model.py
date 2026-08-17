@@ -83,6 +83,7 @@ __all__ = [
     "model_probability_keys",
     "next_game",
     "parse_kickoff_utc",
+    "prediction_loaded_metadata_keys",
     "btts_selection_labels",
     "prediction_loaded_value_keys",
     "prediction_metadata_keys",
@@ -219,6 +220,11 @@ def prediction_probability_keys() -> tuple[str, ...]:
 def prediction_metadata_keys() -> tuple[str, str]:
     """Return source CSV metadata keys consumed by load_predictions."""
     return (PRED_MATCH_ID_KEY, PRED_GROUP_KEY)
+
+
+def prediction_loaded_metadata_keys() -> tuple[str, str]:
+    """Return loaded prediction-row metadata keys."""
+    return (PRED_MATCH_ID_VALUE_KEY, PRED_GROUP_VALUE_KEY)
 
 
 def prediction_team_keys() -> tuple[str, str]:

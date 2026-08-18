@@ -385,7 +385,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         if kt is None or kt <= now:
             continue
         games.append({
-            MATCH_ID_KEY: pred[PRED_MATCH_ID_VALUE_KEY], DATE_KEY: sc[SCHEDULE_DATE_KEY], KICKOFF_UTC_KEY: ko,
+            MATCH_ID_KEY: pred[PRED_MATCH_ID_VALUE_KEY], DATE_KEY: schedule_row_date(sc), KICKOFF_UTC_KEY: ko,
             GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away,
             "model_home_win": pred[PRED_HOME_WIN_VALUE_KEY], "model_draw": pred[PRED_DRAW_VALUE_KEY],
             "model_away_win": pred[PRED_AWAY_WIN_VALUE_KEY], "model_over_2_5": pred[PRED_OVER_2_5_VALUE_KEY],

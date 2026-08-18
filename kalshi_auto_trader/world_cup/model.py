@@ -94,6 +94,7 @@ __all__ = [
     "prediction_team_keys",
     "prediction_value_keys",
     "prediction_row_values",
+    "schedule_row_date",
     "schedule_row_key",
     "schedule_row_kickoff_utc",
     "schedule_metadata_keys",
@@ -335,6 +336,11 @@ def schedule_row_kickoff_utc(row: dict) -> str:
     return kickoff_utc(
         row[SCHEDULE_DATE_KEY], row[SCHEDULE_TIME_KEY], row[SCHEDULE_UTC_OFFSET_KEY]
     )
+
+
+def schedule_row_date(row: dict) -> str:
+    """Return the source schedule date for one schedule CSV row."""
+    return row[SCHEDULE_DATE_KEY]
 
 
 def schedule_row_key(row: dict) -> tuple[str, str]:

@@ -276,13 +276,21 @@ def prediction_row_values(row: dict) -> dict[str, float]:
     home_win_key, draw_key, away_win_key, over_key, btts_key, under_key = (
         prediction_value_keys()
     )
+    (
+        loaded_home_win_key,
+        loaded_draw_key,
+        loaded_away_win_key,
+        loaded_over_key,
+        loaded_under_key,
+        loaded_btts_key,
+    ) = prediction_loaded_value_keys()
     return {
-        PRED_HOME_WIN_VALUE_KEY: float(row[home_win_key]),
-        PRED_DRAW_VALUE_KEY: float(row[draw_key]),
-        PRED_AWAY_WIN_VALUE_KEY: float(row[away_win_key]),
-        PRED_OVER_2_5_VALUE_KEY: float(row[over_key]),
-        PRED_UNDER_2_5_VALUE_KEY: float(row[under_key]),
-        PRED_BTTS_VALUE_KEY: float(row[btts_key]),
+        loaded_home_win_key: float(row[home_win_key]),
+        loaded_draw_key: float(row[draw_key]),
+        loaded_away_win_key: float(row[away_win_key]),
+        loaded_over_key: float(row[over_key]),
+        loaded_under_key: float(row[under_key]),
+        loaded_btts_key: float(row[btts_key]),
     }
 
 

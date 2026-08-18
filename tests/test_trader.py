@@ -407,6 +407,11 @@ def test_schedule_date_key_names_source_field():
     assert model.SCHEDULE_DATE_KEY == "date"
 
 
+def test_schedule_row_date_reads_source_date_field():
+    row = {model.SCHEDULE_DATE_KEY: "2026-06-16"}
+    assert model.schedule_row_date(row) == "2026-06-16"
+
+
 def test_schedule_time_key_names_source_field():
     assert model.SCHEDULE_TIME_KEY == "time"
 

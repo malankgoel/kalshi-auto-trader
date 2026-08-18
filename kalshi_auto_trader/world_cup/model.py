@@ -84,6 +84,7 @@ __all__ = [
     "next_game",
     "parse_kickoff_utc",
     "prediction_loaded_metadata_keys",
+    "prediction_loaded_row_keys",
     "btts_selection_labels",
     "prediction_loaded_value_keys",
     "prediction_metadata_keys",
@@ -247,6 +248,11 @@ def prediction_loaded_value_keys() -> tuple[str, ...]:
         PRED_UNDER_2_5_VALUE_KEY,
         PRED_BTTS_VALUE_KEY,
     )
+
+
+def prediction_loaded_row_keys() -> tuple[str, ...]:
+    """Return every loaded prediction-row key emitted by load_predictions."""
+    return prediction_loaded_metadata_keys() + prediction_loaded_value_keys()
 
 
 def prediction_row_key(row: dict) -> tuple[str, str]:

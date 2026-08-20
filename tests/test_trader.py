@@ -196,6 +196,13 @@ def test_fixture_team_keys_list_home_and_away_fields():
     assert model.fixture_team_keys() == (model.HOME_TEAM_KEY, model.AWAY_TEAM_KEY)
 
 
+def test_fixture_identity_maps_home_and_away_fields():
+    assert model.fixture_identity("Argentina", "Algeria") == {
+        model.HOME_TEAM_KEY: "Argentina",
+        model.AWAY_TEAM_KEY: "Algeria",
+    }
+
+
 def test_match_id_key_names_game_field():
     assert model.MATCH_ID_KEY == "match_id"
 

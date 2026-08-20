@@ -421,7 +421,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
             KICKOFF_UTC_KEY: ko, GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], HOME_TEAM_KEY: h, AWAY_TEAM_KEY: a,
             MODEL_HOME_WIN_KEY: pred[PRED_HOME_WIN_VALUE_KEY], MODEL_DRAW_KEY: pred[PRED_DRAW_VALUE_KEY],
             MODEL_AWAY_WIN_KEY: pred[PRED_AWAY_WIN_VALUE_KEY], MODEL_OVER_2_5_KEY: pred[PRED_OVER_2_5_VALUE_KEY],
-            "model_btts": pred[PRED_BTTS_VALUE_KEY],
+            MODEL_BTTS_KEY: pred[PRED_BTTS_VALUE_KEY],
         }
     return None
 

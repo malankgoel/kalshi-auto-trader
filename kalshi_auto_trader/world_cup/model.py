@@ -419,7 +419,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
         return {
             MATCH_ID_KEY: pred[PRED_MATCH_ID_VALUE_KEY], DATE_KEY: schedule_row_date(sc) if sc else "",
             KICKOFF_UTC_KEY: ko, GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], HOME_TEAM_KEY: h, AWAY_TEAM_KEY: a,
-            "model_home_win": pred[PRED_HOME_WIN_VALUE_KEY], "model_draw": pred[PRED_DRAW_VALUE_KEY],
+            MODEL_HOME_WIN_KEY: pred[PRED_HOME_WIN_VALUE_KEY], "model_draw": pred[PRED_DRAW_VALUE_KEY],
             "model_away_win": pred[PRED_AWAY_WIN_VALUE_KEY], "model_over_2_5": pred[PRED_OVER_2_5_VALUE_KEY],
             "model_btts": pred[PRED_BTTS_VALUE_KEY],
         }

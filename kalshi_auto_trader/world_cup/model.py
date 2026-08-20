@@ -404,7 +404,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
             continue
         games.append({
             MATCH_ID_KEY: pred[PRED_MATCH_ID_VALUE_KEY], DATE_KEY: schedule_row_date(sc), KICKOFF_UTC_KEY: ko,
-            GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away,
+            GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], **fixture_identity(home, away),
             **prediction_model_values(pred),
         })
     games.sort(key=lambda g: (g[KICKOFF_UTC_KEY], g[MATCH_ID_KEY]))

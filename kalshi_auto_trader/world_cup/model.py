@@ -442,8 +442,8 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
         sc = sched.get((h, a), {})
         ko = schedule_row_kickoff_utc(sc) if sc else ""
         return {
-            MATCH_ID_KEY: pred[PRED_MATCH_ID_VALUE_KEY], DATE_KEY: schedule_row_date(sc) if sc else "",
-            KICKOFF_UTC_KEY: ko, GROUP_KEY: pred[PRED_GROUP_VALUE_KEY], **fixture_identity(h, a),
+            **prediction_game_metadata(pred), DATE_KEY: schedule_row_date(sc) if sc else "",
+            KICKOFF_UTC_KEY: ko, **fixture_identity(h, a),
             **prediction_model_values(pred),
         }
     return None

@@ -89,6 +89,7 @@ __all__ = [
     "btts_selection_labels",
     "prediction_loaded_value_keys",
     "prediction_metadata_keys",
+    "prediction_game_metadata",
     "prediction_model_values",
     "prediction_probability_keys",
     "prediction_row_metadata",
@@ -311,6 +312,14 @@ def prediction_model_values(row: dict) -> dict[str, float]:
         MODEL_AWAY_WIN_KEY: row[PRED_AWAY_WIN_VALUE_KEY],
         MODEL_OVER_2_5_KEY: row[PRED_OVER_2_5_VALUE_KEY],
         MODEL_BTTS_KEY: row[PRED_BTTS_VALUE_KEY],
+    }
+
+
+def prediction_game_metadata(row: dict) -> dict[str, str]:
+    """Return game-row metadata fields for one loaded prediction row."""
+    return {
+        MATCH_ID_KEY: row[PRED_MATCH_ID_VALUE_KEY],
+        GROUP_KEY: row[PRED_GROUP_VALUE_KEY],
     }
 
 

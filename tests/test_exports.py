@@ -130,6 +130,7 @@ def test_shared_modules_export_expected_entry_points():
             "YES_SELECTION_PREFIX",
             "btts_selection_labels",
             "flag_bets",
+            "fixture_identity",
             "fixture_metadata_keys",
             "fixture_team_keys",
             "game_row_keys",

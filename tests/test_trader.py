@@ -430,6 +430,13 @@ def test_prediction_row_metadata_reads_optional_source_fields():
     }
 
 
+def test_prediction_row_metadata_defaults_missing_optional_fields():
+    assert model.prediction_row_metadata({}) == {
+        model.PRED_MATCH_ID_VALUE_KEY: "",
+        model.PRED_GROUP_VALUE_KEY: "",
+    }
+
+
 def test_schedule_home_team_key_names_source_field():
     assert model.SCHEDULE_HOME_TEAM_KEY == "home_team"
 

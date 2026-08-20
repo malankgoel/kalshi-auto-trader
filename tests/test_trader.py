@@ -379,6 +379,17 @@ def test_prediction_model_values_map_loaded_values_to_game_fields():
     }
 
 
+def test_prediction_game_metadata_maps_loaded_values_to_game_fields():
+    row = {
+        model.PRED_MATCH_ID_VALUE_KEY: "1",
+        model.PRED_GROUP_VALUE_KEY: "A",
+    }
+    assert model.prediction_game_metadata(row) == {
+        model.MATCH_ID_KEY: "1",
+        model.GROUP_KEY: "A",
+    }
+
+
 def test_prediction_metadata_keys_list_source_metadata_fields():
     assert model.prediction_metadata_keys() == (
         model.PRED_MATCH_ID_KEY,

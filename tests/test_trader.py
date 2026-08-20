@@ -355,6 +355,23 @@ def test_prediction_row_values_cast_source_fields_to_floats():
     }
 
 
+def test_prediction_model_values_map_loaded_values_to_game_fields():
+    row = {
+        model.PRED_HOME_WIN_VALUE_KEY: 0.5,
+        model.PRED_DRAW_VALUE_KEY: 0.25,
+        model.PRED_AWAY_WIN_VALUE_KEY: 0.25,
+        model.PRED_OVER_2_5_VALUE_KEY: 0.6,
+        model.PRED_BTTS_VALUE_KEY: 0.55,
+    }
+    assert model.prediction_model_values(row) == {
+        model.MODEL_HOME_WIN_KEY: 0.5,
+        model.MODEL_DRAW_KEY: 0.25,
+        model.MODEL_AWAY_WIN_KEY: 0.25,
+        model.MODEL_OVER_2_5_KEY: 0.6,
+        model.MODEL_BTTS_KEY: 0.55,
+    }
+
+
 def test_prediction_metadata_keys_list_source_metadata_fields():
     assert model.prediction_metadata_keys() == (
         model.PRED_MATCH_ID_KEY,

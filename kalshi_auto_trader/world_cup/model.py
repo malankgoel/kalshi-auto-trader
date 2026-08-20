@@ -70,6 +70,7 @@ __all__ = [
     "devig_three_way",
     "find_game",
     "flag_bets",
+    "fixture_identity",
     "fixture_team_keys",
     "fixture_metadata_keys",
     "game_row_keys",
@@ -188,6 +189,11 @@ def model_probability_keys() -> tuple[str, ...]:
 def fixture_team_keys() -> tuple[str, str]:
     """Return game-row keys identifying the two fixture teams."""
     return (HOME_TEAM_KEY, AWAY_TEAM_KEY)
+
+
+def fixture_identity(home: str, away: str) -> dict[str, str]:
+    """Return game-row team identity fields for one fixture."""
+    return {HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away}
 
 
 def schedule_team_keys() -> tuple[str, str]:

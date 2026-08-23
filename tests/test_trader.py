@@ -390,6 +390,34 @@ def test_prediction_game_metadata_maps_loaded_values_to_game_fields():
     }
 
 
+def test_build_game_row_combines_prediction_schedule_and_fixture_fields():
+    prediction_row = {
+        model.PRED_MATCH_ID_VALUE_KEY: "1",
+        model.PRED_GROUP_VALUE_KEY: "A",
+        model.PRED_HOME_WIN_VALUE_KEY: 0.5,
+        model.PRED_DRAW_VALUE_KEY: 0.25,
+        model.PRED_AWAY_WIN_VALUE_KEY: 0.25,
+        model.PRED_OVER_2_5_VALUE_KEY: 0.6,
+        model.PRED_BTTS_VALUE_KEY: 0.55,
+    }
+    schedule_row = {model.SCHEDULE_DATE_KEY: "2026-06-16"}
+    assert model.build_game_row(
+        "Argentina", "Algeria", prediction_row, schedule_row, "2026-06-17T00:00:00Z"
+    ) == {
+        model.MATCH_ID_KEY: "1",
+        model.GROUP_KEY: "A",
+        model.DATE_KEY: "2026-06-16",
+        model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",
+        model.HOME_TEAM_KEY: "Argentina",
+        model.AWAY_TEAM_KEY: "Algeria",
+        model.MODEL_HOME_WIN_KEY: 0.5,
+        model.MODEL_DRAW_KEY: 0.25,
+        model.MODEL_AWAY_WIN_KEY: 0.25,
+        model.MODEL_OVER_2_5_KEY: 0.6,
+        model.MODEL_BTTS_KEY: 0.55,
+    }
+
+
 def test_prediction_metadata_keys_list_source_metadata_fields():
     assert model.prediction_metadata_keys() == (
         model.PRED_MATCH_ID_KEY,

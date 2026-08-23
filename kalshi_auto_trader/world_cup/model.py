@@ -87,6 +87,7 @@ __all__ = [
     "prediction_loaded_metadata_keys",
     "prediction_loaded_row_keys",
     "btts_selection_labels",
+    "build_game_row",
     "prediction_loaded_value_keys",
     "prediction_metadata_keys",
     "prediction_game_metadata",
@@ -382,6 +383,22 @@ def schedule_game_metadata(row: dict, kickoff_utc_value: str) -> dict[str, str]:
     return {
         DATE_KEY: schedule_row_date(row) if row else "",
         KICKOFF_UTC_KEY: kickoff_utc_value,
+    }
+
+
+def build_game_row(
+    home: str,
+    away: str,
+    prediction_row: dict,
+    schedule_row: dict,
+    kickoff_utc_value: str,
+) -> dict:
+    """Return the canonical game row emitted by prediction/schedule joins."""
+    return {
+        **prediction_game_metadata(prediction_row),
+        **schedule_game_metadata(schedule_row, kickoff_utc_value),
+        **fixture_identity(home, away),
+        **prediction_model_values(prediction_row),
     }
 
 

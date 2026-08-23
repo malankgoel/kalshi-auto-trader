@@ -477,6 +477,14 @@ def test_schedule_row_key_reads_source_team_fields():
     assert model.schedule_row_key(row) == ("Argentina", "Algeria")
 
 
+def test_schedule_game_metadata_maps_schedule_fields_to_game_fields():
+    row = {model.SCHEDULE_DATE_KEY: "2026-06-16"}
+    assert model.schedule_game_metadata(row, "2026-06-17T00:00:00Z") == {
+        model.DATE_KEY: "2026-06-16",
+        model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",
+    }
+
+
 def test_schedule_metadata_keys_list_timing_fields():
     assert model.schedule_metadata_keys() == (
         model.SCHEDULE_DATE_KEY,

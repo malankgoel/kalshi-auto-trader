@@ -129,6 +129,7 @@ def test_shared_modules_export_expected_entry_points():
             "WINNER_LINE",
             "YES_SELECTION_PREFIX",
             "btts_selection_labels",
+            "build_game_row",
             "flag_bets",
             "fixture_identity",
             "fixture_metadata_keys",

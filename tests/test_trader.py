@@ -203,6 +203,13 @@ def test_fixture_identity_maps_home_and_away_fields():
     }
 
 
+def test_fixture_selector_supplied_accepts_match_id_or_complete_teams():
+    assert model.fixture_selector_supplied("1", "", "")
+    assert model.fixture_selector_supplied("", "Argentina", "Algeria")
+    assert not model.fixture_selector_supplied("", "Argentina", "")
+    assert not model.fixture_selector_supplied("", "", "")
+
+
 def test_match_id_key_names_game_field():
     assert model.MATCH_ID_KEY == "match_id"
 

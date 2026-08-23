@@ -92,6 +92,7 @@ __all__ = [
     "prediction_loaded_value_keys",
     "prediction_metadata_keys",
     "prediction_game_metadata",
+    "prediction_matches_id",
     "prediction_model_values",
     "prediction_probability_keys",
     "prediction_row_metadata",
@@ -324,6 +325,11 @@ def prediction_game_metadata(row: dict) -> dict[str, str]:
         MATCH_ID_KEY: row[PRED_MATCH_ID_VALUE_KEY],
         GROUP_KEY: row[PRED_GROUP_VALUE_KEY],
     }
+
+
+def prediction_matches_id(row: dict, match_id: str) -> bool:
+    """Return whether a loaded prediction row matches an optional match id."""
+    return not match_id or str(row[PRED_MATCH_ID_VALUE_KEY]) == str(match_id)
 
 
 # --------------------------------------------------------------------------- #

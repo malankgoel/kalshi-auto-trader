@@ -398,6 +398,13 @@ def test_prediction_game_metadata_maps_loaded_values_to_game_fields():
     }
 
 
+def test_prediction_matches_id_handles_optional_match_selector():
+    row = {model.PRED_MATCH_ID_VALUE_KEY: "1"}
+    assert model.prediction_matches_id(row, "")
+    assert model.prediction_matches_id(row, "1")
+    assert not model.prediction_matches_id(row, "2")
+
+
 def test_build_game_row_combines_prediction_schedule_and_fixture_fields():
     prediction_row = {
         model.PRED_MATCH_ID_VALUE_KEY: "1",

@@ -477,7 +477,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
             continue
         if home and away and not matches_fixture(h, a, home, away):
             continue
-        if not match_id and not (home and away):
+        if not fixture_selector_supplied(match_id, home, away):
             continue
         sc = sched.get((h, a), {})
         ko = schedule_row_kickoff_utc(sc) if sc else ""

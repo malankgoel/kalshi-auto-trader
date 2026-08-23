@@ -101,6 +101,7 @@ __all__ = [
     "schedule_row_key",
     "schedule_row_kickoff_utc",
     "schedule_metadata_keys",
+    "schedule_game_metadata",
     "schedule_team_keys",
     "staked_fraction",
     "strategy_line_names",
@@ -374,6 +375,14 @@ def schedule_row_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one schedule CSV row."""
     home_key, away_key = schedule_team_keys()
     return game_key(row[home_key], row[away_key])
+
+
+def schedule_game_metadata(row: dict, kickoff_utc_value: str) -> dict[str, str]:
+    """Return game-row schedule metadata fields for one schedule row."""
+    return {
+        DATE_KEY: schedule_row_date(row) if row else "",
+        KICKOFF_UTC_KEY: kickoff_utc_value,
+    }
 
 
 def _now() -> dt.datetime:

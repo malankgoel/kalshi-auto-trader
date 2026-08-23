@@ -444,7 +444,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         if kt is None or kt <= now:
             continue
         games.append(build_game_row(home, away, pred, sc, ko))
-    games.sort(key=lambda g: (g[KICKOFF_UTC_KEY], g[MATCH_ID_KEY]))
+    games.sort(key=game_row_sort_key)
     return games
 
 

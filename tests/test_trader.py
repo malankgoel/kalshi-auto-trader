@@ -243,6 +243,13 @@ def test_game_row_keys_list_fixture_and_model_fields():
     )
 
 
+def test_game_row_identity_keys_list_fixture_identity_fields():
+    assert model.game_row_identity_keys() == (
+        *model.fixture_metadata_keys(),
+        *model.fixture_team_keys(),
+    )
+
+
 def test_game_row_sort_key_orders_by_kickoff_then_match_id():
     row = {
         model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",

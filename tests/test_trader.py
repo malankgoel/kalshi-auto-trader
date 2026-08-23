@@ -236,6 +236,14 @@ def test_game_row_keys_list_fixture_and_model_fields():
     )
 
 
+def test_game_row_sort_key_orders_by_kickoff_then_match_id():
+    row = {
+        model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",
+        model.MATCH_ID_KEY: "1",
+    }
+    assert model.game_row_sort_key(row) == ("2026-06-17T00:00:00Z", "1")
+
+
 def test_prediction_home_win_key_names_source_field():
     assert model.PRED_HOME_WIN_KEY == "home_win"
 

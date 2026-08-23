@@ -437,12 +437,7 @@ def upcoming_games(now: Optional[dt.datetime] = None) -> list[dict]:
         kt = _parse(ko)
         if kt is None or kt <= now:
             continue
-        games.append({
-            **prediction_game_metadata(pred),
-            **schedule_game_metadata(sc, ko),
-            **fixture_identity(home, away),
-            **prediction_model_values(pred),
-        })
+        games.append(build_game_row(home, away, pred, sc, ko))
     games.sort(key=lambda g: (g[KICKOFF_UTC_KEY], g[MATCH_ID_KEY]))
     return games
 

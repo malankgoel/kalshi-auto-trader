@@ -74,6 +74,7 @@ __all__ = [
     "fixture_team_keys",
     "fixture_metadata_keys",
     "game_row_keys",
+    "game_row_sort_key",
     "game_key",
     "kelly_fraction",
     "matches_fixture",
@@ -400,6 +401,11 @@ def build_game_row(
         **fixture_identity(home, away),
         **prediction_model_values(prediction_row),
     }
+
+
+def game_row_sort_key(row: dict) -> tuple[str, str]:
+    """Return the stable chronological sort key for emitted game rows."""
+    return (row[KICKOFF_UTC_KEY], row[MATCH_ID_KEY])
 
 
 def _now() -> dt.datetime:

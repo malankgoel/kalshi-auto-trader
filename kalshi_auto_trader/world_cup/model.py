@@ -71,6 +71,7 @@ __all__ = [
     "find_game",
     "flag_bets",
     "fixture_identity",
+    "fixture_selector_supplied",
     "fixture_team_keys",
     "fixture_metadata_keys",
     "game_row_keys",
@@ -199,6 +200,11 @@ def fixture_team_keys() -> tuple[str, str]:
 def fixture_identity(home: str, away: str) -> dict[str, str]:
     """Return game-row team identity fields for one fixture."""
     return {HOME_TEAM_KEY: home, AWAY_TEAM_KEY: away}
+
+
+def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
+    """Return whether manual lookup has a match id or complete fixture teams."""
+    return bool(match_id or (home and away))
 
 
 def schedule_team_keys() -> tuple[str, str]:

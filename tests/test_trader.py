@@ -472,6 +472,14 @@ def test_prediction_team_keys_list_source_team_fields():
     )
 
 
+def test_prediction_source_row_keys_list_all_prediction_source_fields():
+    assert model.prediction_source_row_keys() == (
+        *model.prediction_team_keys(),
+        *model.prediction_metadata_keys(),
+        *model.prediction_value_keys(),
+    )
+
+
 def test_prediction_row_key_reads_source_team_fields():
     row = {
         model.PRED_HOME_TEAM_KEY: "Argentina",

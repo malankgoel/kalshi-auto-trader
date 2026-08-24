@@ -226,7 +226,7 @@ def fixture_metadata_keys() -> tuple[str, ...]:
 
 def game_row_keys() -> tuple[str, ...]:
     """Return all non-derived game-row keys emitted by schedule/model joins."""
-    return fixture_metadata_keys() + fixture_team_keys() + model_probability_keys()
+    return game_row_identity_keys() + game_row_model_keys()
 
 
 def game_row_identity_keys() -> tuple[str, ...]:

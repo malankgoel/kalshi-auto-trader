@@ -75,6 +75,7 @@ __all__ = [
     "fixture_team_keys",
     "fixture_metadata_keys",
     "game_row_identity_keys",
+    "game_row_has_required_keys",
     "game_row_keys",
     "game_row_model_keys",
     "game_row_sort_key",
@@ -245,6 +246,11 @@ def game_row_identity_keys() -> tuple[str, ...]:
 def game_row_model_keys() -> tuple[str, ...]:
     """Return game-row model probability keys emitted by schedule/model joins."""
     return model_probability_keys()
+
+
+def game_row_has_required_keys(row: dict) -> bool:
+    """Return whether a game row contains every required emitted field."""
+    return all(key in row for key in game_row_keys())
 
 
 def prediction_probability_keys() -> tuple[str, ...]:

@@ -530,6 +530,13 @@ def test_schedule_team_keys_list_source_team_fields():
     )
 
 
+def test_schedule_source_row_keys_list_all_schedule_source_fields():
+    assert model.schedule_source_row_keys() == (
+        *model.schedule_team_keys(),
+        *model.schedule_metadata_keys(),
+    )
+
+
 def test_schedule_row_key_reads_source_team_fields():
     row = {
         model.SCHEDULE_HOME_TEAM_KEY: "Argentina",

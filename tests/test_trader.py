@@ -250,6 +250,10 @@ def test_game_row_identity_keys_list_fixture_identity_fields():
     )
 
 
+def test_game_row_model_keys_list_model_probability_fields():
+    assert model.game_row_model_keys() == model.model_probability_keys()
+
+
 def test_game_row_sort_key_orders_by_kickoff_then_match_id():
     row = {
         model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",

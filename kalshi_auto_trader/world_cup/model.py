@@ -76,6 +76,7 @@ __all__ = [
     "fixture_metadata_keys",
     "game_row_identity_keys",
     "game_row_keys",
+    "game_row_model_keys",
     "game_row_sort_key",
     "game_key",
     "kelly_fraction",
@@ -231,6 +232,11 @@ def game_row_keys() -> tuple[str, ...]:
 def game_row_identity_keys() -> tuple[str, ...]:
     """Return game-row metadata and team keys that identify one fixture."""
     return fixture_metadata_keys() + fixture_team_keys()
+
+
+def game_row_model_keys() -> tuple[str, ...]:
+    """Return game-row model probability keys emitted by schedule/model joins."""
+    return model_probability_keys()
 
 
 def prediction_probability_keys() -> tuple[str, ...]:

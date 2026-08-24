@@ -342,11 +342,8 @@ def prediction_row_values(row: dict) -> dict[str, float]:
 def prediction_model_values(row: dict) -> dict[str, float]:
     """Return game-row model value fields for one loaded prediction row."""
     return {
-        MODEL_HOME_WIN_KEY: row[PRED_HOME_WIN_VALUE_KEY],
-        MODEL_DRAW_KEY: row[PRED_DRAW_VALUE_KEY],
-        MODEL_AWAY_WIN_KEY: row[PRED_AWAY_WIN_VALUE_KEY],
-        MODEL_OVER_2_5_KEY: row[PRED_OVER_2_5_VALUE_KEY],
-        MODEL_BTTS_KEY: row[PRED_BTTS_VALUE_KEY],
+        model_key: row[prediction_key]
+        for prediction_key, model_key in prediction_to_model_key_map()
     }
 
 

@@ -102,6 +102,7 @@ __all__ = [
     "prediction_row_key",
     "prediction_source_row_keys",
     "prediction_team_keys",
+    "prediction_to_model_key_map",
     "prediction_value_keys",
     "prediction_row_values",
     "schedule_row_date",
@@ -347,6 +348,17 @@ def prediction_model_values(row: dict) -> dict[str, float]:
         MODEL_OVER_2_5_KEY: row[PRED_OVER_2_5_VALUE_KEY],
         MODEL_BTTS_KEY: row[PRED_BTTS_VALUE_KEY],
     }
+
+
+def prediction_to_model_key_map() -> tuple[tuple[str, str], ...]:
+    """Return loaded prediction keys paired with emitted game-row model keys."""
+    return (
+        (PRED_HOME_WIN_VALUE_KEY, MODEL_HOME_WIN_KEY),
+        (PRED_DRAW_VALUE_KEY, MODEL_DRAW_KEY),
+        (PRED_AWAY_WIN_VALUE_KEY, MODEL_AWAY_WIN_KEY),
+        (PRED_OVER_2_5_VALUE_KEY, MODEL_OVER_2_5_KEY),
+        (PRED_BTTS_VALUE_KEY, MODEL_BTTS_KEY),
+    )
 
 
 def prediction_game_metadata(row: dict) -> dict[str, str]:

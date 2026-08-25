@@ -580,6 +580,14 @@ def test_schedule_source_row_keys_list_all_schedule_source_fields():
     )
 
 
+def test_schedule_fixture_teams_reads_source_team_fields():
+    row = {
+        model.SCHEDULE_HOME_TEAM_KEY: "Argentina",
+        model.SCHEDULE_AWAY_TEAM_KEY: "Algeria",
+    }
+    assert model.schedule_fixture_teams(row) == ("Argentina", "Algeria")
+
+
 def test_schedule_row_key_reads_source_team_fields():
     row = {
         model.SCHEDULE_HOME_TEAM_KEY: "Argentina",

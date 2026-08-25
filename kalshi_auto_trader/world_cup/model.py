@@ -97,6 +97,7 @@ __all__ = [
     "prediction_metadata_keys",
     "prediction_game_metadata",
     "prediction_matches_id",
+    "prediction_metadata_key_map",
     "prediction_model_values",
     "prediction_probability_keys",
     "prediction_row_metadata",
@@ -272,6 +273,14 @@ def prediction_metadata_keys() -> tuple[str, str]:
 def prediction_loaded_metadata_keys() -> tuple[str, str]:
     """Return loaded prediction-row metadata keys."""
     return (PRED_MATCH_ID_VALUE_KEY, PRED_GROUP_VALUE_KEY)
+
+
+def prediction_metadata_key_map() -> tuple[tuple[str, str], ...]:
+    """Return source prediction metadata keys paired with loaded row keys."""
+    return (
+        (PRED_MATCH_ID_KEY, PRED_MATCH_ID_VALUE_KEY),
+        (PRED_GROUP_KEY, PRED_GROUP_VALUE_KEY),
+    )
 
 
 def prediction_team_keys() -> tuple[str, str]:

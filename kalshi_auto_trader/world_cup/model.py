@@ -442,8 +442,7 @@ def schedule_row_date(row: dict) -> str:
 
 def schedule_row_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one schedule CSV row."""
-    home_key, away_key = schedule_team_keys()
-    return game_key(row[home_key], row[away_key])
+    return game_key(*schedule_fixture_teams(row))
 
 
 def schedule_game_metadata(row: dict, kickoff_utc_value: str) -> dict[str, str]:

@@ -604,6 +604,15 @@ def test_schedule_metadata_keys_list_timing_fields():
     )
 
 
+def test_schedule_timing_values_reads_date_time_and_offset():
+    row = {
+        model.SCHEDULE_DATE_KEY: "2026-06-16",
+        model.SCHEDULE_TIME_KEY: "20:00",
+        model.SCHEDULE_UTC_OFFSET_KEY: "-4",
+    }
+    assert model.schedule_timing_values(row) == ("2026-06-16", "20:00", "-4")
+
+
 def test_schedule_row_kickoff_utc_reads_schedule_source_fields():
     row = {
         model.SCHEDULE_DATE_KEY: "2026-06-16",

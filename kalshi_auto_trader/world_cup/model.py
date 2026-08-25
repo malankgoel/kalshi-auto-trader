@@ -420,9 +420,7 @@ def kickoff_utc(date_str: str, time_str: str, utc_offset: str) -> str:
 
 def schedule_row_kickoff_utc(row: dict) -> str:
     """Return a schedule row's kickoff timestamp normalized to UTC."""
-    return kickoff_utc(
-        row[SCHEDULE_DATE_KEY], row[SCHEDULE_TIME_KEY], row[SCHEDULE_UTC_OFFSET_KEY]
-    )
+    return kickoff_utc(*schedule_timing_values(row))
 
 
 def schedule_timing_values(row: dict) -> tuple[str, str, str]:

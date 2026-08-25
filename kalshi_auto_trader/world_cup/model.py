@@ -393,8 +393,8 @@ def prediction_to_model_key_map() -> tuple[tuple[str, str], ...]:
 def prediction_game_metadata(row: dict) -> dict[str, str]:
     """Return game-row metadata fields for one loaded prediction row."""
     return {
-        MATCH_ID_KEY: row[PRED_MATCH_ID_VALUE_KEY],
-        GROUP_KEY: row[PRED_GROUP_VALUE_KEY],
+        game_key_value: row[prediction_key]
+        for prediction_key, game_key_value in prediction_to_game_metadata_key_map()
     }
 
 

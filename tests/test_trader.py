@@ -261,6 +261,14 @@ def test_game_row_has_required_keys_checks_game_row_schema():
     assert not model.game_row_has_required_keys(row)
 
 
+def test_game_row_fixture_key_reads_emitted_team_fields():
+    row = {
+        model.HOME_TEAM_KEY: "Argentina",
+        model.AWAY_TEAM_KEY: "Algeria",
+    }
+    assert model.game_row_fixture_key(row) == ("Argentina", "Algeria")
+
+
 def test_game_row_sort_key_orders_by_kickoff_then_match_id():
     row = {
         model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",

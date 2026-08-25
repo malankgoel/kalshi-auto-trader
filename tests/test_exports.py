@@ -135,6 +135,7 @@ def test_shared_modules_export_expected_entry_points():
             "fixture_selector_supplied",
             "fixture_metadata_keys",
             "fixture_team_keys",
+            "game_row_fixture_key",
             "game_row_has_required_keys",
             "game_row_identity_keys",
             "game_row_keys",

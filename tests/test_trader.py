@@ -482,6 +482,13 @@ def test_prediction_loaded_metadata_keys_list_loaded_fields():
     )
 
 
+def test_prediction_metadata_key_map_pairs_source_and_loaded_fields():
+    assert model.prediction_metadata_key_map() == (
+        (model.PRED_MATCH_ID_KEY, model.PRED_MATCH_ID_VALUE_KEY),
+        (model.PRED_GROUP_KEY, model.PRED_GROUP_VALUE_KEY),
+    )
+
+
 def test_prediction_team_keys_list_source_team_fields():
     assert model.prediction_team_keys() == (
         model.PRED_HOME_TEAM_KEY,

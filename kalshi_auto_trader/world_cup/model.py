@@ -75,6 +75,7 @@ __all__ = [
     "fixture_team_keys",
     "fixture_metadata_keys",
     "game_row_identity_keys",
+    "game_row_fixture_key",
     "game_row_has_required_keys",
     "game_row_keys",
     "game_row_model_keys",
@@ -262,6 +263,11 @@ def game_row_model_keys() -> tuple[str, ...]:
 def game_row_has_required_keys(row: dict) -> bool:
     """Return whether a game row contains every required emitted field."""
     return all(key in row for key in game_row_keys())
+
+
+def game_row_fixture_key(row: dict) -> tuple[str, str]:
+    """Return the canonical fixture key for one emitted game row."""
+    return game_key(row[HOME_TEAM_KEY], row[AWAY_TEAM_KEY])
 
 
 def prediction_probability_keys() -> tuple[str, ...]:

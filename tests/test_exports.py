@@ -163,6 +163,7 @@ def test_shared_modules_export_expected_entry_points():
             "prediction_value_key_map",
             "prediction_value_keys",
             "schedule_metadata_keys",
+            "schedule_fixture_teams",
             "schedule_game_metadata",
             "schedule_row_date",
             "schedule_row_key",

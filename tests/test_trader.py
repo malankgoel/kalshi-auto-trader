@@ -515,6 +515,14 @@ def test_prediction_source_row_keys_list_all_prediction_source_fields():
     )
 
 
+def test_prediction_fixture_teams_reads_source_team_fields():
+    row = {
+        model.PRED_HOME_TEAM_KEY: "Argentina",
+        model.PRED_AWAY_TEAM_KEY: "Algeria",
+    }
+    assert model.prediction_fixture_teams(row) == ("Argentina", "Algeria")
+
+
 def test_prediction_row_key_reads_source_team_fields():
     row = {
         model.PRED_HOME_TEAM_KEY: "Argentina",

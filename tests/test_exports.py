@@ -151,6 +151,7 @@ def test_shared_modules_export_expected_entry_points():
             "prediction_metadata_keys",
             "prediction_game_metadata",
             "prediction_matches_id",
+            "prediction_metadata_key_map",
             "prediction_model_values",
             "prediction_probability_keys",
             "prediction_row_metadata",

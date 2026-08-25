@@ -161,6 +161,7 @@ def test_shared_modules_export_expected_entry_points():
             "prediction_row_values",
             "prediction_source_row_keys",
             "prediction_team_keys",
+            "prediction_to_game_metadata_key_map",
             "prediction_to_model_key_map",
             "prediction_value_key_map",
             "prediction_value_keys",

@@ -105,6 +105,7 @@ __all__ = [
     "prediction_source_row_keys",
     "prediction_team_keys",
     "prediction_to_model_key_map",
+    "prediction_value_key_map",
     "prediction_value_keys",
     "prediction_row_values",
     "schedule_row_date",
@@ -307,6 +308,18 @@ def prediction_loaded_value_keys() -> tuple[str, ...]:
         PRED_OVER_2_5_VALUE_KEY,
         PRED_UNDER_2_5_VALUE_KEY,
         PRED_BTTS_VALUE_KEY,
+    )
+
+
+def prediction_value_key_map() -> tuple[tuple[str, str], ...]:
+    """Return source prediction value keys paired with loaded row keys."""
+    return (
+        (PRED_HOME_WIN_KEY, PRED_HOME_WIN_VALUE_KEY),
+        (PRED_DRAW_KEY, PRED_DRAW_VALUE_KEY),
+        (PRED_AWAY_WIN_KEY, PRED_AWAY_WIN_VALUE_KEY),
+        (PRED_OVER_2_5_KEY, PRED_OVER_2_5_VALUE_KEY),
+        (PRED_UNDER_2_5_KEY, PRED_UNDER_2_5_VALUE_KEY),
+        (PRED_BTTS_KEY, PRED_BTTS_VALUE_KEY),
     )
 
 

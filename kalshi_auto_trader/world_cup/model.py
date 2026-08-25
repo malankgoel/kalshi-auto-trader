@@ -323,11 +323,9 @@ def prediction_row_key(row: dict) -> tuple[str, str]:
 
 def prediction_row_metadata(row: dict) -> dict[str, str]:
     """Return loaded metadata fields for one prediction CSV row."""
-    match_id_key, group_key = prediction_metadata_keys()
-    loaded_match_id_key, loaded_group_key = prediction_loaded_metadata_keys()
     return {
-        loaded_match_id_key: row.get(match_id_key, ""),
-        loaded_group_key: row.get(group_key, ""),
+        loaded_key: row.get(source_key, "")
+        for source_key, loaded_key in prediction_metadata_key_map()
     }
 
 

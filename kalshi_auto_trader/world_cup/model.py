@@ -106,6 +106,7 @@ __all__ = [
     "prediction_row_key",
     "prediction_source_row_keys",
     "prediction_team_keys",
+    "prediction_to_game_metadata_key_map",
     "prediction_to_model_key_map",
     "prediction_value_key_map",
     "prediction_value_keys",
@@ -395,6 +396,14 @@ def prediction_game_metadata(row: dict) -> dict[str, str]:
         MATCH_ID_KEY: row[PRED_MATCH_ID_VALUE_KEY],
         GROUP_KEY: row[PRED_GROUP_VALUE_KEY],
     }
+
+
+def prediction_to_game_metadata_key_map() -> tuple[tuple[str, str], ...]:
+    """Return loaded prediction metadata keys paired with emitted game keys."""
+    return (
+        (PRED_MATCH_ID_VALUE_KEY, MATCH_ID_KEY),
+        (PRED_GROUP_VALUE_KEY, GROUP_KEY),
+    )
 
 
 def prediction_matches_id(row: dict, match_id: str) -> bool:

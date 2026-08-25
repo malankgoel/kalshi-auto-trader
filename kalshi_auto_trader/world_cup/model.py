@@ -345,8 +345,7 @@ def prediction_loaded_row_keys() -> tuple[str, ...]:
 
 def prediction_row_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one prediction CSV row."""
-    home_key, away_key = prediction_team_keys()
-    return game_key(row[home_key], row[away_key])
+    return game_key(*prediction_fixture_teams(row))
 
 
 def prediction_row_metadata(row: dict) -> dict[str, str]:

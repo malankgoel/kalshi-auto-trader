@@ -115,6 +115,7 @@ __all__ = [
     "schedule_game_metadata",
     "schedule_source_row_keys",
     "schedule_team_keys",
+    "schedule_timing_values",
     "staked_fraction",
     "strategy_line_names",
     "totals_selection_labels",
@@ -422,6 +423,11 @@ def schedule_row_kickoff_utc(row: dict) -> str:
     return kickoff_utc(
         row[SCHEDULE_DATE_KEY], row[SCHEDULE_TIME_KEY], row[SCHEDULE_UTC_OFFSET_KEY]
     )
+
+
+def schedule_timing_values(row: dict) -> tuple[str, str, str]:
+    """Return date, time, and UTC offset values from one schedule row."""
+    return row[SCHEDULE_DATE_KEY], row[SCHEDULE_TIME_KEY], row[SCHEDULE_UTC_OFFSET_KEY]
 
 
 def schedule_row_date(row: dict) -> str:

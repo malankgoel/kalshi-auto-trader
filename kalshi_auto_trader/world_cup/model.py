@@ -112,6 +112,7 @@ __all__ = [
     "schedule_row_key",
     "schedule_row_kickoff_utc",
     "schedule_metadata_keys",
+    "schedule_fixture_teams",
     "schedule_game_metadata",
     "schedule_source_row_keys",
     "schedule_team_keys",
@@ -229,6 +230,12 @@ def schedule_metadata_keys() -> tuple[str, str, str]:
 def schedule_source_row_keys() -> tuple[str, ...]:
     """Return every source schedule CSV key consumed by schedule loading."""
     return schedule_team_keys() + schedule_metadata_keys()
+
+
+def schedule_fixture_teams(row: dict) -> tuple[str, str]:
+    """Return home and away team values from one schedule source row."""
+    home_key, away_key = schedule_team_keys()
+    return row[home_key], row[away_key]
 
 
 def fixture_metadata_keys() -> tuple[str, ...]:

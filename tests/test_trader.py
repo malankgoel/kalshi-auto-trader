@@ -452,6 +452,13 @@ def test_prediction_game_metadata_maps_loaded_values_to_game_fields():
     }
 
 
+def test_prediction_to_game_metadata_key_map_pairs_loaded_and_game_fields():
+    assert model.prediction_to_game_metadata_key_map() == (
+        (model.PRED_MATCH_ID_VALUE_KEY, model.MATCH_ID_KEY),
+        (model.PRED_GROUP_VALUE_KEY, model.GROUP_KEY),
+    )
+
+
 def test_prediction_matches_id_handles_optional_match_selector():
     row = {model.PRED_MATCH_ID_VALUE_KEY: "1"}
     assert model.prediction_matches_id(row, "")

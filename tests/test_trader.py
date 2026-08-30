@@ -279,6 +279,11 @@ def test_game_row_match_id_reads_emitted_match_field():
     assert model.game_row_match_id(row) == "1"
 
 
+def test_game_row_kickoff_utc_reads_emitted_kickoff_field():
+    row = {model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z"}
+    assert model.game_row_kickoff_utc(row) == "2026-06-17T00:00:00Z"
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

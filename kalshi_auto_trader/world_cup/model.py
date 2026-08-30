@@ -81,6 +81,7 @@ __all__ = [
     "game_row_keys",
     "game_row_missing_keys",
     "game_row_model_keys",
+    "game_row_model_values",
     "game_row_sort_key",
     "game_key",
     "kelly_fraction",
@@ -292,6 +293,11 @@ def game_row_missing_keys(row: dict) -> tuple[str, ...]:
 def game_row_has_required_keys(row: dict) -> bool:
     """Return whether a game row contains every required emitted field."""
     return not game_row_missing_keys(row)
+
+
+def game_row_model_values(row: dict) -> dict[str, float]:
+    """Return model probability fields from one emitted game row."""
+    return {key: row[key] for key in game_row_model_keys()}
 
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:

@@ -301,6 +301,10 @@ def test_game_row_model_values_reads_emitted_model_fields():
 
 def test_game_row_fixture_key_reads_emitted_team_fields():
     row = {
+        model.MATCH_ID_KEY: "1",
+        model.DATE_KEY: "2026-06-16",
+        model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",
+        model.GROUP_KEY: "A",
         model.HOME_TEAM_KEY: "Argentina",
         model.AWAY_TEAM_KEY: "Algeria",
     }

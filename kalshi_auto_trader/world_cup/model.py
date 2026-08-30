@@ -308,7 +308,8 @@ def game_row_model_values(row: dict) -> dict[str, float]:
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one emitted game row."""
-    return game_key(row[HOME_TEAM_KEY], row[AWAY_TEAM_KEY])
+    identity = game_row_identity(row)
+    return game_key(identity[HOME_TEAM_KEY], identity[AWAY_TEAM_KEY])
 
 
 def prediction_probability_keys() -> tuple[str, ...]:

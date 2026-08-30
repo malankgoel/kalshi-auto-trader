@@ -275,7 +275,7 @@ def game_row_missing_keys(row: dict) -> tuple[str, ...]:
 
 def game_row_has_required_keys(row: dict) -> bool:
     """Return whether a game row contains every required emitted field."""
-    return all(key in row for key in game_row_keys())
+    return not game_row_missing_keys(row)
 
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:

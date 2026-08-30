@@ -74,6 +74,7 @@ __all__ = [
     "fixture_selector_matches",
     "fixture_selector_supplied",
     "fixture_team_keys",
+    "fixture_team_selector_complete",
     "fixture_metadata_keys",
     "game_row_identity",
     "game_row_identity_keys",
@@ -232,6 +233,11 @@ def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
 def fixture_selector_matches(row_home: str, row_away: str, home: str, away: str) -> bool:
     """Return whether row teams satisfy an optional complete team selector."""
     return not (home and away) or matches_fixture(row_home, row_away, home, away)
+
+
+def fixture_team_selector_complete(home: str, away: str) -> bool:
+    """Return whether both sides of a manual fixture selector are present."""
+    return bool(home and away)
 
 
 def normalize_fixture_selector(match_id: str, home: str, away: str) -> tuple[str, str, str]:

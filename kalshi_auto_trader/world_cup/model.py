@@ -326,8 +326,7 @@ def game_row_team_values(row: dict) -> tuple[str, str]:
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:
     """Return the canonical fixture key for one emitted game row."""
-    identity = game_row_identity(row)
-    return game_key(identity[HOME_TEAM_KEY], identity[AWAY_TEAM_KEY])
+    return game_key(*game_row_team_values(row))
 
 
 def prediction_probability_keys() -> tuple[str, ...]:

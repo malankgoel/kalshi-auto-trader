@@ -309,6 +309,14 @@ def test_game_row_model_values_reads_emitted_model_fields():
     }
 
 
+def test_game_row_team_values_reads_emitted_team_fields():
+    row = {
+        model.HOME_TEAM_KEY: "Argentina",
+        model.AWAY_TEAM_KEY: "Algeria",
+    }
+    assert model.game_row_team_values(row) == ("Argentina", "Algeria")
+
+
 def test_game_row_fixture_key_reads_emitted_team_fields():
     row = {
         model.MATCH_ID_KEY: "1",

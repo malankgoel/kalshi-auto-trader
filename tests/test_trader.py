@@ -274,6 +274,11 @@ def test_game_row_identity_reads_emitted_identity_fields():
     }
 
 
+def test_game_row_match_id_reads_emitted_match_field():
+    row = {model.MATCH_ID_KEY: "1"}
+    assert model.game_row_match_id(row) == "1"
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

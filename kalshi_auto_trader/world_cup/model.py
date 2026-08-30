@@ -120,6 +120,7 @@ __all__ = [
     "schedule_source_row_keys",
     "schedule_team_keys",
     "schedule_timing_values",
+    "schedule_to_game_metadata_key_map",
     "staked_fraction",
     "strategy_line_names",
     "totals_selection_labels",
@@ -228,6 +229,11 @@ def schedule_team_keys() -> tuple[str, str]:
 def schedule_metadata_keys() -> tuple[str, str, str]:
     """Return source schedule CSV keys needed for kickoff timing."""
     return (SCHEDULE_DATE_KEY, SCHEDULE_TIME_KEY, SCHEDULE_UTC_OFFSET_KEY)
+
+
+def schedule_to_game_metadata_key_map() -> tuple[tuple[str, str], ...]:
+    """Return source schedule metadata keys paired with emitted game keys."""
+    return ((SCHEDULE_DATE_KEY, DATE_KEY),)
 
 
 def schedule_source_row_keys() -> tuple[str, ...]:

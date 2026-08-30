@@ -210,6 +210,12 @@ def test_fixture_selector_supplied_accepts_match_id_or_complete_teams():
     assert not model.fixture_selector_supplied("", "", "")
 
 
+def test_fixture_selector_matches_optional_complete_team_selector():
+    assert model.fixture_selector_matches("Argentina", "Algeria", "", "")
+    assert model.fixture_selector_matches("Argentina", "Algeria", "argentina", "ALGERIA")
+    assert not model.fixture_selector_matches("Argentina", "Algeria", "France", "Algeria")
+
+
 def test_normalize_fixture_selector_strips_optional_lookup_values():
     assert model.normalize_fixture_selector(" 1 ", " Argentina ", None) == (
         "1",

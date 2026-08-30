@@ -86,6 +86,7 @@ __all__ = [
     "game_row_model_keys",
     "game_row_model_values",
     "game_row_sort_key",
+    "game_row_team_values",
     "game_key",
     "kelly_fraction",
     "matches_fixture",
@@ -316,6 +317,11 @@ def game_row_has_required_keys(row: dict) -> bool:
 def game_row_model_values(row: dict) -> dict[str, float]:
     """Return model probability fields from one emitted game row."""
     return {key: row[key] for key in game_row_model_keys()}
+
+
+def game_row_team_values(row: dict) -> tuple[str, str]:
+    """Return home and away team values from one emitted game row."""
+    return row[HOME_TEAM_KEY], row[AWAY_TEAM_KEY]
 
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:

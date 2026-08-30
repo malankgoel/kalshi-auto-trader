@@ -578,7 +578,7 @@ def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[di
     for (h, a), pred in preds.items():
         if not prediction_matches_id(pred, match_id):
             continue
-        if home and away and not matches_fixture(h, a, home, away):
+        if not fixture_selector_matches(h, a, home, away):
             continue
         if not fixture_selector_supplied(match_id, home, away):
             continue

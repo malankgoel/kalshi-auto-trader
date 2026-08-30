@@ -139,6 +139,7 @@ def test_shared_modules_export_expected_entry_points():
             "game_row_has_required_keys",
             "game_row_identity_keys",
             "game_row_keys",
+            "game_row_missing_keys",
             "game_row_model_keys",
             "game_row_sort_key",
             "game_key",

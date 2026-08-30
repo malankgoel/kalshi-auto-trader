@@ -282,6 +282,13 @@ def test_game_row_has_required_keys_checks_game_row_schema():
     assert not model.game_row_has_required_keys(row)
 
 
+def test_game_row_model_values_reads_emitted_model_fields():
+    row = {key: index / 10 for index, key in enumerate(model.game_row_model_keys())}
+    assert model.game_row_model_values(row) == {
+        key: index / 10 for index, key in enumerate(model.game_row_model_keys())
+    }
+
+
 def test_game_row_fixture_key_reads_emitted_team_fields():
     row = {
         model.HOME_TEAM_KEY: "Argentina",

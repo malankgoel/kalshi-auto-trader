@@ -132,6 +132,7 @@ def test_shared_modules_export_expected_entry_points():
             "build_game_row",
             "flag_bets",
             "fixture_identity",
+            "fixture_selector_matches",
             "fixture_selector_supplied",
             "fixture_metadata_keys",
             "fixture_team_keys",

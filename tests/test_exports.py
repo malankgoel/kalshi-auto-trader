@@ -147,6 +147,7 @@ def test_shared_modules_export_expected_entry_points():
             "game_row_model_keys",
             "game_row_model_values",
             "game_row_sort_key",
+            "game_row_team_values",
             "game_key",
             "matches_fixture",
             "meets_edge_threshold",

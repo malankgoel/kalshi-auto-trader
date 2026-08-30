@@ -566,9 +566,7 @@ def next_game(now: Optional[dt.datetime] = None) -> Optional[dict]:
 
 def find_game(match_id: str = "", home: str = "", away: str = "") -> Optional[dict]:
     """Look up a specific fixture (ignores the kickoff filter), for manual runs."""
-    match_id = normalize_optional_text(match_id) or ""
-    home = normalize_optional_text(home) or ""
-    away = normalize_optional_text(away) or ""
+    match_id, home, away = normalize_fixture_selector(match_id, home, away)
     preds = load_predictions()
     sched = load_schedule()
     for (h, a), pred in preds.items():

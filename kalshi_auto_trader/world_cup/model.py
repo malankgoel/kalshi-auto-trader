@@ -474,10 +474,12 @@ def schedule_row_key(row: dict) -> tuple[str, str]:
 
 def schedule_game_metadata(row: dict, kickoff_utc_value: str) -> dict[str, str]:
     """Return game-row schedule metadata fields for one schedule row."""
-    return {
-        DATE_KEY: schedule_row_date(row) if row else "",
-        KICKOFF_UTC_KEY: kickoff_utc_value,
+    metadata = {
+        game_key_value: row[source_key] if row else ""
+        for source_key, game_key_value in schedule_to_game_metadata_key_map()
     }
+    metadata[KICKOFF_UTC_KEY] = kickoff_utc_value
+    return metadata
 
 
 def build_game_row(

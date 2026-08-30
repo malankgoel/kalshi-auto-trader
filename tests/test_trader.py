@@ -254,6 +254,13 @@ def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 
 
+def test_game_row_missing_keys_lists_absent_schema_fields():
+    row = {key: "value" for key in model.game_row_keys()}
+    assert model.game_row_missing_keys(row) == ()
+    row.pop(model.MATCH_ID_KEY)
+    assert model.game_row_missing_keys(row) == (model.MATCH_ID_KEY,)
+
+
 def test_game_row_has_required_keys_checks_game_row_schema():
     row = {key: "value" for key in model.game_row_keys()}
     assert model.game_row_has_required_keys(row)

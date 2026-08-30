@@ -264,6 +264,16 @@ def test_game_row_identity_keys_list_fixture_identity_fields():
     )
 
 
+def test_game_row_identity_reads_emitted_identity_fields():
+    row = {
+        key: f"value-{index}"
+        for index, key in enumerate(model.game_row_identity_keys())
+    }
+    assert model.game_row_identity(row) == {
+        key: f"value-{index}" for index, key in enumerate(model.game_row_identity_keys())
+    }
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

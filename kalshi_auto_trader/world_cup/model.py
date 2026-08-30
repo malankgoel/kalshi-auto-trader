@@ -541,7 +541,7 @@ def build_game_row(
 
 def game_row_sort_key(row: dict) -> tuple[str, str]:
     """Return the stable chronological sort key for emitted game rows."""
-    return (row[KICKOFF_UTC_KEY], row[MATCH_ID_KEY])
+    return (row[KICKOFF_UTC_KEY], game_row_match_id(row))
 
 
 def _now() -> dt.datetime:

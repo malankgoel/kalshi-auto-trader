@@ -71,6 +71,7 @@ __all__ = [
     "find_game",
     "flag_bets",
     "fixture_identity",
+    "fixture_selector_matches",
     "fixture_selector_supplied",
     "fixture_team_keys",
     "fixture_metadata_keys",
@@ -221,6 +222,11 @@ def fixture_identity(home: str, away: str) -> dict[str, str]:
 def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
     """Return whether manual lookup has a match id or complete fixture teams."""
     return bool(match_id or (home and away))
+
+
+def fixture_selector_matches(row_home: str, row_away: str, home: str, away: str) -> bool:
+    """Return whether row teams satisfy an optional complete team selector."""
+    return not (home and away) or matches_fixture(row_home, row_away, home, away)
 
 
 def normalize_fixture_selector(match_id: str, home: str, away: str) -> tuple[str, str, str]:

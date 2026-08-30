@@ -232,7 +232,9 @@ def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
 
 def fixture_selector_matches(row_home: str, row_away: str, home: str, away: str) -> bool:
     """Return whether row teams satisfy an optional complete team selector."""
-    return not (home and away) or matches_fixture(row_home, row_away, home, away)
+    return not fixture_team_selector_complete(home, away) or matches_fixture(
+        row_home, row_away, home, away
+    )
 
 
 def fixture_team_selector_complete(home: str, away: str) -> bool:

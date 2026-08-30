@@ -80,6 +80,7 @@ __all__ = [
     "game_row_fixture_key",
     "game_row_has_required_keys",
     "game_row_keys",
+    "game_row_kickoff_utc",
     "game_row_match_id",
     "game_row_missing_keys",
     "game_row_model_keys",
@@ -290,6 +291,11 @@ def game_row_identity(row: dict) -> dict[str, str]:
 def game_row_match_id(row: dict) -> str:
     """Return the match id from one emitted game row."""
     return row[MATCH_ID_KEY]
+
+
+def game_row_kickoff_utc(row: dict) -> str:
+    """Return the kickoff timestamp from one emitted game row."""
+    return row[KICKOFF_UTC_KEY]
 
 
 def game_row_model_keys() -> tuple[str, ...]:

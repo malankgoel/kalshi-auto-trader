@@ -635,6 +635,12 @@ def test_schedule_metadata_keys_list_timing_fields():
     )
 
 
+def test_schedule_to_game_metadata_key_map_pairs_source_and_game_fields():
+    assert model.schedule_to_game_metadata_key_map() == (
+        (model.SCHEDULE_DATE_KEY, model.DATE_KEY),
+    )
+
+
 def test_schedule_timing_values_reads_date_time_and_offset():
     row = {
         model.SCHEDULE_DATE_KEY: "2026-06-16",

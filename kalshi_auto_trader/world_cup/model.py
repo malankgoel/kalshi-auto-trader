@@ -227,7 +227,7 @@ def fixture_identity(home: str, away: str) -> dict[str, str]:
 
 def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
     """Return whether manual lookup has a match id or complete fixture teams."""
-    return bool(match_id or (home and away))
+    return bool(match_id or fixture_team_selector_complete(home, away))
 
 
 def fixture_selector_matches(row_home: str, row_away: str, home: str, away: str) -> bool:

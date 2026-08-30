@@ -90,6 +90,7 @@ __all__ = [
     "meets_edge_threshold",
     "model_probability_keys",
     "next_game",
+    "normalize_fixture_selector",
     "parse_kickoff_utc",
     "prediction_loaded_metadata_keys",
     "prediction_loaded_row_keys",
@@ -220,6 +221,15 @@ def fixture_identity(home: str, away: str) -> dict[str, str]:
 def fixture_selector_supplied(match_id: str, home: str, away: str) -> bool:
     """Return whether manual lookup has a match id or complete fixture teams."""
     return bool(match_id or (home and away))
+
+
+def normalize_fixture_selector(match_id: str, home: str, away: str) -> tuple[str, str, str]:
+    """Return stripped optional selector values for manual fixture lookup."""
+    return (
+        normalize_optional_text(match_id) or "",
+        normalize_optional_text(home) or "",
+        normalize_optional_text(away) or "",
+    )
 
 
 def schedule_team_keys() -> tuple[str, str]:

@@ -75,6 +75,7 @@ __all__ = [
     "fixture_selector_supplied",
     "fixture_team_keys",
     "fixture_metadata_keys",
+    "game_row_identity",
     "game_row_identity_keys",
     "game_row_fixture_key",
     "game_row_has_required_keys",
@@ -278,6 +279,11 @@ def game_row_keys() -> tuple[str, ...]:
 def game_row_identity_keys() -> tuple[str, ...]:
     """Return game-row metadata and team keys that identify one fixture."""
     return fixture_metadata_keys() + fixture_team_keys()
+
+
+def game_row_identity(row: dict) -> dict[str, str]:
+    """Return identity metadata and team fields from one emitted game row."""
+    return {key: row[key] for key in game_row_identity_keys()}
 
 
 def game_row_model_keys() -> tuple[str, ...]:

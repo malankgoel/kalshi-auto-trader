@@ -146,6 +146,7 @@ def test_shared_modules_export_expected_entry_points():
             "matches_fixture",
             "meets_edge_threshold",
             "model_probability_keys",
+            "normalize_fixture_selector",
             "parse_kickoff_utc",
             "prediction_loaded_metadata_keys",
             "prediction_loaded_row_keys",

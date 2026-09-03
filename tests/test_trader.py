@@ -184,6 +184,15 @@ def test_winner_model_keys_list_three_way_probability_fields():
     )
 
 
+def test_winner_model_values_reads_three_way_model_fields():
+    row = {
+        model.MODEL_HOME_WIN_KEY: 0.5,
+        model.MODEL_DRAW_KEY: 0.25,
+        model.MODEL_AWAY_WIN_KEY: 0.25,
+    }
+    assert model.winner_model_values(row) == (0.5, 0.25, 0.25)
+
+
 def test_model_probability_keys_list_all_model_probability_fields():
     assert model.model_probability_keys() == (
         *model.winner_model_keys(),

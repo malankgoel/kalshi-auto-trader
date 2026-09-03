@@ -193,6 +193,7 @@ def test_shared_modules_export_expected_entry_points():
             "strategy_line_names",
             "totals_selection_labels",
             "winner_model_keys",
+            "winner_model_values",
             "winner_selection_labels",
         },
         markets: {

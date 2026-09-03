@@ -348,6 +348,11 @@ def test_game_row_home_team_reads_emitted_home_field():
     assert model.game_row_home_team(row) == "Argentina"
 
 
+def test_game_row_away_team_reads_emitted_away_field():
+    row = {model.AWAY_TEAM_KEY: "Algeria"}
+    assert model.game_row_away_team(row) == "Algeria"
+
+
 def test_game_row_team_values_reads_emitted_team_fields():
     row = {
         model.HOME_TEAM_KEY: "Argentina",

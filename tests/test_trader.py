@@ -137,6 +137,11 @@ def test_btts_selection_labels_return_yes_no_labels():
     )
 
 
+def test_btts_model_value_reads_btts_model_field():
+    row = {model.MODEL_BTTS_KEY: 0.58}
+    assert model.btts_model_value(row) == 0.58
+
+
 def test_yes_selection_prefix_constant_names_prefix():
     assert model.YES_SELECTION_PREFIX == "YES"
 

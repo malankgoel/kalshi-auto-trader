@@ -776,10 +776,11 @@ def flag_bets(game: dict, odds: dict) -> list[Bet]:
                   _c2p(odds.get(markets.WINNER_AWAY_PRICE_KEY)))
     if None not in (hp, dp, ap):
         fh, fd, fa = devig_three_way(hp, dp, ap)
+        mh, md, ma = winner_model_values(game)
         for model_p, fair_p, raw_p, team, label in (
-            (game[MODEL_HOME_WIN_KEY], fh, hp, game[HOME_TEAM_KEY], game[HOME_TEAM_KEY]),
-            (game[MODEL_DRAW_KEY], fd, dp, "", DRAW_SELECTION),
-            (game[MODEL_AWAY_WIN_KEY], fa, ap, game[AWAY_TEAM_KEY], game[AWAY_TEAM_KEY]),
+            (mh, fh, hp, game[HOME_TEAM_KEY], game[HOME_TEAM_KEY]),
+            (md, fd, dp, "", DRAW_SELECTION),
+            (ma, fa, ap, game[AWAY_TEAM_KEY], game[AWAY_TEAM_KEY]),
         ):
             yes_label, no_label = winner_selection_labels(label)
             b = _evaluate(

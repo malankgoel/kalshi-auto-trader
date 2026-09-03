@@ -78,6 +78,7 @@ __all__ = [
     "fixture_metadata_keys",
     "game_row_date",
     "game_row_group",
+    "game_row_home_team",
     "game_row_identity",
     "game_row_identity_keys",
     "game_row_fixture_key",
@@ -354,6 +355,11 @@ def game_row_model_values(row: dict) -> dict[str, float]:
 def game_row_team_identity(row: dict) -> dict[str, str]:
     """Return home and away team fields from one emitted game row."""
     return {key: row[key] for key in fixture_team_keys()}
+
+
+def game_row_home_team(row: dict) -> str:
+    """Return the home team from one emitted game row."""
+    return row[HOME_TEAM_KEY]
 
 
 def game_row_team_values(row: dict) -> tuple[str, str]:

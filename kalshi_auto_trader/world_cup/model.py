@@ -297,7 +297,7 @@ def game_row_identity_keys() -> tuple[str, ...]:
 
 def game_row_identity(row: dict) -> dict[str, str]:
     """Return identity metadata and team fields from one emitted game row."""
-    return {key: row[key] for key in game_row_identity_keys()}
+    return {**game_row_metadata(row), **fixture_identity(*game_row_team_values(row))}
 
 
 def game_row_match_id(row: dict) -> str:

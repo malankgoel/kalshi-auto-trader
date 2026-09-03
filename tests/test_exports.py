@@ -146,6 +146,7 @@ def test_shared_modules_export_expected_entry_points():
             "game_row_keys",
             "game_row_kickoff_utc",
             "game_row_match_id",
+            "game_row_metadata",
             "game_row_missing_keys",
             "game_row_model_keys",
             "game_row_model_values",

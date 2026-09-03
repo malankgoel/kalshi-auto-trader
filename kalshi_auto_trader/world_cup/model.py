@@ -26,6 +26,7 @@ __all__ = [
     "BTTS_LINE",
     "BTTS_NO_SELECTION",
     "BTTS_YES_SELECTION",
+    "btts_model_value",
     "DATE_KEY",
     "DRAW_SELECTION",
     "GROUP_KEY",
@@ -211,6 +212,11 @@ def totals_model_value(row: dict) -> float:
 def btts_selection_labels() -> tuple[str, str]:
     """Return the YES/NO-facing labels for both-teams-to-score."""
     return (BTTS_YES_SELECTION, BTTS_NO_SELECTION)
+
+
+def btts_model_value(row: dict) -> float:
+    """Return the both-teams-to-score model probability from one game row."""
+    return row[MODEL_BTTS_KEY]
 
 
 def winner_selection_labels(label: str) -> tuple[str, str]:

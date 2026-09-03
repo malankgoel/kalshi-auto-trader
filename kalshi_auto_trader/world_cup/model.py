@@ -76,6 +76,7 @@ __all__ = [
     "fixture_team_keys",
     "fixture_team_selector_complete",
     "fixture_metadata_keys",
+    "game_row_away_team",
     "game_row_date",
     "game_row_group",
     "game_row_home_team",
@@ -360,6 +361,11 @@ def game_row_team_identity(row: dict) -> dict[str, str]:
 def game_row_home_team(row: dict) -> str:
     """Return the home team from one emitted game row."""
     return row[HOME_TEAM_KEY]
+
+
+def game_row_away_team(row: dict) -> str:
+    """Return the away team from one emitted game row."""
+    return row[AWAY_TEAM_KEY]
 
 
 def game_row_team_values(row: dict) -> tuple[str, str]:

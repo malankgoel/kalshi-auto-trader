@@ -358,7 +358,8 @@ def game_row_team_identity(row: dict) -> dict[str, str]:
 
 def game_row_team_values(row: dict) -> tuple[str, str]:
     """Return home and away team values from one emitted game row."""
-    return row[HOME_TEAM_KEY], row[AWAY_TEAM_KEY]
+    teams = game_row_team_identity(row)
+    return teams[HOME_TEAM_KEY], teams[AWAY_TEAM_KEY]
 
 
 def game_row_fixture_key(row: dict) -> tuple[str, str]:

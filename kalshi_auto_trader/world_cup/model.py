@@ -141,6 +141,7 @@ __all__ = [
     "totals_selection_labels",
     "upcoming_games",
     "winner_model_keys",
+    "winner_model_values",
     "winner_selection_labels",
 ]
 
@@ -214,6 +215,11 @@ def winner_selection_labels(label: str) -> tuple[str, str]:
 def winner_model_keys() -> tuple[str, str, str]:
     """Return game-row model probability keys for three-way winner outcomes."""
     return (MODEL_HOME_WIN_KEY, MODEL_DRAW_KEY, MODEL_AWAY_WIN_KEY)
+
+
+def winner_model_values(row: dict) -> tuple[float, float, float]:
+    """Return home, draw, and away model probabilities from one game row."""
+    return tuple(row[key] for key in winner_model_keys())
 
 
 def model_probability_keys() -> tuple[str, ...]:

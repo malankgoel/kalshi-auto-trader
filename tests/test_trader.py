@@ -290,6 +290,11 @@ def test_game_row_kickoff_utc_reads_emitted_kickoff_field():
     assert model.game_row_kickoff_utc(row) == "2026-06-17T00:00:00Z"
 
 
+def test_game_row_date_reads_emitted_date_field():
+    row = {model.DATE_KEY: "2026-06-16"}
+    assert model.game_row_date(row) == "2026-06-16"
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

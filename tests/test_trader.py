@@ -295,6 +295,11 @@ def test_game_row_date_reads_emitted_date_field():
     assert model.game_row_date(row) == "2026-06-16"
 
 
+def test_game_row_group_reads_emitted_group_field():
+    row = {model.GROUP_KEY: "A"}
+    assert model.game_row_group(row) == "A"
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

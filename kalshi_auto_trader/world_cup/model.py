@@ -85,6 +85,7 @@ __all__ = [
     "game_row_keys",
     "game_row_kickoff_utc",
     "game_row_match_id",
+    "game_row_metadata",
     "game_row_missing_keys",
     "game_row_model_keys",
     "game_row_model_values",
@@ -317,6 +318,16 @@ def game_row_date(row: dict) -> str:
 def game_row_group(row: dict) -> str:
     """Return the group label from one emitted game row."""
     return row[GROUP_KEY]
+
+
+def game_row_metadata(row: dict) -> dict[str, str]:
+    """Return non-team metadata fields from one emitted game row."""
+    return {
+        MATCH_ID_KEY: game_row_match_id(row),
+        DATE_KEY: game_row_date(row),
+        KICKOFF_UTC_KEY: game_row_kickoff_utc(row),
+        GROUP_KEY: game_row_group(row),
+    }
 
 
 def game_row_model_keys() -> tuple[str, ...]:

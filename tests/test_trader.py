@@ -300,6 +300,16 @@ def test_game_row_group_reads_emitted_group_field():
     assert model.game_row_group(row) == "A"
 
 
+def test_game_row_metadata_reads_emitted_metadata_fields():
+    row = {
+        model.MATCH_ID_KEY: "1",
+        model.DATE_KEY: "2026-06-16",
+        model.KICKOFF_UTC_KEY: "2026-06-17T00:00:00Z",
+        model.GROUP_KEY: "A",
+    }
+    assert model.game_row_metadata(row) == row
+
+
 def test_game_row_model_keys_list_model_probability_fields():
     assert model.game_row_model_keys() == model.model_probability_keys()
 

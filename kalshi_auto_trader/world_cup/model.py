@@ -138,6 +138,7 @@ __all__ = [
     "schedule_to_game_metadata_key_map",
     "staked_fraction",
     "strategy_line_names",
+    "totals_model_value",
     "totals_selection_labels",
     "upcoming_games",
     "winner_model_keys",
@@ -200,6 +201,11 @@ def strategy_line_names() -> tuple[str, ...]:
 def totals_selection_labels() -> tuple[str, str]:
     """Return the YES/NO-facing labels for the 2.5-goals line."""
     return (OVER_2_5_SELECTION, UNDER_2_5_SELECTION)
+
+
+def totals_model_value(row: dict) -> float:
+    """Return the over-2.5 goals model probability from one game row."""
+    return row[MODEL_OVER_2_5_KEY]
 
 
 def btts_selection_labels() -> tuple[str, str]:

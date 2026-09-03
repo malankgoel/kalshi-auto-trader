@@ -76,6 +76,7 @@ __all__ = [
     "fixture_team_keys",
     "fixture_team_selector_complete",
     "fixture_metadata_keys",
+    "game_row_date",
     "game_row_identity",
     "game_row_identity_keys",
     "game_row_fixture_key",
@@ -305,6 +306,11 @@ def game_row_match_id(row: dict) -> str:
 def game_row_kickoff_utc(row: dict) -> str:
     """Return the kickoff timestamp from one emitted game row."""
     return row[KICKOFF_UTC_KEY]
+
+
+def game_row_date(row: dict) -> str:
+    """Return the schedule date from one emitted game row."""
+    return row[DATE_KEY]
 
 
 def game_row_model_keys() -> tuple[str, ...]:

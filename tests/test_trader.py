@@ -106,6 +106,11 @@ def test_over_2_5_selection_constant_names_label():
     assert model.OVER_2_5_SELECTION == "OVER 2.5"
 
 
+def test_totals_model_value_reads_over_model_field():
+    row = {model.MODEL_OVER_2_5_KEY: 0.62}
+    assert model.totals_model_value(row) == 0.62
+
+
 def test_under_2_5_selection_constant_names_label():
     assert model.UNDER_2_5_SELECTION == "UNDER 2.5"
 

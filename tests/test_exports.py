@@ -191,6 +191,7 @@ def test_shared_modules_export_expected_entry_points():
             "schedule_timing_values",
             "schedule_to_game_metadata_key_map",
             "strategy_line_names",
+            "totals_model_value",
             "totals_selection_labels",
             "winner_model_keys",
             "winner_model_values",

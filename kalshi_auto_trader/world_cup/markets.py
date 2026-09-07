@@ -41,6 +41,7 @@ __all__ = [
     "WINNER_HOME_PRICE_KEY",
     "YES_BID_PRICE_FIELDS",
     "YES_ASK_PRICE_FIELDS",
+    "btts_price_keys",
     "build_market_index",
     "build_odds_row",
     "complete_odds_price_keys",
@@ -100,6 +101,14 @@ def totals_price_keys() -> tuple[str, ...]:
     return (
         OVER_2_5_PRICE_KEY,
         UNDER_2_5_PRICE_KEY,
+    )
+
+
+def btts_price_keys() -> tuple[str, ...]:
+    """Return model odds keys for both-teams-to-score outcomes."""
+    return (
+        BTTS_YES_PRICE_KEY,
+        BTTS_NO_PRICE_KEY,
     )
 
 

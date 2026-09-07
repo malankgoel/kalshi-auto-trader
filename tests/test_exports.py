@@ -233,6 +233,7 @@ def test_shared_modules_export_expected_entry_points():
             "totals_price_keys",
             "winner_price_keys",
             "winner_series",
+            "yes_odds_price_keys",
         },
         trader: {
             "SKIP_NO_ASK",

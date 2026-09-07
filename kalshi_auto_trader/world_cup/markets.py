@@ -315,10 +315,7 @@ def yes_price_cents(market: dict) -> Optional[float]:
 
 def odds_price_keys() -> tuple[str, ...]:
     """Return odds-row keys populated from a resolved market index."""
-    return (
-        WINNER_HOME_PRICE_KEY,
-        WINNER_AWAY_PRICE_KEY,
-        WINNER_DRAW_PRICE_KEY,
+    return winner_price_keys() + (
         OVER_2_5_PRICE_KEY,
         BTTS_YES_PRICE_KEY,
     )

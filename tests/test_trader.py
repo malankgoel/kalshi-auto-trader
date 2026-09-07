@@ -1133,6 +1133,14 @@ def test_winner_draw_price_key_names_odds_row_field():
     assert mm.WINNER_DRAW_PRICE_KEY == "winner_draw_price"
 
 
+def test_winner_price_keys_group_winner_outcomes():
+    assert mm.winner_price_keys() == (
+        mm.WINNER_HOME_PRICE_KEY,
+        mm.WINNER_AWAY_PRICE_KEY,
+        mm.WINNER_DRAW_PRICE_KEY,
+    )
+
+
 def test_over_2_5_price_key_names_odds_row_field():
     assert mm.OVER_2_5_PRICE_KEY == "over_2_5_price"
 

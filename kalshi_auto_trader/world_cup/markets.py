@@ -61,6 +61,7 @@ __all__ = [
     "side_ask_cents",
     "team_key",
     "winner_series",
+    "winner_price_keys",
     "yes_price_cents",
 ]
 
@@ -82,6 +83,15 @@ WINNER_DRAW_PRICE_KEY = "winner_draw_price"
 WINNER_HOME_PRICE_KEY = "winner_home_price"
 YES_BID_PRICE_FIELDS = ("yes_bid_dollars", "yes_bid")
 YES_ASK_PRICE_FIELDS = ("yes_ask_dollars", "yes_ask")
+
+
+def winner_price_keys() -> tuple[str, ...]:
+    """Return model odds keys for the three winner outcomes."""
+    return (
+        WINNER_HOME_PRICE_KEY,
+        WINNER_AWAY_PRICE_KEY,
+        WINNER_DRAW_PRICE_KEY,
+    )
 
 
 # --------------------------------------------------------------------------- #

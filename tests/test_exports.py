@@ -233,6 +233,7 @@ def test_shared_modules_export_expected_entry_points():
             "series_line_lookup",
             "team_key",
             "totals_price_keys",
+            "winner_index_key",
             "winner_price_keys",
             "winner_series",
             "yes_odds_price_keys",

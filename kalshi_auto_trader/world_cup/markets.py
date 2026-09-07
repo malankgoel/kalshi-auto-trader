@@ -57,6 +57,7 @@ __all__ = [
     "market_text",
     "non_winner_series",
     "odds_price_keys",
+    "optional_no_odds_price_keys",
     "resolve_order",
     "series_line_lookup",
     "side_ask_cents",
@@ -118,6 +119,14 @@ def yes_odds_price_keys() -> tuple[str, ...]:
     return winner_price_keys() + (
         OVER_2_5_PRICE_KEY,
         BTTS_YES_PRICE_KEY,
+    )
+
+
+def optional_no_odds_price_keys() -> tuple[str, ...]:
+    """Return odds-row keys accepted as explicit NO-side model inputs."""
+    return (
+        UNDER_2_5_PRICE_KEY,
+        BTTS_NO_PRICE_KEY,
     )
 
 

@@ -492,7 +492,7 @@ def resolve_order(idx: dict, line: str, side: str, selection: str,
     if line in ("winner", "winner_draw"):
         if "draw" in _norm(selection) or _norm(selection_team) in ("draw", "tie", ""):
             return idx.get("draw"), buy_side
-        return idx["winner"].get(_norm(selection_team)), buy_side
+        return idx["winner"].get(winner_index_key(selection_team)), buy_side
     if line == "over_under":
         return idx.get("over"), buy_side
     if line == "btts":

@@ -65,6 +65,7 @@ __all__ = [
     "winner_series",
     "winner_price_keys",
     "yes_price_cents",
+    "yes_odds_price_keys",
 ]
 
 MARKET_STATUS_SWEEP = ("open", "unopened", None)
@@ -109,6 +110,14 @@ def btts_price_keys() -> tuple[str, ...]:
     return (
         BTTS_YES_PRICE_KEY,
         BTTS_NO_PRICE_KEY,
+    )
+
+
+def yes_odds_price_keys() -> tuple[str, ...]:
+    """Return odds-row keys populated directly from YES-side markets."""
+    return winner_price_keys() + (
+        OVER_2_5_PRICE_KEY,
+        BTTS_YES_PRICE_KEY,
     )
 
 

@@ -64,6 +64,7 @@ __all__ = [
     "side_ask_cents",
     "team_key",
     "totals_price_keys",
+    "winner_index_key",
     "winner_series",
     "winner_price_keys",
     "yes_price_cents",
@@ -176,6 +177,11 @@ def _team_aliases(team: str) -> list[str]:
 
 def team_key(team: str) -> str:
     return _norm(team)
+
+
+def winner_index_key(team: str) -> str:
+    """Return the normalized key used in winner-market indexes."""
+    return team_key(team)
 
 
 # --------------------------------------------------------------------------- #

@@ -286,7 +286,8 @@ def market_index_keys() -> tuple[str, ...]:
 
 def market_index_template() -> dict:
     """Return the empty per-fixture market index shape used by strategies."""
-    return {"winner": {}, "draw": None, "over": None, "btts": None}
+    winner_key, draw_key, over_key, btts_key = market_index_keys()
+    return {winner_key: {}, draw_key: None, over_key: None, btts_key: None}
 
 
 def market_index_complete(idx: dict) -> bool:

@@ -1179,6 +1179,13 @@ def test_yes_odds_price_keys_list_direct_market_prices():
     )
 
 
+def test_optional_no_odds_price_keys_list_complements():
+    assert mm.optional_no_odds_price_keys() == (
+        mm.UNDER_2_5_PRICE_KEY,
+        mm.BTTS_NO_PRICE_KEY,
+    )
+
+
 def test_odds_price_keys_lists_build_odds_row_fields():
     assert mm.odds_price_keys() == (
         mm.WINNER_HOME_PRICE_KEY,

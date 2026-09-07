@@ -229,6 +229,7 @@ def test_shared_modules_export_expected_entry_points():
             "resolve_order",
             "series_line_lookup",
             "team_key",
+            "totals_price_keys",
             "winner_price_keys",
             "winner_series",
         },

@@ -52,6 +52,7 @@ __all__ = [
     "first_price_cents",
     "is_two_five_line",
     "line_series",
+    "market_index_keys",
     "market_index_complete",
     "market_index_template",
     "market_text",
@@ -276,6 +277,11 @@ def _is_2_5_line(market: dict) -> bool:
 def is_two_five_line(market: dict) -> bool:
     """Return True when a totals market describes the 2.5-goals line."""
     return _is_2_5_line(market)
+
+
+def market_index_keys() -> tuple[str, ...]:
+    """Return top-level keys in the per-fixture market index."""
+    return ("winner", "draw", "over", "btts")
 
 
 def market_index_template() -> dict:

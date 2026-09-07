@@ -60,6 +60,7 @@ __all__ = [
     "series_line_lookup",
     "side_ask_cents",
     "team_key",
+    "totals_price_keys",
     "winner_series",
     "winner_price_keys",
     "yes_price_cents",
@@ -91,6 +92,14 @@ def winner_price_keys() -> tuple[str, ...]:
         WINNER_HOME_PRICE_KEY,
         WINNER_AWAY_PRICE_KEY,
         WINNER_DRAW_PRICE_KEY,
+    )
+
+
+def totals_price_keys() -> tuple[str, ...]:
+    """Return model odds keys for the 2.5-goals totals outcomes."""
+    return (
+        OVER_2_5_PRICE_KEY,
+        UNDER_2_5_PRICE_KEY,
     )
 
 

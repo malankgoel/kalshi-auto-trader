@@ -227,6 +227,7 @@ def test_shared_modules_export_expected_entry_points():
             "market_text",
             "non_winner_series",
             "odds_price_keys",
+            "optional_no_odds_price_keys",
             "resolve_order",
             "series_line_lookup",
             "team_key",

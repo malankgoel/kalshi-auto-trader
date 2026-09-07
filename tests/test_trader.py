@@ -1259,6 +1259,10 @@ def test_team_key_normalizes_case_and_accents():
     assert mm.team_key("Curaçao") == "curacao"
 
 
+def test_winner_index_key_matches_team_key_normalization():
+    assert mm.winner_index_key("Curaçao") == mm.team_key("Curaçao")
+
+
 def test_event_token_extracts_fixture_token():
     assert mm.event_token("KXWCGAME-26JUN16ARGALG-ARG") == "26JUN16ARGALG"
     assert mm.event_token("bad") == ""

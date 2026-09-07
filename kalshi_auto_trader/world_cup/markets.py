@@ -356,10 +356,7 @@ def odds_price_keys() -> tuple[str, ...]:
 
 def complete_odds_price_keys() -> tuple[str, ...]:
     """Return all odds keys accepted by the model input row."""
-    return odds_price_keys() + (
-        UNDER_2_5_PRICE_KEY,
-        BTTS_NO_PRICE_KEY,
-    )
+    return odds_price_keys() + optional_no_odds_price_keys()
 
 
 def build_odds_row(idx: dict, home: str, away: str) -> dict:

@@ -1171,6 +1171,14 @@ def test_btts_price_keys_group_btts_outcomes():
     )
 
 
+def test_yes_odds_price_keys_list_direct_market_prices():
+    assert mm.yes_odds_price_keys() == (
+        *mm.winner_price_keys(),
+        mm.OVER_2_5_PRICE_KEY,
+        mm.BTTS_YES_PRICE_KEY,
+    )
+
+
 def test_odds_price_keys_lists_build_odds_row_fields():
     assert mm.odds_price_keys() == (
         mm.WINNER_HOME_PRICE_KEY,

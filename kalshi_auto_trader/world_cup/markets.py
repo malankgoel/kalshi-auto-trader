@@ -68,6 +68,7 @@ __all__ = [
     "winner_series",
     "winner_price_keys",
     "yes_bid_price_cents",
+    "yes_ask_price_cents",
     "yes_price_cents",
     "yes_odds_price_keys",
 ]
@@ -352,6 +353,11 @@ def first_price_cents(market: dict, *keys) -> Optional[float]:
 def yes_bid_price_cents(market: dict) -> Optional[float]:
     """Return the best available YES bid quote in cents."""
     return first_price_cents(market, *YES_BID_PRICE_FIELDS)
+
+
+def yes_ask_price_cents(market: dict) -> Optional[float]:
+    """Return the best available YES ask quote in cents."""
+    return first_price_cents(market, *YES_ASK_PRICE_FIELDS)
 
 
 def yes_price_cents(market: dict) -> Optional[float]:

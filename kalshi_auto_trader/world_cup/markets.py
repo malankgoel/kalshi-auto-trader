@@ -388,9 +388,9 @@ def yes_price_cents(market: dict) -> Optional[float]:
     yb = yes_bid_price_cents(market)
     ya = yes_ask_price_cents(market)
     if yb is not None and ya is not None and ya >= yb and (yb + ya) > 0:
-        return max(0.0, min(100.0, (yb + ya) / 2.0))
+        return _clamp_cents((yb + ya) / 2.0)
     v = last_trade_price_cents(market)
-    return max(0.0, min(100.0, v)) if v is not None else None
+    return _clamp_cents(v) if v is not None else None
 
 
 def odds_price_keys() -> tuple[str, ...]:
@@ -441,7 +441,7 @@ def side_ask_cents(market: dict, side: str) -> Optional[float]:
             v = 100.0 - yb if yb is not None else None
     if v is None:
         return None
-    return max(0.0, min(100.0, v))
+    return _clamp_cents(v)
 
 
 # --------------------------------------------------------------------------- #

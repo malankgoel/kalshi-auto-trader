@@ -1129,6 +1129,10 @@ def test_no_bid_price_fields_prefer_dollar_then_cent_quotes():
     assert mm.NO_BID_PRICE_FIELDS == ("no_bid_dollars", "no_bid")
 
 
+def test_no_bid_price_cents_prefers_dollar_quote():
+    assert mm.no_bid_price_cents({"no_bid_dollars": "0.52", "no_bid": 51}) == approx(52.0)
+
+
 def test_no_ask_price_fields_prefer_dollar_then_cent_quotes():
     assert mm.NO_ASK_PRICE_FIELDS == ("no_ask_dollars", "no_ask")
 

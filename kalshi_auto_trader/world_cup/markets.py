@@ -422,7 +422,7 @@ def side_ask_cents(market: dict, side: str) -> Optional[float]:
     if side == "yes":
         v = first_price_cents(market, *YES_ASK_PRICE_FIELDS)
         if v is None:
-            nb = first_price_cents(market, *NO_BID_PRICE_FIELDS)
+            nb = no_bid_price_cents(market)
             v = 100.0 - nb if nb is not None else None
     else:  # no
         v = first_price_cents(market, *NO_ASK_PRICE_FIELDS)

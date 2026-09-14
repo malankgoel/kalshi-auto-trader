@@ -221,6 +221,7 @@ def test_shared_modules_export_expected_entry_points():
             "event_token",
             "first_price_cents",
             "is_two_five_line",
+            "last_trade_price_cents",
             "line_series",
             "market_index_keys",
             "market_index_complete",

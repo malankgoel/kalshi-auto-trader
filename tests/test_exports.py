@@ -236,6 +236,7 @@ def test_shared_modules_export_expected_entry_points():
             "winner_index_key",
             "winner_price_keys",
             "winner_series",
+            "yes_ask_price_cents",
             "yes_bid_price_cents",
             "yes_odds_price_keys",
         },

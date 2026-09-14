@@ -57,6 +57,7 @@ __all__ = [
     "market_index_complete",
     "market_index_template",
     "market_text",
+    "no_ask_price_cents",
     "no_bid_price_cents",
     "non_winner_series",
     "odds_price_keys",
@@ -370,6 +371,11 @@ def last_trade_price_cents(market: dict) -> Optional[float]:
 def no_bid_price_cents(market: dict) -> Optional[float]:
     """Return the best available NO bid quote in cents."""
     return first_price_cents(market, *NO_BID_PRICE_FIELDS)
+
+
+def no_ask_price_cents(market: dict) -> Optional[float]:
+    """Return the best available NO ask quote in cents."""
+    return first_price_cents(market, *NO_ASK_PRICE_FIELDS)
 
 
 def yes_price_cents(market: dict) -> Optional[float]:

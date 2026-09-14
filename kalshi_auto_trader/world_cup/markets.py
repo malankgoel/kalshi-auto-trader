@@ -67,6 +67,7 @@ __all__ = [
     "winner_index_key",
     "winner_series",
     "winner_price_keys",
+    "yes_bid_price_cents",
     "yes_price_cents",
     "yes_odds_price_keys",
 ]
@@ -346,6 +347,11 @@ def _cents(market: dict, *keys) -> Optional[float]:
 def first_price_cents(market: dict, *keys) -> Optional[float]:
     """Return the first finite cents quote from the requested market fields."""
     return _cents(market, *keys)
+
+
+def yes_bid_price_cents(market: dict) -> Optional[float]:
+    """Return the best available YES bid quote in cents."""
+    return first_price_cents(market, *YES_BID_PRICE_FIELDS)
 
 
 def yes_price_cents(market: dict) -> Optional[float]:

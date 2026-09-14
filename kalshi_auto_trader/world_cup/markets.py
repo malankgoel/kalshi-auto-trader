@@ -52,6 +52,7 @@ __all__ = [
     "first_price_cents",
     "is_two_five_line",
     "line_series",
+    "last_trade_price_cents",
     "market_index_keys",
     "market_index_complete",
     "market_index_template",
@@ -358,6 +359,11 @@ def yes_bid_price_cents(market: dict) -> Optional[float]:
 def yes_ask_price_cents(market: dict) -> Optional[float]:
     """Return the best available YES ask quote in cents."""
     return first_price_cents(market, *YES_ASK_PRICE_FIELDS)
+
+
+def last_trade_price_cents(market: dict) -> Optional[float]:
+    """Return the best available last-trade quote in cents."""
+    return first_price_cents(market, *LAST_PRICE_FIELDS)
 
 
 def yes_price_cents(market: dict) -> Optional[float]:

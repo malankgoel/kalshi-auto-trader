@@ -348,6 +348,10 @@ def _cents(market: dict, *keys) -> Optional[float]:
     return None
 
 
+def _clamp_cents(value: float) -> float:
+    return max(0.0, min(100.0, value))
+
+
 def first_price_cents(market: dict, *keys) -> Optional[float]:
     """Return the first finite cents quote from the requested market fields."""
     return _cents(market, *keys)

@@ -1121,6 +1121,10 @@ def test_last_price_fields_prefer_last_then_previous_quotes():
     )
 
 
+def test_last_trade_price_cents_reads_previous_price_fallback():
+    assert mm.last_trade_price_cents({"last_price": "", "previous_price": 33}) == approx(33.0)
+
+
 def test_no_bid_price_fields_prefer_dollar_then_cent_quotes():
     assert mm.NO_BID_PRICE_FIELDS == ("no_bid_dollars", "no_bid")
 

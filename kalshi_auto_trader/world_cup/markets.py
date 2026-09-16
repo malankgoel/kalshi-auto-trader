@@ -33,6 +33,7 @@ __all__ = [
     "NO_ASK_PRICE_FIELDS",
     "NO_BID_PRICE_FIELDS",
     "OVER_2_5_PRICE_KEY",
+    "WINNER_LINE",
     "TEAM_ALIASES",
     "TEAM_CODES",
     "UNDER_2_5_PRICE_KEY",
@@ -79,6 +80,7 @@ __all__ = [
 MARKET_STATUS_SWEEP = ("open", "unopened", None)
 BTTS_NO_PRICE_KEY = "btts_no_price"
 BTTS_YES_PRICE_KEY = "btts_yes_price"
+WINNER_LINE = "winner"
 LAST_PRICE_FIELDS = (
     "last_price_dollars",
     "last_price",

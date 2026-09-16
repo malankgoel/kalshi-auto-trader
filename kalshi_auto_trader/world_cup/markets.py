@@ -36,6 +36,10 @@ __all__ = [
     "OVER_UNDER_LINE",
     "OVER_2_5_PRICE_KEY",
     "WINNER_LINE",
+    "WINNER_INDEX_KEY",
+    "DRAW_INDEX_KEY",
+    "OVER_INDEX_KEY",
+    "BTTS_INDEX_KEY",
     "TEAM_ALIASES",
     "TEAM_CODES",
     "UNDER_2_5_PRICE_KEY",
@@ -89,6 +93,10 @@ BTTS_YES_PRICE_KEY = "btts_yes_price"
 WINNER_LINE = "winner"
 WINNER_DRAW_LINE = "winner_draw"
 OVER_UNDER_LINE = "over_under"
+WINNER_INDEX_KEY = "winner"
+DRAW_INDEX_KEY = "draw"
+OVER_INDEX_KEY = "over"
+BTTS_INDEX_KEY = "btts"
 LAST_PRICE_FIELDS = (
     "last_price_dollars",
     "last_price",

@@ -65,6 +65,7 @@ __all__ = [
     "no_bid_price_cents",
     "non_winner_series",
     "odds_price_keys",
+    "order_line_names",
     "optional_no_odds_price_keys",
     "resolve_order",
     "series_line_lookup",
@@ -149,6 +150,11 @@ def optional_no_odds_price_keys() -> tuple[str, ...]:
 def winner_line_names() -> tuple[str, ...]:
     """Return line names resolved through winner-market contracts."""
     return (WINNER_LINE, WINNER_DRAW_LINE)
+
+
+def order_line_names() -> tuple[str, ...]:
+    """Return line names supported by resolve_order."""
+    return winner_line_names() + (OVER_UNDER_LINE, BTTS_LINE)
 
 
 # --------------------------------------------------------------------------- #

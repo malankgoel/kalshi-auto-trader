@@ -1161,6 +1161,15 @@ def test_winner_line_names_groups_winner_variants():
     assert mm.winner_line_names() == (mm.WINNER_LINE, mm.WINNER_DRAW_LINE)
 
 
+def test_order_line_names_groups_resolvable_lines():
+    assert mm.order_line_names() == (
+        mm.WINNER_LINE,
+        mm.WINNER_DRAW_LINE,
+        mm.OVER_UNDER_LINE,
+        mm.BTTS_LINE,
+    )
+
+
 def test_winner_home_price_key_names_odds_row_field():
     assert mm.WINNER_HOME_PRICE_KEY == "winner_home_price"
 

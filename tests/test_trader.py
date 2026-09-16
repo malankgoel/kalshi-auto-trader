@@ -1141,6 +1141,10 @@ def test_no_ask_price_cents_prefers_dollar_quote():
     assert mm.no_ask_price_cents({"no_ask_dollars": "0.57", "no_ask": 58}) == approx(57.0)
 
 
+def test_winner_line_names_order_line():
+    assert mm.WINNER_LINE == "winner"
+
+
 def test_winner_home_price_key_names_odds_row_field():
     assert mm.WINNER_HOME_PRICE_KEY == "winner_home_price"
 

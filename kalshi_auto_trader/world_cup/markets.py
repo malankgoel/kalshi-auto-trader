@@ -331,7 +331,7 @@ def market_index_template() -> dict:
 
 def market_index_complete(idx: dict) -> bool:
     """Return True once winner, totals, and BTTS markets are indexed."""
-    return bool(idx.get("winner") and idx.get("over") and idx.get("btts"))
+    return bool(idx.get(WINNER_INDEX_KEY) and idx.get(OVER_INDEX_KEY) and idx.get(BTTS_INDEX_KEY))
 
 
 def series_line_lookup(series_by_line: dict[str, tuple[str, ...]]) -> dict[str, str]:

@@ -205,6 +205,7 @@ def test_shared_modules_export_expected_entry_points():
             "MARKET_STATUS_SWEEP",
             "NO_ASK_PRICE_FIELDS",
             "NO_BID_PRICE_FIELDS",
+            "OVER_UNDER_LINE",
             "OVER_2_5_PRICE_KEY",
             "UNDER_2_5_PRICE_KEY",
             "WINNER_LINE",

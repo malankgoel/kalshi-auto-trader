@@ -241,6 +241,7 @@ def test_shared_modules_export_expected_entry_points():
             "team_key",
             "totals_price_keys",
             "winner_index_key",
+            "winner_line_names",
             "winner_price_keys",
             "winner_series",
             "yes_ask_price_cents",

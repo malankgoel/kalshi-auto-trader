@@ -40,6 +40,7 @@ __all__ = [
     "WINNER_AWAY_PRICE_KEY",
     "WINNER_DRAW_PRICE_KEY",
     "WINNER_HOME_PRICE_KEY",
+    "WINNER_DRAW_LINE",
     "YES_BID_PRICE_FIELDS",
     "YES_ASK_PRICE_FIELDS",
     "btts_price_keys",
@@ -81,6 +82,7 @@ MARKET_STATUS_SWEEP = ("open", "unopened", None)
 BTTS_NO_PRICE_KEY = "btts_no_price"
 BTTS_YES_PRICE_KEY = "btts_yes_price"
 WINNER_LINE = "winner"
+WINNER_DRAW_LINE = "winner_draw"
 LAST_PRICE_FIELDS = (
     "last_price_dollars",
     "last_price",

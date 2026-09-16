@@ -546,6 +546,6 @@ def resolve_order(idx: dict, line: str, side: str, selection: str,
         return idx["winner"].get(winner_index_key(selection_team)), buy_side
     if line == OVER_UNDER_LINE:
         return idx.get("over"), buy_side
-    if line == "btts":
+    if line == BTTS_LINE:
         return idx.get("btts"), buy_side
     return None, buy_side

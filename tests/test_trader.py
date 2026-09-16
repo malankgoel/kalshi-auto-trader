@@ -1274,6 +1274,15 @@ def test_market_index_keys_name_top_level_slots():
     assert mm.market_index_keys() == ("winner", "draw", "over", "btts")
 
 
+def test_market_index_slot_constants_name_top_level_slots():
+    assert (
+        mm.WINNER_INDEX_KEY,
+        mm.DRAW_INDEX_KEY,
+        mm.OVER_INDEX_KEY,
+        mm.BTTS_INDEX_KEY,
+    ) == mm.market_index_keys()
+
+
 # ----------------------------- mapping ------------------------------------ #
 def _index():
     return {"winner": {"argentina": {"ticker": "KXWCGAME-26JUN16ARGALG-ARG",

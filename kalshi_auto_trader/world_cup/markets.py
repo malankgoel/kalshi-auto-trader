@@ -320,7 +320,7 @@ def is_two_five_line(market: dict) -> bool:
 
 def market_index_keys() -> tuple[str, ...]:
     """Return top-level keys in the per-fixture market index."""
-    return ("winner", "draw", "over", "btts")
+    return (WINNER_INDEX_KEY, DRAW_INDEX_KEY, OVER_INDEX_KEY, BTTS_INDEX_KEY)
 
 
 def market_index_template() -> dict:

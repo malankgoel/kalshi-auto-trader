@@ -199,6 +199,7 @@ def test_shared_modules_export_expected_entry_points():
             "winner_selection_labels",
         },
         markets: {
+            "BTTS_LINE",
             "BTTS_NO_PRICE_KEY",
             "BTTS_YES_PRICE_KEY",
             "LAST_PRICE_FIELDS",

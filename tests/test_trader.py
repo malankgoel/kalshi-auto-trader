@@ -1149,6 +1149,10 @@ def test_winner_draw_line_names_order_line():
     assert mm.WINNER_DRAW_LINE == "winner_draw"
 
 
+def test_over_under_line_names_order_line():
+    assert mm.OVER_UNDER_LINE == "over_under"
+
+
 def test_winner_home_price_key_names_odds_row_field():
     assert mm.WINNER_HOME_PRICE_KEY == "winner_home_price"
 

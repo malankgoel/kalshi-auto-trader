@@ -32,6 +32,7 @@ __all__ = [
     "LAST_PRICE_FIELDS",
     "NO_ASK_PRICE_FIELDS",
     "NO_BID_PRICE_FIELDS",
+    "OVER_UNDER_LINE",
     "OVER_2_5_PRICE_KEY",
     "WINNER_LINE",
     "TEAM_ALIASES",
@@ -83,6 +84,7 @@ BTTS_NO_PRICE_KEY = "btts_no_price"
 BTTS_YES_PRICE_KEY = "btts_yes_price"
 WINNER_LINE = "winner"
 WINNER_DRAW_LINE = "winner_draw"
+OVER_UNDER_LINE = "over_under"
 LAST_PRICE_FIELDS = (
     "last_price_dollars",
     "last_price",
